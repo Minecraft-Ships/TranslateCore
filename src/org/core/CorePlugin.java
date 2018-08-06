@@ -1,5 +1,7 @@
 package org.core;
 
-public class CorePlugin {
+public interface CorePlugin {
+
+    CorePlugin imp = null;
 
 }
