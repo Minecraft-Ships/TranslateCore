@@ -5,6 +5,9 @@ import org.core.stores.number.vector.ThreeIntegerVector;
 import org.core.world.WorldExtent;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.BlockDetails;
+import org.core.world.position.block.entity.TileEntity;
+
+import java.util.Optional;
 
 public interface Position<A extends Number> {
 
@@ -15,6 +18,8 @@ public interface Position<A extends Number> {
     WorldExtent getWorld();
 
     BlockDetails getBlockDetails();
+
+    Optional<TileEntity> getTileEntity();
 
     default BlockType getBlockType() {
         return getBlockDetails().getType();
