@@ -1,27 +1,31 @@
 package org.core.entity;
 
-import org.core.stores.number.TripleNumberStore;
+import org.core.vector.Vector3;
 import org.core.world.position.ExactPosition;
 import org.core.world.position.Position;
 import org.core.world.position.Positionable;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
-public interface Entity extends Positionable<ExactPosition> {
+public interface Entity extends Positionable {
 
-    public EntityType<? extends Entity> getType();
+    @Override
+    public ExactPosition getPosition();
+
+    public <E extends Entity> EntityType<E, ? extends EntitySnapshot<E>> getType();
     public EntitySnapshot createSnapshot();
 
+    public Entity setPitch(double value);
+    public Entity setYaw(double value);
+    public Entity setRoll(double value);
     public Entity setPosition(Position<? extends Number> position);
-    public Entity setPosition(TripleNumberStore<? extends Number> vector);
 
     public double getPitch();
     public double getYaw();
     public double getRoll();
 
-    public List<Entity> getPassengers();
+    public Collection<Entity> getPassengers();
     public Entity addPassengers(Collection<Entity> entities);
     public Entity removePassengers(Collection<Entity> entities);
 
@@ -39,6 +43,14 @@ public interface Entity extends Positionable<ExactPosition> {
 
     public default Entity clearPassengers(){
         return removePassengers(getPassengers());
+    }
+
+    default Entity setPosition(double x, double y, double z){
+        return setPosition(getPosition().getWorld().getPosition(x, y, z));
+    }
+
+    default Entity setPosition(Vector3<? extends Number> vector){
+        return setPosition(vector.getRawX().doubleValue(), vector.getRawY().doubleValue(), vector.getRawZ().doubleValue());
     }
 
 }

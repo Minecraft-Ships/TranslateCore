@@ -1,6 +1,6 @@
 package org.core.world.position.block.entity.container;
 
-import org.core.inventory.inventories.utils.BlockAttachedInventory;
+import org.core.inventory.inventories.BlockAttachedInventory;
 import org.core.world.position.block.entity.TileEntitySnapshot;
 
 import java.util.Optional;

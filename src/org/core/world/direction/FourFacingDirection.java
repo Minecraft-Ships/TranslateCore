@@ -1,12 +1,18 @@
 package org.core.world.direction;
 
-import org.core.stores.number.vector.ThreeIntegerVector;
+import org.core.vector.types.Vector3Int;
 
 public class FourFacingDirection extends Direction {
 
-    public static final Direction NORTH = new FourFacingDirection("North", 0, 0, 0, "East", "South");
+    public static final Direction NORTH = new FourFacingDirection("North", 0, 0, 0, "South", "East");
+    public static final Direction SOUTH = new FourFacingDirection("South", 0, 0, 0, "North", "West");
+    public static final Direction EAST = new FourFacingDirection("East", 0, 0, 0, "West", "South");
+    public static final Direction WEST = new FourFacingDirection("West", 0, 0, 0, "East", "North");
+    public static final Direction UP = new FourFacingDirection("Up", 0, 1, 0, "Down", "Up");
+    public static final Direction DOWN = new FourFacingDirection("Down", 0, -1, 0, "Up", "Down");
 
-    protected FourFacingDirection(String name, ThreeIntegerVector asVector, String opposite, String left) {
+
+    protected FourFacingDirection(String name, Vector3Int asVector, String opposite, String left) {
         super(name, asVector, opposite, left);
     }
 
@@ -15,6 +21,6 @@ public class FourFacingDirection extends Direction {
     }
 
     public static Direction[] getFourFacingDirections(){
-        return new Direction[] {NORTH};
+        return new Direction[] {NORTH, EAST, SOUTH, WEST};
     }
 }

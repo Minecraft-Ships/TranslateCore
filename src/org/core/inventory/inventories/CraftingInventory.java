@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public interface CraftingInventory extends Inventory {
+public interface CraftingInventory extends Inventory, BlockAttachedInventory {
 
     public CraftGrid getCraftingGrid();
     public Slot getResult();

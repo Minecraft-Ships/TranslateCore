@@ -14,6 +14,8 @@ public class BlockTypes implements Guaranteed<BlockType> {
     public static final BlockType DIORITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:diorite"));
     public static final BlockType POLISHED_DIORITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:polished_diorite"));
 
+    public static final BlockType WALL_SIGN = CorePlugin.getPlatform().get(new BlockTypes("minecraft:wall_sign"));
+
     private String id;
 
     private BlockTypes(String id) {

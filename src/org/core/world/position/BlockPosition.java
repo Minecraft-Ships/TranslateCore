@@ -1,9 +1,13 @@
 package org.core.world.position;
 
-import org.core.stores.number.vector.ThreeIntegerVector;
+import org.core.vector.types.Vector3Int;
 
 public interface BlockPosition extends Position<Integer> {
 
     @Override
-    ThreeIntegerVector getPosition();
+    Vector3Int getPosition();
+
+    default ExactPosition toExactPosition(){
+        return getWorld().getPosition((double)getX(), (double)getY(), (double)getZ());
+    }
 }

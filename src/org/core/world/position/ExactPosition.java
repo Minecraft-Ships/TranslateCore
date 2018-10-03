@@ -1,9 +1,9 @@
 package org.core.world.position;
 
-import org.core.stores.number.vector.ThreeDoubleVector;
+import org.core.vector.types.Vector3Double;
 
 public interface ExactPosition extends Position<Double> {
 
     @Override
-    ThreeDoubleVector getPosition();
+    Vector3Double getPosition();
 }

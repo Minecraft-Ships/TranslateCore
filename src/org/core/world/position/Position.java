@@ -1,7 +1,10 @@
 package org.core.world.position;
 
-import org.core.stores.number.TripleNumberStore;
-import org.core.stores.number.vector.ThreeIntegerVector;
+import org.core.entity.Entity;
+import org.core.entity.EntitySnapshot;
+import org.core.entity.EntityType;
+import org.core.vector.Vector3;
+import org.core.vector.types.Vector3Int;
 import org.core.world.WorldExtent;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.BlockDetails;
@@ -11,9 +14,9 @@ import java.util.Optional;
 
 public interface Position<A extends Number> {
 
-    ThreeIntegerVector getChunkPosition();
+    Vector3Int getChunkPosition();
 
-    TripleNumberStore<A> getPosition();
+    Vector3<A> getPosition();
 
     WorldExtent getWorld();
 
@@ -21,19 +24,21 @@ public interface Position<A extends Number> {
 
     Optional<TileEntity> getTileEntity();
 
+    <E extends Entity, S extends EntitySnapshot<E>> Optional<S> createEntity(EntityType<E, S> type);
+
     default BlockType getBlockType() {
         return getBlockDetails().getType();
     }
 
     default A getX() {
-        return getPosition().getOne();
+        return getPosition().getX();
     }
 
     default A getY() {
-        return getPosition().getTwo();
+        return getPosition().getY();
     }
 
     default A getZ() {
-        return getPosition().getThree();
+        return getPosition().getZ();
     }
 }

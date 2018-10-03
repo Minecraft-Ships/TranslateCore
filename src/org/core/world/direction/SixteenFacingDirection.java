@@ -1,12 +1,12 @@
 package org.core.world.direction;
 
-import org.core.stores.number.vector.ThreeIntegerVector;
+import org.core.vector.types.Vector3Int;
 
 public class SixteenFacingDirection extends EightFacingDirection {
 
     public static final Direction NORTH_NORTH_EAST = new SixteenFacingDirection("North_North_East", 0, 0, 0, "South_South_West", "South_East_East");
 
-    protected SixteenFacingDirection(String name, ThreeIntegerVector asVector, String opposite, String left) {
+    protected SixteenFacingDirection(String name, Vector3Int asVector, String opposite, String left) {
         super(name, asVector, opposite, left);
     }
 

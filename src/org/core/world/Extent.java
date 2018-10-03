@@ -9,5 +9,6 @@ public interface Extent {
 
     BlockPosition getPosition(int x, int y, int z);
 
+
     boolean isLoaded();
 }

@@ -2,7 +2,8 @@ package org.core.entity.living;
 
 import org.core.inventory.Inventory;
 
-public interface InventoryHoldingEntity <I extends Inventory> extends LivingEntity {
+public interface InventoryHoldingEntity extends LivingEntity {
 
-    public I getInventory();
+    public Inventory getInventory();
+
 }

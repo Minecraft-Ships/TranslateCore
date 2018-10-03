@@ -9,6 +9,13 @@ import java.util.Set;
 public interface Inventory {
 
     public Set<InventoryPart> getFirstChildren();
-    public Optional<Slot> getSlot(int pos);
-    public Inventory copy();
+    public Inventory createSnapshot();
+
+    public default Optional<Slot> getSlot(int slotPos){
+        Optional<InventoryPart> opPart = getFirstChildren().stream().filter(c -> c.getSlot(slotPos).isPresent()).findFirst();
+        if(!opPart.isPresent()){
+            return Optional.empty();
+        }
+        return opPart.get().getSlot(slotPos);
+    }
 }

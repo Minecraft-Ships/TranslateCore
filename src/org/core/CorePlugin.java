@@ -4,12 +4,20 @@ import org.core.platform.Platform;
 
 public interface CorePlugin {
 
-    CorePlugin imp = null;
-
     public Platform getRawPlatform();
 
     public static Platform getPlatform(){
-        return imp.getRawPlatform();
+        return CorePlugin.CoreImplementation.getImplementation().getRawPlatform();
+    }
+
+    public abstract class CoreImplementation implements CorePlugin {
+
+        protected static CoreImplementation IMPLEMENTATION;
+
+        public static CoreImplementation getImplementation(){
+            return IMPLEMENTATION;
+        }
+
     }
 
 }

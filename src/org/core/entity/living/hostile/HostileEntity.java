@@ -1,4 +1,6 @@
 package org.core.entity.living.hostile;
 
-public interface HostileEntity {
+import org.core.entity.living.LivingEntity;
+
+public interface HostileEntity extends LivingEntity {
 }
