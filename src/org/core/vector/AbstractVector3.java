@@ -1,5 +1,7 @@
 package org.core.vector;
 
+import org.core.vector.types.Vector3Int;
+
 import java.math.BigDecimal;
 
 public abstract class AbstractVector3<N extends Number> implements Vector3<N> {
@@ -14,6 +16,14 @@ public abstract class AbstractVector3<N extends Number> implements Vector3<N> {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    @Override
+    public Vector3<N> add(Vector3Int vector){
+        BigDecimal x = new BigDecimal(this.x.doubleValue() + vector.getX());
+        BigDecimal y = new BigDecimal(this.y.doubleValue() + vector.getY());
+        BigDecimal z = new BigDecimal(this.z.doubleValue() + vector.getZ());
+        return this.createNew(x, y, z);
     }
 
     @Override

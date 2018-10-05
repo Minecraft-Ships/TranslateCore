@@ -6,4 +6,6 @@ public interface ExactPosition extends Position<Double> {
 
     @Override
     Vector3Double getPosition();
+
+    BlockPosition toBlockPosition();
 }

@@ -6,9 +6,10 @@ import org.core.entity.EntityType;
 import org.core.vector.Vector3;
 import org.core.vector.types.Vector3Int;
 import org.core.world.WorldExtent;
+import org.core.world.direction.Direction;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.BlockDetails;
-import org.core.world.position.block.entity.TileEntity;
+import org.core.world.position.block.entity.LiveTileEntity;
 
 import java.util.Optional;
 
@@ -22,7 +23,11 @@ public interface Position<A extends Number> {
 
     BlockDetails getBlockDetails();
 
-    Optional<TileEntity> getTileEntity();
+    Position<A> setBlock(BlockDetails details);
+
+    Position<A> setBlock(BlockType type);
+
+    Optional<LiveTileEntity> getTileEntity();
 
     <E extends Entity, S extends EntitySnapshot<E>> Optional<S> createEntity(EntityType<E, S> type);
 
@@ -40,5 +45,17 @@ public interface Position<A extends Number> {
 
     default A getZ() {
         return getPosition().getZ();
+    }
+
+    default Position<A> getRelative(Vector3Int vector){
+        return getWorld().getPosition(getPosition().add(vector));
+    }
+
+    default Position<A> getRelative(Vector3<A> vector){
+        return getWorld().getPosition(vector.add(getPosition()));
+    }
+
+    default Position<A> getRelative(Direction direction){
+        return getRelative(direction.getAsVector());
     }
 }
