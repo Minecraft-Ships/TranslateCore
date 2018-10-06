@@ -1,4 +1,10 @@
 package org.core.world.position.block.entity;
 
-public interface LiveTileEntity extends TileEntity {
+import org.core.world.position.BlockPosition;
+import org.core.world.position.Positionable;
+
+public interface LiveTileEntity extends TileEntity, Positionable {
+
+    @Override
+    public BlockPosition getPosition();
 }

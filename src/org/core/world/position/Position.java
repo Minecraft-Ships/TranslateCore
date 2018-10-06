@@ -25,7 +25,9 @@ public interface Position<A extends Number> {
 
     Position<A> setBlock(BlockDetails details);
 
-    Position<A> setBlock(BlockType type);
+    default Position<A> setBlock(BlockType type) {
+        return setBlock(type.getDefaultBlockDetails());
+    }
 
     Optional<LiveTileEntity> getTileEntity();
 

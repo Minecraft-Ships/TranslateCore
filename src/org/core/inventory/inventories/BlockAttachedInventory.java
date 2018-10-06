@@ -10,7 +10,5 @@ public interface BlockAttachedInventory extends PositionableInventory.BlockPosit
 
     public BlockType getBlockType();
 
-    public default Optional<TileEntity> getAttachedTileEntity(){
-        return getPosition().getTileEntity();
-    }
+    public Optional<TileEntity> getAttachedTileEntity();
 }
