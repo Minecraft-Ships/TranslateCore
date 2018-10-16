@@ -20,10 +20,12 @@ public interface Entity extends Positionable {
     public Entity setYaw(double value);
     public Entity setRoll(double value);
     public Entity setPosition(Position<? extends Number> position);
+    public Entity setGravity(boolean check);
 
     public double getPitch();
     public double getYaw();
     public double getRoll();
+    public boolean hasGravity();
 
     public Collection<Entity> getPassengers();
     public Entity addPassengers(Collection<Entity> entities);
