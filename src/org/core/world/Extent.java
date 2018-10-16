@@ -1,11 +1,14 @@
 package org.core.world;
 
+import org.core.entity.Entity;
 import org.core.vector.Vector3;
 import org.core.vector.types.Vector3Double;
 import org.core.vector.types.Vector3Int;
 import org.core.world.position.BlockPosition;
 import org.core.world.position.ExactPosition;
 import org.core.world.position.Position;
+
+import java.util.Set;
 
 public interface Extent {
 
@@ -14,6 +17,8 @@ public interface Extent {
     BlockPosition getPosition(int x, int y, int z);
 
     boolean isLoaded();
+
+    Set<Entity> getEntities();
 
     default <N extends Number> Position<N> getPosition(Vector3<N> vector){
         if(vector instanceof Vector3Int){

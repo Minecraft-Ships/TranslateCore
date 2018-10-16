@@ -14,7 +14,9 @@ public interface SchedulerBuilder {
     public SchedulerBuilder setDelayUnit(TimeUnit unit);
 
     public SchedulerBuilder setExecutor(Runnable runnable);
+    public Runnable getExecutor();
     public SchedulerBuilder setToRunAfter(Scheduler scheduler);
+    public Optional<Scheduler> getToRunAfter();
 
     public Scheduler build(Plugin plugin);
 

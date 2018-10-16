@@ -7,4 +7,14 @@ public interface SignTileEntity extends TileEntity {
     public String[] getLines();
     public SignTileEntity setLines(String... lines) throws IndexOutOfBoundsException;
 
+    default String getLine(int a) throws IndexOutOfBoundsException{
+        return getLines()[a];
+    }
+
+    default SignTileEntity setLine(int a, String value) throws IndexOutOfBoundsException{
+        String[] lines = getLines();
+        lines[a] = value;
+        return setLines(lines);
+    }
+
 }

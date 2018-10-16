@@ -6,11 +6,11 @@ import org.core.world.direction.FourFacingDirection;
 import org.core.world.position.block.details.AttachableDetails;
 import org.core.world.position.block.details.BlockDetails;
 import org.core.world.position.block.details.RotateDetails;
-import org.core.world.position.block.details.UsesTileEntity;
+import org.core.world.position.block.details.TiledBlockDetails;
 import org.core.world.position.block.entity.sign.SignTileEntity;
 import org.core.world.position.block.entity.sign.SignTileEntitySnapshot;
 
-public interface WallSign extends BlockDetails, RotateDetails, AttachableDetails, UsesTileEntity<SignTileEntity, SignTileEntitySnapshot> {
+public interface WallSign extends BlockDetails, RotateDetails, AttachableDetails, TiledBlockDetails<SignTileEntity, SignTileEntitySnapshot> {
 
     @Override
     default Direction[] getFacingDirections(){
