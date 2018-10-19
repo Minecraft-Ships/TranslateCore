@@ -4,6 +4,9 @@ import org.core.world.position.block.entity.TileEntity;
 
 public interface SignTileEntity extends TileEntity {
 
+    @Override
+    public SignTileEntitySnapshot getSnapshot();
+
     public String[] getLines();
     public SignTileEntity setLines(String... lines) throws IndexOutOfBoundsException;
 

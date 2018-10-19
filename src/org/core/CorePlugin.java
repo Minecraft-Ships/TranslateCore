@@ -1,15 +1,27 @@
 package org.core;
 
+import org.core.configuration.ConfigurationFile;
+import org.core.configuration.type.ConfigurationLoaderType;
+import org.core.event.EventManager;
 import org.core.platform.Platform;
+import org.core.platform.PlatformServer;
 import org.core.schedule.SchedulerBuilder;
 
+import java.io.File;
 import java.lang.reflect.Array;
+import java.util.function.Function;
 
 public interface CorePlugin {
 
     public Platform getRawPlatform();
 
+    EventManager getRawEventManager();
+
     public SchedulerBuilder createRawSchedulerBuilder();
+
+    ConfigurationFile createRawConfigurationFile(File file, ConfigurationLoaderType type);
+
+    PlatformServer getRawServer();
 
     public static Platform getPlatform(){
         return CorePlugin.CoreImplementation.getImplementation().getRawPlatform();
@@ -17,6 +29,42 @@ public interface CorePlugin {
 
     public static SchedulerBuilder createSchedulerBuilder(){
         return CorePlugin.CoreImplementation.getImplementation().createRawSchedulerBuilder();
+    }
+
+    public static PlatformServer getServer(){
+        return CorePlugin.CoreImplementation.getImplementation().getRawServer();
+    }
+
+    public static EventManager getEventManager(){
+        return CorePlugin.CoreImplementation.getImplementation().getRawEventManager();
+    }
+
+    public static ConfigurationFile createConfigurationFile(File file, ConfigurationLoaderType type){
+        return CorePlugin.CoreImplementation.getImplementation().createRawConfigurationFile(file, type);
+    }
+
+    public static <T extends Object> String toString(String split, Function<T, String> function, Iterable<T> array){
+        String ret = null;
+        for(T value : array){
+            if(ret == null){
+                ret = function.apply(value);
+            }else{
+                ret = ret + split + function.apply(value);
+            }
+        }
+        return ret;
+    }
+
+    public static <T extends Object> String toString(String split, Function<T, String> function, T... array){
+        String ret = null;
+        for(T value : array){
+            if(ret == null){
+                ret = function.apply(value);
+            }else{
+                ret = ret + split + function.apply(value);
+            }
+        }
+        return ret;
     }
 
     public static <T extends Object> T[] join(T[]... arrays){

@@ -9,9 +9,10 @@ import java.util.Optional;
 public interface ConfigurationFile {
 
     File getFile();
-    Map<ConfigurationNode, ? extends Object> getKeyValues();
+    Map<ConfigurationNode, Object> getKeyValues();
     <T extends Object> Optional<T> parse(ConfigurationNode node, Parser<? extends Object, T> parser);
     ConfigurationNode getRootNode();
+    void save();
 
 
 }

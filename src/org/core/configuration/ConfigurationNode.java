@@ -9,16 +9,14 @@ import java.util.stream.Collectors;
 
 public class ConfigurationNode {
 
-    protected ConfigurationNode root;
     protected String[] path;
 
-    public ConfigurationNode(ConfigurationNode root, String[] path1, String... path2){
-        this(root, CorePlugin.join(path1, path2));
+    public ConfigurationNode(String[] path1, String... path2){
+        this(CorePlugin.join(path1, path2));
     }
 
-    public ConfigurationNode(ConfigurationNode root, String... path){
+    public ConfigurationNode( String... path){
         this.path = path;
-        this.root = root;
     }
 
     public boolean contains(ConfigurationNode node){
@@ -37,10 +35,6 @@ public class ConfigurationNode {
 
     public String[] getPath(){
         return this.path;
-    }
-
-    public Optional<ConfigurationNode> getRootNode(){
-        return Optional.ofNullable(this.root);
     }
 
     public Set<ConfigurationNode> getChildren(ConfigurationFile config){

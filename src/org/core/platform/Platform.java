@@ -1,5 +1,7 @@
 package org.core.platform;
 
+import org.core.configuration.type.ConfigurationLoaderType;
+import org.core.configuration.type.ConfigurationLoaderTypes;
 import org.core.entity.Entity;
 import org.core.entity.EntitySnapshot;
 import org.core.entity.EntityType;
@@ -28,6 +30,7 @@ public interface Platform {
     ItemType get(ItemTypes itemId);
     <E extends Entity, S extends EntitySnapshot<E>> EntityType<E, S> get(EntityTypes<E, S> entityId);
     TextColour get(TextColours id);
+    ConfigurationLoaderType get(ConfigurationLoaderTypes id);
 
     <T extends Identifable> Optional<T> get(String id, Class<T> type);
 
