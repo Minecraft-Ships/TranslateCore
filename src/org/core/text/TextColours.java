@@ -8,6 +8,7 @@ public class TextColours implements Guaranteed<TextColour> {
     public static TextColour YELLOW = CorePlugin.getPlatform().get(new TextColours("Yellow"));
     public static TextColour BLUE = CorePlugin.getPlatform().get(new TextColours("Blue"));
     public static TextColour GREEN = CorePlugin.getPlatform().get(new TextColours("Green"));
+    public static TextColour RED = CorePlugin.getPlatform().get(new TextColours("Red"));
 
     public static String stripColours(String message){
         if(message == null){
