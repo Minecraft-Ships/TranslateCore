@@ -52,6 +52,19 @@ public abstract class Direction {
         return directions1;
     }
 
+    public static Optional<Direction> getDirection(int x, int y, int z){
+        return getDirection(new Vector3Int(x, y, z));
+    }
+
+    public static Optional<Direction> getDirection(Vector3Int vector){
+        for(Direction dir : SixteenFacingDirection.getSixteenFacingDirections()){
+            if(dir.vector.equals(vector)){
+                return Optional.of(dir);
+            }
+        }
+        return Optional.empty();
+    }
+
     public static Optional<Direction> getDirction(String name){
         for(Direction dir : SixteenFacingDirection.getSixteenFacingDirections()){
             if(dir.name.equals(name)){

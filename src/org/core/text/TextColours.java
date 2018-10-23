@@ -5,10 +5,11 @@ import org.core.utils.Guaranteed;
 
 public class TextColours implements Guaranteed<TextColour> {
 
-    public static TextColour YELLOW = CorePlugin.getPlatform().get(new TextColours("Yellow"));
-    public static TextColour BLUE = CorePlugin.getPlatform().get(new TextColours("Blue"));
-    public static TextColour GREEN = CorePlugin.getPlatform().get(new TextColours("Green"));
-    public static TextColour RED = CorePlugin.getPlatform().get(new TextColours("Red"));
+    public static final TextColour YELLOW = CorePlugin.getPlatform().get(new TextColours("Yellow"));
+    public static final TextColour BLUE = CorePlugin.getPlatform().get(new TextColours("Blue"));
+    public static final TextColour GREEN = CorePlugin.getPlatform().get(new TextColours("Green"));
+    public static final TextColour RED = CorePlugin.getPlatform().get(new TextColours("Red"));
+    public static final TextColour AQUA = CorePlugin.getPlatform().get(new TextColours("Aqua"));
 
     public static String stripColours(String message){
         if(message == null){

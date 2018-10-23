@@ -6,6 +6,7 @@ import org.core.event.EventManager;
 import org.core.platform.Platform;
 import org.core.platform.PlatformServer;
 import org.core.schedule.SchedulerBuilder;
+import org.core.source.command.ConsoleSource;
 
 import java.io.File;
 import java.lang.reflect.Array;
@@ -17,6 +18,8 @@ public interface CorePlugin {
 
     EventManager getRawEventManager();
 
+    ConsoleSource getRawConsole();
+
     public SchedulerBuilder createRawSchedulerBuilder();
 
     ConfigurationFile createRawConfigurationFile(File file, ConfigurationLoaderType type);
@@ -25,6 +28,10 @@ public interface CorePlugin {
 
     public static Platform getPlatform(){
         return CorePlugin.CoreImplementation.getImplementation().getRawPlatform();
+    }
+
+    public static ConsoleSource getConsole(){
+        return CorePlugin.CoreImplementation.getImplementation().getRawConsole();
     }
 
     public static SchedulerBuilder createSchedulerBuilder(){
