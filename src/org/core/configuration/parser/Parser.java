@@ -11,6 +11,7 @@ public interface Parser <O extends Object, T extends Object> {
     StringToBlockTypeParser STRING_TO_BLOCK_TYPE = new StringToBlockTypeParser();
     StringToWorldParser STRING_TO_WORLD = new StringToWorldParser();
     StringToStringParser STRING_TO_STRING_PARSER = new StringToStringParser();
+    StringToVector3Int STRING_TO_VECTOR3INT = new StringToVector3Int();
 
     public Optional<T> parse(O original);
     public O unparse(T value);

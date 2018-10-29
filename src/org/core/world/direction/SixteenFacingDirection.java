@@ -1,5 +1,6 @@
 package org.core.world.direction;
 
+import org.core.CorePlugin;
 import org.core.vector.types.Vector3Int;
 
 public class SixteenFacingDirection extends EightFacingDirection {
@@ -15,6 +16,6 @@ public class SixteenFacingDirection extends EightFacingDirection {
     }
 
     public static Direction[] getSixteenFacingDirections(){
-        return new Direction[] {NORTH, NORTH_EAST};
+        return CorePlugin.join(EightFacingDirection.getEightFacingDirections(), new Direction[] {NORTH_EAST});
     }
 }

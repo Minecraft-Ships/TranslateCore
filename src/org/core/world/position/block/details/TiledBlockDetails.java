@@ -5,5 +5,6 @@ import org.core.world.position.block.entity.TileEntitySnapshot;
 
 public interface TiledBlockDetails<T extends TileEntity, S extends TileEntitySnapshot<T>> extends BlockDetails {
 
-    public S getTileEntity();
+    S getTileEntity();
+    void setTileEntity(S tile);
 }
