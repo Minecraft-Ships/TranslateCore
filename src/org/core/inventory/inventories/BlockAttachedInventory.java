@@ -2,13 +2,15 @@ package org.core.inventory.inventories;
 
 import org.core.inventory.PositionableInventory;
 import org.core.world.position.block.BlockType;
-import org.core.world.position.block.entity.TileEntity;
+import org.core.world.position.block.entity.LiveTileEntity;
 
 import java.util.Optional;
 
 public interface BlockAttachedInventory extends PositionableInventory.BlockPositionableInventory {
 
-    public BlockType getBlockType();
+    public BlockType[] getAllowedBlockType();
 
-    public Optional<TileEntity> getAttachedTileEntity();
+    default Optional<LiveTileEntity> getAttachedTileEntity(){
+        return getPosition().getTileEntity();
+    }
 }

@@ -1,10 +1,17 @@
 package org.core.inventory.item;
 
+import org.core.CorePlugin;
 import org.core.utils.Guaranteed;
 
 public class ItemTypes implements Guaranteed<ItemType> {
 
-    String id;
+    public static final ItemType AIR = CorePlugin.getPlatform().get(new ItemTypes("minecraft:air"));
+
+    private String id;
+
+    private ItemTypes(String name){
+        this.id = name;
+    }
 
     @Override
     public String getId() {

@@ -9,6 +9,7 @@ import java.util.Set;
 public interface Inventory {
 
     public Set<InventoryPart> getFirstChildren();
+    public Set<Slot> getSlots();
     public Inventory createSnapshot();
 
     public default Optional<Slot> getSlot(int slotPos){

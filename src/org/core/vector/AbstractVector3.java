@@ -76,21 +76,16 @@ public abstract class AbstractVector3<N extends Number> implements Vector3<N> {
     @Override
     public boolean equals(Object obj){
         if(!(obj instanceof Vector3)){
-            System.out.println("Failed, not Vector3 but instead a " + obj.getClass().getName());
             return false;
         }
         Vector3<? extends Number> vector = (Vector3<? extends Number>)obj;
-        System.out.println("Vector: " + getX() + "," + getY() + "," + getZ() + " - " + vector.getX() + "," + vector.getY() + "," + vector.getZ());
         if(vector.getRawX().doubleValue() != this.x.doubleValue()){
-            System.out.println("Failed on X: " + vector.getRawX().doubleValue() + ": " + this.x.doubleValue());
             return false;
         }
         if(vector.getRawY().doubleValue() != this.y.doubleValue()){
-            System.out.println("Failed on Y: " + vector.getRawY().doubleValue() + ": " + this.y.doubleValue());
             return false;
         }
         if(vector.getRawZ().doubleValue() != this.z.doubleValue()){
-            System.out.println("Failed on Z: " + vector.getRawZ().doubleValue() + ": " + this.z.doubleValue());
             return false;
         }
         return true;

@@ -41,17 +41,13 @@ public class Vector3Int extends AbstractVector3<Integer> {
             return super.equals(obj);
         }
         Vector3Int vector = (Vector3Int)obj;
-        System.out.println("Vector: " + getX() + "," + getY() + "," + getZ() + " - " + vector.getX() + "," + vector.getY() + "," + vector.getZ());
         if(vector.getX().intValue() != this.getX().intValue()){
-            System.out.println("Failed on X: " + vector.getX() + ": " + this.getX());
             return false;
         }
         if(vector.getY().intValue() != this.getY().intValue()){
-            System.out.println("Failed on Y: " + vector.getY() + ": " + this.getY());
             return false;
         }
         if(vector.getZ().intValue() != this.getZ().intValue()){
-            System.out.println("Failed on Z: " + vector.getZ() + ": " + this.getZ());
             return false;
         }
         return true;

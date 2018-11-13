@@ -17,6 +17,8 @@ public class BlockTypes implements Guaranteed<BlockType> {
 
 
     public static final BlockType WALL_SIGN = CorePlugin.getPlatform().get(new BlockTypes("minecraft:wall_sign"));
+    public static final BlockType FURNACE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:furnace"));
+    public static final BlockType FURNACE_LIT = CorePlugin.getPlatform().get(new BlockTypes("minecraft:lit_furnace"));
     public static final BlockType WATER = CorePlugin.getPlatform().get(new BlockTypes("minecraft:water"));
 
 

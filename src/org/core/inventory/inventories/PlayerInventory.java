@@ -14,6 +14,17 @@ public interface PlayerInventory extends BasicEntityInventory, EntityAttachedInv
     public MainPlayerInventory getMainInventory();
 
     @Override
+    default Set<Slot> getSlots(){
+        Set<Slot> slots = new HashSet<>();
+        slots.addAll(getHotbar().getSlots());
+        slots.addAll(getMainInventory().getSlots());
+        slots.addAll(getArmor().getSlots());
+        slots.add(getOffHoldingItem());
+        slots.addAll(getCraftingGrid().getSlots());
+        return slots;
+    }
+
+    @Override
     public PlayerInventorySnapshot createSnapshot();
 
     @Override
