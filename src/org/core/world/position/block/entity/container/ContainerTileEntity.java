@@ -5,5 +5,6 @@ import org.core.world.position.block.entity.TileEntity;
 
 public interface ContainerTileEntity extends TileEntity {
 
-    public BlockAttachedInventory getInventory();
+    BlockAttachedInventory getInventory();
+
 }

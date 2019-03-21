@@ -5,6 +5,6 @@ import org.core.world.position.BlockPosition;
 
 public interface TileEntitySnapshot <E extends TileEntity> extends TileEntity {
 
-    public E apply(BlockPosition position) throws BlockNotSupported;
+    E apply(BlockPosition position) throws BlockNotSupported;
 
 }

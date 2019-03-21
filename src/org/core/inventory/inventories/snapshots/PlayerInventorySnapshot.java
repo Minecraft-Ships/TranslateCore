@@ -23,6 +23,7 @@ public abstract class PlayerInventorySnapshot implements PlayerInventory, Entity
         this.inventory = inventory.getMainInventory().createSnapshot();
     }
 
+    @Override
     public void apply(){
         this.apply(getAttachedEntity());
     }

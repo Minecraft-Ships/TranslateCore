@@ -1,5 +1,6 @@
 package org.core.world.position.block.entity.sign;
 
+import org.core.text.Text;
 import org.core.world.position.block.entity.TileEntity;
 
 import java.util.Optional;
@@ -9,19 +10,19 @@ public interface SignTileEntity extends TileEntity {
     @Override
     SignTileEntitySnapshot getSnapshot();
 
-    String[] getLines();
-    SignTileEntity setLines(String... lines) throws IndexOutOfBoundsException;
+    Text[] getLines();
+    SignTileEntity setLines(Text... lines) throws IndexOutOfBoundsException;
 
-    default Optional<String> getLine(int a) throws IndexOutOfBoundsException{
-        String[] lines = getLines();
+    default Optional<Text> getLine(int a) throws IndexOutOfBoundsException{
+        Text[] lines = getLines();
         if(a >= lines.length){
             return Optional.empty();
         }
         return Optional.ofNullable(lines[a]);
     }
 
-    default SignTileEntity setLine(int a, String value) throws IndexOutOfBoundsException{
-        String[] lines = getLines();
+    default SignTileEntity setLine(int a, Text value) throws IndexOutOfBoundsException{
+        Text[] lines = getLines();
         lines[a] = value;
         return setLines(lines);
     }

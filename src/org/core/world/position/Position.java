@@ -25,10 +25,6 @@ public interface Position<A extends Number> {
 
     Position<A> setBlock(BlockDetails details);
 
-    default Position<A> setBlock(BlockType type) {
-        return setBlock(type.getDefaultBlockDetails());
-    }
-
     Optional<LiveTileEntity> getTileEntity();
 
     <E extends Entity, S extends EntitySnapshot<E>> Optional<S> createEntity(EntityType<E, S> type);
@@ -59,5 +55,9 @@ public interface Position<A extends Number> {
 
     default Position<A> getRelative(Direction direction){
         return getRelative(direction.getAsVector());
+    }
+
+    default Position<A> setBlock(BlockType type) {
+        return setBlock(type.getDefaultBlockDetails());
     }
 }

@@ -2,7 +2,8 @@ package org.core.platform;
 
 public interface Plugin {
 
-    public String getPluginName();
+    String getPluginName();
+    String getPluginVersion();
 
     public Object getBukkitLauncher();
 

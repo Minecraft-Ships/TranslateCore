@@ -10,6 +10,7 @@ public class TextColours implements Guaranteed<TextColour> {
     public static final TextColour GREEN = CorePlugin.getPlatform().get(new TextColours("Green"));
     public static final TextColour RED = CorePlugin.getPlatform().get(new TextColours("Red"));
     public static final TextColour AQUA = CorePlugin.getPlatform().get(new TextColours("Aqua"));
+    public static final TextColour RESET = CorePlugin.getPlatform().get(new TextColours("Reset"));
 
     public static String stripColours(String message){
         if(message == null){
@@ -17,6 +18,10 @@ public class TextColours implements Guaranteed<TextColour> {
         }
         String ret = message;
         for (TextColour colour : CorePlugin.getPlatform().get(TextColour.class)){
+            if(colour == null){
+                System.err.println("Colour was not found");
+                continue;
+            }
             ret = ret.replaceAll(colour.formatChar(), "");
         }
         return ret;

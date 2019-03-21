@@ -90,4 +90,9 @@ public abstract class AbstractVector3<N extends Number> implements Vector3<N> {
         }
         return true;
     }
+
+    @Override
+    public String toString(){
+        return this.getClass().getSimpleName() + "{" + this.x + "," + this.y + "," + this.z + ")";
+    }
 }

@@ -7,6 +7,7 @@ import org.core.platform.Platform;
 import org.core.platform.PlatformServer;
 import org.core.schedule.SchedulerBuilder;
 import org.core.source.command.ConsoleSource;
+import org.core.text.Text;
 
 import java.io.File;
 import java.lang.reflect.Array;
@@ -14,43 +15,49 @@ import java.util.function.Function;
 
 public interface CorePlugin {
 
-    public Platform getRawPlatform();
+    Platform getRawPlatform();
 
     EventManager getRawEventManager();
 
     ConsoleSource getRawConsole();
 
-    public SchedulerBuilder createRawSchedulerBuilder();
+    SchedulerBuilder createRawSchedulerBuilder();
 
     ConfigurationFile createRawConfigurationFile(File file, ConfigurationLoaderType type);
 
     PlatformServer getRawServer();
 
-    public static Platform getPlatform(){
+    Text textBuilder(String chars);
+
+    static Platform getPlatform(){
         return CorePlugin.CoreImplementation.getImplementation().getRawPlatform();
     }
 
-    public static ConsoleSource getConsole(){
+    static ConsoleSource getConsole(){
         return CorePlugin.CoreImplementation.getImplementation().getRawConsole();
     }
 
-    public static SchedulerBuilder createSchedulerBuilder(){
+    static Text buildText(String text){
+        return CorePlugin.CoreImplementation.getImplementation().textBuilder(text);
+    }
+
+    static SchedulerBuilder createSchedulerBuilder(){
         return CorePlugin.CoreImplementation.getImplementation().createRawSchedulerBuilder();
     }
 
-    public static PlatformServer getServer(){
+    static PlatformServer getServer(){
         return CorePlugin.CoreImplementation.getImplementation().getRawServer();
     }
 
-    public static EventManager getEventManager(){
+    static EventManager getEventManager(){
         return CorePlugin.CoreImplementation.getImplementation().getRawEventManager();
     }
 
-    public static ConfigurationFile createConfigurationFile(File file, ConfigurationLoaderType type){
+    static ConfigurationFile createConfigurationFile(File file, ConfigurationLoaderType type){
         return CorePlugin.CoreImplementation.getImplementation().createRawConfigurationFile(file, type);
     }
 
-    public static <T extends Object> String toString(String split, Function<T, String> function, Iterable<T> array){
+    static <T extends Object> String toString(String split, Function<T, String> function, Iterable<T> array){
         String ret = null;
         for(T value : array){
             if(ret == null){
@@ -62,7 +69,7 @@ public interface CorePlugin {
         return ret;
     }
 
-    public static <T extends Object> String toString(String split, Function<T, String> function, T... array){
+    static <T extends Object> String toString(String split, Function<T, String> function, T... array){
         String ret = null;
         for(T value : array){
             if(ret == null){
@@ -74,7 +81,7 @@ public interface CorePlugin {
         return ret;
     }
 
-    public static <T extends Object> T[] join(T[]... arrays){
+    static <T extends Object> T[] join(T[]... arrays){
         int total = 0;
         for(T[] array : arrays){
             for(int A = 0; A < array.length; A++){
@@ -92,7 +99,7 @@ public interface CorePlugin {
         return arrayMash;
     }
 
-    public abstract class CoreImplementation implements CorePlugin {
+    abstract class CoreImplementation implements CorePlugin {
 
         protected static CoreImplementation IMPLEMENTATION;
 

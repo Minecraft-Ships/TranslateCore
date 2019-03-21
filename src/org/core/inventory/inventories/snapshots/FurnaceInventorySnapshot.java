@@ -5,6 +5,10 @@ import org.core.inventory.inventories.FurnaceInventory;
 import org.core.inventory.parts.Slot;
 import org.core.inventory.parts.snapshot.SlotSnapshot;
 import org.core.world.position.BlockPosition;
+import org.core.world.position.block.entity.LiveTileEntity;
+import org.core.world.position.block.entity.container.furnace.LiveFurnaceTileEntity;
+
+import java.util.Optional;
 
 public abstract class FurnaceInventorySnapshot implements FurnaceInventory, InventorySnapshot {
 
@@ -12,6 +16,12 @@ public abstract class FurnaceInventorySnapshot implements FurnaceInventory, Inve
     protected SlotSnapshot resultsSlot;
     protected SlotSnapshot smeltingSlot;
     protected BlockPosition position;
+
+    public void apply(FurnaceInventory fi){
+        this.fuelSlot.getItem().ifPresent(f -> fi.getFuelSlot().setItem(f));
+        this.resultsSlot.getItem().ifPresent(f -> fi.getResultsSlot().setItem(f));
+        this.smeltingSlot.getItem().ifPresent(f -> fi.getSmeltingSlot().setItem(f));
+    }
 
     @Override
     public Slot getFuelSlot() {
@@ -31,5 +41,18 @@ public abstract class FurnaceInventorySnapshot implements FurnaceInventory, Inve
     @Override
     public BlockPosition getPosition() {
         return this.position;
+    }
+
+    @Override
+    public void apply(){
+        Optional<LiveTileEntity> opTile = this.position.getTileEntity();
+        if(!opTile.isPresent()){
+            return;
+        }
+        if (!(opTile.get() instanceof LiveFurnaceTileEntity)){
+            return;
+        }
+        LiveFurnaceTileEntity lfte = (LiveFurnaceTileEntity) opTile.get();
+        apply(lfte.getInventory());
     }
 }
