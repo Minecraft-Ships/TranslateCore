@@ -1,19 +1,21 @@
-package org.core.inventory.inventories.snapshots;
+package org.core.inventory.inventories.snapshots.entity;
 
 import org.core.entity.living.human.player.Player;
-import org.core.inventory.inventories.PlayerInventory;
+import org.core.entity.living.human.player.PlayerSnapshot;
+import org.core.inventory.inventories.general.entity.PlayerInventory;
 import org.core.inventory.parts.*;
 import org.core.inventory.parts.snapshot.*;
+import org.core.world.position.ExactPosition;
 
 
-public abstract class PlayerInventorySnapshot implements PlayerInventory, EntityInventorySnapshot<Player> {
+public abstract class PlayerInventorySnapshot implements PlayerInventory<Player>, EntityInventorySnapshot<Player> {
 
     protected SlotSnapshot offHand;
     protected ArmorPartSnapshot armor;
     protected HotbarSnapshot hotbar;
     protected Grid2x2Snapshot craftGridSnapshot;
     protected MainPlayerInventorySnapshot inventory;
-    protected Player player;
+    protected PlayerSnapshot player;
 
     public PlayerInventorySnapshot(PlayerInventory inventory){
         this.offHand = inventory.getOffHoldingItem().createSnapshot();
@@ -54,8 +56,13 @@ public abstract class PlayerInventorySnapshot implements PlayerInventory, Entity
     }
 
     @Override
-    public Player getAttachedEntity() {
+    public PlayerSnapshot getAttachedEntity() {
         return this.player;
+    }
+
+    @Override
+    public ExactPosition getPosition() {
+        return getAttachedEntity().getPosition();
     }
 
 }

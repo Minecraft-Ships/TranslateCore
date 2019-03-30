@@ -8,13 +8,15 @@ import org.core.source.projectile.EntityProjectileSource;
 
 public interface AbstractHuman extends LivingEntity, InventoryHoldingEntity, Tamer, EntityProjectileSource {
 
-    public int getFoodLevel();
-    public double getExhaustionLevel();
-    public double getSaturationLevel();
+    int getFoodLevel();
+    double getExhaustionLevel();
+    double getSaturationLevel();
+    boolean isSneaking();
 
-    public AbstractHuman setFood(int value) throws IndexOutOfBoundsException;
-    public AbstractHuman setExhaustionLevel(double value) throws IndexOutOfBoundsException;
-    public AbstractHuman setSaturationLevel(double value) throws IndexOutOfBoundsException;
+    AbstractHuman setFood(int value) throws IndexOutOfBoundsException;
+    AbstractHuman setExhaustionLevel(double value) throws IndexOutOfBoundsException;
+    AbstractHuman setSaturationLevel(double value) throws IndexOutOfBoundsException;
+    AbstractHuman setSneaking(boolean sneaking);
 
     @Override
     public EntityType<? extends AbstractHuman, ? extends AbstractHumanSnapshot<? extends AbstractHuman>> getType();

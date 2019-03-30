@@ -52,4 +52,9 @@ public class Vector3Int extends AbstractVector3<Integer> {
         }
         return true;
     }
+
+    @Override
+    public Vector3Int multiply(double value){
+        return (Vector3Int) super.multiply(value);
+    }
 }

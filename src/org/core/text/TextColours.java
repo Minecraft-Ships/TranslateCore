@@ -17,7 +17,7 @@ public class TextColours implements Guaranteed<TextColour> {
             return null;
         }
         String ret = message;
-        for (TextColour colour : CorePlugin.getPlatform().get(TextColour.class)){
+        for (TextColour colour : CorePlugin.getPlatform().getTextColours()){
             if(colour == null){
                 System.err.println("Colour was not found");
                 continue;

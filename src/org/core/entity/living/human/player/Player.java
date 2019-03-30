@@ -3,7 +3,7 @@ package org.core.entity.living.human.player;
 import org.core.entity.EntityType;
 import org.core.entity.EntityTypes;
 import org.core.entity.living.human.AbstractHuman;
-import org.core.inventory.inventories.PlayerInventory;
+import org.core.inventory.inventories.general.entity.PlayerInventory;
 
 public interface Player extends AbstractHuman, User {
 
@@ -15,9 +15,9 @@ public interface Player extends AbstractHuman, User {
     }
 
     @Override
-    public PlayerInventory getInventory();
+    PlayerInventory getInventory();
 
     @Override
-    public PlayerSnapshot createSnapshot();
+    PlayerSnapshot createSnapshot();
 
 }

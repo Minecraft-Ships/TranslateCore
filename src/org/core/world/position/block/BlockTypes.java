@@ -13,15 +13,18 @@ public class BlockTypes implements Guaranteed<BlockType> {
     //public static final BlockType POLISHED_GRANITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:polished_granite"));
     public static final BlockType DIORITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:diorite"));
     //public static final BlockType POLISHED_DIORITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:polished_diorite"));
-    //public static final BlockType OAK_WOOD = CorePlugin.getPlatform().get(new BlockTypes("minecraft:oak_wood"));
-    public static final BlockType OAK_WOOD = CorePlugin.getPlatform().get(new BlockTypes("minecraft:planks")); //1.12.2
+    public static final BlockType OAK_WOOD = CorePlugin.getPlatform().get(new BlockTypes("minecraft:oak_wood"));
+    //public static final BlockType OAK_WOOD = CorePlugin.getPlatform().get(new BlockTypes("minecraft:log")); //1.12.2
+
+    public static final BlockType OAK_PLANKS = CorePlugin.getPlatform().get(new BlockTypes("minecraft:oak_planks"));
 
     public static final BlockType FIRE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:fire"));
-    public static final BlockType WOOL_WHITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:wool")); //1.12.2
+    public static final BlockType WOOL_WHITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:white_wool"));
+    //public static final BlockType WOOL_WHITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:wool")); //1.12.2
 
     public static final BlockType WALL_SIGN = CorePlugin.getPlatform().get(new BlockTypes("minecraft:wall_sign"));
     public static final BlockType FURNACE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:furnace"));
-    public static final BlockType FURNACE_LIT = CorePlugin.getPlatform().get(new BlockTypes("minecraft:lit_furnace"));
+    //public static final BlockType FURNACE_LIT = CorePlugin.getPlatform().get(new BlockTypes("minecraft:lit_furnace")); //1.12.2
     public static final BlockType WATER = CorePlugin.getPlatform().get(new BlockTypes("minecraft:water"));
 
 

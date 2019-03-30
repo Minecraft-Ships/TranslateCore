@@ -1,13 +1,15 @@
-package org.core.inventory.inventories;
+package org.core.inventory.inventories.general.entity;
 
-import org.core.inventory.inventories.snapshots.PlayerInventorySnapshot;
+import org.core.entity.living.human.player.Player;
+import org.core.inventory.inventories.BasicEntityInventory;
+import org.core.inventory.inventories.snapshots.entity.PlayerInventorySnapshot;
 import org.core.inventory.parts.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public interface PlayerInventory extends BasicEntityInventory, EntityAttachedInventory {
+public interface PlayerInventory<P extends Player> extends BasicEntityInventory<P> {
 
     public Hotbar getHotbar();
     public Grid2x2 getCraftingGrid();

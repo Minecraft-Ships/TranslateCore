@@ -1,6 +1,7 @@
-package org.core.inventory.inventories;
+package org.core.inventory.inventories.general.block;
 
-import org.core.inventory.inventories.snapshots.FurnaceInventorySnapshot;
+import org.core.inventory.inventories.BlockAttachedInventory;
+import org.core.inventory.inventories.snapshots.block.FurnaceInventorySnapshot;
 import org.core.inventory.parts.InventoryPart;
 import org.core.inventory.parts.Slot;
 import org.core.world.position.block.BlockType;
@@ -17,7 +18,7 @@ public interface FurnaceInventory extends BlockAttachedInventory {
 
     @Override
     default BlockType[] getAllowedBlockType() {
-        return new BlockType[]{BlockTypes.FURNACE, BlockTypes.FURNACE_LIT};
+        return new BlockType[]{BlockTypes.FURNACE, /*BlockTypes.FURNACE_LIT*//*1.12.2*/};
     }
 
     @Override

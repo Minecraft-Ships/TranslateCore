@@ -28,7 +28,7 @@ public class SlotSnapshot implements InventoryPartSnapshot, Slot {
 
     @Override
     public Optional<ItemStack> getItem() {
-        return Optional.ofNullable(itemstack);
+        return Optional.ofNullable(this.itemstack);
     }
 
     @Override
