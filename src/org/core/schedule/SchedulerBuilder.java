@@ -7,24 +7,30 @@ import java.util.concurrent.TimeUnit;
 
 public interface SchedulerBuilder {
 
-    public Optional<Integer> getDelay();
-    public SchedulerBuilder setDelay(Integer value);
+    Optional<Integer> getDelay();
+    SchedulerBuilder setDelay(Integer value);
 
-    public Optional<TimeUnit> getDelayUnit();
-    public SchedulerBuilder setDelayUnit(TimeUnit unit);
+    Optional<TimeUnit> getDelayUnit();
+    SchedulerBuilder setDelayUnit(TimeUnit unit);
 
-    public SchedulerBuilder setExecutor(Runnable runnable);
-    public Runnable getExecutor();
-    public SchedulerBuilder setToRunAfter(Scheduler scheduler);
-    public Optional<Scheduler> getToRunAfter();
+    Optional<Integer> getIteration();
+    SchedulerBuilder setIteration(Integer value);
 
-    public Scheduler build(Plugin plugin);
+    Optional<TimeUnit> getIterationUnit();
+    SchedulerBuilder setIterationUnit(TimeUnit unit);
 
-    public default SchedulerBuilder useTicksForDelay(){
+    SchedulerBuilder setExecutor(Runnable runnable);
+    Runnable getExecutor();
+    SchedulerBuilder setToRunAfter(Scheduler scheduler);
+    Optional<Scheduler> getToRunAfter();
+
+    Scheduler build(Plugin plugin);
+
+    default SchedulerBuilder useTicksForDelay(){
         return setDelayUnit(null);
     }
 
-    public default SchedulerBuilder removeDelay(){
+    default SchedulerBuilder removeDelay(){
         return setDelay(null);
     }
 }

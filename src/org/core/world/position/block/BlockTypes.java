@@ -1,48 +1,10 @@
 package org.core.world.position.block;
 
-import org.core.CorePlugin;
-import org.core.utils.Guaranteed;
+import org.core.world.position.block.blocktypes.post.BlockTypes1V13;
 
-public class BlockTypes implements Guaranteed<BlockType> {
+public class BlockTypes extends BlockTypes1V13 {
 
-    public static final BlockType AIR = CorePlugin.getPlatform().get(new BlockTypes("minecraft:air"));
-    //public static final BlockType VOID_AIR = CorePlugin.getPlatform().get(new BlockTypes("minecraft:void_air"));
-    //public static final BlockType CAVE_AIR = CorePlugin.getPlatform().get(new BlockTypes("minecraft:cave_air"));
-    public static final BlockType STONE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:stone"));
-    public static final BlockType GRANTIE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:granite"));
-    //public static final BlockType POLISHED_GRANITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:polished_granite"));
-    public static final BlockType DIORITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:diorite"));
-    //public static final BlockType POLISHED_DIORITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:polished_diorite"));
-    public static final BlockType OAK_WOOD = CorePlugin.getPlatform().get(new BlockTypes("minecraft:oak_wood"));
-    //public static final BlockType OAK_WOOD = CorePlugin.getPlatform().get(new BlockTypes("minecraft:log")); //1.12.2
-
-    public static final BlockType OAK_PLANKS = CorePlugin.getPlatform().get(new BlockTypes("minecraft:oak_planks"));
-
-    public static final BlockType FIRE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:fire"));
-    public static final BlockType WOOL_WHITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:white_wool"));
-    //public static final BlockType WOOL_WHITE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:wool")); //1.12.2
-
-    public static final BlockType WALL_SIGN = CorePlugin.getPlatform().get(new BlockTypes("minecraft:wall_sign"));
-    public static final BlockType FURNACE = CorePlugin.getPlatform().get(new BlockTypes("minecraft:furnace"));
-    //public static final BlockType FURNACE_LIT = CorePlugin.getPlatform().get(new BlockTypes("minecraft:lit_furnace")); //1.12.2
-    public static final BlockType WATER = CorePlugin.getPlatform().get(new BlockTypes("minecraft:water"));
-
-
-    private String id;
-
-    private BlockTypes(String id) {
-        this.id = id;
-    }
-
-    @Override
-    public String getId() {
-        return this.id;
-    }
-
-    @Override
-    public String getName() {
-        String nameLowercase = getId().split(":")[1];
-        char first = Character.toUpperCase(nameLowercase.charAt(0));
-        return first + nameLowercase.substring(1);
+    protected BlockTypes(String id) {
+        super(id);
     }
 }

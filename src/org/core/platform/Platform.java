@@ -10,12 +10,14 @@ import org.core.inventory.item.ItemType;
 import org.core.inventory.item.ItemTypes;
 import org.core.inventory.item.data.dye.DyeType;
 import org.core.inventory.item.data.dye.DyeTypes;
+import org.core.inventory.item.type.ItemTypeCommon;
 import org.core.text.TextColour;
 import org.core.text.TextColours;
 import org.core.utils.Guaranteed;
 import org.core.utils.Identifable;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.BlockTypes;
+import org.core.world.position.block.blocktypes.GarenteedBlockType;
 import org.core.world.position.block.entity.banner.pattern.PatternLayerType;
 import org.core.world.position.block.entity.banner.pattern.PatternLayerTypes;
 
@@ -25,13 +27,21 @@ import java.util.Set;
 
 public interface Platform {
 
-    BlockType get(BlockTypes blockId);
-    ItemType get(ItemTypes itemId);
+    BlockType get(GarenteedBlockType blockId);
+    ItemType get(ItemTypeCommon itemId);
     TextColour get(TextColours id);
     DyeType get(DyeTypes id);
     PatternLayerType get(PatternLayerTypes id);
     ConfigurationLoaderType get(ConfigurationLoaderTypes id);
     <E extends Entity, S extends EntitySnapshot<E>> EntityType<E, S> get(EntityTypes<E, S> entityId);
+
+    Optional<EntityType<? extends Entity, ? extends EntitySnapshot<? extends Entity>>> getEntityType(String id);
+    Optional<BlockType> getBlockType(String id);
+    Optional<ItemType> getItemType(String id);
+    Optional<TextColour> getTextColour(String id);
+    Optional<DyeType> getDyeType(String id);
+    Optional<PatternLayerType> getPatternLayerType(String id);
+    Optional<ConfigurationLoaderType> getConfigurationLoaderType(String id);
 
     Collection<EntityType<? extends Entity, ? extends EntitySnapshot<? extends Entity>>> getEntityTypes();
     Collection<BlockType> getBlockTypes();
@@ -105,7 +115,28 @@ public interface Platform {
 
     @Deprecated
     default <T extends Identifable> Optional<T> get(String id, Class<T> type) {
-        return get(type).stream().filter(t -> t.getId().equals(id)).findAny();
+        if(type.isAssignableFrom(EntityType.class)){
+            return (Optional<T>) getEntityType(id);
+        }
+        if(type.isAssignableFrom(BlockType.class)){
+            return (Optional<T>) getBlockType(id);
+        }
+        if(type.isAssignableFrom(ItemType.class)){
+            return (Optional<T>) getItemType(id);
+        }
+        if(type.isAssignableFrom(TextColour.class)){
+            return (Optional<T>) getTextColour(id);
+        }
+        if(type.isAssignableFrom(DyeType.class)){
+            return (Optional<T>) getDyeType(id);
+        }
+        if(type.isAssignableFrom(PatternLayerType.class)){
+            return (Optional<T>) getPatternLayerType(id);
+        }
+        if(type.isAssignableFrom(ConfigurationLoaderType.class)){
+            return (Optional<T>) getConfigurationLoaderType(id);
+        }
+        return Optional.empty();
     }
 
 }

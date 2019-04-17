@@ -2,20 +2,20 @@ package org.core.configuration.parser.parsers;
 
 import org.core.CorePlugin;
 import org.core.configuration.parser.StringParser;
+import org.core.inventory.item.ItemType;
 import org.core.platform.Platform;
-import org.core.world.position.block.BlockType;
 
 import java.util.Optional;
 
-public class StringToBlockTypeParser implements StringParser<BlockType> {
+public class StringToItemTypeParser implements StringParser<ItemType> {
     @Override
-    public Optional<BlockType> parse(String original) {
+    public Optional<ItemType> parse(String original) {
         Platform platform = CorePlugin.getPlatform();
-        return platform.getBlockType(original);
+        return platform.getItemType(original);
     }
 
     @Override
-    public String unparse(BlockType value) {
+    public String unparse(ItemType value) {
         return value.getId();
     }
 }

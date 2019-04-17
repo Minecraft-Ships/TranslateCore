@@ -2,7 +2,8 @@ package org.core.inventory.item;
 
 public interface ItemStack {
 
-    public ItemType getType();
-    public int getQuantity();
-    public ItemStack copy();
+    ItemType getType();
+    int getQuantity();
+    ItemStack copy();
+    ItemStack copyWithQuantity(int quantity);
 }
