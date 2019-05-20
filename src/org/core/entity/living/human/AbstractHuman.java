@@ -1,7 +1,7 @@
 package org.core.entity.living.human;
 
 import org.core.entity.EntityType;
-import org.core.entity.living.InventoryHoldingEntity;
+import org.core.entity.InventoryHoldingEntity;
 import org.core.entity.living.LivingEntity;
 import org.core.entity.living.Tamer;
 import org.core.source.projectile.EntityProjectileSource;

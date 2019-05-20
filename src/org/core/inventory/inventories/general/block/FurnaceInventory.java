@@ -18,7 +18,7 @@ public interface FurnaceInventory extends BlockAttachedInventory {
 
     @Override
     default BlockType[] getAllowedBlockType() {
-        return new BlockType[]{BlockTypes.FURNACE, /*BlockTypes.FURNACE_LIT*//*1.12.2*/};
+        return new BlockType[]{BlockTypes.FURNACE.get(), /*BlockTypes.FURNACE_LIT*//*1.12.2*/};
     }
 
     @Override

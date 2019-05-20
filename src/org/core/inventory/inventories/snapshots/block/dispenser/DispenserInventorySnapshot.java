@@ -25,6 +25,6 @@ public abstract class DispenserInventorySnapshot extends DispenserBasedInventory
 
     @Override
     public BlockType[] getAllowedBlockType() {
-        return new BlockType[]{BlockTypes.DISPENSER};
+        return new BlockType[]{BlockTypes.DISPENSER.get()};
     }
 }

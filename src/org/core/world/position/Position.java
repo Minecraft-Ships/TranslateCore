@@ -3,6 +3,7 @@ package org.core.world.position;
 import org.core.entity.Entity;
 import org.core.entity.EntitySnapshot;
 import org.core.entity.EntityType;
+import org.core.entity.living.human.player.LivePlayer;
 import org.core.vector.Vector3;
 import org.core.vector.types.Vector3Int;
 import org.core.world.WorldExtent;
@@ -24,6 +25,10 @@ public interface Position<A extends Number> {
     BlockDetails getBlockDetails();
 
     Position<A> setBlock(BlockDetails details);
+
+    Position<A> setBlock(BlockDetails details, LivePlayer... player);
+
+    Position<A> resetBlock(LivePlayer... player);
 
     Optional<LiveTileEntity> getTileEntity();
 

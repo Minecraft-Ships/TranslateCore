@@ -11,4 +11,6 @@ public interface LivePlayer extends Player, LiveEntity, CommandViewer {
         return Player.super.getType();
     }
 
+    boolean hasPermission(String permission);
+
 }

@@ -11,6 +11,6 @@ public interface ChestInventory extends BlockAttachedInventory {
     ChestInventorySnapshot createSnapshot();
 
     default BlockType[] getAllowedBlockType(){
-        return new BlockType[]{BlockTypes.CHEST};
+        return new BlockType[]{BlockTypes.CHEST.get()};
     }
 }

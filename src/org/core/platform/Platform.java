@@ -16,8 +16,6 @@ import org.core.text.TextColours;
 import org.core.utils.Guaranteed;
 import org.core.utils.Identifable;
 import org.core.world.position.block.BlockType;
-import org.core.world.position.block.BlockTypes;
-import org.core.world.position.block.blocktypes.GarenteedBlockType;
 import org.core.world.position.block.entity.banner.pattern.PatternLayerType;
 import org.core.world.position.block.entity.banner.pattern.PatternLayerTypes;
 
@@ -27,7 +25,6 @@ import java.util.Set;
 
 public interface Platform {
 
-    BlockType get(GarenteedBlockType blockId);
     ItemType get(ItemTypeCommon itemId);
     TextColour get(TextColours id);
     DyeType get(DyeTypes id);
@@ -66,9 +63,6 @@ public interface Platform {
         if(class1.isAssignableFrom(BlockType.class)){
             return (Collection<T>)getBlockTypes();
         }
-        if(class1.isAssignableFrom(BlockType.class)){
-            return (Collection<T>)getBlockTypes();
-        }
         if(class1.isAssignableFrom(ItemType.class)){
             return (Collection<T>)getItemTypes();
         }
@@ -91,9 +85,6 @@ public interface Platform {
     default <T extends Identifable> T get(Guaranteed<T> guaranteed){
         if(guaranteed instanceof EntityType){
             return (T)get((EntityTypes)guaranteed);
-        }
-        if(guaranteed instanceof BlockTypes){
-            return (T)get((BlockTypes)guaranteed);
         }
         if(guaranteed instanceof ItemTypes){
             return (T)get((ItemTypes)guaranteed);

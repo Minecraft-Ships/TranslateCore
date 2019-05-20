@@ -1,5 +1,7 @@
 package org.core.entity.living;
 
+import org.core.entity.InventoryHoldingEntity;
+import org.core.entity.ItemHoldingEntity;
 import org.core.inventory.inventories.BasicEntityInventory;
 import org.core.inventory.parts.ArmorPart;
 import org.core.inventory.parts.Slot;

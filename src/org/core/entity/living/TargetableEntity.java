@@ -6,10 +6,10 @@ import java.util.Optional;
 
 public interface TargetableEntity extends LivingEntity {
 
-    public Optional<Entity> getTargetEntity();
-    public TargetableEntity setTargetEntity(Entity entity);
+    Optional<Entity> getTargetEntity();
+    TargetableEntity setTargetEntity(Entity entity);
 
-    public default TargetableEntity removeTargetEntity(){
+    default TargetableEntity removeTargetEntity(){
         return setTargetEntity(null);
     }
 }

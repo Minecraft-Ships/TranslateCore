@@ -11,6 +11,7 @@ import org.core.text.Text;
 
 import java.io.File;
 import java.lang.reflect.Array;
+import java.util.Objects;
 import java.util.function.Function;
 
 public interface CorePlugin {
@@ -57,31 +58,101 @@ public interface CorePlugin {
         return CorePlugin.CoreImplementation.getImplementation().createRawConfigurationFile(file, type);
     }
 
-    static <T extends Object> String toString(String split, Function<T, String> function, Iterable<T> array){
-        String ret = null;
-        for(T value : array){
-            if(ret == null){
-                ret = function.apply(value);
-            }else{
-                ret = ret + split + function.apply(value);
-            }
-        }
-        return ret;
+    static String toString(String split, Iterable<String> array){
+        return toString(split, t -> t, array);
     }
 
-    static <T extends Object> String toString(String split, Function<T, String> function, T... array){
-        String ret = null;
+    static <T> String toString(String split, Function<T, String> function, Iterable<T> array){
+        StringBuilder ret = null;
         for(T value : array){
             if(ret == null){
-                ret = function.apply(value);
+                ret = new StringBuilder(function.apply(value));
             }else{
-                ret = ret + split + function.apply(value);
+                ret.append(split).append(function.apply(value));
             }
         }
-        return ret;
+        return Objects.requireNonNull(ret).toString();
     }
 
-    static <T extends Object> T[] join(T[]... arrays){
+    static String toString(String split, String... array){
+        return toString(split, t -> t, array);
+    }
+
+    static String toString(String split, int... array){
+        StringBuilder ret = null;
+        for(int value : array){
+            if(ret == null){
+                ret = new StringBuilder(value + "");
+            }else{
+                ret.append(split).append(value);
+            }
+        }
+        return Objects.requireNonNull(ret).toString();
+    }
+
+    static String toString(String split, double... array){
+        StringBuilder ret = null;
+        for(double value : array){
+            if(ret == null){
+                ret = new StringBuilder(value + "");
+            }else{
+                ret.append(split).append(value);
+            }
+        }
+        return Objects.requireNonNull(ret).toString();
+    }
+
+    static String toString(String split, long... array){
+        StringBuilder ret = null;
+        for(long value : array){
+            if(ret == null){
+                ret = new StringBuilder(value + "");
+            }else{
+                ret.append(split).append(value);
+            }
+        }
+        return Objects.requireNonNull(ret).toString();
+    }
+
+    static String toString(String split, short... array){
+        StringBuilder ret = null;
+        for(int value : array){
+            if(ret == null){
+                ret = new StringBuilder(value + "");
+            }else{
+                ret.append(split).append(value);
+            }
+        }
+        return Objects.requireNonNull(ret).toString();
+    }
+
+    static String toString(String split, float... array){
+        StringBuilder ret = null;
+        for(float value : array){
+            if(ret == null){
+                ret = new StringBuilder(value + "");
+            }else{
+                ret.append(split).append(value);
+            }
+        }
+        return Objects.requireNonNull(ret).toString();
+    }
+
+    @SafeVarargs
+    static <T> String toString(String split, Function<T, String> function, T... array){
+        StringBuilder ret = null;
+        for(T value : array){
+            if(ret == null){
+                ret = new StringBuilder(function.apply(value));
+            }else{
+                ret.append(split).append(function.apply(value));
+            }
+        }
+        return Objects.requireNonNull(ret).toString();
+    }
+
+    @SafeVarargs
+    static <T> T[] join(T[]... arrays){
         int total = 0;
         for(T[] array : arrays){
             for(int A = 0; A < array.length; A++){
