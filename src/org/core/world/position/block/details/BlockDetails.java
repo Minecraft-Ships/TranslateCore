@@ -1,6 +1,10 @@
 package org.core.world.position.block.details;
 
 import org.core.world.position.block.BlockType;
+import org.core.world.position.block.details.data.DirectionalData;
+import org.core.world.position.block.details.data.keyed.KeyedData;
+
+import java.util.Optional;
 
 /**
  * <p>Contains all information of a block that has not been placed</p>
@@ -13,9 +17,19 @@ public interface BlockDetails {
      */
     BlockType getType();
 
+    Optional<DirectionalData> getDirectionalData();
+
+    <T extends Object> Optional<T> get(Class<? extends KeyedData<T>> data);
+
+    <T extends Object> BlockDetails set(Class<? extends KeyedData<T>> data, T value);
+
     /**
      * Creates a copy of the BlockDetails
      * @return The copy of the BlockDetails
      */
     BlockDetails createCopyOf();
+
+    default <T extends Object> Optional<T> getUnspecified(Class<? extends KeyedData<? extends Object>> dataClass){
+        return get((Class<? extends KeyedData<T>>)dataClass);
+    }
 }

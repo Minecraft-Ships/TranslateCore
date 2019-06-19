@@ -71,6 +71,9 @@ public interface CorePlugin {
                 ret.append(split).append(function.apply(value));
             }
         }
+        if(ret == null){
+            return null;
+        }
         return Objects.requireNonNull(ret).toString();
     }
 

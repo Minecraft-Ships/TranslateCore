@@ -16,8 +16,11 @@ import org.core.text.TextColours;
 import org.core.utils.Guaranteed;
 import org.core.utils.Identifable;
 import org.core.world.position.block.BlockType;
+import org.core.world.position.block.entity.TileEntity;
+import org.core.world.position.block.entity.TileEntitySnapshot;
 import org.core.world.position.block.entity.banner.pattern.PatternLayerType;
 import org.core.world.position.block.entity.banner.pattern.PatternLayerTypes;
+import org.core.world.position.block.grouptype.BlockGroup;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -47,12 +50,22 @@ public interface Platform {
     Collection<DyeType> getDyeTypes();
     Collection<PatternLayerType> getPatternLayerTypes();
     Collection<ConfigurationLoaderType> getConfigurationLoaderTypes();
+    Collection<BlockGroup> getBlockGroups();
 
+    Collection<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntities();
     int[] getMinecraftVersion();
     Set<Plugin> getPlugins();
 
+    default Optional<BlockGroup> getBlockGroup(String id){
+        return getBlockGroups().stream().filter(g -> g.getId().equals(id)).findFirst();
+    }
+
     default Optional<Plugin> getPlugin(String name){
         return getPlugins().stream().filter(p -> p.getPluginName().equals(name)).findAny();
+    }
+
+    default Optional<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntity(BlockType type){
+        return getDefaultTileEntities().stream().filter(t -> t.getSupportedBlocks().stream().anyMatch(ty -> ty.equals(type))).findFirst();
     }
 
     @Deprecated

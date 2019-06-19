@@ -513,6 +513,7 @@ public class BlockTypes1V13 extends CommonBlockTypes {
      */
     @Deprecated
     public static final Optional<BlockType> SIGN;
+    public static final Optional<BlockType> OAK_SIGN;
     public static final Optional<BlockType> SKELETON_SKULL = CorePlugin.getPlatform().getBlockType("minecraft:skeleton_skull");
     public static final Optional<BlockType> SKELETON_WALL_SKULL = CorePlugin.getPlatform().getBlockType("minecraft:skeleton_wall_skull");
     public static final Optional<BlockType> SLIME_BLOCK = CorePlugin.getPlatform().getBlockType("minecraft:slime_block");
@@ -582,6 +583,7 @@ public class BlockTypes1V13 extends CommonBlockTypes {
      */
     @Deprecated
     public static final Optional<BlockType> WALL_SIGN;
+    public static final Optional<BlockType> OAK_WALL_SIGN;
     public static final Optional<BlockType> WALL_TORCH = CorePlugin.getPlatform().getBlockType("minecraft:wall_torch");
     public static final Optional<BlockType> WATER = CorePlugin.getPlatform().getBlockType("minecraft:water");
     public static final Optional<BlockType> WET_SPONGE = CorePlugin.getPlatform().getBlockType("minecraft:wet_sponge");
@@ -619,10 +621,14 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     static {
         if(CorePlugin.toString(".", CorePlugin.getPlatform().getMinecraftVersion()).startsWith("1.13")) {
             SIGN = CorePlugin.getPlatform().getBlockType("minecraft:sign");
+            OAK_SIGN = SIGN;
             WALL_SIGN = CorePlugin.getPlatform().getBlockType("minecraft:wall_sign");
+            OAK_WALL_SIGN = WALL_SIGN;
         }else{
             SIGN = CorePlugin.getPlatform().getBlockType("minecraft:oak_sign");
+            OAK_SIGN  = SIGN;
             WALL_SIGN = CorePlugin.getPlatform().getBlockType("minecraft:oak_wall_sign");
+            OAK_WALL_SIGN = WALL_SIGN;
         }
 
     }
