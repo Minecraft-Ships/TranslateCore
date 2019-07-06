@@ -1,6 +1,6 @@
 package org.core.world;
 
-import org.core.entity.Entity;
+import org.core.entity.LiveEntity;
 import org.core.vector.Vector3;
 import org.core.vector.types.Vector3Double;
 import org.core.vector.types.Vector3Int;
@@ -18,7 +18,7 @@ public interface Extent {
 
     boolean isLoaded();
 
-    Set<Entity> getEntities();
+    Set<LiveEntity> getEntities();
 
     default <N extends Number> Position<N> getPosition(Vector3<N> vector){
         if(vector instanceof Vector3Int){

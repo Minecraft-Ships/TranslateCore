@@ -10,6 +10,7 @@ public class FourFacingDirection extends Direction {
     public static final Direction WEST = new FourFacingDirection("West", -1, 0, 0, "East", "North");
     public static final Direction UP = new FourFacingDirection("Up", 0, 1, 0, "Down", "Up");
     public static final Direction DOWN = new FourFacingDirection("Down", 0, -1, 0, "Up", "Down");
+    public static final Direction NONE = new FourFacingDirection("None", 0, 0, 0, "None", "None");
 
 
     protected FourFacingDirection(String name, Vector3Int asVector, String opposite, String left) {

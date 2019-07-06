@@ -7,7 +7,7 @@ import org.core.inventory.inventories.general.entity.PlayerInventory;
 
 public interface Player extends AbstractHuman, User {
 
-    public boolean isViewingInventory();
+    boolean isViewingInventory();
 
     @Override
     default EntityType<Player, PlayerSnapshot> getType(){

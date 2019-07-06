@@ -1,6 +1,8 @@
 package org.core.platform;
 
-import org.core.command.BaseCommandLauncher;
+import org.core.command.CommandLauncher;
+import org.core.entity.living.human.player.LivePlayer;
+import org.core.entity.living.human.player.User;
 import org.core.world.WorldExtent;
 
 import java.util.Collection;
@@ -12,9 +14,11 @@ public interface PlatformServer {
 
     Set<WorldExtent> getWorlds();
     Optional<WorldExtent> getWorldByPlatformSpecific(String name);
+    Collection<LivePlayer> getOnlinePlayers();
+    Optional<User> getOfflineUser(UUID uuid);
 
-    Collection<BaseCommandLauncher> getCommands();
-    void registerCommands(BaseCommandLauncher... commandLaunchers);
+    Collection<CommandLauncher> getCommands();
+    void registerCommands(CommandLauncher... commandLaunchers);
 
     default Optional<WorldExtent> getWorld(String name, boolean justName){
         if(justName){

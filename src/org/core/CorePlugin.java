@@ -11,8 +11,12 @@ import org.core.text.Text;
 
 import java.io.File;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public interface CorePlugin {
 
@@ -56,6 +60,15 @@ public interface CorePlugin {
 
     static ConfigurationFile createConfigurationFile(File file, ConfigurationLoaderType type){
         return CorePlugin.CoreImplementation.getImplementation().createRawConfigurationFile(file, type);
+    }
+
+    static <T extends Object, V extends T> List<V> arrayCast(Predicate<T> predicate, Collection<T> collection){
+        return arrayCast(new ArrayList<>(), predicate, collection);
+    }
+
+    static <T extends Object, V extends T, L extends Collection<V>> L arrayCast(L array, Predicate<T> predicate, Collection<T> original){
+        original.stream().filter(predicate).forEach(v -> array.add((V)v));
+        return array;
     }
 
     static String toString(String split, Iterable<String> array){

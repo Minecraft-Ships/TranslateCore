@@ -17,6 +17,7 @@ public interface Parser <O, T> {
     StringToWorldParser STRING_TO_WORLD = new StringToWorldParser();
     StringToStringParser STRING_TO_STRING_PARSER = new StringToStringParser();
     StringToVector3Int STRING_TO_VECTOR3INT = new StringToVector3Int();
+    StringToUniquieIdParser STRING_TO_UNIQUIE_ID = new StringToUniquieIdParser();
 
     Optional<T> parse(O original);
     O unparse(T value);

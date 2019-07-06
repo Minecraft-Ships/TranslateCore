@@ -11,6 +11,7 @@ public interface AbstractHuman extends LivingEntity, InventoryHoldingEntity, Tam
     int getFoodLevel();
     double getExhaustionLevel();
     double getSaturationLevel();
+    String getName();
     boolean isSneaking();
 
     AbstractHuman setFood(int value) throws IndexOutOfBoundsException;
@@ -19,8 +20,8 @@ public interface AbstractHuman extends LivingEntity, InventoryHoldingEntity, Tam
     AbstractHuman setSneaking(boolean sneaking);
 
     @Override
-    public EntityType<? extends AbstractHuman, ? extends AbstractHumanSnapshot<? extends AbstractHuman>> getType();
+    EntityType<? extends AbstractHuman, ? extends AbstractHumanSnapshot<? extends AbstractHuman>> getType();
 
     @Override
-    public AbstractHumanSnapshot<? extends AbstractHuman> createSnapshot();
+    AbstractHumanSnapshot<? extends AbstractHuman> createSnapshot();
 }
