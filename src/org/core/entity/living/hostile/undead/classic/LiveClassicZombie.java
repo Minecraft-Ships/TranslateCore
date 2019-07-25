@@ -5,8 +5,7 @@ import org.core.entity.LiveEntity;
 
 public interface LiveClassicZombie extends ClassicZombie, LiveEntity {
 
-    @Override
-    default EntityType<ClassicZombie, ClassicZombieSnapshot> getType(){
+    default EntityType<LiveClassicZombie, ClassicZombieSnapshot> getType(){
         return ClassicZombie.super.getType();
     }
 }

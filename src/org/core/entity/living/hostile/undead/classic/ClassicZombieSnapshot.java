@@ -2,13 +2,10 @@ package org.core.entity.living.hostile.undead.classic;
 
 import org.core.entity.EntitySnapshot;
 import org.core.entity.EntityType;
-import org.core.entity.EntityTypes;
 
-public interface ClassicZombieSnapshot extends ClassicZombie, EntitySnapshot<ClassicZombie> {
+public interface ClassicZombieSnapshot extends ClassicZombie, EntitySnapshot<LiveClassicZombie> {
 
-    @Override
-    default EntityType<ClassicZombie, ClassicZombieSnapshot> getType(){
-        return EntityTypes.ZOMBIE;
+    default EntityType<LiveClassicZombie, ClassicZombieSnapshot> getType(){
+        return ClassicZombie.super.getType();
     }
-
 }

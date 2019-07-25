@@ -8,8 +8,12 @@ public class StringToIntegerParser implements StringParser<Integer> {
 
     @Override
     public Optional<Integer> parse(String original) {
-        int value = Integer.parseInt(original);
-        return Optional.of(value);
+        try {
+            int value = Integer.parseInt(original);
+            return Optional.of(value);
+        }catch (NumberFormatException e){
+            return Optional.empty();
+        }
     }
 
     @Override

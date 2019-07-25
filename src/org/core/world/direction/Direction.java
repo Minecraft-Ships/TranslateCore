@@ -32,7 +32,12 @@ public abstract class Direction {
     }
 
     public Direction getOpposite(){
-        return getDirction(this.opposite).get();
+        Optional<Direction> opDirection = getDirction(this.opposite);
+        if(opDirection.isPresent()){
+            return opDirection.get();
+        }
+        System.out.println("unknown opposite direction from " + this.name + " of " + this.opposite);
+        return opDirection.get();
     }
 
     public Direction getRightAngleLeft(){
@@ -61,7 +66,7 @@ public abstract class Direction {
     }
 
     public static Optional<Direction> getDirction(String name){
-        for(Direction dir : SixteenFacingDirection.getSixteenFacingDirections()){
+        for(Direction dir : Direction.withYDirections(SixteenFacingDirection.getSixteenFacingDirections())){
             if(dir.name.equals(name)){
                 return Optional.of(dir);
             }

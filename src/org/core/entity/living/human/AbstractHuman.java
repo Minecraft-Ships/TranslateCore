@@ -1,6 +1,5 @@
 package org.core.entity.living.human;
 
-import org.core.entity.EntityType;
 import org.core.entity.InventoryHoldingEntity;
 import org.core.entity.living.LivingEntity;
 import org.core.entity.living.Tamer;
@@ -18,10 +17,4 @@ public interface AbstractHuman extends LivingEntity, InventoryHoldingEntity, Tam
     AbstractHuman setExhaustionLevel(double value) throws IndexOutOfBoundsException;
     AbstractHuman setSaturationLevel(double value) throws IndexOutOfBoundsException;
     AbstractHuman setSneaking(boolean sneaking);
-
-    @Override
-    EntityType<? extends AbstractHuman, ? extends AbstractHumanSnapshot<? extends AbstractHuman>> getType();
-
-    @Override
-    AbstractHumanSnapshot<? extends AbstractHuman> createSnapshot();
 }

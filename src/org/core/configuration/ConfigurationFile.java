@@ -9,6 +9,7 @@ import java.util.*;
 public interface ConfigurationFile {
 
     File getFile();
+    ConfigurationFile reload();
     Map<ConfigurationNode, Object> getKeyValues();
     <T extends Object> Optional<T> parse(ConfigurationNode node, Parser<? extends Object, T> parser);
     Optional<String> parseString(ConfigurationNode node);

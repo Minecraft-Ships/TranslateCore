@@ -2,10 +2,8 @@ package org.core.platform;
 
 import org.core.configuration.type.ConfigurationLoaderType;
 import org.core.configuration.type.ConfigurationLoaderTypes;
-import org.core.entity.Entity;
-import org.core.entity.EntitySnapshot;
-import org.core.entity.EntityType;
-import org.core.entity.EntityTypes;
+import org.core.entity.*;
+import org.core.event.CustomEvent;
 import org.core.inventory.item.ItemType;
 import org.core.inventory.item.ItemTypes;
 import org.core.inventory.item.data.dye.DyeType;
@@ -33,7 +31,7 @@ public interface Platform {
     DyeType get(DyeTypes id);
     PatternLayerType get(PatternLayerTypes id);
     ConfigurationLoaderType get(ConfigurationLoaderTypes id);
-    <E extends Entity, S extends EntitySnapshot<E>> EntityType<E, S> get(EntityTypes<E, S> entityId);
+    <E extends LiveEntity, S extends EntitySnapshot<E>> EntityType<E, S> get(EntityTypes<E, S> entityId);
 
     Optional<EntityType<? extends Entity, ? extends EntitySnapshot<? extends Entity>>> getEntityType(String id);
     Optional<BlockType> getBlockType(String id);
@@ -55,6 +53,7 @@ public interface Platform {
     Collection<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntities();
     int[] getMinecraftVersion();
     Set<Plugin> getPlugins();
+    <E extends CustomEvent> E callEvent(E event);
 
     default Optional<BlockGroup> getBlockGroup(String id){
         return getBlockGroups().stream().filter(g -> g.getId().equals(id)).findFirst();

@@ -7,7 +7,7 @@ import org.core.entity.living.hostile.undead.Zombie;
 public interface ClassicZombie extends Zombie {
 
     @Override
-    default EntityType<ClassicZombie, ClassicZombieSnapshot> getType(){
+    default EntityType<LiveClassicZombie, ClassicZombieSnapshot> getType(){
         return EntityTypes.ZOMBIE;
     }
 }

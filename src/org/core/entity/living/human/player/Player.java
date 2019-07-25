@@ -10,7 +10,7 @@ public interface Player extends AbstractHuman, User {
     boolean isViewingInventory();
 
     @Override
-    default EntityType<Player, PlayerSnapshot> getType(){
+    default EntityType<LivePlayer, PlayerSnapshot> getType(){
         return EntityTypes.PLAYER;
     }
 

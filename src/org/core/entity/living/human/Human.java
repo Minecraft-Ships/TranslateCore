@@ -7,7 +7,7 @@ import org.core.entity.living.Creature;
 public interface Human extends AbstractHuman, Creature {
 
     @Override
-    default EntityType<Human, HumanSnapshot> getType(){
+    default EntityType<LiveHuman, HumanSnapshot> getType(){
         return EntityTypes.HUMAN;
     }
 }

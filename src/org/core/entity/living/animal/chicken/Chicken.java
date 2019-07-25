@@ -7,7 +7,7 @@ import org.core.entity.living.animal.AnimalEntity;
 public interface Chicken extends AnimalEntity {
 
     @Override
-    default EntityType<Chicken, ChickenSnapshot> getType() {
+    default EntityType<LiveChicken, ChickenSnapshot> getType() {
         return EntityTypes.CHICKEN;
     }
 

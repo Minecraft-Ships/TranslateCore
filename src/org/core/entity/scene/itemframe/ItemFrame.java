@@ -14,7 +14,7 @@ public interface ItemFrame extends AttachableEntity, ItemHoldingEntity {
     ItemFrame setItemRotation(Direction direction, boolean flip) throws DirectionNotSupported;
 
     @Override
-    default EntityType<ItemFrame, ItemFrameSnapshot> getType() {
+    default EntityType<LiveItemFrame, ItemFrameSnapshot> getType() {
         return EntityTypes.ITEM_FRAME;
     }
 

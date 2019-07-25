@@ -1,6 +1,7 @@
 package org.core.entity;
 
-public interface EntitySnapshot<E extends Entity> extends Entity {
+public interface EntitySnapshot<E extends LiveEntity> extends Entity {
 
-    public E getOrCreateEntity();
+    E spawnEntity();
+    EntitySnapshot<E> createSnapshot();
 }

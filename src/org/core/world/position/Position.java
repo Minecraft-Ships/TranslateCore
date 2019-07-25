@@ -1,8 +1,8 @@
 package org.core.world.position;
 
-import org.core.entity.Entity;
 import org.core.entity.EntitySnapshot;
 import org.core.entity.EntityType;
+import org.core.entity.LiveEntity;
 import org.core.entity.living.human.player.LivePlayer;
 import org.core.vector.Vector3;
 import org.core.vector.types.Vector3Int;
@@ -32,7 +32,7 @@ public interface Position<A extends Number> {
 
     Optional<LiveTileEntity> getTileEntity();
 
-    <E extends Entity, S extends EntitySnapshot<E>> Optional<S> createEntity(EntityType<E, S> type);
+    <E extends LiveEntity, S extends EntitySnapshot<E>> Optional<S> createEntity(EntityType<E, S> type);
 
     default BlockType getBlockType() {
         return getBlockDetails().getType();

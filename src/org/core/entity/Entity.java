@@ -11,39 +11,39 @@ import java.util.Collection;
 public interface Entity extends Positionable {
 
     @Override
-    public ExactPosition getPosition();
+    ExactPosition getPosition();
 
-    public <E extends Entity> EntityType<E, ? extends EntitySnapshot<E>> getType();
-    public EntitySnapshot createSnapshot();
+    <E extends LiveEntity> EntityType<E, ? extends EntitySnapshot<E>> getType();
+    EntitySnapshot<? extends LiveEntity> createSnapshot();
 
-    public Entity setPitch(double value);
-    public Entity setYaw(double value);
-    public Entity setRoll(double value);
-    public Entity setPosition(Position<? extends Number> position);
-    public Entity setGravity(boolean check);
+    Entity setPitch(double value);
+    Entity setYaw(double value);
+    Entity setRoll(double value);
+    Entity setPosition(Position<? extends Number> position);
+    Entity setGravity(boolean check);
 
-    public double getPitch();
-    public double getYaw();
-    public double getRoll();
-    public boolean hasGravity();
+    double getPitch();
+    double getYaw();
+    double getRoll();
+    boolean hasGravity();
 
-    public Collection<Entity> getPassengers();
-    public Entity addPassengers(Collection<Entity> entities);
-    public Entity removePassengers(Collection<Entity> entities);
+    Collection<Entity> getPassengers();
+    Entity addPassengers(Collection<Entity> entities);
+    Entity removePassengers(Collection<Entity> entities);
 
-    public default boolean hasPassengers(){
+    default boolean hasPassengers(){
         return !getPassengers().isEmpty();
     }
 
-    public default Entity addPassengers(Entity... entities) {
+    default Entity addPassengers(Entity... entities) {
         return addPassengers(Arrays.asList(entities));
     }
 
-    public default Entity removePassengers(Entity... entities){
+    default Entity removePassengers(Entity... entities){
         return removePassengers(Arrays.asList(entities));
     }
 
-    public default Entity clearPassengers(){
+    default Entity clearPassengers(){
         return removePassengers(getPassengers());
     }
 

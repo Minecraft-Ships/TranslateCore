@@ -6,11 +6,10 @@ import org.core.source.viewer.CommandViewer;
 
 public interface LivePlayer extends Player, LiveEntity, CommandViewer {
 
-    @Override
-    default EntityType<Player, PlayerSnapshot> getType(){
+    boolean hasPermission(String permission);
+
+    default EntityType<LivePlayer, PlayerSnapshot> getType(){
         return Player.super.getType();
     }
-
-    boolean hasPermission(String permission);
 
 }
