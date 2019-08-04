@@ -8,6 +8,7 @@ import org.core.platform.PlatformServer;
 import org.core.schedule.SchedulerBuilder;
 import org.core.source.command.ConsoleSource;
 import org.core.text.Text;
+import org.core.world.boss.ServerBossBar;
 
 import java.io.File;
 import java.lang.reflect.Array;
@@ -33,6 +34,8 @@ public interface CorePlugin {
     PlatformServer getRawServer();
 
     Text textBuilder(String chars);
+
+    ServerBossBar bossBuilder();
 
     static Platform getPlatform(){
         return CorePlugin.CoreImplementation.getImplementation().getRawPlatform();
@@ -62,11 +65,15 @@ public interface CorePlugin {
         return CorePlugin.CoreImplementation.getImplementation().createRawConfigurationFile(file, type);
     }
 
-    static <T extends Object, V extends T> List<V> arrayCast(Predicate<T> predicate, Collection<T> collection){
+    static ServerBossBar createBossBar(){
+        return CorePlugin.CoreImplementation.getImplementation().bossBuilder();
+    }
+
+    static <T, V extends T> List<V> arrayCast(Predicate<T> predicate, Collection<T> collection){
         return arrayCast(new ArrayList<>(), predicate, collection);
     }
 
-    static <T extends Object, V extends T, L extends Collection<V>> L arrayCast(L array, Predicate<T> predicate, Collection<T> original){
+    static <T, V extends T, L extends Collection<V>> L arrayCast(L array, Predicate<T> predicate, Collection<T> original){
         original.stream().filter(predicate).forEach(v -> array.add((V)v));
         return array;
     }
@@ -156,15 +163,15 @@ public interface CorePlugin {
 
     @SafeVarargs
     static <T> String toString(String split, Function<T, String> function, T... array){
-        StringBuilder ret = null;
+        String ret = null;
         for(T value : array){
             if(ret == null){
-                ret = new StringBuilder(function.apply(value));
+                ret = function.apply(value);
             }else{
-                ret.append(split).append(function.apply(value));
+                ret = ret + split + function.apply(value);
             }
         }
-        return Objects.requireNonNull(ret).toString();
+        return ret;
     }
 
     @SafeVarargs
@@ -186,6 +193,16 @@ public interface CorePlugin {
         return arrayMash;
     }
 
+    static <T> T[] strip(Class<T> tClass, int min, int max, T... array){
+        Object obj = Array.newInstance(tClass, max - min);
+        T[] array1 = (T[])obj;
+        for (int A = min; A < max; A++){
+            T B = array[A];
+            array1[A - min] = array[A];
+        }
+        return array1;
+    }
+
     abstract class CoreImplementation implements CorePlugin {
 
         protected static CoreImplementation IMPLEMENTATION;
@@ -195,5 +212,4 @@ public interface CorePlugin {
         }
 
     }
-
 }

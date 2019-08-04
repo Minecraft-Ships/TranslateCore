@@ -5,14 +5,13 @@ import org.core.configuration.type.ConfigurationLoaderTypes;
 import org.core.entity.*;
 import org.core.event.CustomEvent;
 import org.core.inventory.item.ItemType;
-import org.core.inventory.item.ItemTypes;
 import org.core.inventory.item.data.dye.DyeType;
 import org.core.inventory.item.data.dye.DyeTypes;
 import org.core.inventory.item.type.ItemTypeCommon;
 import org.core.text.TextColour;
 import org.core.text.TextColours;
-import org.core.utils.Guaranteed;
-import org.core.utils.Identifable;
+import org.core.world.boss.colour.BossColour;
+import org.core.world.boss.colour.BossColours;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.entity.TileEntity;
 import org.core.world.position.block.entity.TileEntitySnapshot;
@@ -26,6 +25,7 @@ import java.util.Set;
 
 public interface Platform {
 
+    BossColour get(BossColours colours);
     ItemType get(ItemTypeCommon itemId);
     TextColour get(TextColours id);
     DyeType get(DyeTypes id);
@@ -40,6 +40,7 @@ public interface Platform {
     Optional<DyeType> getDyeType(String id);
     Optional<PatternLayerType> getPatternLayerType(String id);
     Optional<ConfigurationLoaderType> getConfigurationLoaderType(String id);
+    Optional<BossColour> getBossColour(String id);
 
     Collection<EntityType<? extends Entity, ? extends EntitySnapshot<? extends Entity>>> getEntityTypes();
     Collection<BlockType> getBlockTypes();
@@ -49,6 +50,7 @@ public interface Platform {
     Collection<PatternLayerType> getPatternLayerTypes();
     Collection<ConfigurationLoaderType> getConfigurationLoaderTypes();
     Collection<BlockGroup> getBlockGroups();
+    Collection<BossColour> getBossColours();
 
     Collection<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntities();
     int[] getMinecraftVersion();
@@ -65,81 +67,6 @@ public interface Platform {
 
     default Optional<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntity(BlockType type){
         return getDefaultTileEntities().stream().filter(t -> t.getSupportedBlocks().stream().anyMatch(ty -> ty.equals(type))).findFirst();
-    }
-
-    @Deprecated
-    default <T extends Identifable> Collection<T> get(Class<T> class1){
-        if(class1.isAssignableFrom(EntityType.class)){
-            return (Collection<T>)getEntityTypes();
-        }
-        if(class1.isAssignableFrom(BlockType.class)){
-            return (Collection<T>)getBlockTypes();
-        }
-        if(class1.isAssignableFrom(ItemType.class)){
-            return (Collection<T>)getItemTypes();
-        }
-        if(class1.isAssignableFrom(TextColour.class)){
-            return (Collection<T>)getTextColours();
-        }
-        if(class1.isAssignableFrom(DyeType.class)){
-            return (Collection<T>)getDyeTypes();
-        }
-        if(class1.isAssignableFrom(PatternLayerType.class)){
-            return (Collection<T>)getPatternLayerTypes();
-        }
-        if(class1.isAssignableFrom(ConfigurationLoaderType.class)) {
-            return (Collection<T>) getConfigurationLoaderTypes();
-        }
-        return null;
-    }
-
-    @Deprecated
-    default <T extends Identifable> T get(Guaranteed<T> guaranteed){
-        if(guaranteed instanceof EntityType){
-            return (T)get((EntityTypes)guaranteed);
-        }
-        if(guaranteed instanceof ItemTypes){
-            return (T)get((ItemTypes)guaranteed);
-        }
-        if(guaranteed instanceof TextColours){
-            return (T)get((TextColours)guaranteed);
-        }
-        if(guaranteed instanceof DyeTypes){
-            return (T)get((DyeTypes)guaranteed);
-        }
-        if(guaranteed instanceof PatternLayerTypes){
-            return (T)get((PatternLayerTypes)guaranteed);
-        }
-        if(guaranteed instanceof ConfigurationLoaderTypes){
-            return (T)get((ConfigurationLoaderTypes)guaranteed);
-        }
-        return null;
-    }
-
-    @Deprecated
-    default <T extends Identifable> Optional<T> get(String id, Class<T> type) {
-        if(type.isAssignableFrom(EntityType.class)){
-            return (Optional<T>) getEntityType(id);
-        }
-        if(type.isAssignableFrom(BlockType.class)){
-            return (Optional<T>) getBlockType(id);
-        }
-        if(type.isAssignableFrom(ItemType.class)){
-            return (Optional<T>) getItemType(id);
-        }
-        if(type.isAssignableFrom(TextColour.class)){
-            return (Optional<T>) getTextColour(id);
-        }
-        if(type.isAssignableFrom(DyeType.class)){
-            return (Optional<T>) getDyeType(id);
-        }
-        if(type.isAssignableFrom(PatternLayerType.class)){
-            return (Optional<T>) getPatternLayerType(id);
-        }
-        if(type.isAssignableFrom(ConfigurationLoaderType.class)){
-            return (Optional<T>) getConfigurationLoaderType(id);
-        }
-        return Optional.empty();
     }
 
 }

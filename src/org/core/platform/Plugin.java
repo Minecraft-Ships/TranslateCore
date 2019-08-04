@@ -5,11 +5,9 @@ import java.util.Optional;
 public interface Plugin {
 
     String getPluginName();
+    String getPluginId();
     String getPluginVersion();
-    Optional<String> checkForUpdates();
-
-    public Object getBukkitLauncher();
-
-    public Object getSpongeLauncher();
+    Optional<Object> getBukkitLauncher();
+    Optional<Object> getSpongeLauncher();
 
 }
