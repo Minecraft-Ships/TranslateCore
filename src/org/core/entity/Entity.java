@@ -1,6 +1,8 @@
 package org.core.entity;
 
+import org.core.text.Text;
 import org.core.vector.Vector3;
+import org.core.vector.types.Vector3Double;
 import org.core.world.position.ExactPosition;
 import org.core.world.position.Position;
 import org.core.world.position.Positionable;
@@ -21,15 +23,25 @@ public interface Entity extends Positionable {
     Entity setRoll(double value);
     Entity setPosition(Position<? extends Number> position);
     Entity setGravity(boolean check);
+    Entity setVelocity(Vector3Double velocity);
+    Entity setCustomName(Text text);
+    Entity setCustomNameVisible(boolean visible);
 
     double getPitch();
     double getYaw();
     double getRoll();
     boolean hasGravity();
+    Vector3Double getVelocity();
+    Text getCustomName();
+    boolean isCustomNameVisible();
 
     Collection<Entity> getPassengers();
     Entity addPassengers(Collection<Entity> entities);
     Entity removePassengers(Collection<Entity> entities);
+
+    default Entity setVelocity(double x, double y, double z){
+        return setVelocity(new Vector3Double(x, y, z));
+    }
 
     default boolean hasPassengers(){
         return !getPassengers().isEmpty();
