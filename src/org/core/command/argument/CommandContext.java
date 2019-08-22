@@ -1,9 +1,11 @@
 package org.core.command.argument;
 
+import org.core.exceptions.NotEnoughArguments;
 import org.core.source.command.CommandSource;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CommandContext implements Iterator<String>{
 
@@ -11,6 +13,7 @@ public class CommandContext implements Iterator<String>{
     protected int target = 0;
     protected List<ArgumentContext<?>> argumentProcessors = new ArrayList<>();
     protected CommandSource source;
+    protected boolean tab = true;
 
     public CommandContext(CommandSource source, Collection<ArgumentContext<?>> collection, String... arguments){
         this.rawArguments = arguments;
@@ -26,6 +29,34 @@ public class CommandContext implements Iterator<String>{
         return this.rawArguments;
     }
 
+    public List<ArgumentContext<?>> getProcessors(){return this.argumentProcessors;}
+
+    public void validate() throws NotEnoughArguments {
+        List<ArgumentContext<?>> list = new ArrayList<>();
+        for(ArgumentContext<?> a : this.argumentProcessors){
+            try {
+                a.parse(this);
+            }catch (NotEnoughArguments e1){
+                e1.printStackTrace();
+                throw e1;
+            } catch (ArrayIndexOutOfBoundsException | IOException e) {
+                list.add(a);
+            }
+        }
+        if(list.isEmpty()){
+            return;
+        }
+        throw new NotEnoughArguments(list);
+    }
+
+    public boolean isForTabComplete(){
+        return this.tab;
+    }
+
+    public void setForTabComplete(boolean check){
+        this.tab = check;
+    }
+
     public List<String> suggests(){
         int originalTarget = this.target;
         this.target = 0;
@@ -33,7 +64,7 @@ public class CommandContext implements Iterator<String>{
             int safeTarget = this.target;
             try {
                 argument.parse(this);
-            }catch (ArrayIndexOutOfBoundsException e1){
+            /*}catch (ArrayIndexOutOfBoundsException e1){
                 String[] args = new String[this.rawArguments.length - safeTarget];
                 for(int A = safeTarget; A < this.rawArguments.length; A++){
                     args[A] = this.rawArguments[A];
@@ -42,6 +73,14 @@ public class CommandContext implements Iterator<String>{
                 return argument.getSuggestions(this, args);
             } catch (IOException e) {
                 this.target = safeTarget;
+            }*/
+            }catch (ArrayIndexOutOfBoundsException | IOException e1){
+                String[] args = new String[this.rawArguments.length - safeTarget];
+                for(int A = safeTarget; A < this.rawArguments.length; A++){
+                    args[A] = this.rawArguments[A];
+                }
+                this.target = originalTarget;
+                return argument.getSuggestions(this, args);
             }
         }
         this.target = originalTarget;

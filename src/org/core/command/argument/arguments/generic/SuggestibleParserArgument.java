@@ -1,10 +1,12 @@
 package org.core.command.argument.arguments.generic;
 
+import org.core.CorePlugin;
 import org.core.command.argument.ArgumentContext;
 import org.core.command.argument.CommandContext;
 import org.core.configuration.parser.StringParser;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,9 +36,9 @@ public abstract class SuggestibleParserArgument<T> implements ArgumentContext<T>
     public List<String> getSuggestions(CommandContext context, String... args) {
         if(args.length == 0 || (args.length == 1 && args[0].equalsIgnoreCase(""))){
             return this.parser.getStringSuggestions();
-        }else{
-            return this.parser.getStringSuggestions(args[0]);
         }
+        String peek = args[0];
+        return this.parser.getStringSuggestions(peek);
     }
 
     @Override

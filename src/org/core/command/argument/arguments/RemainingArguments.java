@@ -18,8 +18,8 @@ public class RemainingArguments<T> implements ArgumentContext<List<T>> {
     @Override
     public List<T> parse(CommandContext context) throws IOException {
         List<T> values = new ArrayList<>();
-        while(context.hasNext()) {
-            this.context.parse(context);
+        for(int A = 0; A < context.getRawArguments().length; A++){
+            values.add(this.context.parse(context));
         }
         return values;
     }

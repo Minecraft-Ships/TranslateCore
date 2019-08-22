@@ -2,6 +2,7 @@ package org.core.command;
 
 import org.core.command.argument.ArgumentContext;
 import org.core.command.argument.CommandContext;
+import org.core.exceptions.NotEnoughArguments;
 import org.core.source.command.CommandSource;
 
 import java.util.ArrayList;
@@ -45,8 +46,10 @@ public abstract class ChildArgumentCommandLauncher implements BaseCommandLaunche
     }
 
     @Override
-    public boolean run(CommandSource source, String... args) {
+    public boolean run(CommandSource source, String... args) throws NotEnoughArguments {
         CommandContext context = new CommandContext(source, this.argumentProcessors, args);
+        context.setForTabComplete(false);
+        context.validate();
         return process(context);
     }
 

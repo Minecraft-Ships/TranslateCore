@@ -1,7 +1,9 @@
 package org.core.command;
 
+import org.core.exceptions.NotEnoughArguments;
 import org.core.source.command.CommandSource;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +17,6 @@ public interface BaseCommandLauncher {
         return getName();
     }
 
-    boolean run(CommandSource source, String... args);
+    boolean run(CommandSource source, String... args) throws NotEnoughArguments;
     List<String> tab(CommandSource source, String... args);
 }

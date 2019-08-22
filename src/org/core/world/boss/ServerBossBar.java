@@ -30,6 +30,6 @@ public interface ServerBossBar {
     }
 
     default ServerBossBar deregisterPlayers(){
-        return deregister(getPlayers().toArray(new LivePlayer[1]));
+        return deregister(getPlayers().toArray(new LivePlayer[0]));
     }
 }

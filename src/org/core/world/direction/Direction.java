@@ -36,7 +36,7 @@ public abstract class Direction {
         if(opDirection.isPresent()){
             return opDirection.get();
         }
-        System.out.println("unknown opposite direction from " + this.name + " of " + this.opposite);
+        System.err.println("unknown opposite direction from " + this.name + " of " + this.opposite);
         return opDirection.get();
     }
 
