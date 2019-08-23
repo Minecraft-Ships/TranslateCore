@@ -18,9 +18,14 @@ public interface Parser <O, T> {
     StringToStringParser STRING_TO_STRING_PARSER = new StringToStringParser();
     StringToVector3Int STRING_TO_VECTOR3INT = new StringToVector3Int();
     StringToUniquieIdParser STRING_TO_UNIQUIE_ID = new StringToUniquieIdParser();
+    StringToMinecraftTimeUnitParser STRING_TO_MINECRAFT_TIME_UNIT = new StringToMinecraftTimeUnitParser();
 
     Optional<T> parse(O original);
     O unparse(T value);
+
+    static <E extends Enum> StringToEnumParser<E> getEnumParser(Class<E> clazz){
+        return new StringToEnumParser<>(clazz);
+    }
 
     static <O, T> List<T> parseList(Parser<O, T> parser, Collection<O> collection){
         List<T> list = new ArrayList<>();

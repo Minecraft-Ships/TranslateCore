@@ -26,7 +26,8 @@ public interface ServerBossBar {
     }
 
     default ServerBossBar setValue(int value, int max){
-        return setValue((int)(value * 100.0f) / max);
+        int percent = (int)((value * 100.0f) / max);
+        return setValue(percent);
     }
 
     default ServerBossBar deregisterPlayers(){
