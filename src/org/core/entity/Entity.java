@@ -3,6 +3,7 @@ package org.core.entity;
 import org.core.text.Text;
 import org.core.vector.Vector3;
 import org.core.vector.types.Vector3Double;
+import org.core.world.position.BlockPosition;
 import org.core.world.position.ExactPosition;
 import org.core.world.position.Position;
 import org.core.world.position.Positionable;
@@ -65,6 +66,10 @@ public interface Entity extends Positionable {
 
     default Entity setPosition(Vector3<? extends Number> vector){
         return setPosition(vector.getRawX().doubleValue(), vector.getRawY().doubleValue(), vector.getRawZ().doubleValue());
+    }
+
+    default BlockPosition getAttachedTo(){
+        return getPosition().getRelative(new Vector3Double(0, -0.1, 0)).toBlockPosition();
     }
 
 }

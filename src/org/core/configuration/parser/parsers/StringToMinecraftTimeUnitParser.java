@@ -1,11 +1,11 @@
 package org.core.configuration.parser.parsers;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class StringToMinecraftTimeUnitParser extends StringToEnumParser<TimeUnit> {
 
@@ -27,6 +27,15 @@ public class StringToMinecraftTimeUnitParser extends StringToEnumParser<TimeUnit
             return "TICKS";
         }
         return super.unparse(unit);
+    }
+
+    @Override
+    public List<TimeUnit> getSuggestions(String peek) {
+        List<TimeUnit> list = getSuggestions().stream().filter(s -> s != null).filter(s -> s.name().toLowerCase().startsWith(peek.toLowerCase())).collect(Collectors.toList());
+        if("ticks".startsWith(peek.toLowerCase())){
+            list.add(null);
+        }
+        return list;
     }
 
     @Override
