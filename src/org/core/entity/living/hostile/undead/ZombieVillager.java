@@ -1,4 +1,6 @@
 package org.core.entity.living.hostile.undead;
 
-public interface ZombieVillager extends Zombie {
+import org.core.entity.Entity;
+
+public interface ZombieVillager<E extends Entity> extends Zombie<E> {
 }

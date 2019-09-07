@@ -1,5 +1,6 @@
 package org.core.inventory.inventories.general.entity;
 
+import org.core.entity.LiveEntity;
 import org.core.entity.living.hostile.undead.Zombie;
 import org.core.inventory.inventories.BasicEntityInventory;
 import org.core.inventory.inventories.snapshots.entity.ZombieInventorySnapshot;
@@ -8,7 +9,7 @@ import org.core.inventory.parts.Slot;
 import java.util.HashSet;
 import java.util.Set;
 
-public interface ZombieInventory<Z extends Zombie> extends BasicEntityInventory<Z> {
+public interface ZombieInventory<Z extends Zombie<LiveEntity> & LiveEntity> extends BasicEntityInventory<Z> {
 
     @Override
     ZombieInventorySnapshot createSnapshot();

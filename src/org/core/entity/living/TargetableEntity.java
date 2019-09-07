@@ -4,12 +4,12 @@ import org.core.entity.Entity;
 
 import java.util.Optional;
 
-public interface TargetableEntity extends LivingEntity {
+public interface TargetableEntity<E extends Entity> extends Entity<E> {
 
-    Optional<Entity> getTargetEntity();
-    TargetableEntity setTargetEntity(Entity entity);
+    Optional<E> getTargetEntity();
+    TargetableEntity<E> setTargetEntity(E entity);
 
-    default TargetableEntity removeTargetEntity(){
+    default TargetableEntity<E> removeTargetEntity(){
         return setTargetEntity(null);
     }
 }

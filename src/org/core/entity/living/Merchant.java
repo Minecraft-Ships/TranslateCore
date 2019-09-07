@@ -1,12 +1,13 @@
 package org.core.entity.living;
 
+import org.core.entity.Entity;
 import org.core.entity.living.human.AbstractHuman;
 
 import java.util.Optional;
 
-public interface Merchant {
+public interface Merchant<E extends Entity> extends Entity<E> {
 
-    public Optional<AbstractHuman> getCustomer();
-    public Merchant setCustomer();
+    Optional<AbstractHuman> getCustomer();
+    Merchant<E> setCustomer();
 
 }

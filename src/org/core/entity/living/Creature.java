@@ -1,4 +1,6 @@
 package org.core.entity.living;
 
-public interface Creature extends TargetableEntity {
+import org.core.entity.Entity;
+
+public interface Creature<E extends Entity> extends TargetableEntity<E> {
 }

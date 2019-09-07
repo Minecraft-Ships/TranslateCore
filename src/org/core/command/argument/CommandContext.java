@@ -5,7 +5,6 @@ import org.core.source.command.CommandSource;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class CommandContext implements Iterator<String>{
 
@@ -91,6 +90,7 @@ public class CommandContext implements Iterator<String>{
         return getArgumentValue(id);
     }
 
+    @SuppressWarnings("unchecked")
     public <V> Optional<V> getArgumentValue(String id){
         int originalTarget = this.target;
         this.target = 0;

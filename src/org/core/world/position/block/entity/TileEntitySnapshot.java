@@ -5,9 +5,27 @@ import org.core.world.position.BlockPosition;
 import org.core.world.position.block.BlockType;
 
 import java.util.Collection;
+import java.util.Optional;
 
-public interface TileEntitySnapshot <E extends TileEntity> extends TileEntity {
+public interface TileEntitySnapshot <E extends LiveTileEntity> extends TileEntity {
 
-    E apply(BlockPosition position) throws BlockNotSupported;
+    Class<E> getDeclaredClass();
+
+    E apply(E tileEntity);
+
     Collection<BlockType> getSupportedBlocks();
+
+    default E apply(BlockPosition position) throws BlockNotSupported {
+        if(!getSupportedBlocks().stream().anyMatch(b -> position.getBlockType().equals(b))){
+            throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());
+        }
+        Optional<LiveTileEntity> opTileEntity = position.getTileEntity();
+        if(!opTileEntity.isPresent()){
+            throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());
+        }
+        if(!getDeclaredClass().isAssignableFrom(opTileEntity.get().getClass())){
+            throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());
+        }
+        return apply((E)opTileEntity.get());
+    }
 }

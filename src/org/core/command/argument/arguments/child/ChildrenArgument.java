@@ -3,11 +3,8 @@ package org.core.command.argument.arguments.child;
 import org.core.CorePlugin;
 import org.core.command.BaseCommandLauncher;
 import org.core.command.ChildArgumentCommandLauncher;
-import org.core.command.CommandLauncher;
-import org.core.command.argument.ArgumentCommandLauncher;
 import org.core.command.argument.ArgumentContext;
 import org.core.command.argument.CommandContext;
-import org.core.exceptions.NotEnoughArguments;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,6 +33,10 @@ public class ChildrenArgument implements ArgumentContext<String> {
 
     public ChildrenArgument(Map<String, BaseCommandLauncher> map){
         this.children = map;
+    }
+
+    public Map<String, BaseCommandLauncher> getChildren(){
+        return this.children;
     }
 
     @Override

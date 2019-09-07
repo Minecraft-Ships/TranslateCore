@@ -5,5 +5,7 @@ import org.core.inventory.parts.snapshot.Grid2x2Snapshot;
 public interface Grid2x2 extends InventoryPart {
 
     @Override
-    public Grid2x2Snapshot createSnapshot();
+    default Grid2x2Snapshot createSnapshot(){
+        return new Grid2x2Snapshot(this);
+    }
 }

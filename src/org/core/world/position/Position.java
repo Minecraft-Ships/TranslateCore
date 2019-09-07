@@ -10,7 +10,9 @@ import org.core.world.WorldExtent;
 import org.core.world.direction.Direction;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.BlockDetails;
+import org.core.world.position.block.details.BlockSnapshot;
 import org.core.world.position.block.entity.LiveTileEntity;
+import org.core.world.position.flags.PositionFlag;
 
 import java.util.Optional;
 
@@ -22,9 +24,9 @@ public interface Position<A extends Number> {
 
     WorldExtent getWorld();
 
-    BlockDetails getBlockDetails();
+    BlockSnapshot getBlockDetails();
 
-    Position<A> setBlock(BlockDetails details);
+    Position<A> setBlock(BlockDetails details, PositionFlag.SetFlag... flags);
 
     Position<A> setBlock(BlockDetails details, LivePlayer... player);
 
@@ -64,5 +66,9 @@ public interface Position<A extends Number> {
 
     default Position<A> setBlock(BlockType type) {
         return setBlock(type.getDefaultBlockDetails());
+    }
+
+    default Position<A> setBlock(BlockDetails details){
+        return setBlock(details, new PositionFlag.SetFlag[0]);
     }
 }

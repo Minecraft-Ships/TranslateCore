@@ -1,7 +1,9 @@
 package org.core.entity.living;
 
-public interface AgeableEntity extends LivingEntity {
+import org.core.entity.Entity;
+
+public interface AgeableEntity<E extends Entity> extends LivingEntity<E> {
 
     public boolean isAdult();
-    public AgeableEntity setAdult(boolean check);
+    public AgeableEntity<E> setAdult(boolean check);
 }

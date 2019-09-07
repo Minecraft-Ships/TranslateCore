@@ -7,6 +7,7 @@ import org.core.event.events.Cancellable;
 import org.core.event.events.entity.EntityEvent;
 import org.core.world.expload.Explosion;
 import org.core.world.position.block.details.BlockDetails;
+import org.core.world.position.block.details.BlockSnapshot;
 
 import java.util.Collection;
 
@@ -17,13 +18,17 @@ public interface BlockChangeEvent extends BlockEvent, PlatformEvent {
 
     interface Break extends BlockChangeEvent {
 
-        interface ByPlayer extends Break, Cancellable, EntityEvent<LivePlayer> {
+        interface Pre extends Break, Cancellable {
 
-        }
+            interface ByPlayer extends Pre, EntityEvent<LivePlayer> {
 
-        interface ByExplosion extends Break, Cancellable {
+            }
 
-            Explosion getExplosion();
+            interface ByExplosion extends Break, Pre {
+
+                Explosion getExplosion();
+
+            }
 
         }
 
@@ -41,6 +46,12 @@ public interface BlockChangeEvent extends BlockEvent, PlatformEvent {
     }
 
     interface Place extends BlockChangeEvent {
+
+        Collection<BlockSnapshot> getAffected();
+
+        interface Post extends Place {
+
+        }
 
         interface ByPlayer extends Place, Cancellable, EntityEvent<LivePlayer> {
 

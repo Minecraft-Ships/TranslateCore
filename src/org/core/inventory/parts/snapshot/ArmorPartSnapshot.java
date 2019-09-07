@@ -12,6 +12,7 @@ public class ArmorPartSnapshot implements ArmorPart, InventoryPartSnapshot {
 
     public ArmorPartSnapshot(ArmorPart part){
         this(part.getHelmetSlot(), part.getArmorSlot(), part.getLeggingsSlot(), part.getShoesSlot());
+
     }
 
     public ArmorPartSnapshot(Slot helmet, Slot armor, Slot leggings, Slot shoes){

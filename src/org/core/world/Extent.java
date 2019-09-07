@@ -20,6 +20,7 @@ public interface Extent {
 
     Set<LiveEntity> getEntities();
 
+    @SuppressWarnings("unchecked")
     default <N extends Number> Position<N> getPosition(Vector3<N> vector){
         if(vector instanceof Vector3Int){
             Vector3Int intVect = (Vector3Int)vector;

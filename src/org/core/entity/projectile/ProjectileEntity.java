@@ -5,9 +5,9 @@ import org.core.source.projectile.ProjectileSource;
 
 import java.util.Optional;
 
-public interface ProjectileEntity extends Entity {
+public interface ProjectileEntity<E extends Entity> extends Entity<E> {
 
     Optional<ProjectileSource> getSource();
-    ProjectileEntity setSource(ProjectileSource source);
+    ProjectileEntity<E> setSource(ProjectileSource source);
 
 }

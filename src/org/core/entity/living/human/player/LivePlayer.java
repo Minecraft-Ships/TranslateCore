@@ -4,7 +4,8 @@ import org.core.entity.EntityType;
 import org.core.entity.LiveEntity;
 import org.core.source.viewer.CommandViewer;
 
-public interface LivePlayer extends Player, LiveEntity, CommandViewer {
+@SuppressWarnings("unchecked")
+public interface LivePlayer extends Player<LiveEntity>, LiveEntity, CommandViewer {
 
     boolean hasPermission(String permission);
 

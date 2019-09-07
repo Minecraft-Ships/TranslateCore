@@ -2,6 +2,7 @@ package org.core.command;
 
 import org.core.command.argument.ArgumentContext;
 import org.core.command.argument.CommandContext;
+import org.core.command.argument.arguments.child.ChildrenArgument;
 import org.core.exceptions.NotEnoughArguments;
 import org.core.source.command.CommandSource;
 
@@ -14,17 +15,29 @@ public abstract class ChildArgumentCommandLauncher implements BaseCommandLaunche
 
     public static abstract class ChildOnly extends ChildArgumentCommandLauncher {
 
+        @Deprecated
         public ChildOnly(ArgumentContext<?>... arguments){
             this(Arrays.asList(arguments));
         }
 
+        @Deprecated
         public ChildOnly(Collection<ArgumentContext<?>> collection){
             this.argumentProcessors.addAll(collection);
+        }
+
+        public ChildOnly(ChildrenArgument argument){
+            this.argumentProcessors.add(argument);
         }
 
         @Override
         protected boolean process(CommandContext context){
             return true;
+        }
+
+        @Override
+        public boolean hasPermission(CommandSource source){
+            ChildrenArgument argument = (ChildrenArgument) this.argumentProcessors.get(0);
+            return argument.getChildren().values().stream().anyMatch(c -> c.hasPermission(source));
         }
 
     }

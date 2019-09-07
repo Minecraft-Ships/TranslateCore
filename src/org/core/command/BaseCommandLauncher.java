@@ -3,15 +3,13 @@ package org.core.command;
 import org.core.exceptions.NotEnoughArguments;
 import org.core.source.command.CommandSource;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 public interface BaseCommandLauncher {
 
     String getName();
     String getDescription();
-    Optional<String> getPermission();
+    boolean hasPermission(CommandSource source);
 
     default String getUsage(CommandSource source){
         return getName();

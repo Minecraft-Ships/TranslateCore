@@ -5,12 +5,14 @@ import org.core.inventory.LiveInventory;
 import org.core.inventory.inventories.BasicEntityInventory;
 import org.core.world.position.ExactPosition;
 
-public interface LiveEntityInventory extends BasicEntityInventory, LiveInventory.ExactPostionableInventory {
+import java.util.Optional;
 
-    LiveEntity getAttachedEntity();
+public interface LiveEntityInventory<E extends LiveEntity> extends BasicEntityInventory<E>, LiveInventory.ExactPostionableInventory {
+
+    Optional<E> getAttachedEntity();
 
     @Override
     default ExactPosition getPosition(){
-        return getAttachedEntity().getPosition();
+        return getAttachedEntity().get().getPosition();
     }
 }

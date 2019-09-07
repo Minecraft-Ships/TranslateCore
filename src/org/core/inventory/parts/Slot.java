@@ -10,9 +10,9 @@ import java.util.Set;
 
 public interface Slot extends InventoryPart {
 
-    public Optional<Integer> getPosition();
-    public Optional<ItemStack> getItem();
-    public Slot setItem(ItemStack stack);
+    Optional<Integer> getPosition();
+    Optional<ItemStack> getItem();
+    Slot setItem(ItemStack stack);
 
     @Override
     default SlotSnapshot createSnapshot(){
@@ -20,7 +20,7 @@ public interface Slot extends InventoryPart {
     }
 
     @Override
-    public default Set<Slot> getSlots(){
+    default Set<Slot> getSlots(){
         return new HashSet<>(Arrays.asList(this));
     }
 }

@@ -3,7 +3,8 @@ package org.core.entity.scene.itemframe;
 import org.core.entity.EntityType;
 import org.core.entity.LiveEntity;
 
-public interface LiveItemFrame extends ItemFrame, LiveEntity {
+@SuppressWarnings("unchecked")
+public interface LiveItemFrame extends ItemFrame<LiveEntity>, LiveEntity {
 
     @Override
     default EntityType<LiveItemFrame, ItemFrameSnapshot> getType(){

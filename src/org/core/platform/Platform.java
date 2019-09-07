@@ -3,6 +3,8 @@ package org.core.platform;
 import org.core.configuration.type.ConfigurationLoaderType;
 import org.core.configuration.type.ConfigurationLoaderTypes;
 import org.core.entity.*;
+import org.core.entity.living.animal.parrot.ParrotType;
+import org.core.entity.living.animal.parrot.ParrotTypes;
 import org.core.event.CustomEvent;
 import org.core.inventory.item.ItemType;
 import org.core.inventory.item.data.dye.DyeType;
@@ -18,6 +20,8 @@ import org.core.world.position.block.entity.TileEntitySnapshot;
 import org.core.world.position.block.entity.banner.pattern.PatternLayerType;
 import org.core.world.position.block.entity.banner.pattern.PatternLayerTypes;
 import org.core.world.position.block.grouptype.BlockGroup;
+import org.core.world.position.flags.physics.ApplyPhysicsFlag;
+import org.core.world.position.flags.physics.ApplyPhysicsFlags;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -26,7 +30,9 @@ import java.util.Set;
 public interface Platform {
 
     BossColour get(BossColours colours);
+    ApplyPhysicsFlag get(ApplyPhysicsFlags flags);
     ItemType get(ItemTypeCommon itemId);
+    ParrotType get(ParrotTypes parrotID);
     TextColour get(TextColours id);
     DyeType get(DyeTypes id);
     PatternLayerType get(PatternLayerTypes id);
@@ -41,6 +47,8 @@ public interface Platform {
     Optional<PatternLayerType> getPatternLayerType(String id);
     Optional<ConfigurationLoaderType> getConfigurationLoaderType(String id);
     Optional<BossColour> getBossColour(String id);
+    Optional<ParrotType> getParrotType(String id);
+    Optional<ApplyPhysicsFlag> getApplyPhysics(String id);
 
     Collection<EntityType<? extends Entity, ? extends EntitySnapshot<? extends Entity>>> getEntityTypes();
     Collection<BlockType> getBlockTypes();
@@ -51,6 +59,8 @@ public interface Platform {
     Collection<ConfigurationLoaderType> getConfigurationLoaderTypes();
     Collection<BlockGroup> getBlockGroups();
     Collection<BossColour> getBossColours();
+    Collection<ParrotType> getParrotType();
+    Collection<ApplyPhysicsFlag> getApplyPhysics();
 
     Collection<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntities();
     int[] getMinecraftVersion();

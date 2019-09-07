@@ -4,5 +4,5 @@ import org.core.utils.Identifable;
 
 public interface ConfigurationLoaderType extends Identifable {
 
-    public String getName();
+    String[] acceptedFileExtensions();
 }

@@ -1,4 +1,6 @@
 package org.core.entity.living;
 
-public interface Tamer {
+import org.core.entity.Entity;
+
+public interface Tamer<E extends Entity> extends Entity<E> {
 }

@@ -1,33 +1,35 @@
 package org.core.inventory.inventories.snapshots.entity;
 
-import org.core.entity.living.human.player.Player;
-import org.core.entity.living.human.player.PlayerSnapshot;
+import org.core.entity.living.human.player.LivePlayer;
 import org.core.inventory.inventories.general.entity.PlayerInventory;
 import org.core.inventory.parts.*;
 import org.core.inventory.parts.snapshot.*;
 import org.core.world.position.ExactPosition;
 
+import java.util.Optional;
 
-public abstract class PlayerInventorySnapshot implements PlayerInventory<Player>, EntityInventorySnapshot<Player> {
+
+public abstract class PlayerInventorySnapshot implements PlayerInventory, EntityInventorySnapshot<LivePlayer> {
 
     protected SlotSnapshot offHand;
     protected ArmorPartSnapshot armor;
     protected HotbarSnapshot hotbar;
     protected Grid2x2Snapshot craftGridSnapshot;
     protected MainPlayerInventorySnapshot inventory;
-    protected PlayerSnapshot player;
+    protected LivePlayer player;
 
     public PlayerInventorySnapshot(PlayerInventory inventory){
-        this.offHand = inventory.getOffHoldingItem().createSnapshot();
         this.armor = inventory.getArmor().createSnapshot();
+        this.offHand = inventory.getOffHoldingItem().createSnapshot();
         this.hotbar = inventory.getHotbar().createSnapshot();
         this.craftGridSnapshot = inventory.getCraftingGrid().createSnapshot();
         this.inventory = inventory.getMainInventory().createSnapshot();
+        this.player = inventory.getAttachedEntity().get();
     }
 
     @Override
     public void apply(){
-        this.apply(getAttachedEntity());
+        this.apply(this.player);
     }
 
     @Override
@@ -56,13 +58,13 @@ public abstract class PlayerInventorySnapshot implements PlayerInventory<Player>
     }
 
     @Override
-    public PlayerSnapshot getAttachedEntity() {
-        return this.player;
+    public Optional<LivePlayer> getAttachedEntity() {
+        return Optional.of(this.player);
     }
 
     @Override
     public ExactPosition getPosition() {
-        return getAttachedEntity().getPosition();
+        return this.player.getPosition();
     }
 
 }
