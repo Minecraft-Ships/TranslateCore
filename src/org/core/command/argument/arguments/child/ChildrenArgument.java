@@ -53,7 +53,6 @@ public class ChildrenArgument implements ArgumentContext<String> {
             throw new IOException("Unknown argument");
         }
         if(context.isForTabComplete()) {
-            new IOException("Test").printStackTrace();
             if(launcher instanceof ChildArgumentCommandLauncher) {
                 CommandContext context2 = new CommandContext(context.getSource(), ((ChildArgumentCommandLauncher) launcher).getArgumentProcessors(), remaining);
                 context2.validate();

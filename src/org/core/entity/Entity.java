@@ -39,7 +39,7 @@ public interface Entity<T extends Entity> extends Positionable {
     double getRoll();
     boolean hasGravity();
     Vector3Double getVelocity();
-    Text getCustomName();
+    Optional<Text> getCustomName();
     boolean isCustomNameVisible();
 
     Collection<T> getPassengers();

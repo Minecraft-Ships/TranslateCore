@@ -4,7 +4,7 @@ import org.core.utils.Identifable;
 
 public interface EntityType <T extends LiveEntity, S extends EntitySnapshot<T>> extends Identifable {
 
-    Class<T> getEntityClass();
-    Class<S> getSnapshotClass();
+    Class<? extends T> getEntityClass();
+    Class<? extends S> getSnapshotClass();
 
 }

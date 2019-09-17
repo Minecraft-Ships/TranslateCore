@@ -11,19 +11,20 @@ import java.util.Optional;
  */
 public class BlockTypes1V13 extends CommonBlockTypes {
 
+    public static final Optional<BlockType> ACACIA_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:acacia_trapdoor");
+    public static final Optional<BlockType> BIRCH_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:birch_trapdoor");
+    public static final Optional<BlockType> DARK_OAK_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:dark_oak_trapdoor");
+    public static final Optional<BlockType> JUNGLE_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:jungle_trapdoor");
+    public static final Optional<BlockType> SPRUCE_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:spruce_trapdoor");
+
     public static final Optional<BlockType> ACACIA_BUTTON = CorePlugin.getPlatform().getBlockType("minecraft:acacia_button");
-    public static final Optional<BlockType> ACACIA_FENCE = CorePlugin.getPlatform().getBlockType("minecraft:acacia_fence");
-    public static final Optional<BlockType> ACACIA_FENCE_GATE = CorePlugin.getPlatform().getBlockType("minecraft:acacia_fence_gate");
     public static final Optional<BlockType> ACACIA_LEAVES = CorePlugin.getPlatform().getBlockType("minecraft:acacia_leaves");
     public static final Optional<BlockType> ACACIA_LOG = CorePlugin.getPlatform().getBlockType("minecraft:acacia_log");
     public static final Optional<BlockType> ACACIA_PLANKS = CorePlugin.getPlatform().getBlockType("minecraft:acacia_planks");
     public static final Optional<BlockType> ACACIA_PRESSURE_PLATE = CorePlugin.getPlatform().getBlockType("minecraft:acacia_pressure_plate");
     public static final Optional<BlockType> ACACIA_SAPLING = CorePlugin.getPlatform().getBlockType("minecraft:acacia_sapling");
     public static final Optional<BlockType> ACACIA_SLAB = CorePlugin.getPlatform().getBlockType("minecraft:acacia_slab");
-    public static final Optional<BlockType> ACACIA_STAIRS = CorePlugin.getPlatform().getBlockType("minecraft:acacia_stairs");
-    public static final Optional<BlockType> ACACIA_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:acacia_trapdoor");
     public static final Optional<BlockType> ACACIA_WOOD = CorePlugin.getPlatform().getBlockType("minecraft:acacia_wood");
-    public static final Optional<BlockType> ACTIVATOR_RAIL = CorePlugin.getPlatform().getBlockType("minecraft:activator_rail");
     public static final Optional<BlockType> ALLIUM = CorePlugin.getPlatform().getBlockType("minecraft:allium");
     public static final Optional<BlockType> ANDESITE = CorePlugin.getPlatform().getBlockType("minecraft:andesite");
     public static final Optional<BlockType> ANVIL = CorePlugin.getPlatform().getBlockType("minecraft:anvil");
@@ -45,7 +46,6 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     public static final Optional<BlockType> BIRCH_SAPLING = CorePlugin.getPlatform().getBlockType("minecraft:birch_sapling");
     public static final Optional<BlockType> BIRCH_SLAB = CorePlugin.getPlatform().getBlockType("minecraft:birch_slab");
     public static final Optional<BlockType> BIRCH_STAIRS = CorePlugin.getPlatform().getBlockType("minecraft:birch_stairs");
-    public static final Optional<BlockType> BIRCH_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:birch_trapdoor");
     public static final Optional<BlockType> BIRCH_WOOD = CorePlugin.getPlatform().getBlockType("minecraft:birch_wood");
     public static final Optional<BlockType> BLACK_BANNER = CorePlugin.getPlatform().getBlockType("minecraft:black_banner");
     public static final Optional<BlockType> BLACK_BED = CorePlugin.getPlatform().getBlockType("minecraft:black_bed");
@@ -161,7 +161,6 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     public static final Optional<BlockType> DARK_OAK_SAPLING = CorePlugin.getPlatform().getBlockType("minecraft:dark_oak_sapling");
     public static final Optional<BlockType> DARK_OAK_SLAB = CorePlugin.getPlatform().getBlockType("minecraft:dark_oak_slab");
     public static final Optional<BlockType> DARK_OAK_STAIRS = CorePlugin.getPlatform().getBlockType("minecraft:dark_oak_stairs");
-    public static final Optional<BlockType> DARK_OAK_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:dark_oak_trapdoor");
     public static final Optional<BlockType> DARK_OAK_WOOD = CorePlugin.getPlatform().getBlockType("minecraft:dark_oak_wood");
     public static final Optional<BlockType> DARK_PRISMARINE = CorePlugin.getPlatform().getBlockType("minecraft:dark_prismarine");
     public static final Optional<BlockType> DARK_PRISMARINE_SLAB = CorePlugin.getPlatform().getBlockType("minecraft:dark_prismarine_slab");
@@ -271,7 +270,6 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     public static final Optional<BlockType> IRON_BLOCK = CorePlugin.getPlatform().getBlockType("minecraft:iron_block");
     public static final Optional<BlockType> IRON_DOOR = CorePlugin.getPlatform().getBlockType("minecraft:iron_door");
     public static final Optional<BlockType> IRON_ORE = CorePlugin.getPlatform().getBlockType("minecraft:iron_ore");
-    public static final Optional<BlockType> IRON_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:iron_trapdoor");
     public static final Optional<BlockType> JACK_O_LANTERN = CorePlugin.getPlatform().getBlockType("minecraft:jack_o_lantern");
     public static final Optional<BlockType> JUKEBOX = CorePlugin.getPlatform().getBlockType("minecraft:jukebox");
     public static final Optional<BlockType> JUNGLE_BUTTON = CorePlugin.getPlatform().getBlockType("minecraft:jungle_button");
@@ -285,7 +283,6 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     public static final Optional<BlockType> JUNGLE_SAPLING = CorePlugin.getPlatform().getBlockType("minecraft:jungle_sapling");
     public static final Optional<BlockType> JUNGLE_SLAB = CorePlugin.getPlatform().getBlockType("minecraft:jungle_slab");
     public static final Optional<BlockType> JUNGLE_STAIRS = CorePlugin.getPlatform().getBlockType("minecraft:jungle_stairs");
-    public static final Optional<BlockType> JUNGLE_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:jungle_trapdoor");
     public static final Optional<BlockType> JUNGLE_WOOD = CorePlugin.getPlatform().getBlockType("minecraft:jungle_wood");
     public static final Optional<BlockType> KELP = CorePlugin.getPlatform().getBlockType("minecraft:kelp");
     public static final Optional<BlockType> KELP_PLANT = CorePlugin.getPlatform().getBlockType("minecraft:kelp_plant");
@@ -352,7 +349,6 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     public static final Optional<BlockType> MOSSY_COBBLESTONE = CorePlugin.getPlatform().getBlockType("minecraft:mossy_cobblestone");
     public static final Optional<BlockType> MOSSY_COBBLESTONE_WALL = CorePlugin.getPlatform().getBlockType("minecraft:mossy_cobblestone_wall");
     public static final Optional<BlockType> MOSSY_STONE_BRICKS = CorePlugin.getPlatform().getBlockType("minecraft:mossy_stone_bricks");
-    public static final Optional<BlockType> MOVING_PISTON = CorePlugin.getPlatform().getBlockType("minecraft:moving_piston");
     public static final Optional<BlockType> MUSHROOM_STEM = CorePlugin.getPlatform().getBlockType("minecraft:mushroom_stem");
     public static final Optional<BlockType> MYCELIUM = CorePlugin.getPlatform().getBlockType("minecraft:mycelium");
     public static final Optional<BlockType> NETHERRACK = CorePlugin.getPlatform().getBlockType("minecraft:netherrack");
@@ -364,7 +360,6 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     public static final Optional<BlockType> NETHER_QUARTZ_ORE = CorePlugin.getPlatform().getBlockType("minecraft:nether_quartz_ore");
     public static final Optional<BlockType> NETHER_WART = CorePlugin.getPlatform().getBlockType("minecraft:nether_wart");
     public static final Optional<BlockType> NETHER_WART_BLOCK = CorePlugin.getPlatform().getBlockType("minecraft:nether_wart_block");
-    public static final Optional<BlockType> NOTE_BLOCK = CorePlugin.getPlatform().getBlockType("minecraft:note_block");
     public static final Optional<BlockType> OAK_BUTTON = CorePlugin.getPlatform().getBlockType("minecraft:oak_button");
     public static final Optional<BlockType> OAK_DOOR = CorePlugin.getPlatform().getBlockType("minecraft:oak_door");
     public static final Optional<BlockType> OAK_FENCE = CorePlugin.getPlatform().getBlockType("minecraft:oak_fence");
@@ -375,8 +370,6 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     public static final Optional<BlockType> OAK_PRESSURE_PLATE = CorePlugin.getPlatform().getBlockType("minecraft:oak_pressure_plate");
     public static final Optional<BlockType> OAK_SAPLING = CorePlugin.getPlatform().getBlockType("minecraft:oak_sapling");
     public static final Optional<BlockType> OAK_SLAB = CorePlugin.getPlatform().getBlockType("minecraft:oak_slab");
-    public static final Optional<BlockType> OAK_STAIRS = CorePlugin.getPlatform().getBlockType("minecraft:oak_stairs");
-    public static final Optional<BlockType> OAK_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:oak_trapdoor");
     public static final Optional<BlockType> OAK_WOOD = CorePlugin.getPlatform().getBlockType("minecraft:oak_wood");
     public static final Optional<BlockType> OBSERVER = CorePlugin.getPlatform().getBlockType("minecraft:observer");
     public static final Optional<BlockType> OBSIDIAN = CorePlugin.getPlatform().getBlockType("minecraft:obsidian");
@@ -508,12 +501,6 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     public static final Optional<BlockType> SEA_LANTERN = CorePlugin.getPlatform().getBlockType("minecraft:sea_lantern");
     public static final Optional<BlockType> SEA_PICKLE = CorePlugin.getPlatform().getBlockType("minecraft:sea_pickle");
     public static final Optional<BlockType> SHULKER_BOX = CorePlugin.getPlatform().getBlockType("minecraft:shulker_box");
-    /**
-     * @Deprecated 1.14 removed the normal sign and replaced it with multiple different types of signs with the wood type
-     */
-    @Deprecated
-    public static final Optional<BlockType> SIGN;
-    public static final Optional<BlockType> OAK_SIGN;
     public static final Optional<BlockType> SKELETON_SKULL = CorePlugin.getPlatform().getBlockType("minecraft:skeleton_skull");
     public static final Optional<BlockType> SKELETON_WALL_SKULL = CorePlugin.getPlatform().getBlockType("minecraft:skeleton_wall_skull");
     public static final Optional<BlockType> SLIME_BLOCK = CorePlugin.getPlatform().getBlockType("minecraft:slime_block");
@@ -537,7 +524,6 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     public static final Optional<BlockType> SPRUCE_SAPLING = CorePlugin.getPlatform().getBlockType("minecraft:spruce_sapling");
     public static final Optional<BlockType> SPRUCE_SLAB = CorePlugin.getPlatform().getBlockType("minecraft:spruce_slab");
     public static final Optional<BlockType> SPRUCE_STAIRS = CorePlugin.getPlatform().getBlockType("minecraft:spruce_stairs");
-    public static final Optional<BlockType> SPRUCE_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:spruce_trapdoor");
     public static final Optional<BlockType> SPRUCE_WOOD = CorePlugin.getPlatform().getBlockType("minecraft:spruce_wood");
     public static final Optional<BlockType> STICKY_PISTON = CorePlugin.getPlatform().getBlockType("minecraft:sticky_piston");
     public static final Optional<BlockType> STONE = CorePlugin.getPlatform().getBlockType("minecraft:stone");
@@ -578,12 +564,6 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     public static final Optional<BlockType> TURTLE_EGG = CorePlugin.getPlatform().getBlockType("minecraft:turtle_egg");
     public static final Optional<BlockType> VINE = CorePlugin.getPlatform().getBlockType("minecraft:vine");
     public static final Optional<BlockType> VOID_AIR = CorePlugin.getPlatform().getBlockType("minecraft:void_air");
-    /**
-     * @Deprecated 1.14 removed the normal sign and replaced it with multiple different types of signs with the wood type
-     */
-    @Deprecated
-    public static final Optional<BlockType> WALL_SIGN;
-    public static final Optional<BlockType> OAK_WALL_SIGN;
     public static final Optional<BlockType> WALL_TORCH = CorePlugin.getPlatform().getBlockType("minecraft:wall_torch");
     public static final Optional<BlockType> WATER = CorePlugin.getPlatform().getBlockType("minecraft:water");
     public static final Optional<BlockType> WET_SPONGE = CorePlugin.getPlatform().getBlockType("minecraft:wet_sponge");
@@ -617,20 +597,5 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     public static final Optional<BlockType> YELLOW_WOOL = CorePlugin.getPlatform().getBlockType("minecraft:yellow_wool");
     public static final Optional<BlockType> ZOMBIE_HEAD = CorePlugin.getPlatform().getBlockType("minecraft:zombie_head");
     public static final Optional<BlockType> ZOMBIE_WALL_HEAD = CorePlugin.getPlatform().getBlockType("minecraft:zombie_wall_head");
-
-    static {
-        if(CorePlugin.toString(".", CorePlugin.getPlatform().getMinecraftVersion()).startsWith("1.13")) {
-            SIGN = CorePlugin.getPlatform().getBlockType("minecraft:sign");
-            OAK_SIGN = SIGN;
-            WALL_SIGN = CorePlugin.getPlatform().getBlockType("minecraft:wall_sign");
-            OAK_WALL_SIGN = WALL_SIGN;
-        }else{
-            SIGN = CorePlugin.getPlatform().getBlockType("minecraft:oak_sign");
-            OAK_SIGN  = SIGN;
-            WALL_SIGN = CorePlugin.getPlatform().getBlockType("minecraft:oak_wall_sign");
-            OAK_WALL_SIGN = WALL_SIGN;
-        }
-
-    }
 
 }

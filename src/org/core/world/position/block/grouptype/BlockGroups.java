@@ -1,6 +1,9 @@
 package org.core.world.position.block.grouptype;
 
+import org.core.CorePlugin;
+import org.core.world.position.block.grouptype.versions.BlockGroups1V12;
 import org.core.world.position.block.grouptype.versions.BlockGroups1V13;
+import org.core.world.position.block.grouptype.versions.CommonBlockGroups;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -8,7 +11,19 @@ import java.util.*;
 
 public class BlockGroups {
 
-    private static final BlockGroups IMPLEMENTATION = new BlockGroups().registerFields(BlockGroups1V13.class);
+    private static final BlockGroups IMPLEMENTATION;
+
+    static {
+        IMPLEMENTATION = new BlockGroups().registerFields(CommonBlockGroups.class);
+        int[] version = CorePlugin.getPlatform().getMinecraftVersion();
+        if(version[0] == 1){
+            if(version[1] >= 13){
+                IMPLEMENTATION.registerFields(BlockGroups1V13.class);
+            }else{
+                IMPLEMENTATION.registerFields(BlockGroups1V12.class);
+            }
+        }
+    }
 
     private Collection<BlockGroup> groups = new HashSet<>();
 

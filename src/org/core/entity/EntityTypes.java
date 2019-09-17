@@ -5,6 +5,8 @@ import org.core.entity.living.animal.chicken.ChickenSnapshot;
 import org.core.entity.living.animal.chicken.LiveChicken;
 import org.core.entity.living.animal.cow.CowSnapshot;
 import org.core.entity.living.animal.cow.LiveCow;
+import org.core.entity.living.animal.parrot.LiveParrot;
+import org.core.entity.living.animal.parrot.ParrotSnapshot;
 import org.core.entity.living.bat.BatSnapshot;
 import org.core.entity.living.bat.LiveBat;
 import org.core.entity.living.fish.cod.CodSnapshot;
@@ -35,6 +37,7 @@ public class EntityTypes <T extends LiveEntity, S extends EntitySnapshot<T>> imp
     public static final EntityType<LiveCod, CodSnapshot> COD = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:cod"));
     public static final EntityType<LiveBat, BatSnapshot> BAT = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:bat"));
     public static final EntityType<LiveSnowballEntity, SnowballEntitySnapshot> SNOWBALL = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:snowball"));
+    public static final EntityType<LiveParrot, ParrotSnapshot> PARROT = CorePlugin.getPlatform().get(new EntityTypes("minecraft:parrot"));
 
     private String id;
 
