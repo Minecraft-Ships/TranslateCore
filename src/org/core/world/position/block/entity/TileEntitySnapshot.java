@@ -15,6 +15,7 @@ public interface TileEntitySnapshot <E extends LiveTileEntity> extends TileEntit
 
     Collection<BlockType> getSupportedBlocks();
 
+    @SuppressWarnings("unchecked")
     default E apply(BlockPosition position) throws BlockNotSupported {
         if(!getSupportedBlocks().stream().anyMatch(b -> position.getBlockType().equals(b))){
             throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());

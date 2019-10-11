@@ -24,6 +24,9 @@ public interface SchedulerBuilder {
     SchedulerBuilder setToRunAfter(Scheduler scheduler);
     Optional<Scheduler> getToRunAfter();
 
+    Optional<String> getDisplayName();
+    SchedulerBuilder setDisplayName(String displayName);
+
     Scheduler build(Plugin plugin);
 
     default SchedulerBuilder useTicksForDelay(){

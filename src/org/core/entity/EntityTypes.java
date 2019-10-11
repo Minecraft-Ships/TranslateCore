@@ -37,7 +37,7 @@ public class EntityTypes <T extends LiveEntity, S extends EntitySnapshot<T>> imp
     public static final EntityType<LiveCod, CodSnapshot> COD = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:cod"));
     public static final EntityType<LiveBat, BatSnapshot> BAT = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:bat"));
     public static final EntityType<LiveSnowballEntity, SnowballEntitySnapshot> SNOWBALL = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:snowball"));
-    public static final EntityType<LiveParrot, ParrotSnapshot> PARROT = CorePlugin.getPlatform().get(new EntityTypes("minecraft:parrot"));
+    public static final EntityType<LiveParrot, ParrotSnapshot> PARROT = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:parrot"));
 
     private String id;
 

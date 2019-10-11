@@ -16,6 +16,7 @@ public interface DroppedItem<E extends Entity> extends ItemHoldingEntity<E> {
     @Override
     DroppedItemSnapshot createSnapshot();
 
+    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveDroppedItem, DroppedItemSnapshot> getType() {
         return EntityTypes.DROPPED_ITEM;

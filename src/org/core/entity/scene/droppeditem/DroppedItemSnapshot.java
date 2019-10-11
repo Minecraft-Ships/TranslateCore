@@ -10,6 +10,7 @@ public interface DroppedItemSnapshot extends DroppedItem<EntitySnapshot<? extend
     @Override
     SlotSnapshot getHoldingItem();
 
+    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveDroppedItem, DroppedItemSnapshot> getType(){
         return DroppedItem.super.getType();

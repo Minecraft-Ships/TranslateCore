@@ -6,6 +6,7 @@ import org.core.entity.LiveEntity;
 
 public interface CodSnapshot extends Cod<EntitySnapshot<? extends LiveEntity>>, EntitySnapshot<LiveCod> {
 
+    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveCod, CodSnapshot> getType(){
         return Cod.super.getType();

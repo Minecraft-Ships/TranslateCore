@@ -54,10 +54,12 @@ public interface Entity<T extends Entity> extends Positionable {
         return !getPassengers().isEmpty();
     }
 
+    @SuppressWarnings("unchecked")
     default T addPassengers(T... entities) {
         return addPassengers(Arrays.asList(entities));
     }
 
+    @SuppressWarnings("unchecked")
     default T removePassengers(T... entities){
         return removePassengers(Arrays.asList(entities));
     }

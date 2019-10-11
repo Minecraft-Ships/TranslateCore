@@ -15,6 +15,9 @@ public class TPSExecutor implements Runnable {
             return 20;
         }
         int target = (this.tickCount - 1 - ticks) % this.ticks.length;
+        if(target == -1){
+            return 0;
+        }
         long elapsed = System.currentTimeMillis() - this.ticks[target];
         return ticks / (elapsed / 1000.0);
     }

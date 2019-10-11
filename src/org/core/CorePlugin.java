@@ -73,6 +73,7 @@ public interface CorePlugin {
         return arrayCast(new ArrayList<>(), predicate, collection);
     }
 
+    @SuppressWarnings("unchecked")
     static <T, V extends T, L extends Collection<V>> L arrayCast(L array, Predicate<T> predicate, Collection<T> original){
         original.stream().filter(predicate).forEach(v -> array.add((V)v));
         return array;
@@ -193,6 +194,7 @@ public interface CorePlugin {
         return arrayMash;
     }
 
+    @SuppressWarnings("unchecked")
     static <T> T[] strip(Class<T> tClass, int min, int max, T... array){
         Object obj = Array.newInstance(tClass, max - min);
         T[] array1 = (T[])obj;

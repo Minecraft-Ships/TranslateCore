@@ -6,6 +6,7 @@ import org.core.entity.LiveEntity;
 
 public interface SnowballEntitySnapshot extends SnowballEntity<EntitySnapshot<? extends LiveEntity>>, EntitySnapshot<LiveSnowballEntity> {
 
+    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveSnowballEntity, SnowballEntitySnapshot> getType(){
         return SnowballEntity.super.getType();

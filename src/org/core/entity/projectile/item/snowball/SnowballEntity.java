@@ -13,6 +13,7 @@ public interface SnowballEntity<E extends Entity> extends ItemProjectileEntity<E
         return ItemTypes.SNOWBALL.getDefaultItemStack().copyWithQuantity(1);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveSnowballEntity, SnowballEntitySnapshot> getType(){
         return EntityTypes.SNOWBALL;
