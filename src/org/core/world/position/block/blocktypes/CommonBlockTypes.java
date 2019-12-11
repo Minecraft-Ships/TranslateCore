@@ -174,7 +174,7 @@ public class CommonBlockTypes {
     public static final Optional<BlockType> SANDSTONE_STAIRS = CorePlugin.getPlatform().getBlockType("minecraft:sandstone_stairs");
     public static final Optional<BlockType> SEA_LANTERN = CorePlugin.getPlatform().getBlockType("minecraft:sea_lantern");
     /**
-     * @Deprecated 1.14 removed the normal sign and replaced it with multiple different types of signs with the wood type
+     * @deprecated 1.14 removed the normal sign and replaced it with multiple different types of signs with the wood type
      */
     @Deprecated
     public static final Optional<BlockType> SIGN;
@@ -203,7 +203,7 @@ public class CommonBlockTypes {
     public static final Optional<BlockType> NOTE_BLOCK;
 
     /**
-     * @Deprecated 1.14 removed the normal sign and replaced it with multiple different types of signs with the wood type
+     * @deprecated 1.14 removed the normal sign and replaced it with multiple different types of signs with the wood type
      */
     @Deprecated
     public static final Optional<BlockType> WALL_SIGN;

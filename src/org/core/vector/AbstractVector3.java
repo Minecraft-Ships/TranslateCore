@@ -4,15 +4,26 @@ import org.core.vector.types.Vector3Int;
 
 import java.math.BigDecimal;
 
+/**
+ * A base abstract Vector for assisting development of Vectors
+ * @param <N> the Number type
+ */
 public abstract class AbstractVector3<N extends Number> implements Vector3<N> {
 
-    BigDecimal x;
-    BigDecimal y;
-    BigDecimal z;
+    protected BigDecimal x;
+    protected BigDecimal y;
+    protected BigDecimal z;
 
+    /**
+     * Creates a new instance of the vector with the values specified
+     * @param x The new value for X
+     * @param y The new value for Y
+     * @param z The new value of Z
+     * @return The new instance of Vector
+     */
     protected abstract Vector3<N> createNew(BigDecimal x, BigDecimal y, BigDecimal z);
 
-    public AbstractVector3(BigDecimal x, BigDecimal y, BigDecimal z){
+    protected AbstractVector3(BigDecimal x, BigDecimal y, BigDecimal z){
         this.x = x;
         this.y = y;
         this.z = z;
@@ -43,7 +54,7 @@ public abstract class AbstractVector3<N extends Number> implements Vector3<N> {
     }
 
     @Override
-    public Vector3<N> devide(BigDecimal amount) {
+    public Vector3<N> divide(BigDecimal amount) {
         BigDecimal x = new BigDecimal(this.x.doubleValue() / amount.doubleValue());
         BigDecimal y = new BigDecimal(this.y.doubleValue() / amount.doubleValue());
         BigDecimal z = new BigDecimal(this.z.doubleValue() / amount.doubleValue());
@@ -73,6 +84,13 @@ public abstract class AbstractVector3<N extends Number> implements Vector3<N> {
         return this.z;
     }
 
+    /**
+     * Checks that the vector is equal to another vector.
+     * The numbers are compared in X Y and Z, does not
+     * matter about the class.
+     * @param obj the obj to compare
+     * @return if the vectors equal
+     */
     @Override
     public boolean equals(Object obj){
         if(!(obj instanceof Vector3)){
@@ -91,6 +109,10 @@ public abstract class AbstractVector3<N extends Number> implements Vector3<N> {
         return true;
     }
 
+    /**
+     * Gets a String value of the Vector
+     * @return {X, Y, Z}
+     */
     @Override
     public String toString(){
         return this.getClass().getSimpleName() + "{" + this.x + "," + this.y + "," + this.z + ")";

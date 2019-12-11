@@ -11,6 +11,8 @@ import org.core.entity.living.bat.BatSnapshot;
 import org.core.entity.living.bat.LiveBat;
 import org.core.entity.living.fish.cod.CodSnapshot;
 import org.core.entity.living.fish.cod.LiveCod;
+import org.core.entity.living.hostile.creeper.CreeperEntitySnapshot;
+import org.core.entity.living.hostile.creeper.LiveCreeperEntity;
 import org.core.entity.living.hostile.undead.classic.ClassicZombieSnapshot;
 import org.core.entity.living.hostile.undead.classic.LiveClassicZombie;
 import org.core.entity.living.human.HumanSnapshot;
@@ -25,6 +27,11 @@ import org.core.entity.scene.itemframe.ItemFrameSnapshot;
 import org.core.entity.scene.itemframe.LiveItemFrame;
 import org.core.utils.Guaranteed;
 
+/**
+ * All default Entity types found within Minecraft (The lowest version of minecraft Core supports)
+ * @param <T> The LiveEntity of the EntityType
+ * @param <S> The EntitySnapshot of the EntityType
+ */
 public class EntityTypes <T extends LiveEntity, S extends EntitySnapshot<T>> implements Guaranteed<EntityType<T, S>> {
 
     public static final EntityType<LiveClassicZombie, ClassicZombieSnapshot> ZOMBIE = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:zombie"));
@@ -38,6 +45,7 @@ public class EntityTypes <T extends LiveEntity, S extends EntitySnapshot<T>> imp
     public static final EntityType<LiveBat, BatSnapshot> BAT = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:bat"));
     public static final EntityType<LiveSnowballEntity, SnowballEntitySnapshot> SNOWBALL = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:snowball"));
     public static final EntityType<LiveParrot, ParrotSnapshot> PARROT = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:parrot"));
+    public static final EntityType<LiveCreeperEntity, CreeperEntitySnapshot> CREEPER = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:creeper"));
 
     private String id;
 

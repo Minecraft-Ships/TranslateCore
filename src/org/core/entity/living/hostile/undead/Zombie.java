@@ -9,6 +9,6 @@ import org.core.inventory.inventories.general.entity.ZombieInventory;
 public interface Zombie<E extends Entity> extends HostileEntity<E>, ArmoredEntity<E>, AgeableEntity<E> {
 
     @Override
-    public ZombieInventory getInventory();
+    ZombieInventory getInventory();
 
 }
