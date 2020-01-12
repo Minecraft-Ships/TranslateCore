@@ -102,6 +102,14 @@ public interface CorePlugin {
         return toString(split, t -> t, array);
     }
 
+    static <T> String toString(String split, Function<T, String> function, T... value){
+        return toString(split, function, 0, value.length, value);
+    }
+
+    static <T> String toString(String split, Function<T, String> function, int start, T... value){
+        return toString(split, function, start, value.length, value);
+    }
+
     static String toString(String split, int... array){
         StringBuilder ret = null;
         for(int value : array){
@@ -163,9 +171,10 @@ public interface CorePlugin {
     }
 
     @SafeVarargs
-    static <T> String toString(String split, Function<T, String> function, T... array){
+    static <T> String toString(String split, Function<T, String> function, int start, int end, T... array){
         String ret = null;
-        for(T value : array){
+        for(int A = start; A < end; A++){
+            T value = array[A];
             if(ret == null){
                 ret = function.apply(value);
             }else{
