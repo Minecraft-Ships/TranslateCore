@@ -11,11 +11,15 @@ public class ConfigurationNode {
 
     protected String[] path;
 
+    public ConfigurationNode(ConfigurationNode node, String... path2){
+        this(node.getPath(), path2);
+    }
+
     public ConfigurationNode(String[] path1, String... path2){
         this(CorePlugin.join(path1, path2));
     }
 
-    public ConfigurationNode( String... path){
+    public ConfigurationNode(String... path){
         this.path = path;
     }
 
@@ -41,7 +45,29 @@ public class ConfigurationNode {
         return config.getKeyValues().keySet().stream().filter(k -> k.contains(ConfigurationNode.this)).collect(Collectors.toSet());
     }
 
+    public Set<ConfigurationNode> getDirectChildren(ConfigurationFile file){
+        int args = this.getPath().length + 1;
+        return this.getChildren(file).stream().filter(c -> c.getPath().length == args).collect(Collectors.toSet());
+    }
+
     public <T extends Object> Optional<T> to(ConfigurationFile file, Parser<? extends Object, T> parser){
         return file.parse(this, parser);
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(!(obj instanceof ConfigurationNode)){
+            return false;
+        }
+        ConfigurationNode node = (ConfigurationNode)obj;
+        if(this.getPath().length != node.getPath().length){
+            return false;
+        }
+        for(int A = 0; A < this.getPath().length; A++){
+            if(!this.getPath()[A].equals(node.getPath()[A])){
+                return false;
+            }
+        }
+        return true;
     }
 }
