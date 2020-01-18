@@ -1,10 +1,12 @@
 package org.core.configuration.parser.parsers;
 
+import org.core.configuration.ConfigurationFile;
+import org.core.configuration.ConfigurationNode;
 import org.core.configuration.parser.StringParser;
 
 import java.util.Optional;
 
-public class StringToDoubleParser implements StringParser<Double> {
+public class StringToDoubleParser implements StringParser<Double>, StringParser.SpecialParser<Double> {
     @Override
     public Optional<Double> parse(String original) {
         try {
@@ -26,5 +28,10 @@ public class StringToDoubleParser implements StringParser<Double> {
            return "" + ((int)value2);
         }
         return "" + value;
+    }
+
+    @Override
+    public Optional<Double> get(ConfigurationFile file, ConfigurationNode node) {
+        return file.parseDouble(node);
     }
 }

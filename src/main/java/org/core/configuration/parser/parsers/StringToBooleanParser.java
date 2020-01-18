@@ -1,5 +1,7 @@
 package org.core.configuration.parser.parsers;
 
+import org.core.configuration.ConfigurationFile;
+import org.core.configuration.ConfigurationNode;
 import org.core.configuration.parser.StringParser;
 
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class StringToBooleanParser implements StringParser.Suggestible<Boolean> {
+public class StringToBooleanParser implements StringParser.Suggestible<Boolean>, StringParser.SpecialParser<Boolean> {
 
     @Override
     public Optional<Boolean> parse(String original) {
@@ -37,5 +39,10 @@ public class StringToBooleanParser implements StringParser.Suggestible<Boolean> 
     @Override
     public List<Boolean> getSuggestions() {
         return Arrays.asList(false, true);
+    }
+
+    @Override
+    public Optional<Boolean> get(ConfigurationFile file, ConfigurationNode node) {
+        return file.parseBoolean(node);
     }
 }
