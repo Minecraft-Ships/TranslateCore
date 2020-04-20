@@ -214,6 +214,27 @@ public interface CorePlugin {
         return array1;
     }
 
+    static <T> T[] stripIndexFrom(Class<T> tClass, T[] array, int... strip){
+        Object obj = Array.newInstance(tClass, array.length - strip.length);
+        T[] array1 = (T[])obj;
+        int offset = 0;
+        for(int A = 0; A < array.length; A++){
+            boolean skip = false;
+            for(int B = 0; B < strip.length; B++){
+                if(B == A){
+                    skip = true;
+                    break;
+                }
+            }
+            if(skip){
+                offset++;
+                continue;
+            }
+            array1[A - offset] = array[A];
+        }
+        return array1;
+    }
+
     abstract class CoreImplementation implements CorePlugin {
 
         protected static CoreImplementation IMPLEMENTATION;

@@ -27,6 +27,9 @@ public interface SchedulerBuilder {
     Optional<String> getDisplayName();
     SchedulerBuilder setDisplayName(String displayName);
 
+    boolean isAsync();
+    SchedulerBuilder setAsync(boolean check);
+
     Scheduler build(Plugin plugin);
 
     default SchedulerBuilder useTicksForDelay(){
