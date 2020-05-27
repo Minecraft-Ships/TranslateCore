@@ -1,6 +1,8 @@
 package org.core.world.position;
 
-public interface Positionable{
+import org.core.world.position.impl.Position;
 
-    public Position<? extends Number> getPosition();
+public interface Positionable<P extends Position<? extends Number>>{
+
+    P getPosition();
 }

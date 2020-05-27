@@ -3,14 +3,14 @@ package org.core.configuration.parser.parsers;
 import org.core.CorePlugin;
 import org.core.configuration.parser.StringParser;
 import org.core.world.WorldExtent;
-import org.core.world.position.BlockPosition;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 
 import java.util.Optional;
 
-public class StringToBlockPosition implements StringParser<BlockPosition> {
+public class StringToBlockPosition implements StringParser<SyncBlockPosition> {
 
     @Override
-    public Optional<BlockPosition> parse(String original) {
+    public Optional<SyncBlockPosition> parse(String original) {
         try {
             String[] split = original.split(",");
             int x = Integer.parseInt(split[0]);
@@ -24,7 +24,7 @@ public class StringToBlockPosition implements StringParser<BlockPosition> {
     }
 
     @Override
-    public String unparse(BlockPosition value) {
+    public String unparse(SyncBlockPosition value) {
         return value.getX() + "," + value.getY() + "," + value.getZ() + "," + value.getWorld().getPlatformUniquieId();
     }
 }

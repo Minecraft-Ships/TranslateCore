@@ -5,7 +5,7 @@ import org.core.entity.living.hostile.undead.classic.LiveClassicZombie;
 import org.core.inventory.inventories.general.entity.ZombieInventory;
 import org.core.inventory.parts.ArmorPart;
 import org.core.inventory.parts.Slot;
-import org.core.world.position.ExactPosition;
+import org.core.world.position.impl.sync.SyncExactPosition;
 
 import java.util.Optional;
 
@@ -24,7 +24,7 @@ public abstract class ZombieInventorySnapshot implements ZombieInventory<LiveCla
     }
 
     @Override
-    public ExactPosition getPosition(){
+    public SyncExactPosition getPosition(){
         return this.zombie.getPosition();
     }
 

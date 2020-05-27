@@ -1,6 +1,6 @@
 package org.core.world.position.block.details;
 
-import org.core.world.position.BlockPosition;
+import org.core.world.position.impl.Position;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.data.DirectionalData;
 import org.core.world.position.block.details.data.keyed.KeyedData;
@@ -18,19 +18,19 @@ public interface BlockDetails {
      */
     BlockType getType();
 
-    BlockSnapshot createSnapshot(BlockPosition position);
+    <T extends Position<Integer>> BlockSnapshot<T> createSnapshot(T position);
 
     Optional<DirectionalData> getDirectionalData();
-
-    <T extends Object> Optional<T> get(Class<? extends KeyedData<T>> data);
-
-    <T extends Object> BlockDetails set(Class<? extends KeyedData<T>> data, T value);
 
     /**
      * Creates a copy of the BlockDetails
      * @return The copy of the BlockDetails
      */
     BlockDetails createCopyOf();
+
+    <T extends Object> Optional<T> get(Class<? extends KeyedData<T>> data);
+
+    <T extends Object> BlockDetails set(Class<? extends KeyedData<T>> data, T value);
 
     @SuppressWarnings("unchecked")
     default <T extends Object> Optional<T> getUnspecified(Class<? extends KeyedData<? extends Object>> dataClass){

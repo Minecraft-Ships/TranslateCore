@@ -1,20 +1,20 @@
 package org.core.inventory;
 
-import org.core.world.position.BlockPosition;
-import org.core.world.position.ExactPosition;
+import org.core.world.position.impl.sync.SyncBlockPosition;
+import org.core.world.position.impl.sync.SyncExactPosition;
 
 public interface LiveInventory extends PositionableInventory {
 
     interface LiveExactInventory extends LiveInventory {
 
         @Override
-        public ExactPosition getPosition();
+        public SyncExactPosition getPosition();
 
     }
 
     interface LiveBlockInventory extends LiveInventory{
 
         @Override
-        public BlockPosition getPosition();
+        public SyncBlockPosition getPosition();
     }
 }

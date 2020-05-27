@@ -1,8 +1,8 @@
 package org.core.world.expload;
 
 import org.core.entity.Entity;
-import org.core.world.position.BlockPosition;
-import org.core.world.position.ExactPosition;
+import org.core.world.position.impl.sync.SyncBlockPosition;
+import org.core.world.position.impl.sync.SyncExactPosition;
 import org.core.world.position.Positionable;
 
 import java.util.Collection;
@@ -15,12 +15,12 @@ public interface Explosion extends Positionable {
         Entity getSource();
 
         @Override
-        default ExactPosition getPosition(){
+        default SyncExactPosition getPosition(){
             return getSource().getPosition();
         }
 
     }
 
-    Collection<BlockPosition> getAffectedPositions();
+    Collection<SyncBlockPosition> getAffectedPositions();
     Object getSource();
 }

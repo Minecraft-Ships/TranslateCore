@@ -6,7 +6,7 @@ import org.core.inventory.inventories.general.block.dispenser.DispenserBasedInve
 import org.core.inventory.parts.Grid3x3;
 import org.core.inventory.parts.InventoryPart;
 import org.core.inventory.parts.Slot;
-import org.core.world.position.BlockPosition;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,11 +14,11 @@ import java.util.Set;
 
 public abstract class DispenserBasedInventorySnapshot implements DispenserBasedInventory, InventorySnapshot, Inventory.Parent {
 
-    protected BlockPosition position;
+    protected SyncBlockPosition position;
     protected Grid3x3 grid;
 
     @Override
-    public BlockPosition getPosition(){
+    public SyncBlockPosition getPosition(){
         return this.position;
     }
 

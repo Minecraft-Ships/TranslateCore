@@ -5,7 +5,7 @@ import org.core.inventory.Inventory;
 import org.core.inventory.parts.ArmorPart;
 import org.core.inventory.parts.InventoryPart;
 import org.core.inventory.parts.Slot;
-import org.core.world.position.ExactPosition;
+import org.core.world.position.impl.sync.SyncExactPosition;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -17,7 +17,7 @@ public interface BasicEntityInventory<E extends LiveEntity> extends Inventory.Pa
     ArmorPart getArmor();
     Slot getMainHoldingItem();
     Slot getOffHoldingItem();
-    ExactPosition getPosition();
+    SyncExactPosition getPosition();
     Optional<E> getAttachedEntity();
 
     @Override

@@ -5,7 +5,7 @@ import org.core.entity.InventoryHoldingEntity;
 import org.core.entity.ItemHoldingEntity;
 import org.core.entity.LiveEntity;
 import org.core.world.WorldExtent;
-import org.core.world.position.ExactPosition;
+import org.core.world.position.impl.sync.SyncExactPosition;
 import org.core.world.position.block.entity.LiveTileEntity;
 import org.core.world.position.block.entity.container.ContainerTileEntity;
 
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public interface LiveItemStack extends ItemStack {
 
-    default Optional<ExactPosition> getPosition(){
+    default Optional<SyncExactPosition> getPosition(){
         for (WorldExtent extent : CorePlugin.getServer().getWorlds()){
             for(LiveTileEntity tile : extent.getTileEntities()){
                 if(!(tile instanceof ContainerTileEntity)){

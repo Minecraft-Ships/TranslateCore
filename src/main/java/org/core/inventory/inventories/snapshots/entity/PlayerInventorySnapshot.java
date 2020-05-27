@@ -4,7 +4,7 @@ import org.core.entity.living.human.player.LivePlayer;
 import org.core.inventory.inventories.general.entity.PlayerInventory;
 import org.core.inventory.parts.*;
 import org.core.inventory.parts.snapshot.*;
-import org.core.world.position.ExactPosition;
+import org.core.world.position.impl.sync.SyncExactPosition;
 
 import java.util.Optional;
 
@@ -63,7 +63,7 @@ public abstract class PlayerInventorySnapshot implements PlayerInventory, Entity
     }
 
     @Override
-    public ExactPosition getPosition() {
+    public SyncExactPosition getPosition() {
         return this.player.getPosition();
     }
 

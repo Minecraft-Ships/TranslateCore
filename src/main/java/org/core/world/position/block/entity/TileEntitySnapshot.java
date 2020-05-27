@@ -1,7 +1,7 @@
 package org.core.world.position.block.entity;
 
 import org.core.exceptions.BlockNotSupported;
-import org.core.world.position.BlockPosition;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.block.BlockType;
 
 import java.util.Collection;
@@ -16,7 +16,7 @@ public interface TileEntitySnapshot <E extends LiveTileEntity> extends TileEntit
     Collection<BlockType> getSupportedBlocks();
 
     @SuppressWarnings("unchecked")
-    default E apply(BlockPosition position) throws BlockNotSupported {
+    default E apply(SyncBlockPosition position) throws BlockNotSupported {
         if(!getSupportedBlocks().stream().anyMatch(b -> position.getBlockType().equals(b))){
             throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());
         }

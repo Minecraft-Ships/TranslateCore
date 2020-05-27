@@ -7,9 +7,9 @@ import org.core.world.direction.Direction;
 import org.core.world.direction.EightFacingDirection;
 import org.core.world.direction.FourFacingDirection;
 import org.core.world.direction.SixteenFacingDirection;
-import org.core.world.position.BlockPosition;
-import org.core.world.position.ExactPosition;
-import org.core.world.position.Position;
+import org.core.world.position.impl.sync.SyncBlockPosition;
+import org.core.world.position.impl.sync.SyncExactPosition;
+import org.core.world.position.impl.sync.SyncPosition;
 import org.core.world.position.Positionable;
 import org.core.world.position.block.BlockTypes;
 
@@ -28,7 +28,7 @@ public interface Entity<T extends Entity> extends Positionable {
      * @return The Exact Position the entity is
      */
     @Override
-    ExactPosition getPosition();
+    SyncExactPosition getPosition();
 
     /**
      * Gets the type of the entity
@@ -76,7 +76,7 @@ public interface Entity<T extends Entity> extends Positionable {
      * @param position The position for the entity to be in
      * @return itself for chaining
      */
-    T setPosition(Position<? extends Number> position);
+    T setPosition(SyncPosition<? extends Number> position);
 
     /**
      * Sets if the entity has gravity or not
@@ -298,8 +298,8 @@ public interface Entity<T extends Entity> extends Positionable {
      * the block that the entity is standing on
      * @return The attached block if present
      */
-    default Optional<BlockPosition> getAttachedTo(){
-        BlockPosition block = getPosition().getRelative(new Vector3Double(0, -0.1, 0)).toBlockPosition();
+    default Optional<SyncBlockPosition> getAttachedTo(){
+        SyncBlockPosition block = getPosition().getRelative(new Vector3Double(0, -0.1, 0)).toBlockPosition();
         if(block.getBlockType().equals(BlockTypes.AIR)){
             return Optional.empty();
         }

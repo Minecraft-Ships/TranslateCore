@@ -4,7 +4,7 @@ import org.core.entity.Entity;
 import org.core.entity.EntityType;
 import org.core.entity.EntityTypes;
 import org.core.vector.types.Vector3Double;
-import org.core.world.position.BlockPosition;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.block.BlockTypes;
 
 import java.util.Optional;
@@ -21,8 +21,8 @@ public interface Bat<E extends Entity> extends Entity<E> {
     }
 
     @Override
-    default Optional<BlockPosition> getAttachedTo(){
-        BlockPosition block = getPosition().getRelative(new Vector3Double(0, 0.1, 0)).toBlockPosition();
+    default Optional<SyncBlockPosition> getAttachedTo(){
+        SyncBlockPosition block = getPosition().getRelative(new Vector3Double(0, 0.1, 0)).toBlockPosition();
         if(block.getBlockType().equals(BlockTypes.AIR)){
             return Optional.empty();
         }

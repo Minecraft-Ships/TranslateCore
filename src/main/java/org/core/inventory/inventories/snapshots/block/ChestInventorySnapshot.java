@@ -3,7 +3,7 @@ package org.core.inventory.inventories.snapshots.block;
 import org.core.inventory.InventorySnapshot;
 import org.core.inventory.inventories.general.block.ChestInventory;
 import org.core.inventory.parts.Slot;
-import org.core.world.position.BlockPosition;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.block.entity.LiveTileEntity;
 import org.core.world.position.block.entity.container.chest.LiveChestTileEntity;
 
@@ -11,10 +11,10 @@ import java.util.Optional;
 
 public abstract class ChestInventorySnapshot implements ChestInventory, InventorySnapshot {
 
-    protected BlockPosition position;
+    protected SyncBlockPosition position;
 
     @Override
-    public BlockPosition getPosition() {
+    public SyncBlockPosition getPosition() {
         return this.position;
     }
 

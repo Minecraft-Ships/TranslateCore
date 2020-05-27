@@ -4,7 +4,7 @@ import org.core.inventory.InventorySnapshot;
 import org.core.inventory.inventories.general.block.FurnaceInventory;
 import org.core.inventory.parts.Slot;
 import org.core.inventory.parts.snapshot.SlotSnapshot;
-import org.core.world.position.BlockPosition;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.block.entity.LiveTileEntity;
 import org.core.world.position.block.entity.container.furnace.LiveFurnaceTileEntity;
 
@@ -15,7 +15,7 @@ public abstract class FurnaceInventorySnapshot implements FurnaceInventory, Inve
     protected SlotSnapshot fuelSlot;
     protected SlotSnapshot resultsSlot;
     protected SlotSnapshot smeltingSlot;
-    protected BlockPosition position;
+    protected SyncBlockPosition position;
 
     public void apply(FurnaceInventory fi){
         this.fuelSlot.getItem().ifPresent(f -> fi.getFuelSlot().setItem(f));
@@ -39,7 +39,7 @@ public abstract class FurnaceInventorySnapshot implements FurnaceInventory, Inve
     }
 
     @Override
-    public BlockPosition getPosition() {
+    public SyncBlockPosition getPosition() {
         return this.position;
     }
 
