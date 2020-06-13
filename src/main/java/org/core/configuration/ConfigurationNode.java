@@ -15,12 +15,15 @@ public class ConfigurationNode {
         this(node.getPath(), path2);
     }
 
-    public ConfigurationNode(String[] path1, String... path2){
+    public ConfigurationNode(Object[] path1, Object... path2){
         this(CorePlugin.join(path1, path2));
     }
 
-    public ConfigurationNode(String... path){
-        this.path = path;
+    public ConfigurationNode(Object... path){
+        this.path = new String[path.length];
+        for(int A = 0; A < path.length; A++){
+            this.path[A] = path[A].toString();
+        }
     }
 
     public boolean contains(ConfigurationNode node){

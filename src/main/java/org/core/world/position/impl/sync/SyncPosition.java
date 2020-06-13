@@ -30,6 +30,8 @@ public interface SyncPosition<A extends Number> extends Position<A> {
 
     <E extends LiveEntity, S extends EntitySnapshot<E>> Optional<S> createEntity(EntityType<E, S> type);
 
+    SyncPosition<A> destroy();
+
     default SyncPosition<A> setBlock(BlockType type) {
         return setBlock(type.getDefaultBlockDetails());
     }
