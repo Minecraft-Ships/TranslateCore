@@ -35,6 +35,10 @@ public interface ConfigurationFile {
      */
     <T extends Object> Optional<T> parse(ConfigurationNode node, Parser<? extends Object, T> parser);
 
+    default <T> T parse(ConfigurationNode node, Parser<? extends Object, T> parser, T defaut) {
+        return parse(node, parser).orElse(defaut);
+    }
+
     /**
      * Gets a string value from the node placement
      * @param node the location of the value
@@ -46,8 +50,15 @@ public interface ConfigurationFile {
     Optional<Boolean> parseBoolean(ConfigurationNode node);
     <T extends Object> Optional<List<T>> parseList(ConfigurationNode node, StringParser<T> parser);
 
+    String parseString(ConfigurationNode node, String defaut);
+    int parseInt(ConfigurationNode node, int defaut);
+    double parseDouble(ConfigurationNode node, double defaut);
+    boolean parseBoolean(ConfigurationNode node, boolean defaut);
+    <T extends Object> List<T> parseList(ConfigurationNode node, StringParser<T> parser, List<T> defaut);
+
     <T extends Object> void set(ConfigurationNode node, Parser<? extends Object, T> parser, T value);
     void set(ConfigurationNode node, Object value);
+
     ConfigurationNode getRootNode();
     void save();
 
