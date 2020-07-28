@@ -21,7 +21,7 @@ import java.util.Optional;
  * Class to represent all Entity types within the Minecraft game
  * @param <T> Options are either LiveEntity or EntitySnapshot
  */
-public interface Entity<T extends Entity> extends Positionable {
+public interface Entity<T extends Entity> extends Positionable<SyncExactPosition> {
 
     /**
      * Gets the position the entity is.
@@ -185,6 +185,12 @@ public interface Entity<T extends Entity> extends Positionable {
     T removePassengers(Collection<T> entities);
 
     /**
+     * Checks if the entity is on ground
+     * @return If the entity is on the ground
+     */
+    boolean isOnGround();
+
+    /**
      * Sets the velocity of the entity without the need
      * of a Vector
      * @param x the X speed
@@ -258,7 +264,7 @@ public interface Entity<T extends Entity> extends Positionable {
      * @param vector the new position
      * @return itself for chaining
      */
-    default Entity setPosition(Vector3<? extends Number> vector){
+    default Entity<T> setPosition(Vector3<? extends Number> vector){
         return setPosition(vector.getRawX().doubleValue(), vector.getRawY().doubleValue(), vector.getRawZ().doubleValue());
     }
 
@@ -300,7 +306,7 @@ public interface Entity<T extends Entity> extends Positionable {
      */
     default Optional<SyncBlockPosition> getAttachedTo(){
         SyncBlockPosition block = getPosition().getRelative(new Vector3Double(0, -0.1, 0)).toBlockPosition();
-        if(block.getBlockType().equals(BlockTypes.AIR)){
+        if(block.getBlockType().equals(BlockTypes.AIR.get())){
             return Optional.empty();
         }
         return Optional.of(block);
