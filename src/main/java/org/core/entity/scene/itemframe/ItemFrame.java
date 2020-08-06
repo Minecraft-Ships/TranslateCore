@@ -6,11 +6,13 @@ import org.core.entity.EntityTypes;
 import org.core.entity.ItemHoldingEntity;
 import org.core.entity.scene.AttachableEntity;
 import org.core.exceptions.DirectionNotSupported;
+import org.core.inventory.item.stack.ItemStack;
 import org.core.world.direction.Direction;
 
 @SuppressWarnings("unchecked")
 public interface ItemFrame<E extends Entity> extends AttachableEntity<E>, ItemHoldingEntity<E> {
 
+    void setItem(ItemStack stack);
     Direction getItemRotation();
     boolean getItemRotationFlip();
     ItemFrame setItemRotation(Direction direction, boolean flip) throws DirectionNotSupported;

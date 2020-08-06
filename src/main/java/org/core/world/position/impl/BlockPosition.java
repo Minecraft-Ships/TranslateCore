@@ -1,5 +1,6 @@
 package org.core.world.position.impl;
 
+import org.core.entity.LiveEntity;
 import org.core.vector.Vector3;
 import org.core.vector.types.Vector3Int;
 import org.core.world.direction.Direction;
@@ -11,6 +12,9 @@ import org.core.world.position.impl.sync.SyncBlockPosition;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public interface BlockPosition extends Position<Integer> {
 
@@ -26,6 +30,19 @@ public interface BlockPosition extends Position<Integer> {
     @Override
     default BlockPosition getRelative(Direction direction){
         return (SyncBlockPosition) Position.super.getRelative(direction);
+    }
+
+    default Set<LiveEntity> getAttachedEntities(){
+        return this.getWorld().getEntities().stream().filter(e -> {
+            System.out.println("\tTesting " + e.getType().getId());
+            Optional<SyncBlockPosition> opAttached = e.getAttachedTo();
+            if(!opAttached.isPresent()){
+                System.out.println("\t\tNo Attachment found");
+                return false;
+            }
+            System.out.println("\t\tComparing " + opAttached.get().equals(this));
+            return opAttached.get().equals(this);
+        }).collect(Collectors.toSet());
     }
 
     default boolean isInLineOfSight(final Vector3Int vector, FourFacingDirection direction){
