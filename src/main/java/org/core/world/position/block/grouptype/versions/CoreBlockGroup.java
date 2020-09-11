@@ -1,6 +1,6 @@
 package org.core.world.position.block.grouptype.versions;
 
-import org.core.CorePlugin;
+import org.array.utils.ArrayUtils;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.grouptype.BlockGroup;
 
@@ -11,6 +11,6 @@ public class CoreBlockGroup extends BlockGroup {
     }
 
     CoreBlockGroup(String name, BlockType[]... types){
-        this(name, CorePlugin.join(types));
+        this(name, ArrayUtils.join(BlockType.class, types));
     }
 }

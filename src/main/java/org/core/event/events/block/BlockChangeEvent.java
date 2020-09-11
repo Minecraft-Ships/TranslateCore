@@ -8,6 +8,7 @@ import org.core.event.events.entity.EntityEvent;
 import org.core.world.expload.Explosion;
 import org.core.world.position.block.details.BlockDetails;
 import org.core.world.position.block.details.BlockSnapshot;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 
 import java.util.Collection;
 
@@ -47,7 +48,7 @@ public interface BlockChangeEvent extends BlockEvent, PlatformEvent {
 
     interface Place extends BlockChangeEvent {
 
-        Collection<BlockSnapshot> getAffected();
+        Collection<BlockSnapshot<SyncBlockPosition>> getAffected();
 
         interface Post extends Place {
 

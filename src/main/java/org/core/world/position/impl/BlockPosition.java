@@ -34,13 +34,10 @@ public interface BlockPosition extends Position<Integer> {
 
     default Set<LiveEntity> getAttachedEntities(){
         return this.getWorld().getEntities().stream().filter(e -> {
-            System.out.println("\tTesting " + e.getType().getId());
             Optional<SyncBlockPosition> opAttached = e.getAttachedTo();
             if(!opAttached.isPresent()){
-                System.out.println("\t\tNo Attachment found");
                 return false;
             }
-            System.out.println("\t\tComparing " + opAttached.get().equals(this));
             return opAttached.get().equals(this);
         }).collect(Collectors.toSet());
     }

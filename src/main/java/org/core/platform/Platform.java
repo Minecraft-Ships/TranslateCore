@@ -1,9 +1,8 @@
 package org.core.platform;
 
-import org.core.configuration.parser.unspecific.UnspecificParser;
-import org.core.configuration.parser.unspecific.UnspecificParsers;
-import org.core.configuration.type.ConfigurationLoaderType;
-import org.core.configuration.type.ConfigurationLoaderTypes;
+import org.core.config.ConfigurationFormat;
+import org.core.config.parser.unspecific.UnspecificParser;
+import org.core.config.parser.unspecific.UnspecificParsers;
 import org.core.entity.*;
 import org.core.entity.living.animal.parrot.ParrotType;
 import org.core.entity.living.animal.parrot.ParrotTypes;
@@ -41,7 +40,6 @@ public interface Platform {
     TextColour get(TextColours id);
     DyeType get(DyeTypes id);
     PatternLayerType get(PatternLayerTypes id);
-    ConfigurationLoaderType get(ConfigurationLoaderTypes id);
     <E extends LiveEntity, S extends EntitySnapshot<E>> EntityType<E, S> get(EntityTypes<E, S> entityId);
 
     Optional<EntityType<? extends Entity, ? extends EntitySnapshot<? extends Entity>>> getEntityType(String id);
@@ -50,7 +48,6 @@ public interface Platform {
     Optional<TextColour> getTextColour(String id);
     Optional<DyeType> getDyeType(String id);
     Optional<PatternLayerType> getPatternLayerType(String id);
-    Optional<ConfigurationLoaderType> getConfigurationLoaderType(String id);
     Optional<BossColour> getBossColour(String id);
     Optional<ParrotType> getParrotType(String id);
     Optional<ApplyPhysicsFlag> getApplyPhysics(String id);
@@ -64,7 +61,6 @@ public interface Platform {
     Collection<TextColour> getTextColours();
     Collection<DyeType> getDyeTypes();
     Collection<PatternLayerType> getPatternLayerTypes();
-    Collection<ConfigurationLoaderType> getConfigurationLoaderTypes();
     Collection<BlockGroup> getBlockGroups();
     Collection<BossColour> getBossColours();
     Collection<ParrotType> getParrotType();
@@ -76,6 +72,7 @@ public interface Platform {
     Collection<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntities();
     int[] getMinecraftVersion();
     PlatformDetails getDetails();
+    ConfigurationFormat getConfigFormat();
     Set<Plugin> getPlugins();
     <E extends CustomEvent> E callEvent(E event);
 

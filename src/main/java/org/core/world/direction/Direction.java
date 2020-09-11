@@ -1,5 +1,6 @@
 package org.core.world.direction;
 
+import org.array.utils.ArrayUtils;
 import org.core.CorePlugin;
 import org.core.vector.types.Vector3Int;
 
@@ -49,7 +50,7 @@ public abstract class Direction {
     }
 
     public static Direction[] withYDirections(Direction... directions){
-        return CorePlugin.join(directions, new Direction[] {FourFacingDirection.UP, FourFacingDirection.DOWN});
+        return ArrayUtils.join(Direction.class, directions, new Direction[] {FourFacingDirection.UP, FourFacingDirection.DOWN});
     }
 
     public static Optional<Direction> getDirection(int x, int y, int z){
