@@ -1,8 +1,8 @@
 package org.core.inventory;
 
+import org.core.world.position.Positionable;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
-import org.core.world.position.Positionable;
 
 public interface PositionableInventory extends Inventory, Positionable {
 

@@ -1,10 +1,8 @@
 package org.core.inventory.parts;
 
 import org.core.inventory.Inventory;
-import org.core.inventory.parts.snapshot.InventoryPartSnapshot;
 
 import java.util.Optional;
-import java.util.Set;
 
 public interface InventoryPart extends Inventory {
 

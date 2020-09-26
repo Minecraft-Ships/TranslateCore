@@ -3,9 +3,9 @@ package org.core.inventory.inventories.snapshots.block;
 import org.core.inventory.InventorySnapshot;
 import org.core.inventory.inventories.general.block.ChestInventory;
 import org.core.inventory.parts.Slot;
-import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.block.entity.LiveTileEntity;
 import org.core.world.position.block.entity.container.chest.LiveChestTileEntity;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 
 import java.util.Optional;
 

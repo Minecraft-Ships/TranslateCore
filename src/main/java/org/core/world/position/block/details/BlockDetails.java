@@ -1,9 +1,9 @@
 package org.core.world.position.block.details;
 
-import org.core.world.position.impl.Position;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.data.DirectionalData;
 import org.core.world.position.block.details.data.keyed.KeyedData;
+import org.core.world.position.impl.Position;
 
 import java.util.Optional;
 

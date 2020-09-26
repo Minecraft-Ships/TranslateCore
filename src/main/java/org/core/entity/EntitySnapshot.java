@@ -9,6 +9,25 @@ import java.util.Optional;
  */
 public interface EntitySnapshot<E extends LiveEntity> extends Entity<EntitySnapshot<? extends LiveEntity>> {
 
+    interface NoneDestructibleSnapshot<E extends LiveEntity> extends EntitySnapshot<E>{
+
+        /**
+         * Teleports the entity from its current position into the state of the snapshot
+         * @param keepInventory If the entity should keep its current inventory or apply the snapshot inventory
+         * @return The teleported entity
+         */
+        E teleportEntity(boolean keepInventory);
+
+        /**
+         * Gets the entity to teleport {@link NoneDestructibleSnapshot#teleportEntity(boolean)}
+         * @return The entity of the snapshot
+         */
+        default E getEntity(){
+            return this.getCreatedFrom().get();
+        }
+
+    }
+
     /**
      * Spawn the entity in the current condition of the snapshot
      * @return Spawns the entity

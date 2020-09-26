@@ -4,9 +4,9 @@ import org.core.inventory.InventorySnapshot;
 import org.core.inventory.inventories.general.block.FurnaceInventory;
 import org.core.inventory.parts.Slot;
 import org.core.inventory.parts.snapshot.SlotSnapshot;
-import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.block.entity.LiveTileEntity;
 import org.core.world.position.block.entity.container.furnace.LiveFurnaceTileEntity;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 
 import java.util.Optional;
 

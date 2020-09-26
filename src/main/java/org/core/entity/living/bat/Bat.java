@@ -4,8 +4,8 @@ import org.core.entity.Entity;
 import org.core.entity.EntityType;
 import org.core.entity.EntityTypes;
 import org.core.vector.types.Vector3Double;
-import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.block.BlockTypes;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 
 import java.util.Optional;
 

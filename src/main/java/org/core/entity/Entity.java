@@ -7,11 +7,11 @@ import org.core.world.direction.Direction;
 import org.core.world.direction.EightFacingDirection;
 import org.core.world.direction.FourFacingDirection;
 import org.core.world.direction.SixteenFacingDirection;
+import org.core.world.position.Positionable;
+import org.core.world.position.block.BlockTypes;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
 import org.core.world.position.impl.sync.SyncPosition;
-import org.core.world.position.Positionable;
-import org.core.world.position.block.BlockTypes;
 
 import java.util.Arrays;
 import java.util.Collection;

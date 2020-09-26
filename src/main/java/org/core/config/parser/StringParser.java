@@ -1,11 +1,7 @@
 package org.core.config.parser;
 
-import org.core.config.ConfigurationNode;
-import org.core.config.ConfigurationStream;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public interface StringParser<T extends Object> extends Parser<String, T> {
 

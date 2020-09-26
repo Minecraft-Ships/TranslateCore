@@ -6,13 +6,13 @@ import org.core.threadsafe.ThreadSafe;
 import org.core.vector.Vector3;
 import org.core.vector.types.Vector3Double;
 import org.core.vector.types.Vector3Int;
+import org.core.world.position.block.entity.LiveTileEntity;
 import org.core.world.position.impl.async.ASyncBlockPosition;
 import org.core.world.position.impl.async.ASyncExactPosition;
 import org.core.world.position.impl.async.ASyncPosition;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
 import org.core.world.position.impl.sync.SyncPosition;
-import org.core.world.position.block.entity.LiveTileEntity;
 
 import java.util.Set;
 

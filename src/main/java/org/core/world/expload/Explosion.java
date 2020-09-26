@@ -1,9 +1,9 @@
 package org.core.world.expload;
 
 import org.core.entity.Entity;
+import org.core.world.position.Positionable;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
-import org.core.world.position.Positionable;
 
 import java.util.Collection;
 

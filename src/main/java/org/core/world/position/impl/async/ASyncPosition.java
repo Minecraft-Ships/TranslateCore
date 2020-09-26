@@ -7,11 +7,11 @@ import org.core.threadsafe.FutureResult;
 import org.core.threadsafe.ThreadSafe;
 import org.core.vector.Vector3;
 import org.core.vector.types.Vector3Int;
-import org.core.world.position.impl.Position;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.BlockDetails;
 import org.core.world.position.block.entity.LiveTileEntity;
 import org.core.world.position.flags.PositionFlag;
+import org.core.world.position.impl.Position;
 import org.core.world.position.impl.sync.SyncPosition;
 
 @ThreadSafe(impl = {PlatformDetails.BUKKIT_ID})

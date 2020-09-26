@@ -1,8 +1,8 @@
 package org.core.world.position.block.entity;
 
 import org.core.exceptions.BlockNotSupported;
-import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.block.BlockType;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 
 import java.util.Collection;
 import java.util.Optional;

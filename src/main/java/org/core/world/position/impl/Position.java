@@ -1,8 +1,7 @@
 package org.core.world.position.impl;
 
-import org.core.entity.LiveEntity;
-import org.core.threadsafe.ThreadSafe;
 import org.core.platform.PlatformDetails;
+import org.core.threadsafe.ThreadSafe;
 import org.core.vector.Vector3;
 import org.core.vector.types.Vector3Int;
 import org.core.world.WorldExtent;
@@ -13,9 +12,6 @@ import org.core.world.position.impl.async.ASyncBlockPosition;
 import org.core.world.position.impl.async.ASyncExactPosition;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
-
-import java.util.Collection;
-import java.util.Optional;
 
 @ThreadSafe(impl = {PlatformDetails.BUKKIT_ID})
 public interface Position<A extends Number> {

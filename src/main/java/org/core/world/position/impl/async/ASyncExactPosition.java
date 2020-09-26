@@ -4,9 +4,7 @@ import org.core.vector.Vector3;
 import org.core.vector.types.Vector3Double;
 import org.core.vector.types.Vector3Int;
 import org.core.world.direction.Direction;
-import org.core.world.position.impl.BlockPosition;
 import org.core.world.position.impl.ExactPosition;
-import org.core.world.position.impl.sync.SyncExactPosition;
 
 public interface ASyncExactPosition extends ASyncPosition<Double>, ExactPosition {
 

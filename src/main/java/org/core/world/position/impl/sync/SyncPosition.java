@@ -6,12 +6,12 @@ import org.core.entity.LiveEntity;
 import org.core.entity.living.human.player.LivePlayer;
 import org.core.vector.Vector3;
 import org.core.vector.types.Vector3Int;
-import org.core.world.position.impl.Position;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.BlockDetails;
 import org.core.world.position.block.details.BlockSnapshot;
 import org.core.world.position.block.entity.LiveTileEntity;
 import org.core.world.position.flags.PositionFlag;
+import org.core.world.position.impl.Position;
 
 import java.util.Optional;
 
