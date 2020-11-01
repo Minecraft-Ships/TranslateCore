@@ -5,9 +5,8 @@ import org.core.entity.EntityType;
 import org.core.entity.EntityTypes;
 import org.core.entity.living.Creature;
 
-public interface Human<E extends Entity> extends AbstractHuman<E>, Creature<E> {
+public interface Human<E extends Entity<?>> extends AbstractHuman<E>, Creature<E> {
 
-    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveHuman, HumanSnapshot> getType(){
         return EntityTypes.HUMAN;

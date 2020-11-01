@@ -1,10 +1,11 @@
 package org.core.world.position.impl.async;
 
-import org.core.vector.Vector3;
-import org.core.vector.types.Vector3Double;
-import org.core.vector.types.Vector3Int;
+import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
 import org.core.world.position.impl.ExactPosition;
+import org.core.world.position.impl.sync.SyncExactPosition;
+
+import java.math.BigDecimal;
 
 public interface ASyncExactPosition extends ASyncPosition<Double>, ExactPosition {
 
@@ -12,20 +13,13 @@ public interface ASyncExactPosition extends ASyncPosition<Double>, ExactPosition
     ASyncBlockPosition toBlockPosition();
 
     @Override
-    Vector3Double getPosition();
-
-    @Override
-    default ASyncExactPosition getRelative(Vector3Int vector){
-        return getRelative(vector.to(Vector3Double.class));
+    default ASyncExactPosition getRelative(Vector3<?> vector){
+        Vector3<Double> vectorD = this.getPosition().plus(vector.toVector(BigDecimal::doubleValue));
+        return this.getWorld().getAsyncPosition(vectorD.getX(), vectorD.getY(), vectorD.getZ());
     }
 
     @Override
-    default ASyncExactPosition getRelative(Direction direction){
-        return (ASyncExactPosition) ExactPosition.super.getRelative(direction);
-    }
-
-    @Override
-    default ASyncExactPosition getRelative(Vector3<Double> vector){
-        return (ASyncExactPosition) ASyncPosition.super.getRelative(vector);
+    default ASyncExactPosition getRelative(Direction direction) {
+        return this.getRelative(direction.getAsVector());
     }
 }

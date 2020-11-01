@@ -8,6 +8,11 @@ import org.core.platform.PlatformServer;
 import org.core.schedule.SchedulerBuilder;
 import org.core.source.command.ConsoleSource;
 import org.core.text.Text;
+import org.core.text.colour.TextColour;
+import org.core.text.style.TextStyle;
+import org.core.text.type.ColouredText;
+import org.core.text.type.JoinedText;
+import org.core.text.type.StyledText;
 import org.core.world.boss.ServerBossBar;
 
 import java.io.File;
@@ -26,7 +31,12 @@ public interface CorePlugin {
 
     PlatformServer getRawServer();
 
+    @Deprecated
     Text textBuilder(String chars);
+
+    ColouredText colouredTextBuilder(TextColour colour, String text, TextStyle... styles);
+    StyledText styleTextBuilder(String text, TextStyle... styles);
+    JoinedText joinTextBuilder(org.core.text.type.Text... texts);
 
     ServerBossBar bossBuilder();
 
@@ -38,8 +48,21 @@ public interface CorePlugin {
         return CorePlugin.CoreImplementation.getImplementation().getRawConsole();
     }
 
+    @Deprecated
     static Text buildText(String text){
         return CorePlugin.CoreImplementation.getImplementation().textBuilder(text);
+    }
+
+    static StyledText buildStyledText(String text, TextStyle... style){
+        return CorePlugin.CoreImplementation.getImplementation().styleTextBuilder(text, style);
+    }
+
+    static ColouredText buildColouredText(TextColour colour, String text, TextStyle... style){
+        return CorePlugin.CoreImplementation.getImplementation().colouredTextBuilder(colour, text, style);
+    }
+
+    static JoinedText buildJoinedText(org.core.text.type.Text... texts){
+        return CorePlugin.CoreImplementation.getImplementation().joinTextBuilder(texts);
     }
 
     static SchedulerBuilder createSchedulerBuilder(){

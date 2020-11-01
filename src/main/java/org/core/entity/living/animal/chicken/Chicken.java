@@ -5,7 +5,7 @@ import org.core.entity.EntityType;
 import org.core.entity.EntityTypes;
 import org.core.entity.living.animal.AnimalEntity;
 
-public interface Chicken<E extends Entity> extends AnimalEntity<E> {
+public interface Chicken<E extends Entity<?>> extends AnimalEntity<E> {
 
     @SuppressWarnings("unchecked")
     @Override

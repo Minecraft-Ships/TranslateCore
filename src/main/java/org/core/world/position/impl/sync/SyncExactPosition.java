@@ -1,31 +1,27 @@
 package org.core.world.position.impl.sync;
 
-import org.core.vector.Vector3;
-import org.core.vector.types.Vector3Double;
-import org.core.vector.types.Vector3Int;
+import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
 import org.core.world.position.impl.ExactPosition;
+
+import java.math.BigDecimal;
 
 public interface SyncExactPosition extends SyncPosition<Double>, ExactPosition {
 
     @Override
-    Vector3Double getPosition();
+    Vector3<Double> getPosition();
 
     @Override
     SyncBlockPosition toBlockPosition();
 
     @Override
-    default SyncExactPosition getRelative(Vector3Int vector){
-        return getRelative(vector.to(Vector3Double.class));
+    default SyncExactPosition getRelative(Vector3<?> vector){
+        Vector3<Double> vectorD = this.getPosition().plus(vector.toVector(BigDecimal::doubleValue));
+        return this.getWorld().getPosition(vectorD.getX(), vectorD.getY(), vectorD.getZ());
     }
 
     @Override
-    default SyncExactPosition getRelative(Direction direction){
-        return (SyncExactPosition) ExactPosition.super.getRelative(direction);
-    }
-
-    @Override
-    default SyncExactPosition getRelative(Vector3<Double> vector){
-        return (SyncExactPosition) SyncPosition.super.getRelative(vector);
+    default SyncExactPosition getRelative(Direction direction) {
+        return this.getRelative(direction.getAsVector());
     }
 }

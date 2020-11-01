@@ -6,7 +6,7 @@ import org.core.entity.scene.minecart.Minecart;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface RideableMinecart<E extends Entity> extends Minecart<E> {
+public interface RideableMinecart<E extends Entity<?>> extends Minecart<E> {
 
     @Deprecated
     Collection<E> getPassengers();

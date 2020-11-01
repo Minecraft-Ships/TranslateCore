@@ -6,7 +6,7 @@ import org.core.entity.EntityTypes;
 import org.core.entity.living.animal.AnimalEntity;
 
 @SuppressWarnings("unchecked")
-public interface Cow<E extends Entity> extends AnimalEntity<E> {
+public interface Cow<E extends Entity<?>> extends AnimalEntity<E> {
 
     @Override
     default EntityType<LiveCow, CowSnapshot> getType(){

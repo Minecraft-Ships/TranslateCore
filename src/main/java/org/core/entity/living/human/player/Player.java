@@ -6,8 +6,7 @@ import org.core.entity.EntityTypes;
 import org.core.entity.living.human.AbstractHuman;
 import org.core.inventory.inventories.general.entity.PlayerInventory;
 
-@SuppressWarnings("unchecked")
-public interface Player<E extends Entity> extends AbstractHuman<E>, User {
+public interface Player<E extends Entity<?>> extends AbstractHuman<E>, User {
 
     boolean isViewingInventory();
 

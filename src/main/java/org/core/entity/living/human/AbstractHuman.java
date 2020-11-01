@@ -6,7 +6,7 @@ import org.core.entity.living.LivingEntity;
 import org.core.entity.living.Tamer;
 import org.core.source.projectile.EntityProjectileSource;
 
-public interface AbstractHuman<E extends Entity> extends LivingEntity<E>, InventoryHoldingEntity<E>, Tamer<E>, EntityProjectileSource {
+public interface AbstractHuman<E extends Entity<?>> extends LivingEntity<E>, InventoryHoldingEntity<E>, Tamer<E>, EntityProjectileSource {
 
     int getFoodLevel();
     double getExhaustionLevel();
@@ -14,8 +14,8 @@ public interface AbstractHuman<E extends Entity> extends LivingEntity<E>, Invent
     String getName();
     boolean isSneaking();
 
-    AbstractHuman setFood(int value) throws IndexOutOfBoundsException;
-    AbstractHuman setExhaustionLevel(double value) throws IndexOutOfBoundsException;
-    AbstractHuman setSaturationLevel(double value) throws IndexOutOfBoundsException;
-    AbstractHuman setSneaking(boolean sneaking);
+    AbstractHuman<E> setFood(int value) throws IndexOutOfBoundsException;
+    AbstractHuman<E> setExhaustionLevel(double value) throws IndexOutOfBoundsException;
+    AbstractHuman<E> setSaturationLevel(double value) throws IndexOutOfBoundsException;
+    AbstractHuman<E> setSneaking(boolean sneaking);
 }

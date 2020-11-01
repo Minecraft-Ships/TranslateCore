@@ -1,18 +1,18 @@
 package org.core.world.direction;
 
 import org.array.utils.ArrayUtils;
-import org.core.vector.types.Vector3Int;
+import org.core.vector.type.Vector3;
 
 import java.util.Optional;
 
 public abstract class Direction {
 
-    protected Vector3Int vector;
+    protected Vector3<Integer> vector;
     protected String name;
     protected String left;
     protected String opposite;
 
-    protected Direction(String name, Vector3Int asVector, String opposite, String left){
+    protected Direction(String name, Vector3<Integer> asVector, String opposite, String left){
         this.left = left;
         this.name = name;
         this.vector = asVector;
@@ -20,10 +20,10 @@ public abstract class Direction {
     }
 
     protected Direction(String name, int x, int y, int z, String opposite, String left){
-        this(name, new Vector3Int(x, y, z), opposite, left);
+        this(name, Vector3.valueOf(x, y, z), opposite, left);
     }
 
-    public Vector3Int getAsVector(){
+    public Vector3<Integer> getAsVector(){
         return this.vector;
     }
 
@@ -32,20 +32,19 @@ public abstract class Direction {
     }
 
     public Direction getOpposite(){
-        Optional<Direction> opDirection = getDirction(this.opposite);
+        Optional<Direction> opDirection = Direction.getDirection(this.opposite);
         if(opDirection.isPresent()){
             return opDirection.get();
         }
-        System.err.println("unknown opposite direction from " + this.name + " of " + this.opposite);
-        return opDirection.get();
+        throw new IllegalStateException("unknown opposite direction from " + this.name + " of " + this.opposite);
     }
 
     public Direction getRightAngleLeft(){
-        return getDirction(this.left).get();
+        return Direction.getDirection(this.left).get();
     }
 
     public Direction getRightAngleRight(){
-        return getDirction(this.left).get().getOpposite();
+        return Direction.getDirection(this.left).get().getOpposite();
     }
 
     public static Direction[] withYDirections(Direction... directions){
@@ -53,10 +52,10 @@ public abstract class Direction {
     }
 
     public static Optional<Direction> getDirection(int x, int y, int z){
-        return getDirection(new Vector3Int(x, y, z));
+        return getDirection(Vector3.valueOf(x, y, z));
     }
 
-    public static Optional<Direction> getDirection(Vector3Int vector){
+    public static Optional<Direction> getDirection(Vector3<Integer> vector){
         for(Direction dir : SixteenFacingDirection.getSixteenFacingDirections()){
             if(dir.vector.equals(vector)){
                 return Optional.of(dir);
@@ -65,7 +64,7 @@ public abstract class Direction {
         return Optional.empty();
     }
 
-    public static Optional<Direction> getDirction(String name){
+    public static Optional<Direction> getDirection(String name){
         for(Direction dir : Direction.withYDirections(SixteenFacingDirection.getSixteenFacingDirections())){
             if(dir.name.equals(name)){
                 return Optional.of(dir);

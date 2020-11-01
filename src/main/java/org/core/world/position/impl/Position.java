@@ -2,8 +2,7 @@ package org.core.world.position.impl;
 
 import org.core.platform.PlatformDetails;
 import org.core.threadsafe.ThreadSafe;
-import org.core.vector.Vector3;
-import org.core.vector.types.Vector3Int;
+import org.core.vector.type.Vector3;
 import org.core.world.WorldExtent;
 import org.core.world.direction.Direction;
 import org.core.world.position.block.BlockType;
@@ -14,27 +13,28 @@ import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
 
 @ThreadSafe(impl = {PlatformDetails.BUKKIT_ID})
-public interface Position<A extends Number> {
+public interface Position<N extends Number> {
 
-    Vector3Int getChunkPosition();
+    Vector3<Integer> getChunkPosition();
     WorldExtent getWorld();
-    BlockSnapshot<? extends Position<A>> getBlockDetails();
-    Vector3<A> getPosition();
+    BlockSnapshot<? extends BlockPosition> getBlockDetails();
+    Vector3<N> getPosition();
+    Position<N> getRelative(Vector3<?> vector);
+
     default BlockType getBlockType() {
         return getBlockDetails().getType();
     }
-    Position<A> getRelative(Vector3Int vector);
-    Position<A> getRelative(Vector3<A> vector);
-    default Position<A> getRelative(Direction direction){
+
+    default Position<N> getRelative(Direction direction){
         return getRelative(direction.getAsVector());
     }
-    default A getX() {
+    default N getX() {
         return getPosition().getX();
     }
-    default A getY() {
+    default N getY() {
         return getPosition().getY();
     }
-    default A getZ() {
+    default N getZ() {
         return getPosition().getZ();
     }
 

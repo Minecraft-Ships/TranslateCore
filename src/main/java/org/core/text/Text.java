@@ -1,5 +1,6 @@
 package org.core.text;
 
+@Deprecated
 public interface Text {
 
     boolean equalsExact(String chars);

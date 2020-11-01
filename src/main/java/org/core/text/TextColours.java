@@ -3,6 +3,7 @@ package org.core.text;
 import org.core.CorePlugin;
 import org.core.utils.Guaranteed;
 
+@Deprecated
 public class TextColours implements Guaranteed<TextColour> {
 
     public static final TextColour YELLOW = CorePlugin.getPlatform().get(new TextColours("Yellow"));

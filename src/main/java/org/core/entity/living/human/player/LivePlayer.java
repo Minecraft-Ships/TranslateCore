@@ -7,7 +7,6 @@ import org.core.world.position.impl.BlockPosition;
 
 import java.util.Optional;
 
-@SuppressWarnings("unchecked")
 public interface LivePlayer extends Player<LiveEntity>, LiveEntity, CommandViewer {
 
     boolean hasPermission(String permission);

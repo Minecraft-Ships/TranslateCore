@@ -6,7 +6,6 @@ import org.core.entity.LiveEntity;
 
 public interface HumanSnapshot extends Human<EntitySnapshot<? extends LiveEntity>>, EntitySnapshot<LiveHuman> {
 
-    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveHuman, HumanSnapshot> getType(){
         return Human.super.getType();

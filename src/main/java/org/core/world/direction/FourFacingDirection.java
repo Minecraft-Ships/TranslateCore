@@ -1,6 +1,6 @@
 package org.core.world.direction;
 
-import org.core.vector.types.Vector3Int;
+import org.core.vector.type.Vector3;
 
 public class FourFacingDirection extends Direction {
 
@@ -13,7 +13,7 @@ public class FourFacingDirection extends Direction {
     public static final FourFacingDirection NONE = new FourFacingDirection("None", 0, 0, 0, "None", "None");
 
 
-    protected FourFacingDirection(String name, Vector3Int asVector, String opposite, String left) {
+    protected FourFacingDirection(String name, Vector3<Integer> asVector, String opposite, String left) {
         super(name, asVector, opposite, left);
     }
 

@@ -1,8 +1,7 @@
 package org.core.world.position.impl;
 
 import org.core.entity.LiveEntity;
-import org.core.vector.Vector3;
-import org.core.vector.types.Vector3Int;
+import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
 import org.core.world.direction.FourFacingDirection;
 import org.core.world.position.block.BlockTypes;
@@ -21,36 +20,29 @@ public interface BlockPosition extends Position<Integer> {
     ExactPosition toExactPosition();
 
     @Override
-    Vector3Int getPosition();
-
-    BlockPosition getRelative(Vector3<Integer> vector);
-
-    BlockPosition getRelative(Vector3Int vector);
+    BlockPosition getRelative(Vector3<?> vector);
 
     @Override
     default BlockPosition getRelative(Direction direction){
-        return (SyncBlockPosition) Position.super.getRelative(direction);
+        return this.getRelative(direction.getAsVector());
     }
 
     default Set<LiveEntity> getAttachedEntities(){
         return this.getWorld().getEntities().stream().filter(e -> {
             Optional<SyncBlockPosition> opAttached = e.getAttachedTo();
-            if(!opAttached.isPresent()){
-                return false;
-            }
-            return opAttached.get().equals(this);
+            return opAttached.map(syncBlockPosition -> syncBlockPosition.equals(this)).orElse(false);
         }).collect(Collectors.toSet());
     }
 
-    default boolean isInLineOfSight(final Vector3Int vector, FourFacingDirection direction){
+    default boolean isInLineOfSight(final Vector3<Integer> vector, FourFacingDirection direction){
         return isInLineOfSight(vector, direction, BlockTypes.AIR.get().getDefaultBlockDetails(), BlockTypes.CAVE_AIR.get().getDefaultBlockDetails(), BlockTypes.VOID_AIR.get().getDefaultBlockDetails());
     }
 
-    default boolean isInLineOfSight(final Vector3Int vector, FourFacingDirection direction, BlockDetails... details){
+    default boolean isInLineOfSight(final Vector3<Integer> vector, FourFacingDirection direction, BlockDetails... details){
         return isInLineOfSight(vector, direction, Arrays.asList(details));
     }
 
-    default boolean isInLineOfSight(final Vector3Int vector, FourFacingDirection direction, final Collection<BlockDetails> ignored){
+    default boolean isInLineOfSight(final Vector3<Integer> vector, FourFacingDirection direction, final Collection<BlockDetails> ignored){
         return isInLineOfSight(vector.getX(), vector.getY(), vector.getZ(), direction, ignored);
     }
 
@@ -93,7 +85,7 @@ public interface BlockPosition extends Position<Integer> {
             int plusZ = direction.getAsVector().getZ() * A;
 
             BlockPosition position = this.getWorld().getPosition(startX + plusX, startY + plusY, startZ + plusZ);
-            BlockSnapshot<? extends Position<Integer>> snapshot = position.getBlockDetails();
+            BlockSnapshot<? extends BlockPosition> snapshot = position.getBlockDetails();
             if (ignored.stream().noneMatch(b -> b.equals(snapshot))){
                 return false;
             }

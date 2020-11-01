@@ -5,8 +5,8 @@ import org.core.platform.PlatformDetails;
 import org.core.platform.Plugin;
 import org.core.threadsafe.FutureResult;
 import org.core.threadsafe.ThreadSafe;
-import org.core.vector.Vector3;
-import org.core.vector.types.Vector3Int;
+import org.core.vector.type.Vector3;
+import org.core.world.direction.Direction;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.BlockDetails;
 import org.core.world.position.block.entity.LiveTileEntity;
@@ -22,21 +22,17 @@ public interface ASyncPosition<N extends Number> extends Position<N> {
     FutureResult<SyncPosition<N>> scheduleReset(Plugin plugin, LivePlayer... player);
     FutureResult<LiveTileEntity> getTileEntity(Plugin plugin);
 
+    @Override
+    ASyncPosition<N> getRelative(Vector3<?> vector);
+
+    @Override
+    ASyncPosition<N> getRelative(Direction direction);
+
     default FutureResult<SyncPosition<N>> scheduleBlock(Plugin plugin, BlockType type){
         return this.scheduleBlock(plugin, type.getDefaultBlockDetails());
     }
 
     default FutureResult<SyncPosition<N>> scheduleBlock(Plugin plugin, BlockDetails details){
         return this.scheduleBlock(plugin, details, new PositionFlag.SetFlag[0]);
-    }
-
-    @Override
-    default ASyncPosition<N> getRelative(Vector3Int vector){
-        return getWorld().getAsyncPosition(getPosition().add(vector));
-    }
-
-    @Override
-    default ASyncPosition<N> getRelative(Vector3<N> vector){
-        return getWorld().getAsyncPosition(vector.add(getPosition()));
     }
 }

@@ -19,9 +19,6 @@ public interface PlatformServer {
     Optional<User> getOfflineUser(UUID uuid);
     TPSExecutor getTPSExecutor();
 
-    Collection<CommandLauncher> getCommands();
-    void registerCommands(CommandLauncher... commandLaunchers);
-
     default Optional<WorldExtent> getWorld(String name, boolean justName){
         if(justName){
             return getWorlds().stream().filter(w -> w.getName().equals(name)).findAny();

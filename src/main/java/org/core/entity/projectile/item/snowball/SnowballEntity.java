@@ -7,7 +7,7 @@ import org.core.entity.projectile.ItemProjectileEntity;
 import org.core.inventory.item.ItemTypes;
 import org.core.inventory.item.stack.ItemStack;
 
-public interface SnowballEntity<E extends Entity> extends ItemProjectileEntity<E> {
+public interface SnowballEntity<E extends Entity<?>> extends ItemProjectileEntity<E> {
 
     default ItemStack getItem(){
         return ItemTypes.SNOWBALL.getDefaultItemStack().copyWithQuantity(1);

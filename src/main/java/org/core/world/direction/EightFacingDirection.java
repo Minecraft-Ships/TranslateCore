@@ -1,7 +1,6 @@
 package org.core.world.direction;
 
-
-import org.core.vector.types.Vector3Int;
+import org.core.vector.type.Vector3;
 
 public class EightFacingDirection extends FourFacingDirection {
 
@@ -10,7 +9,7 @@ public class EightFacingDirection extends FourFacingDirection {
     public static final Direction SOUTH_WEST = new EightFacingDirection("South_West", -1, 0, 1, "North_East", "North_West");
     public static final Direction SOUTH_EAST = new EightFacingDirection("South_East", 1, 0, 1, "North_West", "South_West");
 
-    protected EightFacingDirection(String name, Vector3Int asVector, String opposite, String left) {
+    protected EightFacingDirection(String name, Vector3<Integer> asVector, String opposite, String left) {
         super(name, asVector, opposite, left);
     }
 

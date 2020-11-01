@@ -1,8 +1,7 @@
 package org.core.entity;
 
 import org.core.text.Text;
-import org.core.vector.Vector3;
-import org.core.vector.types.Vector3Double;
+import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
 import org.core.world.direction.EightFacingDirection;
 import org.core.world.direction.FourFacingDirection;
@@ -21,7 +20,7 @@ import java.util.Optional;
  * Class to represent all Entity types within the Minecraft game
  * @param <T> Options are either LiveEntity or EntitySnapshot
  */
-public interface Entity<T extends Entity> extends Positionable<SyncExactPosition> {
+public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosition> {
 
     /**
      * Gets the position the entity is.
@@ -48,14 +47,14 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * @param value The pitch to be
      * @return Itself for chaining
      */
-    T setPitch(double value);
+    Entity<T> setPitch(double value);
 
     /**
      * Sets the Yaw of the entities rotation
      * @param value The yaw to be
      * @return Itself for chaining
      */
-    T setYaw(double value);
+    Entity<T> setYaw(double value);
 
     /**
      * Sets the Roll of the entities rotation.
@@ -64,7 +63,7 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * @param value the roll to be
      * @return Itself for chaining
      */
-    T setRoll(double value);
+    Entity<T> setRoll(double value);
 
     /**
      * Sets the position for the entity to be in.
@@ -76,21 +75,21 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * @param position The position for the entity to be in
      * @return itself for chaining
      */
-    T setPosition(SyncPosition<? extends Number> position);
+    Entity<T> setPosition(SyncPosition<? extends Number> position);
 
     /**
      * Sets if the entity has gravity or not
      * @param check If the entity should have gravity
      * @return itself for chaining
      */
-    T setGravity(boolean check);
+    Entity<T> setGravity(boolean check);
 
     /**
      * Sets the velocity of the entity
      * @param velocity the velocity to be
      * @return itself for chaining
      */
-    T setVelocity(Vector3Double velocity);
+    Entity<T> setVelocity(Vector3<Double> velocity);
 
     /**
      * Sets the custom name of the entity.
@@ -98,14 +97,14 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * @param text the name to be
      * @return itself for chaining
      */
-    T setCustomName(Text text);
+    Entity<T> setCustomName(Text text);
 
     /**
      * Sets if the custom name should be visible
      * @param visible if the name should be visible
      * @return itself for chaining
      */
-    T setCustomNameVisible(boolean visible);
+    Entity<T> setCustomNameVisible(boolean visible);
 
     /**
      * Gets the current pitch of the entity
@@ -137,7 +136,7 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * Gets the current velocity of the entity
      * @return The current velocity
      */
-    Vector3Double getVelocity();
+    Vector3<Double> getVelocity();
 
     /**
      * Gets the custom name of the entity, even
@@ -172,7 +171,7 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * @param entities Collection of entities to add
      * @return itself for chaining
      */
-    T addPassengers(Collection<T> entities);
+    Entity<T> addPassengers(Collection<T> entities);
 
     /**
      * Removes passengers to the current entity.
@@ -182,7 +181,7 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * @param entities Collection of entities to remove
      * @return itself for chaining
      */
-    T removePassengers(Collection<T> entities);
+    Entity<T> removePassengers(Collection<T> entities);
 
     /**
      * Checks if the entity is on ground
@@ -198,8 +197,8 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * @param z the Z speed
      * @return itself for chaining
      */
-    default T setVelocity(double x, double y, double z){
-        return setVelocity(new Vector3Double(x, y, z));
+    default Entity<T> setVelocity(double x, double y, double z){
+        return setVelocity(Vector3.valueOf(x, y, z));
     }
 
     /**
@@ -219,7 +218,7 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * @return itself for chaining
      */
     @SuppressWarnings("unchecked")
-    default T addPassengers(T... entities) {
+    default Entity<T> addPassengers(T... entities) {
         return addPassengers(Arrays.asList(entities));
     }
 
@@ -232,7 +231,7 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * @return itself for chaining
      */
     @SuppressWarnings("unchecked")
-    default T removePassengers(T... entities){
+    default Entity<T> removePassengers(T... entities){
         return removePassengers(Arrays.asList(entities));
     }
 
@@ -240,7 +239,7 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * Removes all passengers from the entity
      * @return itself for chaining
      */
-    default T clearPassengers(){
+    default Entity<T> clearPassengers(){
         return removePassengers(getPassengers());
     }
 
@@ -253,7 +252,7 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * @param z The Z position of the world
      * @return itself for chaining
      */
-    default T setPosition(double x, double y, double z){
+    default Entity<T> setPosition(double x, double y, double z){
         return setPosition(getPosition().getWorld().getPosition(x, y, z));
     }
 
@@ -305,7 +304,7 @@ public interface Entity<T extends Entity> extends Positionable<SyncExactPosition
      * @return The attached block if present
      */
     default Optional<SyncBlockPosition> getAttachedTo(){
-        SyncBlockPosition block = getPosition().getRelative(new Vector3Double(0, -0.1, 0)).toBlockPosition();
+        SyncBlockPosition block = getPosition().getRelative(Vector3.valueOf(0, -0.1, 0)).toBlockPosition();
         if(block.getBlockType().equals(BlockTypes.AIR.get())){
             return Optional.empty();
         }

@@ -12,7 +12,10 @@ public interface ItemStack {
     ItemType getType();
     int getQuantity();
 
+    @Deprecated
     List<Text> getLore();
+
+    @Deprecated
     ItemStack setLore(Collection<Text> lore);
 
     ItemStack copy();
@@ -20,6 +23,7 @@ public interface ItemStack {
 
     ItemStackSnapshot createSnapshot();
 
+    @Deprecated
     default ItemStack setLore(Text... text){
         return this.setLore(Arrays.asList(text));
     }

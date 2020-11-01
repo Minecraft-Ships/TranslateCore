@@ -1,5 +1,6 @@
 package org.core.platform;
 
+import org.core.command.CommandRegister;
 import org.core.config.ConfigurationStream;
 
 import java.io.File;
@@ -11,6 +12,7 @@ public interface Plugin {
     String getPluginName();
     String getPluginId();
     String getPluginVersion();
+    void registerCommands(CommandRegister register);
     Object getLauncher();
     Optional<ConfigurationStream.ConfigurationFile> createConfig(String configName, File file);
 

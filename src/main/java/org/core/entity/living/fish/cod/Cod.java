@@ -5,7 +5,7 @@ import org.core.entity.EntityType;
 import org.core.entity.EntityTypes;
 import org.core.entity.living.fish.FishEntity;
 
-public interface Cod<E extends Entity> extends FishEntity<E> {
+public interface Cod<E extends Entity<?>> extends FishEntity<E> {
 
     @Override
     @SuppressWarnings("unchecked")

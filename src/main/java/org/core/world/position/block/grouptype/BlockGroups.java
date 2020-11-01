@@ -1,7 +1,6 @@
 package org.core.world.position.block.grouptype;
 
 import org.core.CorePlugin;
-import org.core.world.position.block.grouptype.versions.BlockGroups1V12;
 import org.core.world.position.block.grouptype.versions.BlockGroups1V13;
 import org.core.world.position.block.grouptype.versions.CommonBlockGroups;
 
@@ -19,13 +18,11 @@ public class BlockGroups {
         if(version[0] == 1){
             if(version[1] >= 13){
                 IMPLEMENTATION.registerFields(BlockGroups1V13.class);
-            }else{
-                IMPLEMENTATION.registerFields(BlockGroups1V12.class);
             }
         }
     }
 
-    private Collection<BlockGroup> groups = new HashSet<>();
+    private final Collection<BlockGroup> groups = new HashSet<>();
 
     public BlockGroups register(BlockGroup... groups){
         this.groups.addAll(Arrays.asList(groups));

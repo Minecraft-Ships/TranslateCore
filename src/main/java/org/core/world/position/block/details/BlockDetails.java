@@ -3,8 +3,7 @@ package org.core.world.position.block.details;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.data.DirectionalData;
 import org.core.world.position.block.details.data.keyed.KeyedData;
-import org.core.world.position.impl.Position;
-
+import org.core.world.position.impl.BlockPosition;
 import java.util.Optional;
 
 /**
@@ -18,7 +17,7 @@ public interface BlockDetails {
      */
     BlockType getType();
 
-    <T extends Position<Integer>> BlockSnapshot<T> createSnapshot(T position);
+    <T extends BlockPosition> BlockSnapshot<T> createSnapshot(T position);
 
     Optional<DirectionalData> getDirectionalData();
 
@@ -28,12 +27,11 @@ public interface BlockDetails {
      */
     BlockDetails createCopyOf();
 
-    <T extends Object> Optional<T> get(Class<? extends KeyedData<T>> data);
+    <T> Optional<T> get(Class<? extends KeyedData<T>> data);
 
-    <T extends Object> BlockDetails set(Class<? extends KeyedData<T>> data, T value);
+    <T> BlockDetails set(Class<? extends KeyedData<T>> data, T value);
 
-    @SuppressWarnings("unchecked")
-    default <T extends Object> Optional<T> getUnspecified(Class<? extends KeyedData<? extends Object>> dataClass){
+    default <T> Optional<T> getUnspecified(Class<? extends KeyedData<?>> dataClass){
         return get((Class<? extends KeyedData<T>>)dataClass);
     }
 }

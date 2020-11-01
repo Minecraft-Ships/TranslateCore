@@ -5,7 +5,7 @@ import org.core.entity.EntityType;
 import org.core.entity.EntityTypes;
 import org.core.entity.living.hostile.HostileEntity;
 
-public interface CreeperEntity<E extends Entity> extends HostileEntity<E> {
+public interface CreeperEntity<E extends Entity<?>> extends HostileEntity<E> {
 
     boolean isCharged();
     CreeperEntity<E> setCharged(boolean check);
