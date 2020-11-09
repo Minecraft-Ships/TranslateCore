@@ -1,5 +1,7 @@
 package org.core.vector;
 
+import org.array.utils.ArrayUtils;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.function.BiFunction;
@@ -81,5 +83,27 @@ public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
 
     public int getPointCount(){
         return this.points.length;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(!(obj instanceof Vector)){
+            return false;
+        }
+        Vector<?, ?> vector = (Vector<?, ?>)obj;
+        if(vector.getPointCount() != this.getPointCount()){
+            return false;
+        }
+        for(int A = 0; A < this.getPointCount(); A++){
+            if(this.getRawPoint(A).doubleValue() != vector.getRawPoint(A).doubleValue()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "{" + ArrayUtils.toString(", ", BigDecimal::toPlainString, this.points) + "}";
     }
 }

@@ -1,5 +1,6 @@
 package org.core.vector.type;
 
+import org.array.utils.ArrayUtils;
 import org.core.vector.Vector;
 import org.core.vector.VectorConverter;
 
@@ -87,6 +88,11 @@ public class Vector3<N extends Number> extends Vector<N, Vector3<N>> {
         return distanceSquared(this.createNew(BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(y.doubleValue()), BigDecimal.valueOf(z.doubleValue())));
     }
 
+    @Override
+    public String toString() {
+        return "Vector3{X: " + this.getRawX().toPlainString() + ", Y: " + this.getRawY().toPlainString() + ", Z: " + this.getRawZ().toPlainString() + "}";
+    }
+
     public static Vector3<Double> valueOf(double x, double y, double z){
         return new Vector3<>(BigDecimal::doubleValue, BigDecimal.valueOf(x), BigDecimal.valueOf(y), BigDecimal.valueOf(z));
     }
@@ -94,4 +100,6 @@ public class Vector3<N extends Number> extends Vector<N, Vector3<N>> {
     public static Vector3<Integer> valueOf(int x, int y, int z){
         return new Vector3<>(BigDecimal::intValue, BigDecimal.valueOf(x), BigDecimal.valueOf(y), BigDecimal.valueOf(z));
     }
+
+
 }

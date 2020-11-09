@@ -40,13 +40,16 @@ public interface ConfigurationStream {
         return this.getChildren(new ConfigurationNode());
     }
 
-    default <T> void set(ConfigurationNode node, StringMapParser<T> parser, T value){
-        Map<String, String> map = parser.unparse(value);
-        map.forEach((key, value1) -> {
+    default void set(ConfigurationNode node, Map<String, String> value){
+        value.forEach((key, value1) -> {
             String[] args = key.split(Pattern.quote("."));
             String[] fullArgs = ArrayUtils.join(String.class, node.getPath(), args);
             this.set(new ConfigurationNode(fullArgs), value1);
         });
+    }
+
+    default <T> void set(ConfigurationNode node, StringMapParser<T> parser, T value){
+        set(node, parser.unparse(value));
     }
 
     default <T> void set(ConfigurationNode node, StringParser<T> parser, T value){
@@ -79,6 +82,17 @@ public interface ConfigurationStream {
 
     default <T, C extends Collection<T>> void set(ConfigurationNode.KnownParser.CollectionKnown<T, C> node, C value){
         set(node, node.getParser(), value);
+    }
+
+    default <T> void set(ConfigurationNode.GroupKnown<T> node, Collection<T> values) {
+        Map<String, String> map = new HashMap<>();
+        values.forEach(v -> {
+            String key = node.toKey(v);
+            String value = node.getValueParsers().get(key).unparse(v);
+            map.put(key, value);
+        });
+        this.set(node, map);
+
     }
 
     default <T> Optional<T> parse(ConfigurationNode node, Parser<String, T> parser){
@@ -129,6 +143,22 @@ public interface ConfigurationStream {
 
     default <T> T parse(ConfigurationNode.KnownParser<?, T> node, T value){
         return parse(node).orElse(value);
+    }
+
+    default <T, C extends Collection<T>> C parseCollection(ConfigurationNode.GroupKnown<T> node, C collection){
+        node.getValueParsers().forEach((key, value) -> {
+            ConfigurationNode directNode = new ConfigurationNode(ArrayUtils.join(String.class, node.getPath(), new String[]{key}));
+            Optional<String> opValue = getString(directNode);
+            if (!opValue.isPresent()) {
+                return;
+            }
+            Optional<T> opParsed = value.parse(opValue.get());
+            if (!opParsed.isPresent()) {
+                return;
+            }
+            collection.add(opParsed.get());
+        });
+        return collection;
     }
 
     default <T, C extends Collection<T>> C parseCollection(ConfigurationNode.KnownParser<String, T> node, C collection){

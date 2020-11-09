@@ -6,6 +6,14 @@ import org.core.text.Text;
 
 public interface ClientConnectionEvent extends EntityEvent<LivePlayer> {
 
+    interface Incoming extends ClientConnectionEvent {
+
+        interface Joined extends Incoming {
+
+        }
+
+    }
+
     interface Leave extends ClientConnectionEvent {
 
         Text getLeaveMessage();

@@ -50,6 +50,14 @@ public class Vector2 <N extends Number> extends Vector<N, Vector2<N>> {
         return this.getPoint(1);
     }
 
+    public BigDecimal getRawX(){
+        return this.getRawPoint(0);
+    }
+
+    public BigDecimal getRawZ(){
+        return this.getRawPoint(1);
+    }
+
     public Vector2<N> plus(N x, N z){
         return this.plus(this.createNew(BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(z.doubleValue())));
     }
@@ -64,6 +72,11 @@ public class Vector2 <N extends Number> extends Vector<N, Vector2<N>> {
 
     public Vector2<N> minus(Vector2<Integer> vector){
         return this.minus(this.toNumber.apply(vector.getRawPoint(0)), this.toNumber.apply(vector.getRawPoint(1)));
+    }
+
+    @Override
+    public String toString() {
+        return "Vector3{X: " + this.getRawX().toPlainString() + ", Z: " + this.getRawZ().toPlainString() + "}";
     }
 
     public static Vector2<Double> valueOf(double x, double z){
