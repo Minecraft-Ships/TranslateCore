@@ -11,6 +11,7 @@ import org.core.inventory.item.ItemType;
 import org.core.inventory.item.data.dye.DyeType;
 import org.core.inventory.item.data.dye.DyeTypes;
 import org.core.inventory.item.type.ItemTypeCommon;
+import org.core.permission.Permission;
 import org.core.text.TextColour;
 import org.core.text.TextColours;
 import org.core.world.boss.colour.BossColour;
@@ -42,7 +43,7 @@ public interface Platform {
     PatternLayerType get(PatternLayerTypes id);
     <E extends LiveEntity, S extends EntitySnapshot<E>> EntityType<E, S> get(EntityTypes<E, S> entityId);
 
-    Optional<EntityType<? extends Entity, ? extends EntitySnapshot<? extends Entity>>> getEntityType(String id);
+    <E extends LiveEntity> Optional<EntityType<E, ? extends EntitySnapshot<E>>> getEntityType(String id);
     Optional<BlockType> getBlockType(String id);
     Optional<ItemType> getItemType(String id);
     Optional<TextColour> getTextColour(String id);
@@ -55,7 +56,7 @@ public interface Platform {
     @Deprecated
     Optional<UnspecificParser<?>> getUnspecifiedParser(String id);
 
-    Collection<EntityType<? extends Entity, ? extends EntitySnapshot<? extends Entity>>> getEntityTypes();
+    Collection<EntityType<? extends LiveEntity, ? extends EntitySnapshot<? extends LiveEntity>>> getEntityTypes();
     Collection<BlockType> getBlockTypes();
     Collection<ItemType> getItemTypes();
     Collection<TextColour> getTextColours();
@@ -65,6 +66,8 @@ public interface Platform {
     Collection<BossColour> getBossColours();
     Collection<ParrotType> getParrotType();
     Collection<ApplyPhysicsFlag> getApplyPhysics();
+    Collection<Permission> getPermissions();
+    Permission register(String permissionNode);
 
     @Deprecated
     Collection<UnspecificParser<?>> getUnspecifiedParsers();

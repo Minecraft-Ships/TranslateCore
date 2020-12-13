@@ -88,7 +88,11 @@ public interface ConfigurationStream {
         Map<String, String> map = new HashMap<>();
         values.forEach(v -> {
             String key = node.toKey(v);
-            String value = node.getValueParsers().get(key).unparse(v);
+            Parser<String, T> mappedValue = node.getValueParsers().get(key);
+            if(mappedValue == null){
+                throw new IllegalStateException("Can not save GroupKnown. Unknown Key of '" + key + "' from '" + ArrayUtils.toString(", ", t -> "\"" + t + "\"", node.getValueParsers().keySet()) + "' which was created from GroupKnown.toKey(T)");
+            }
+            String value = mappedValue.unparse(v);
             map.put(key, value);
         });
         this.set(node, map);

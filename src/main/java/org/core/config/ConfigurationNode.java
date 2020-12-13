@@ -7,15 +7,16 @@ import org.core.config.parser.StringParser;
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class ConfigurationNode {
 
     public static class GroupKnown<T> extends ConfigurationNode {
 
-        private Map<String, Parser<String, T>> values;
+        private Supplier<Map<String, Parser<String, T>>> values;
         private Function<T, String> toKey;
 
-        public GroupKnown(Map<String, Parser<String, T>> values, Function<T, String> toKey, String... path){
+        public GroupKnown(Supplier<Map<String, Parser<String, T>>> values, Function<T, String> toKey, String... path){
             super(path);
             this.values = values;
             this.toKey = toKey;
@@ -26,7 +27,7 @@ public class ConfigurationNode {
         }
 
         public Map<String, Parser<String, T>> getValueParsers(){
-            return this.values;
+            return this.values.get();
         }
 
     }
