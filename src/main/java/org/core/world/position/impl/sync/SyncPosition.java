@@ -5,6 +5,7 @@ import org.core.entity.EntityType;
 import org.core.entity.LiveEntity;
 import org.core.entity.living.human.player.LivePlayer;
 import org.core.vector.type.Vector3;
+import org.core.world.ChunkExtent;
 import org.core.world.direction.Direction;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.BlockDetails;

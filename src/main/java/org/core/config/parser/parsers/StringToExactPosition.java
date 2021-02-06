@@ -25,6 +25,6 @@ public class StringToExactPosition implements StringParser<SyncExactPosition> {
 
     @Override
     public String unparse(SyncExactPosition value) {
-        return value.getX() + "," + value.getY() + "," + value.getZ() + "," + value.getWorld().getPlatformUniquieId();
+        return value.getX() + "," + value.getY() + "," + value.getZ() + "," + value.getWorld().getPlatformUniqueId();
     }
 }

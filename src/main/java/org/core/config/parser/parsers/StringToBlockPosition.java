@@ -25,6 +25,6 @@ public class StringToBlockPosition implements StringParser<SyncBlockPosition> {
 
     @Override
     public String unparse(SyncBlockPosition value) {
-        return value.getX() + "," + value.getY() + "," + value.getZ() + "," + value.getWorld().getPlatformUniquieId();
+        return value.getX() + "," + value.getY() + "," + value.getZ() + "," + value.getWorld().getPlatformUniqueId();
     }
 }

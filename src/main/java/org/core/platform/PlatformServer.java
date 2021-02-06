@@ -1,6 +1,5 @@
 package org.core.platform;
 
-import org.core.command.CommandLauncher;
 import org.core.entity.living.human.player.LivePlayer;
 import org.core.entity.living.human.player.User;
 import org.core.platform.tps.TPSExecutor;
@@ -27,7 +26,7 @@ public interface PlatformServer {
     }
 
     default Optional<WorldExtent> getWorld(UUID uuid){
-        return getWorlds().stream().filter(w -> w.getUniquieId().equals(uuid)).findAny();
+        return getWorlds().stream().filter(w -> w.getUniqueId().equals(uuid)).findAny();
     }
 
     default double getTPS(){

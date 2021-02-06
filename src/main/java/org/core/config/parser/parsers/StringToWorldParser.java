@@ -14,6 +14,6 @@ public class StringToWorldParser implements StringParser<WorldExtent> {
 
     @Override
     public String unparse(WorldExtent value) {
-        return value.getPlatformUniquieId();
+        return value.getPlatformUniqueId();
     }
 }

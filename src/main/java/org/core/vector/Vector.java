@@ -2,6 +2,7 @@ package org.core.vector;
 
 import org.array.utils.ArrayUtils;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.function.BiFunction;
@@ -83,6 +84,15 @@ public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
 
     public int getPointCount(){
         return this.points.length;
+    }
+
+    @Override
+    public int hashCode() {
+        double check = 0;
+        for (BigDecimal big : this.points){
+            check = check + big.doubleValue();
+        }
+        return Integer.parseInt((check + "").replaceAll("\\.", ""));
     }
 
     @Override
