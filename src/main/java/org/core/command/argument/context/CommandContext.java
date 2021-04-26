@@ -1,5 +1,6 @@
 package org.core.command.argument.context;
 
+import org.array.utils.ArrayUtils;
 import org.core.command.argument.ArgumentCommand;
 import org.core.command.argument.arguments.CommandArgument;
 import org.core.command.argument.arguments.operation.OptionalArgument;
@@ -97,8 +98,8 @@ public class CommandContext {
         throw new IllegalArgumentException("Argument ID of '" + id + "' not found within command");
     }
 
-    public Optional<String> getCompleteError(){
-        TreeMap<Integer, String> map = new TreeMap<>();
+    public Set<ErrorContext> getErrors(){
+        Set<ErrorContext> map = new HashSet<>();
         for(ArgumentCommand command : this.potentialCommands){
             List<CommandArgument<?>> arguments = command.getArguments();
             int commandArgument = 0;
@@ -107,23 +108,22 @@ public class CommandContext {
                     continue;
                 }
                 if(this.commands.length <= commandArgument){
-                    map.put(commandArgument, "Not enough arguments");
+                    ErrorContext context = new ErrorContext(command, commandArgument, arg, "Not enough arguments");
+                    map.add(context);
                     break;
                 }
                 try {
                     Map.Entry<?, Integer> entry = this.parse(arg, commandArgument);
                     commandArgument = entry.getValue();
                 } catch (IOException e) {
-                    map.put(commandArgument, e.getMessage());
+                    ErrorContext context = new ErrorContext(command, commandArgument, arg, e.getMessage());
+                    map.add(context);
                     break;
                 }
             }
+
         }
-        Map.Entry<Integer, String> entry = map.firstEntry();
-        if(entry == null){
-            return Optional.empty();
-        }
-        return Optional.of(map.firstEntry().getValue());
+        return ArrayUtils.getBests(ErrorContext::getArgumentFailedAt, (b, c) -> b > c, Integer::equals, map);
     }
 
     public Optional<ArgumentCommand> getCompleteCommand(){

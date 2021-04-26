@@ -6,12 +6,14 @@ import org.core.command.argument.ArgumentCommand;
 import org.core.command.argument.arguments.CommandArgument;
 import org.core.command.argument.arguments.operation.OptionalArgument;
 import org.core.command.argument.context.CommandContext;
+import org.core.command.argument.context.ErrorContext;
 import org.core.exceptions.NotEnoughArguments;
 import org.core.source.command.CommandSource;
 import org.core.source.viewer.CommandViewer;
 import org.core.text.TextColours;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public interface ArgumentLauncher extends BaseCommandLauncher {
 
@@ -24,10 +26,22 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
         if(!opCommand.isPresent()){
             if(source instanceof CommandViewer){
                 CommandViewer viewer = (CommandViewer)source;
-                viewer.sendMessage(CorePlugin.buildText(TextColours.RED + commandContext.getCompleteError().orElse("Unknown Error")));
-                commandContext.getPotentialCommands().stream().findFirst().ifPresent(c -> {
+                Set<ErrorContext> errors = commandContext.getErrors();
+                if(!errors.isEmpty()){
+                    ErrorContext error = errors.iterator().next();
+                    viewer.sendMessage(CorePlugin.buildText(TextColours.RED + error.getError()));
+                    errors.parallelStream().map(e -> e.getArgument().getUsage()).collect(Collectors.toSet()).forEach(e -> {
+                        viewer.sendMessage(CorePlugin.buildText(e));
+                    });
+                }else{
+                    viewer.sendMessage(CorePlugin.buildText(TextColours.RED + "Unknown error"));
+                }
+
+                /*viewer.sendMessage(CorePlugin.buildText(TextColours.RED + commandContext.getCompleteError().orElse("Unknown Error")));
+                Set<ArgumentCommand> potentialCommands = commandContext.getPotentialCommands();
+                potentialCommands.stream().forEach(c -> {
                     viewer.sendMessage(CorePlugin.buildText(TextColours.RED + "/Ships " + ArrayUtils.toString(" ", CommandArgument::getUsage, c.getArguments())));
-                });
+                });*/
                 return true;
             }
             return false;
