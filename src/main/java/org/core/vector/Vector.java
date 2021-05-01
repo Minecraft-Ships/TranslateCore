@@ -2,7 +2,6 @@ package org.core.vector;
 
 import org.array.utils.ArrayUtils;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.function.BiFunction;

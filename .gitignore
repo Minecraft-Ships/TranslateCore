@@ -1,5 +1,3 @@
-.idea/
-/.m2/
+/.gradle/
+/build/
 /target/
-ShipsCore.iml
-/JavaDoc/

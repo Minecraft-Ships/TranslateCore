@@ -1,6 +1,5 @@
 package org.core.vector.type;
 
-import org.array.utils.ArrayUtils;
 import org.core.vector.Vector;
 import org.core.vector.VectorConverter;
 
