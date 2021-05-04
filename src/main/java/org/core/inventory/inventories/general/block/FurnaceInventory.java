@@ -14,12 +14,14 @@ import java.util.Set;
 public interface FurnaceInventory extends BlockAttachedInventory, Inventory.Parent {
 
     Slot getFuelSlot();
+
     Slot getResultsSlot();
+
     Slot getSmeltingSlot();
 
     @Override
     default BlockType[] getAllowedBlockType() {
-        return new BlockType[]{BlockTypes.FURNACE.get(), /*BlockTypes.FURNACE_LIT*//*1.12.2*/};
+        return new BlockType[]{BlockTypes.FURNACE};
     }
 
     @Override
@@ -31,7 +33,7 @@ public interface FurnaceInventory extends BlockAttachedInventory, Inventory.Pare
     }
 
     @Override
-    default Set<Slot> getSlots(){
+    default Set<Slot> getSlots() {
         Set<Slot> slots = new HashSet<>();
         slots.add(getFuelSlot());
         slots.add(getResultsSlot());

@@ -16,17 +16,17 @@ public class ConfigurationNode {
         private Supplier<Map<String, Parser<String, T>>> values;
         private Function<T, String> toKey;
 
-        public GroupKnown(Supplier<Map<String, Parser<String, T>>> values, Function<T, String> toKey, String... path){
+        public GroupKnown(Supplier<Map<String, Parser<String, T>>> values, Function<T, String> toKey, String... path) {
             super(path);
             this.values = values;
             this.toKey = toKey;
         }
 
-        public String toKey(T value){
+        public String toKey(T value) {
             return this.toKey.apply(value);
         }
 
-        public Map<String, Parser<String, T>> getValueParsers(){
+        public Map<String, Parser<String, T>> getValueParsers() {
             return this.values.get();
         }
 
@@ -86,14 +86,18 @@ public class ConfigurationNode {
 
     private final String[] path;
 
-    public ConfigurationNode(String... path){
-        if(path.length == 0){
+    public ConfigurationNode(String... path) {
+        if (path.length == 0) {
             throw new IllegalArgumentException("Node must have a path specified");
         }
         this.path = path;
     }
 
-    public String[] getPath(){
+    public String[] getPath() {
+        return this.path;
+    }
+
+    public Object[] getObjectPath() {
         return this.path;
     }
 

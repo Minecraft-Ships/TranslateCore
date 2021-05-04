@@ -9,7 +9,10 @@ import org.core.source.command.CommandSource;
 import org.core.source.viewer.CommandViewer;
 import org.core.text.TextColours;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public interface ArgumentLauncher extends BaseCommandLauncher {
@@ -17,20 +20,22 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
     Set<ArgumentCommand> getCommands();
 
     @Override
-    default boolean run(CommandSource source, String... args) throws NotEnoughArguments{
+    default boolean run(CommandSource source, String... args) throws NotEnoughArguments {
         CommandContext commandContext = new CommandContext(source, this.getCommands(), args);
         Optional<ArgumentCommand> opCommand = commandContext.getCompleteCommand();
-        if(!opCommand.isPresent()){
-            if(source instanceof CommandViewer){
-                CommandViewer viewer = (CommandViewer)source;
+        if (!opCommand.isPresent()) {
+            if (source instanceof CommandViewer) {
+                CommandViewer viewer = (CommandViewer) source;
                 Set<ErrorContext> errors = commandContext.getErrors();
-                if(!errors.isEmpty()){
+                if (!errors.isEmpty()) {
                     ErrorContext error = errors.iterator().next();
                     viewer.sendMessage(CorePlugin.buildText(TextColours.RED + error.getError()));
-                    errors.parallelStream().map(e -> e.getArgument().getUsage()).collect(Collectors.toSet()).forEach(e -> {
-                        viewer.sendMessage(CorePlugin.buildText(e));
-                    });
-                }else{
+                    errors
+                            .parallelStream()
+                            .map(e -> e.getArgument().getUsage())
+                            .collect(Collectors.toSet())
+                            .forEach(e -> viewer.sendMessage(CorePlugin.buildText(e)));
+                } else {
                     viewer.sendMessage(CorePlugin.buildText(TextColours.RED + "Unknown error"));
                 }
 
@@ -43,9 +48,9 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
             }
             return false;
         }
-        if (!opCommand.get().hasPermission(source)){
-            if(source instanceof CommandViewer){
-                ((CommandViewer)source).sendMessage(CorePlugin.buildText(TextColours.RED + " You do not have permission for that command. You require " + opCommand.get().getPermissionNode()));
+        if (!opCommand.get().hasPermission(source)) {
+            if (source instanceof CommandViewer) {
+                ((CommandViewer) source).sendMessage(CorePlugin.buildText(TextColours.RED + " You do not have permission for that command. You require " + opCommand.get().getPermissionNode()));
                 return true;
             }
             return false;
@@ -59,7 +64,7 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
         Set<ArgumentCommand> commands = commandContext.getPotentialCommands();
         List<String> tab = new ArrayList<>();
         commands.forEach(c -> {
-            if(!c.hasPermission(source)){
+            if (!c.hasPermission(source)) {
                 return;
             }
             tab.addAll(commandContext.getSuggestions(c));

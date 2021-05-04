@@ -13,18 +13,18 @@ public abstract class DispenserInventorySnapshot extends DispenserBasedInventory
     @Override
     public void apply() {
         Optional<LiveTileEntity> opTile = this.position.getTileEntity();
-        if(!opTile.isPresent()){
+        if (!opTile.isPresent()) {
             return;
         }
-        if (!(opTile.get() instanceof LiveDispenserTileEntity)){
+        if (!(opTile.get() instanceof LiveDispenserTileEntity)) {
             return;
         }
-        LiveDispenserTileEntity ldte = (LiveDispenserTileEntity)opTile.get();
+        LiveDispenserTileEntity ldte = (LiveDispenserTileEntity) opTile.get();
         apply(ldte.getInventory());
     }
 
     @Override
     public BlockType[] getAllowedBlockType() {
-        return new BlockType[]{BlockTypes.DISPENSER.get()};
+        return new BlockType[]{BlockTypes.DISPENSER};
     }
 }

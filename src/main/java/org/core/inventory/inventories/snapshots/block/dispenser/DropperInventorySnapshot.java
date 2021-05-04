@@ -13,18 +13,18 @@ public abstract class DropperInventorySnapshot extends DispenserBasedInventorySn
     @Override
     public void apply() {
         Optional<LiveTileEntity> opTile = this.position.getTileEntity();
-        if(!opTile.isPresent()){
+        if (!opTile.isPresent()) {
             return;
         }
-        if (!(opTile.get() instanceof LiveDropperTileEntity)){
+        if (!(opTile.get() instanceof LiveDropperTileEntity)) {
             return;
         }
-        LiveDropperTileEntity ldte = (LiveDropperTileEntity)opTile.get();
+        LiveDropperTileEntity ldte = (LiveDropperTileEntity) opTile.get();
         apply(ldte.getInventory());
     }
 
     @Override
     public BlockType[] getAllowedBlockType() {
-        return new BlockType[]{BlockTypes.DROPPER.get()};
+        return new BlockType[]{BlockTypes.DROPPER};
     }
 }
