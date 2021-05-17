@@ -3,12 +3,12 @@ package org.core.command.argument.arguments.id;
 import org.core.command.argument.arguments.CommandArgument;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
-import org.core.utils.Identifable;
+import org.core.utils.Identifiable;
 
 import java.io.IOException;
 import java.util.*;
 
-public abstract class IdentifiableArgument<I extends Identifable> implements CommandArgument<I> {
+public abstract class IdentifiableArgument<I extends Identifiable> implements CommandArgument<I> {
 
     private final String id;
 

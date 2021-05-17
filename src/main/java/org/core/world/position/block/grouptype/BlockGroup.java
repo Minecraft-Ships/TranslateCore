@@ -1,9 +1,9 @@
 package org.core.world.position.block.grouptype;
 
-import org.core.utils.Identifable;
+import org.core.utils.Identifiable;
 import org.core.world.position.block.BlockType;
 
-public class BlockGroup implements Identifable {
+public class BlockGroup implements Identifiable {
 
     private String id;
     private String name;

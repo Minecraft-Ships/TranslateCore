@@ -1,6 +1,6 @@
 package org.core.entity.living.animal.parrot;
 
-import org.core.utils.Identifable;
+import org.core.utils.Identifiable;
 
-public interface ParrotType extends Identifable {
+public interface ParrotType extends Identifiable {
 }

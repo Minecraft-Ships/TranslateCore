@@ -1,5 +1,6 @@
 package org.core.entity;
 
+import org.core.adventureText.AText;
 import org.core.text.Text;
 import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
@@ -11,6 +12,7 @@ import org.core.world.position.block.BlockTypes;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
 import org.core.world.position.impl.sync.SyncPosition;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -112,12 +114,20 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
     Entity<T> setCustomName(Text text);
 
     /**
+     * Sets the custom name of the entity.
+     * For players this is the display name.
+     *
+     * @param text the name to be
+     * @return itself for chaining
+     */
+    Entity<T> setCustomName(@Nullable AText text);
+
+    /**
      * Sets if the custom name should be visible
      *
      * @param visible if the name should be visible
      * @return itself for chaining
      */
-    @Deprecated
     Entity<T> setCustomNameVisible(boolean visible);
 
     /**
@@ -163,8 +173,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      *
      * @return Optional of the custom name, if the custom name has not been set it will return a Optional.empty
      */
-    @Deprecated
-    Optional<Text> getCustomName();
+    Optional<AText> getCustomName();
 
     /**
      * Checks if the custom name should be visible

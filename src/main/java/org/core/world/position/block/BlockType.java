@@ -1,7 +1,7 @@
 package org.core.world.position.block;
 
 import org.core.inventory.item.ItemType;
-import org.core.utils.Identifable;
+import org.core.utils.Identifiable;
 import org.core.world.position.block.details.BlockDetails;
 import org.core.world.position.block.grouptype.BlockGroup;
 
@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * <p>Very basic info of a block</p>
  */
-public interface BlockType extends Identifable {
+public interface BlockType extends Identifiable {
 
     /**
      * <p>Gets the default BlockDetails from the BlockType</p>

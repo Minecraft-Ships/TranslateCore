@@ -1,13 +1,13 @@
 package org.core.entity;
 
-import org.core.utils.Identifable;
+import org.core.utils.Identifiable;
 
 /**
  * The base type of the Entity
  * @param <T> The LiveEntity class type
  * @param <S> The EntitySnapshot class type
  */
-public interface EntityType <T extends LiveEntity, S extends EntitySnapshot<T>> extends Identifable {
+public interface EntityType <T extends LiveEntity, S extends EntitySnapshot<T>> extends Identifiable {
 
     /**
      * Gets the LiveEntity class from the translation layer

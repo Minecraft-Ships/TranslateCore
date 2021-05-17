@@ -1,9 +1,9 @@
 package org.core.text;
 
-import org.core.utils.Identifable;
+import org.core.utils.Identifiable;
 
 @Deprecated
-public interface TextColour extends Identifable {
+public interface TextColour extends Identifiable {
 
-    public String formatChar();
+    String formatChar();
 }

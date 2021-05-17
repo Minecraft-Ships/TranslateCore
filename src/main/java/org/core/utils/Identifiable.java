@@ -1,6 +1,6 @@
 package org.core.utils;
 
-public interface Identifable {
+public interface Identifiable {
 
     String getId();
 

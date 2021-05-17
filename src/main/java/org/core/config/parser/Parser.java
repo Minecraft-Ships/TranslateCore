@@ -21,6 +21,7 @@ public interface Parser <O, T> {
     StringToMinecraftTimeUnitParser STRING_TO_MINECRAFT_TIME_UNIT = new StringToMinecraftTimeUnitParser();
     StringToBlockPosition STRING_TO_BLOCK_POSITION = new StringToBlockPosition();
     StringToExactPosition STRING_TO_EXACT_POSITION = new StringToExactPosition();
+    StringToATextLegacyParser STRING_TO_TEXT = new StringToATextLegacyParser();
 
     Optional<T> parse(O original);
     O unparse(T value);

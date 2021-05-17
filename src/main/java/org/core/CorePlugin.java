@@ -8,11 +8,6 @@ import org.core.platform.PlatformServer;
 import org.core.schedule.SchedulerBuilder;
 import org.core.source.command.ConsoleSource;
 import org.core.text.Text;
-import org.core.text.colour.TextColour;
-import org.core.text.style.TextStyle;
-import org.core.text.type.ColouredText;
-import org.core.text.type.JoinedText;
-import org.core.text.type.StyledText;
 import org.core.world.boss.ServerBossBar;
 
 import java.io.File;
@@ -34,54 +29,38 @@ public interface CorePlugin {
     @Deprecated
     Text textBuilder(String chars);
 
-    ColouredText colouredTextBuilder(TextColour colour, String text, TextStyle... styles);
-    StyledText styleTextBuilder(String text, TextStyle... styles);
-    JoinedText joinTextBuilder(org.core.text.type.Text... texts);
-
     ServerBossBar bossBuilder();
 
-    static Platform getPlatform(){
+    static Platform getPlatform() {
         return CorePlugin.CoreImplementation.getImplementation().getRawPlatform();
     }
 
-    static ConsoleSource getConsole(){
+    static ConsoleSource getConsole() {
         return CorePlugin.CoreImplementation.getImplementation().getRawConsole();
     }
 
     @Deprecated
-    static Text buildText(String text){
+    static Text buildText(String text) {
         return CorePlugin.CoreImplementation.getImplementation().textBuilder(text);
     }
 
-    static StyledText buildStyledText(String text, TextStyle... style){
-        return CorePlugin.CoreImplementation.getImplementation().styleTextBuilder(text, style);
-    }
-
-    static ColouredText buildColouredText(TextColour colour, String text, TextStyle... style){
-        return CorePlugin.CoreImplementation.getImplementation().colouredTextBuilder(colour, text, style);
-    }
-
-    static JoinedText buildJoinedText(org.core.text.type.Text... texts){
-        return CorePlugin.CoreImplementation.getImplementation().joinTextBuilder(texts);
-    }
-
-    static SchedulerBuilder createSchedulerBuilder(){
+    static SchedulerBuilder createSchedulerBuilder() {
         return CorePlugin.CoreImplementation.getImplementation().createRawSchedulerBuilder();
     }
 
-    static PlatformServer getServer(){
+    static PlatformServer getServer() {
         return CorePlugin.CoreImplementation.getImplementation().getRawServer();
     }
 
-    static EventManager getEventManager(){
+    static EventManager getEventManager() {
         return CorePlugin.CoreImplementation.getImplementation().getRawEventManager();
     }
 
-    static ConfigurationStream.ConfigurationFile createConfigurationFile(File file, ConfigurationFormat type){
+    static ConfigurationStream.ConfigurationFile createConfigurationFile(File file, ConfigurationFormat type) {
         return CorePlugin.CoreImplementation.getImplementation().createRawConfigurationFile(file, type);
     }
 
-    static ServerBossBar createBossBar(){
+    static ServerBossBar createBossBar() {
         return CorePlugin.CoreImplementation.getImplementation().bossBuilder();
     }
 
@@ -89,7 +68,7 @@ public interface CorePlugin {
 
         protected static CoreImplementation IMPLEMENTATION;
 
-        public static CoreImplementation getImplementation(){
+        public static CoreImplementation getImplementation() {
             return IMPLEMENTATION;
         }
 

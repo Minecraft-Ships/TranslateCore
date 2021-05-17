@@ -1,5 +1,6 @@
 package org.core.source.viewer;
 
+import org.core.adventureText.AText;
 import org.core.source.command.CommandSource;
 import org.core.text.Text;
 
@@ -15,5 +16,9 @@ public interface CommandViewer extends CommandSource {
 
     @Deprecated
     CommandViewer sendMessagePlain(String message);
+
+    CommandViewer sendMessage(AText message, UUID uuid);
+
+    CommandViewer sendMessage(AText message);
 
 }

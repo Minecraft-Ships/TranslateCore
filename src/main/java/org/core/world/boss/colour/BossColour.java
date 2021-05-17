@@ -1,6 +1,6 @@
 package org.core.world.boss.colour;
 
-import org.core.utils.Identifable;
+import org.core.utils.Identifiable;
 
-public interface BossColour extends Identifable {
+public interface BossColour extends Identifiable {
 }
