@@ -35,17 +35,17 @@ public class AdventureText implements AText {
     }
 
     @Override
-    public AText append(AText aText) {
+    public @NotNull AText append(@NotNull AText aText) {
         return new AdventureText(this.component.append(toAdventure(aText).component));
     }
 
     @Override
-    public boolean contains(AText aText) {
+    public boolean contains(@NotNull AText aText) {
         return this.component.contains(toAdventure(aText).component);
     }
 
     @Override
-    public AText withAllAs(String containing, AText aText) {
+    public @NotNull AText withAllAs(@NotNull String containing, AText aText) {
         return new AdventureText(this.component.replaceText(
                 TextReplacementConfig
                         .builder()
@@ -78,17 +78,17 @@ public class AdventureText implements AText {
     }
 
     @Override
-    public AText withColour(TextColour colour) {
+    public @NotNull AText withColour(TextColour colour) {
         return new AdventureText(this.component.color(TextColor.color(colour.getRed(), colour.getGreen(), colour.getBlue())));
     }
 
     @Override
-    public List<AText> getChildren() {
+    public @NotNull List<AText> getChildren() {
         return this.component.children().stream().map(AdventureText::new).collect(Collectors.toList());
     }
 
     @Override
-    public String toPlain() {
+    public @NotNull String toPlain() {
         return PlainComponentSerializer.plain().serialize(this.component);
     }
 
