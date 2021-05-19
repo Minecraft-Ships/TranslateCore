@@ -8,6 +8,22 @@ import java.util.stream.Collectors;
 
 public interface ArrayUtils {
 
+    static <T, F> T collect(Function<F, T> function, BiFunction<T, F, T> biFunction, Iterable<F> iterable){
+        T result = null;
+        for(F obj : iterable){
+            if(result == null){
+                result = function.apply(obj);
+                continue;
+            }
+            result = biFunction.apply(result, obj);
+        }
+        return result;
+    }
+
+    static String collect(String split, Iterable<String> iterable){
+        return collect(t -> t, (old, t) -> old + split + t, iterable);
+    }
+
     @SafeVarargs
     static <T> Set<T> ofSet(T... values) {
         return new HashSet<>(Arrays.asList(values));
@@ -196,18 +212,11 @@ public interface ArrayUtils {
      * @return A string output
      */
     static <T> String toString(String split, Function<T, String> toString, Iterable<T> array) {
-        StringBuilder ret = null;
-        for (T value : array) {
-            if (ret == null) {
-                ret = new StringBuilder(toString.apply(value));
-            } else {
-                ret.append(split).append(toString.apply(value));
-            }
-        }
-        if (ret == null) {
-            return null;
-        }
-        return ret.toString();
+        return collect(toString, (old, obj) -> old + split + toString.apply(obj), array);
+    }
+
+    static <T> String toString(String split, Function<T, String> toString, Collection<T> collection){
+        return collection.stream().map(toString).collect(Collectors.joining(split));
     }
 
     /**
