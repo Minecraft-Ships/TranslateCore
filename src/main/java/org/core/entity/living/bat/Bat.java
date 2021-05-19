@@ -11,6 +11,6 @@ public interface Bat<E extends Entity<?>> extends Entity<E> {
 
     @Override
     default EntityType<LiveBat, BatSnapshot> getType(){
-        return EntityTypes.BAT;
+        return EntityTypes.BAT.get();
     }
 }

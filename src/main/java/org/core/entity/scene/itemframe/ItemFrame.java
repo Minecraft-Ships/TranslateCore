@@ -18,7 +18,7 @@ public interface ItemFrame<E extends Entity<?>> extends AttachableEntity<E>, Ite
 
     @Override
     default EntityType<LiveItemFrame, ItemFrameSnapshot> getType() {
-        return EntityTypes.ITEM_FRAME;
+        return EntityTypes.ITEM_FRAME.get();
     }
 
 

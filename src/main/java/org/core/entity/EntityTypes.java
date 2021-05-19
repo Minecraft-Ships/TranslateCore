@@ -26,30 +26,32 @@ import org.core.entity.scene.droppeditem.LiveDroppedItem;
 import org.core.entity.scene.itemframe.ItemFrameSnapshot;
 import org.core.entity.scene.itemframe.LiveItemFrame;
 import org.core.utils.Guaranteed;
+import org.core.utils.Singleton;
 
 /**
  * All default Entity types found within Minecraft (The lowest version of minecraft Core supports)
+ *
  * @param <T> The LiveEntity of the EntityType
  * @param <S> The EntitySnapshot of the EntityType
  */
-public class EntityTypes <T extends LiveEntity, S extends EntitySnapshot<T>> implements Guaranteed<EntityType<T, S>> {
+public class EntityTypes<T extends LiveEntity, S extends EntitySnapshot<T>> implements Guaranteed<EntityType<T, S>> {
 
-    public static final EntityType<LiveClassicZombie, ClassicZombieSnapshot> ZOMBIE = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:zombie"));
-    public static final EntityType<LiveHuman, HumanSnapshot> HUMAN = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:human"));
-    public static final EntityType<LivePlayer, PlayerSnapshot> PLAYER = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:player"));
-    public static final EntityType<LiveChicken, ChickenSnapshot> CHICKEN = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:chicken"));
-    public static final EntityType<LiveCow, CowSnapshot> COW = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:cow"));
-    public static final EntityType<LiveItemFrame, ItemFrameSnapshot> ITEM_FRAME = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:itemframe"));
-    public static final EntityType<LiveDroppedItem, DroppedItemSnapshot> DROPPED_ITEM = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:droppeditem"));
-    public static final EntityType<LiveCod, CodSnapshot> COD = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:cod"));
-    public static final EntityType<LiveBat, BatSnapshot> BAT = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:bat"));
-    public static final EntityType<LiveSnowballEntity, SnowballEntitySnapshot> SNOWBALL = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:snowball"));
-    public static final EntityType<LiveParrot, ParrotSnapshot> PARROT = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:parrot"));
-    public static final EntityType<LiveCreeperEntity, CreeperEntitySnapshot> CREEPER = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:creeper"));
+    public static final Singleton<EntityType<LiveClassicZombie, ClassicZombieSnapshot>> ZOMBIE = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:zombie"));
+    public static final Singleton<EntityType<LiveHuman, HumanSnapshot>> HUMAN = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:human"));
+    public static final Singleton<EntityType<LivePlayer, PlayerSnapshot>> PLAYER = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:player"));
+    public static final Singleton<EntityType<LiveChicken, ChickenSnapshot>> CHICKEN = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:chicken"));
+    public static final Singleton<EntityType<LiveCow, CowSnapshot>> COW = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:cow"));
+    public static final Singleton<EntityType<LiveItemFrame, ItemFrameSnapshot>> ITEM_FRAME = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:itemframe"));
+    public static final Singleton<EntityType<LiveDroppedItem, DroppedItemSnapshot>> DROPPED_ITEM = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:droppeditem"));
+    public static final Singleton<EntityType<LiveCod, CodSnapshot>> COD = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:cod"));
+    public static final Singleton<EntityType<LiveBat, BatSnapshot>> BAT = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:bat"));
+    public static final Singleton<EntityType<LiveSnowballEntity, SnowballEntitySnapshot>> SNOWBALL = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:snowball"));
+    public static final Singleton<EntityType<LiveParrot, ParrotSnapshot>> PARROT = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:parrot"));
+    public static final Singleton<EntityType<LiveCreeperEntity, CreeperEntitySnapshot>> CREEPER = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:creeper"));
 
-    private String id;
+    private final String id;
 
-    private EntityTypes(String id){
+    private EntityTypes(String id) {
         this.id = id;
     }
 

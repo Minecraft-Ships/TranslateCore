@@ -10,7 +10,7 @@ public interface Cod<E extends Entity<?>> extends FishEntity<E> {
     @Override
     @SuppressWarnings("unchecked")
     default EntityType<LiveCod, CodSnapshot> getType(){
-        return EntityTypes.COD;
+        return EntityTypes.COD.get();
     }
 
 }

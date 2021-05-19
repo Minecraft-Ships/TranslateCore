@@ -13,6 +13,6 @@ public interface ClassicZombie<E extends Entity<?>> extends Zombie<E> {
 
     @Override
     default EntityType<LiveClassicZombie, ClassicZombieSnapshot> getType(){
-        return EntityTypes.ZOMBIE;
+        return EntityTypes.ZOMBIE.get();
     }
 }

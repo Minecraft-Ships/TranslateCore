@@ -11,8 +11,8 @@ public class UnspecificParsers<T> implements Guaranteed<UnspecificParser<T>> {
     public static final UnspecificParser<ItemStack> ITEM_STACK = CorePlugin.getPlatform().get(new UnspecificParsers<>("coreto" + CorePlugin.getPlatform().getDetails().getIdName() + ":itemstack", "ItemStack"));
     public static final UnspecificParser<Inventory> INVENTORY = CorePlugin.getPlatform().get(new UnspecificParsers<>("coreto" + CorePlugin.getPlatform().getDetails().getIdName() + ":inventory", "Inventory"));
 
-    private String name;
-    private String idName;
+    private final String name;
+    private final String idName;
 
     private UnspecificParsers(String idName, String name){
         this.name = name;

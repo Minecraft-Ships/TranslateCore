@@ -13,6 +13,8 @@ public interface Plugin {
     String getPluginId();
     String getPluginVersion();
     void registerCommands(CommandRegister register);
+    void registerPlugin();
+    void registerReady();
     Object getLauncher();
     Optional<ConfigurationStream.ConfigurationFile> createConfig(String configName, File file);
 

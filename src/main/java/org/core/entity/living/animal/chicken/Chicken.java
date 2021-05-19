@@ -10,7 +10,7 @@ public interface Chicken<E extends Entity<?>> extends AnimalEntity<E> {
     @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveChicken, ChickenSnapshot> getType() {
-        return EntityTypes.CHICKEN;
+        return EntityTypes.CHICKEN.get();
     }
 
 }

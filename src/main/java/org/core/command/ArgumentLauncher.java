@@ -1,6 +1,8 @@
 package org.core.command;
 
 import org.core.CorePlugin;
+import org.core.adventureText.AText;
+import org.core.adventureText.format.NamedTextColours;
 import org.core.command.argument.ArgumentCommand;
 import org.core.command.argument.context.CommandContext;
 import org.core.command.argument.context.ErrorContext;
@@ -29,21 +31,15 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
                 Set<ErrorContext> errors = commandContext.getErrors();
                 if (!errors.isEmpty()) {
                     ErrorContext error = errors.iterator().next();
-                    viewer.sendMessage(CorePlugin.buildText(TextColours.RED + error.getError()));
+                    viewer.sendMessage(AText.ofPlain(error.getError()).withColour(NamedTextColours.RED));
                     errors
                             .parallelStream()
                             .map(e -> e.getArgument().getUsage())
                             .collect(Collectors.toSet())
-                            .forEach(e -> viewer.sendMessage(CorePlugin.buildText(e)));
+                            .forEach(e -> viewer.sendMessage(AText.ofPlain(e).withColour(NamedTextColours.RED)));
                 } else {
-                    viewer.sendMessage(CorePlugin.buildText(TextColours.RED + "Unknown error"));
+                    viewer.sendMessage(AText.ofPlain("Unknown error").withColour(NamedTextColours.RED));
                 }
-
-                /*viewer.sendMessage(CorePlugin.buildText(TextColours.RED + commandContext.getCompleteError().orElse("Unknown Error")));
-                Set<ArgumentCommand> potentialCommands = commandContext.getPotentialCommands();
-                potentialCommands.stream().forEach(c -> {
-                    viewer.sendMessage(CorePlugin.buildText(TextColours.RED + "/Ships " + ArrayUtils.toString(" ", CommandArgument::getUsage, c.getArguments())));
-                });*/
                 return true;
             }
             return false;

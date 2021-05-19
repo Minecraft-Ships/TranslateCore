@@ -10,12 +10,12 @@ import org.core.inventory.item.stack.ItemStack;
 public interface SnowballEntity<E extends Entity<?>> extends ItemProjectileEntity<E> {
 
     default ItemStack getItem(){
-        return ItemTypes.SNOWBALL.getDefaultItemStack().copyWithQuantity(1);
+        return ItemTypes.SNOWBALL.get().getDefaultItemStack().copyWithQuantity(1);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveSnowballEntity, SnowballEntitySnapshot> getType(){
-        return EntityTypes.SNOWBALL;
+        return EntityTypes.SNOWBALL.get();
     }
 }

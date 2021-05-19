@@ -10,7 +10,7 @@ public interface Cow<E extends Entity<?>> extends AnimalEntity<E> {
 
     @Override
     default EntityType<LiveCow, CowSnapshot> getType(){
-        return EntityTypes.COW;
+        return EntityTypes.COW.get();
     }
 
 }

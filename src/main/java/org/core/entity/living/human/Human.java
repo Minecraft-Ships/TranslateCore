@@ -9,6 +9,6 @@ public interface Human<E extends Entity<?>> extends AbstractHuman<E>, Creature<E
 
     @Override
     default EntityType<LiveHuman, HumanSnapshot> getType(){
-        return EntityTypes.HUMAN;
+        return EntityTypes.HUMAN.get();
     }
 }
