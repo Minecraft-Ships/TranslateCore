@@ -141,4 +141,17 @@ public class LegacyText implements AText {
 
         return new LegacyText(null, null, collection);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof AText)) {
+            return false;
+        }
+        String plain = ((AText) obj).toPlain();
+        String thisPlain = this.toPlain();
+        System.out.println("Original: " + thisPlain);
+        System.out.println("Compare: " + plain);
+
+        return thisPlain.equals(plain);
+    }
 }

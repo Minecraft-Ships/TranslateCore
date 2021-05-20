@@ -38,6 +38,14 @@ public interface AText {
         return withColour(null);
     }
 
+    default boolean equalsLegacy(AText text) {
+        return this.toLegacy().equals(text.toLegacy());
+    }
+
+    default boolean equalsIgnoreCase(AText text) {
+        return this.toPlain().equalsIgnoreCase(text.toPlain());
+    }
+
     static AText ofPlain(String text) {
         try {
             Class.forName("net.kyori.adventure.text.Component");

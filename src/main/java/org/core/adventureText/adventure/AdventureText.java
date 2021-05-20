@@ -97,6 +97,14 @@ public class AdventureText implements AText {
         return LegacyComponentSerializer.legacySection().serialize(this.component);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof AText)) {
+            return false;
+        }
+        return this.toPlain().equals(((AText) obj).toPlain());
+    }
+
     public static AdventureText plain(String text) {
         return new AdventureText(PlainComponentSerializer.plain().deserialize(text));
     }
