@@ -9,6 +9,7 @@ import org.core.world.direction.FourFacingDirection;
 import org.core.world.direction.SixteenFacingDirection;
 import org.core.world.position.Positionable;
 import org.core.world.position.block.BlockTypes;
+import org.core.world.position.impl.Position;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
 import org.core.world.position.impl.sync.SyncPosition;
@@ -85,7 +86,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      * @param position The position for the entity to be in
      * @return itself for chaining
      */
-    Entity<T> setPosition(SyncPosition<? extends Number> position);
+    Entity<T> setPosition(Position<? extends Number> position);
 
     /**
      * Sets if the entity has gravity or not

@@ -9,15 +9,15 @@ import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 
-public class OptionalArgument <T> implements CommandArgument<T> {
+public class OptionalArgument<T> implements CommandArgument<T> {
 
-    public interface Parser<T>{
+    public interface Parser<T> {
 
         class WrappedParser<T> implements Parser<T> {
 
             private final T value;
 
-            public WrappedParser(T value){
+            public WrappedParser(T value) {
                 this.value = value;
             }
 
@@ -33,16 +33,16 @@ public class OptionalArgument <T> implements CommandArgument<T> {
     private final CommandArgument<T> arg;
     private final Parser<T> value;
 
-    public OptionalArgument(CommandArgument<T> arg, T value){
+    public OptionalArgument(CommandArgument<T> arg, T value) {
         this(arg, new Parser.WrappedParser<>(value));
     }
 
-    public OptionalArgument(CommandArgument<T> arg, Parser<T> value){
+    public OptionalArgument(CommandArgument<T> arg, Parser<T> value) {
         this.arg = arg;
         this.value = value;
     }
 
-    public CommandArgument<T> getOriginalArgument(){
+    public CommandArgument<T> getOriginalArgument() {
         return this.arg;
     }
 
@@ -52,11 +52,11 @@ public class OptionalArgument <T> implements CommandArgument<T> {
     }
 
     @Override
-    public Map.Entry<T, Integer> parse(CommandContext context, CommandArgumentContext<T> argument){
-        if(context.getCommand().length == argument.getFirstArgument()){
+    public Map.Entry<T, Integer> parse(CommandContext context, CommandArgumentContext<T> argument) {
+        if (context.getCommand().length == argument.getFirstArgument()) {
             return new AbstractMap.SimpleImmutableEntry<>(this.value.parse(context, argument), argument.getFirstArgument());
         }
-        try{
+        try {
             return this.arg.parse(context, argument);
         } catch (IOException e) {
             return new AbstractMap.SimpleImmutableEntry<>(this.value.parse(context, argument), argument.getFirstArgument());

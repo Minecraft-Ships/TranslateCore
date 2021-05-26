@@ -23,8 +23,21 @@ public interface BlockPosition extends Position<Integer> {
     BlockPosition getRelative(Vector3<?> vector);
 
     @Override
+    default Position<Integer> getRelative(int x, int y, int z) {
+        Vector3<Integer> vector = this.getPosition().plus(x, y, z);
+        return this.getWorld().getPosition(vector);
+    }
+
+    @Override
+    default ExactPosition getRelative(double x, double y, double z) {
+        Vector3<Double> vector = this.getPosition().toVector(Vector3.DOUBLE_CONVERTER).plus(x, y, z);
+        return this.getWorld().getPosition(vector.getX(), vector.getY(), vector.getZ());
+    }
+
+    @Override
     default BlockPosition getRelative(Direction direction) {
-        return this.getRelative(direction.getAsVector());
+        Vector3<Integer> vector = direction.getAsVector();
+        return (BlockPosition) this.getRelative(vector.getX(), vector.getY(), vector.getZ());
     }
 
     default Set<LiveEntity> getAttachedEntities() {

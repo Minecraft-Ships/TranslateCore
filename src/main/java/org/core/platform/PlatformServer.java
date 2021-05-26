@@ -13,27 +13,35 @@ import java.util.UUID;
 public interface PlatformServer {
 
     Set<WorldExtent> getWorlds();
+
     Optional<WorldExtent> getWorldByPlatformSpecific(String name);
+
     Collection<LivePlayer> getOnlinePlayers();
+
     Optional<User> getOfflineUser(UUID uuid);
+
+    Optional<User> getOfflineUser(String lastName);
+
+    Collection<User> getOfflineUsers();
+
     TPSExecutor getTPSExecutor();
 
-    default Optional<WorldExtent> getWorld(String name, boolean justName){
-        if(justName){
+    default Optional<WorldExtent> getWorld(String name, boolean justName) {
+        if (justName) {
             return getWorlds().stream().filter(w -> w.getName().equals(name)).findAny();
         }
         return getWorldByPlatformSpecific(name);
     }
 
-    default Optional<WorldExtent> getWorld(UUID uuid){
+    default Optional<WorldExtent> getWorld(UUID uuid) {
         return getWorlds().stream().filter(w -> w.getUniqueId().equals(uuid)).findAny();
     }
 
-    default double getTPS(){
+    default double getTPS() {
         return getTPSExecutor().getTPS();
     }
 
-    default double getTPS(int ticks){
+    default double getTPS(int ticks) {
         return getTPSExecutor().getTPS(ticks);
     }
 }

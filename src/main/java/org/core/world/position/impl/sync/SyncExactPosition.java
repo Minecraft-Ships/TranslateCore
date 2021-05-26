@@ -3,6 +3,7 @@ package org.core.world.position.impl.sync;
 import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
 import org.core.world.position.impl.ExactPosition;
+import org.core.world.position.impl.Position;
 
 import java.math.BigDecimal;
 
