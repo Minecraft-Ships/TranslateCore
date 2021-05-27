@@ -1,6 +1,7 @@
 package org.core.command.argument.arguments.operation;
 
 import org.core.command.argument.arguments.CommandArgument;
+import org.core.command.argument.arguments.ParseCommandArgument;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 
@@ -11,33 +12,28 @@ import java.util.Map;
 
 public class OptionalArgument<T> implements CommandArgument<T> {
 
-    public interface Parser<T> {
+    public static class WrappedParser<T> implements ParseCommandArgument<T> {
 
-        class WrappedParser<T> implements Parser<T> {
+        private final T value;
 
-            private final T value;
-
-            public WrappedParser(T value) {
-                this.value = value;
-            }
-
-            @Override
-            public T parse(CommandContext context, CommandArgumentContext<T> argument) {
-                return this.value;
-            }
+        public WrappedParser(T value) {
+            this.value = value;
         }
 
-        T parse(CommandContext context, CommandArgumentContext<T> argument);
+        @Override
+        public Map.Entry<T, Integer> parse(CommandContext context, CommandArgumentContext<T> argument) {
+            return new AbstractMap.SimpleImmutableEntry<>(this.value, 0);
+        }
     }
 
     private final CommandArgument<T> arg;
-    private final Parser<T> value;
+    private final ParseCommandArgument<T> value;
 
     public OptionalArgument(CommandArgument<T> arg, T value) {
-        this(arg, new Parser.WrappedParser<>(value));
+        this(arg, new WrappedParser<>(value));
     }
 
-    public OptionalArgument(CommandArgument<T> arg, Parser<T> value) {
+    public OptionalArgument(CommandArgument<T> arg, ParseCommandArgument<T> value) {
         this.arg = arg;
         this.value = value;
     }
@@ -52,14 +48,14 @@ public class OptionalArgument<T> implements CommandArgument<T> {
     }
 
     @Override
-    public Map.Entry<T, Integer> parse(CommandContext context, CommandArgumentContext<T> argument) {
+    public Map.Entry<T, Integer> parse(CommandContext context, CommandArgumentContext<T> argument) throws IOException {
         if (context.getCommand().length == argument.getFirstArgument()) {
-            return new AbstractMap.SimpleImmutableEntry<>(this.value.parse(context, argument), argument.getFirstArgument());
+            return new AbstractMap.SimpleImmutableEntry<>(this.value.parse(context, argument).getKey(), argument.getFirstArgument());
         }
         try {
             return this.arg.parse(context, argument);
         } catch (IOException e) {
-            return new AbstractMap.SimpleImmutableEntry<>(this.value.parse(context, argument), argument.getFirstArgument());
+            return new AbstractMap.SimpleImmutableEntry<>(this.value.parse(context, argument).getKey(), argument.getFirstArgument());
         }
     }
 

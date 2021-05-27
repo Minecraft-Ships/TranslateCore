@@ -29,11 +29,15 @@ public class UserArgument implements CommandArgument<User> {
     @Override
     public Map.Entry<User, Integer> parse(CommandContext context, CommandArgumentContext<User> argument) throws IOException {
         String command = context.getCommand()[argument.getFirstArgument()];
-        return CorePlugin
-                .getServer()
-                .getOfflineUser(command)
-                .map(user -> new AbstractMap.SimpleEntry<>(user, argument.getFirstArgument() + 1))
-                .orElseThrow(() -> new IOException("No user by that name"));
+        try {
+            return CorePlugin
+                    .getServer()
+                    .getOfflineUser(command)
+                    .map(user -> new AbstractMap.SimpleEntry<>(user, argument.getFirstArgument() + 1))
+                    .orElseThrow(() -> new IOException("No user by that name"));
+        } catch (Throwable e) {
+            throw new IOException(e);
+        }
     }
 
     @Override
