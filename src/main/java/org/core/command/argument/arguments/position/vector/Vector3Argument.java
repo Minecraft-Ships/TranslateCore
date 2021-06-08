@@ -1,16 +1,15 @@
 package org.core.command.argument.arguments.position.vector;
 
-import org.core.command.argument.arguments.CommandArgument;
+import org.core.command.argument.CommandArgument;
+import org.core.command.argument.CommandArgumentResult;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 import org.core.vector.type.Vector3;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 
 public class Vector3Argument<N extends Number> implements CommandArgument<Vector3<N>> {
@@ -31,7 +30,7 @@ public class Vector3Argument<N extends Number> implements CommandArgument<Vector
     }
 
     @Override
-    public Map.Entry<Vector3<N>, Integer> parse(CommandContext context, CommandArgumentContext<Vector3<N>> argument) throws IOException {
+    public CommandArgumentResult<Vector3<N>> parse(CommandContext context, CommandArgumentContext<Vector3<N>> argument) throws IOException {
         String[] cmd = context.getCommand();
         if (cmd.length < (argument.getFirstArgument() + 3)) {
             throw new IOException("X Y and Z are required");
@@ -39,10 +38,11 @@ public class Vector3Argument<N extends Number> implements CommandArgument<Vector
         BigDecimal[] numbers = new BigDecimal[3];
         for (int A = 0; A < 3; A++) {
             CommandArgumentContext<N> argContext = new CommandArgumentContext<>(this.numberArgument[A], argument.getFirstArgument() + A, cmd);
-            N number = this.numberArgument[A].parse(context, argContext).getKey();
+            N number = this.numberArgument[A].parse(context, argContext).getValue();
             numbers[A] = BigDecimal.valueOf(number.doubleValue());
         }
-        return new AbstractMap.SimpleImmutableEntry<>(new Vector3<>(this.function, numbers[0], numbers[1], numbers[2]), argument.getFirstArgument() + 3);
+        Vector3<N> vector3 = new Vector3<>(this.function, numbers[0], numbers[1], numbers[2]);
+        return CommandArgumentResult.from(argument, 3, vector3);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class Vector3Argument<N extends Number> implements CommandArgument<Vector
         for (int A = 0; A < min; A++) {
             CommandArgumentContext<N> argContext = new CommandArgumentContext<>(this.numberArgument[A], argument.getFirstArgument() + A, cmd);
             try {
-                N number = this.numberArgument[A].parse(context, argContext).getKey();
+                N number = this.numberArgument[A].parse(context, argContext).getValue();
             } catch (IOException e) {
                 return this.numberArgument[A].suggest(context, argContext);
             }

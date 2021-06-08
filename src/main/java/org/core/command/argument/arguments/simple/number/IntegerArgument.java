@@ -1,6 +1,7 @@
 package org.core.command.argument.arguments.simple.number;
 
-import org.core.command.argument.arguments.CommandArgument;
+import org.core.command.argument.CommandArgument;
+import org.core.command.argument.CommandArgumentResult;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 
@@ -24,9 +25,9 @@ public class IntegerArgument implements CommandArgument<Integer> {
     }
 
     @Override
-    public Map.Entry<Integer, Integer> parse(CommandContext context, CommandArgumentContext<Integer> argument) throws IOException {
+    public CommandArgumentResult<Integer> parse(CommandContext context, CommandArgumentContext<Integer> argument) throws IOException {
         try{
-            return new AbstractMap.SimpleImmutableEntry<>(Integer.parseInt(context.getCommand()[argument.getFirstArgument()]), argument.getFirstArgument() + 1);
+            return CommandArgumentResult.from(argument, Integer.parseInt(context.getCommand()[argument.getFirstArgument()]));
         }catch (NumberFormatException e){
             throw new IOException("'" + context.getCommand()[argument.getFirstArgument()] + "' is not a number");
         }

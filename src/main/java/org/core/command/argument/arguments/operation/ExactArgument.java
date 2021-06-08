@@ -1,7 +1,8 @@
 package org.core.command.argument.arguments.operation;
 
 import org.array.utils.ArrayUtils;
-import org.core.command.argument.arguments.CommandArgument;
+import org.core.command.argument.CommandArgument;
+import org.core.command.argument.CommandArgumentResult;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 
@@ -46,10 +47,10 @@ public class ExactArgument implements CommandArgument<String> {
     }
 
     @Override
-    public Map.Entry<String, Integer> parse(CommandContext context, CommandArgumentContext<String> argument) throws IOException {
+    public CommandArgumentResult<String> parse(CommandContext context, CommandArgumentContext<String> argument) throws IOException {
         String arg = context.getCommand()[argument.getFirstArgument()];
         if(anyMatch(arg)){
-            return new AbstractMap.SimpleImmutableEntry<>(arg, argument.getFirstArgument() + 1);
+            return CommandArgumentResult.from(argument, arg);
         }
         throw new IOException("Unknown argument of '" + arg + "'");
     }

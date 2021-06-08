@@ -1,6 +1,5 @@
 package org.core.command.argument.arguments.position;
 
-import org.core.command.argument.arguments.CommandArgument;
 import org.core.command.argument.arguments.simple.number.DoubleArgument;
 import org.core.world.WorldExtent;
 import org.core.world.position.impl.ExactPosition;

@@ -1,14 +1,13 @@
 package org.core.command.argument.arguments.operation;
 
-import org.core.command.argument.arguments.CommandArgument;
-import org.core.command.argument.arguments.ParseCommandArgument;
+import org.core.command.argument.CommandArgument;
+import org.core.command.argument.CommandArgumentResult;
+import org.core.command.argument.ParseCommandArgument;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
-import java.util.AbstractMap;
 import java.util.List;
-import java.util.Map;
 
 public class OptionalArgument<T> implements CommandArgument<T> {
 
@@ -21,8 +20,8 @@ public class OptionalArgument<T> implements CommandArgument<T> {
         }
 
         @Override
-        public Map.Entry<T, Integer> parse(CommandContext context, CommandArgumentContext<T> argument) {
-            return new AbstractMap.SimpleImmutableEntry<>(this.value, 0);
+        public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) {
+            return CommandArgumentResult.from(argument, 0, this.value);
         }
     }
 
@@ -48,14 +47,14 @@ public class OptionalArgument<T> implements CommandArgument<T> {
     }
 
     @Override
-    public Map.Entry<T, Integer> parse(CommandContext context, CommandArgumentContext<T> argument) throws IOException {
+    public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) throws IOException {
         if (context.getCommand().length == argument.getFirstArgument()) {
-            return new AbstractMap.SimpleImmutableEntry<>(this.value.parse(context, argument).getKey(), argument.getFirstArgument());
+            return CommandArgumentResult.from(argument, 0, this.value.parse(context, argument).getValue());
         }
         try {
             return this.arg.parse(context, argument);
         } catch (IOException e) {
-            return new AbstractMap.SimpleImmutableEntry<>(this.value.parse(context, argument).getKey(), argument.getFirstArgument());
+            return CommandArgumentResult.from(argument, 0, this.value.parse(context, argument).getValue());
         }
     }
 

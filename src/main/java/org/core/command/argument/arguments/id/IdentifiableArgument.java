@@ -1,18 +1,22 @@
 package org.core.command.argument.arguments.id;
 
-import org.core.command.argument.arguments.CommandArgument;
+import org.core.command.argument.CommandArgument;
+import org.core.command.argument.CommandArgumentResult;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 import org.core.utils.Identifiable;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 public abstract class IdentifiableArgument<I extends Identifiable> implements CommandArgument<I> {
 
     private final String id;
 
-    public IdentifiableArgument(String id){
+    public IdentifiableArgument(String id) {
         this.id = id;
     }
 
@@ -24,13 +28,13 @@ public abstract class IdentifiableArgument<I extends Identifiable> implements Co
     }
 
     @Override
-    public Map.Entry<I, Integer> parse(CommandContext context, CommandArgumentContext<I> argument) throws IOException {
+    public CommandArgumentResult<I> parse(CommandContext context, CommandArgumentContext<I> argument) throws IOException {
         String id = context.getCommand()[argument.getFirstArgument()];
         Optional<I> opIdent = this.getAll().stream().filter(a -> a.getId().equalsIgnoreCase(id)).findAny();
-        if(!opIdent.isPresent()){
+        if (!opIdent.isPresent()) {
             throw new IOException("Invalid ID of '" + id + "'");
         }
-        return new AbstractMap.SimpleImmutableEntry<>(opIdent.get(), argument.getFirstArgument() + 1);
+        return CommandArgumentResult.from(argument, opIdent.get());
     }
 
     @Override

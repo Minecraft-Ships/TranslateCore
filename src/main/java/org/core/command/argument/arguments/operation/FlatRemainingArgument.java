@@ -8,17 +8,17 @@ import org.core.command.argument.context.CommandContext;
 import java.io.IOException;
 import java.util.*;
 
-public class RemainingArgument<T> implements CommandArgument<List<T>> {
+public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
 
     private final String id;
-    private final List<CommandArgument<T>> argument;
+    private final List<CommandArgument<? extends Collection<T>>> argument;
 
     @SafeVarargs
-    public RemainingArgument(String id, CommandArgument<T>... argument) {
+    public FlatRemainingArgument(String id, CommandArgument<? extends Collection<T>>... argument) {
         this(id, Arrays.asList(argument));
     }
 
-    public RemainingArgument(String id, Collection<CommandArgument<T>> argument) {
+    public FlatRemainingArgument(String id, Collection<CommandArgument<? extends Collection<T>>> argument) {
         if (argument.isEmpty()) {
             throw new IllegalArgumentException("Remaining Argument cannot have a argument of empty");
         }
@@ -26,12 +26,11 @@ public class RemainingArgument<T> implements CommandArgument<List<T>> {
         this.argument = new ArrayList<>(argument);
     }
 
-    private CommandArgumentResult<T> parseAny(CommandContext context, int B) throws IOException {
+    private CommandArgumentResult<? extends Collection<T>> parseAny(CommandContext context, int B) throws IOException {
         IOException e1 = null;
         for (int A = 0; A < this.argument.size(); A++) {
             try {
-                CommandArgumentContext<T> argumentContext = new CommandArgumentContext<>(this.argument.get(A), B, context.getCommand());
-                return this.argument.get(A).parse(context, argumentContext);
+                return parse(context, B, this.argument.get(A));
             } catch (IOException e) {
                 if (A == 0) {
                     e1 = e;
@@ -45,6 +44,11 @@ public class RemainingArgument<T> implements CommandArgument<List<T>> {
         throw e1;
     }
 
+    private <R extends Collection<T>> CommandArgumentResult<R> parse(CommandContext context, int B, CommandArgument<R> argument) throws IOException {
+        CommandArgumentContext<R> argumentContext = new CommandArgumentContext<>(argument, B, context.getCommand());
+        return argument.parse(context, argumentContext);
+    }
+
     @Override
     public String getId() {
         return this.id;
@@ -55,9 +59,9 @@ public class RemainingArgument<T> implements CommandArgument<List<T>> {
         int A = argument.getFirstArgument();
         List<T> list = new ArrayList<>();
         while (A < context.getCommand().length) {
-            CommandArgumentResult<T> entry = parseAny(context, A);
+            CommandArgumentResult<? extends Collection<T>> entry = parseAny(context, A);
             A = entry.getPosition();
-            list.add(entry.getValue());
+            list.addAll(entry.getValue());
         }
         return new CommandArgumentResult<>(A, list);
     }
@@ -66,19 +70,23 @@ public class RemainingArgument<T> implements CommandArgument<List<T>> {
     public List<String> suggest(CommandContext context, CommandArgumentContext<List<T>> argument) {
         int A = argument.getFirstArgument();
         while (A < context.getCommand().length) {
-            CommandArgumentResult<T> entry;
+            CommandArgumentResult<? extends Collection<T>> entry;
             try {
                 entry = parseAny(context, A);
             } catch (IOException e) {
                 List<String> list = new ArrayList<>();
-                for (CommandArgument<T> arg : this.argument) {
-                    CommandArgumentContext<T> argumentContext = new CommandArgumentContext<>(arg, A, context.getCommand());
-                    list.addAll(arg.suggest(context, argumentContext));
+                for (CommandArgument<? extends Collection<T>> arg : this.argument) {
+                    list.addAll(suggest(context, A, arg));
                 }
                 return list;
             }
             A = entry.getPosition();
         }
         return Collections.emptyList();
+    }
+
+    private <R extends Collection<T>> Collection<String> suggest(CommandContext context, int A, CommandArgument<R> arg) {
+        CommandArgumentContext<R> argumentContext = new CommandArgumentContext<>(arg, A, context.getCommand());
+        return arg.suggest(context, argumentContext);
     }
 }

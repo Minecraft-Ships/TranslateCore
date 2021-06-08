@@ -1,7 +1,7 @@
 package org.core.command.argument.context;
 
 import org.core.command.argument.ArgumentCommand;
-import org.core.command.argument.arguments.CommandArgument;
+import org.core.command.argument.CommandArgument;
 
 public class ErrorContext {
 

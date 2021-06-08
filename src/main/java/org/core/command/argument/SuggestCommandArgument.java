@@ -1,4 +1,4 @@
-package org.core.command.argument.arguments;
+package org.core.command.argument;
 
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;

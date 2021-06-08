@@ -1,16 +1,15 @@
 package org.core.command.argument.arguments.source;
 
 import org.core.CorePlugin;
-import org.core.command.argument.arguments.CommandArgument;
+import org.core.command.argument.CommandArgument;
+import org.core.command.argument.CommandArgumentResult;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 import org.core.entity.living.human.player.LivePlayer;
 import org.core.entity.living.human.player.User;
 
 import java.io.IOException;
-import java.util.AbstractMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class UserArgument implements CommandArgument<User> {
@@ -27,13 +26,13 @@ public class UserArgument implements CommandArgument<User> {
     }
 
     @Override
-    public Map.Entry<User, Integer> parse(CommandContext context, CommandArgumentContext<User> argument) throws IOException {
+    public CommandArgumentResult<User> parse(CommandContext context, CommandArgumentContext<User> argument) throws IOException {
         String command = context.getCommand()[argument.getFirstArgument()];
         try {
             return CorePlugin
                     .getServer()
                     .getOfflineUser(command)
-                    .map(user -> new AbstractMap.SimpleEntry<>(user, argument.getFirstArgument() + 1))
+                    .map(user -> CommandArgumentResult.from(argument, user))
                     .orElseThrow(() -> new IOException("No user by that name"));
         } catch (Throwable e) {
             throw new IOException(e);

@@ -1,32 +1,38 @@
 package org.core.command.argument.arguments.simple.number;
 
-import org.core.command.argument.arguments.CommandArgument;
+import org.core.command.argument.CommandArgument;
+import org.core.command.argument.CommandArgumentResult;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class DoubleArgument implements CommandArgument<Double> {
 
     private final String id;
 
-    public DoubleArgument(String id){
+    public DoubleArgument(String id) {
         this.id = id;
     }
+
     @Override
     public String getId() {
         return this.id;
     }
 
     @Override
-    public Map.Entry<Double, Integer> parse(CommandContext context, CommandArgumentContext<Double> argument) throws IOException {
-        return null;
+    public CommandArgumentResult<Double> parse(CommandContext context, CommandArgumentContext<Double> argument) throws IOException {
+        try {
+            return CommandArgumentResult.from(argument, Double.parseDouble(context.getCommand()[argument.getFirstArgument()]));
+        } catch (NumberFormatException e) {
+            throw new IOException("'" + context.getCommand()[argument.getFirstArgument()] + "' is not a number");
+        }
     }
 
     @Override
     public List<String> suggest(CommandContext commandContext, CommandArgumentContext<Double> argument) {
-        return null;
+        return Collections.emptyList();
     }
 }

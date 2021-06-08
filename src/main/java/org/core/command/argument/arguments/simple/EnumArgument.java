@@ -1,13 +1,15 @@
 package org.core.command.argument.arguments.simple;
 
-import org.core.command.argument.arguments.CommandArgument;
+import org.core.command.argument.CommandArgument;
+import org.core.command.argument.CommandArgumentResult;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,7 +18,7 @@ public class EnumArgument<E extends Enum<?>> implements CommandArgument<E> {
     private final String id;
     private final Class<E> clazz;
 
-    public EnumArgument(String id, Class<E> clazz){
+    public EnumArgument(String id, Class<E> clazz) {
         this.id = id;
         this.clazz = clazz;
     }
@@ -34,12 +36,12 @@ public class EnumArgument<E extends Enum<?>> implements CommandArgument<E> {
     }
 
     @Override
-    public Map.Entry<E, Integer> parse(CommandContext context, CommandArgumentContext<E> argument) throws IOException {
+    public CommandArgumentResult<E> parse(CommandContext context, CommandArgumentContext<E> argument) throws IOException {
         String next = context.getCommand()[argument.getFirstArgument()];
         try {
             Optional<E> opValue = Stream.of(this.getValues()).filter(n -> n.name().equalsIgnoreCase(next)).findFirst();
-            if(opValue.isPresent()){
-                return new AbstractMap.SimpleImmutableEntry<>(opValue.get(), argument.getFirstArgument() + 1);
+            if (opValue.isPresent()) {
+                return CommandArgumentResult.from(argument, opValue.get());
             }
             throw new IOException("Unknown value of '" + next + "' in argument " + this.getUsage());
         } catch (NoSuchFieldException | IllegalAccessException e) {

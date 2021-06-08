@@ -1,4 +1,4 @@
-package org.core.command.argument.arguments;
+package org.core.command.argument;
 
 public interface CommandArgument<T> extends ParseCommandArgument<T>, SuggestCommandArgument<T> {
 

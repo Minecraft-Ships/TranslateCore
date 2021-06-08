@@ -1,6 +1,6 @@
 package org.core.command.argument.arguments.position.vector;
 
-import org.core.command.argument.arguments.CommandArgument;
+import org.core.command.argument.CommandArgument;
 import org.core.command.argument.arguments.simple.number.IntegerArgument;
 
 import java.math.BigDecimal;
