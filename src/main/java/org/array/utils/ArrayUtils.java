@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public interface ArrayUtils {
 
-    static <T, F> T collect(Function<F, T> function, BiFunction<T, F, T> biFunction, Iterable<F> iterable){
+    static <T, F> T collect(Function<F, T> function, BiFunction<T, F, T> biFunction, Iterable<F> iterable) {
         T result = null;
-        for(F obj : iterable){
-            if(result == null){
+        for (F obj : iterable) {
+            if (result == null) {
                 result = function.apply(obj);
                 continue;
             }
@@ -20,7 +20,7 @@ public interface ArrayUtils {
         return result;
     }
 
-    static String collect(String split, Iterable<String> iterable){
+    static String collect(String split, Iterable<String> iterable) {
         return collect(t -> t, (old, t) -> old + split + t, iterable);
     }
 
@@ -191,7 +191,7 @@ public interface ArrayUtils {
     /**
      * Converts a specified array into a String.
      *
-     * @param split    The devide between every instance
+     * @param split    The divide between every instance
      * @param toString Converts the specified type into String
      * @param array    The array to be converted
      * @param <T>      The class type of the array
@@ -205,7 +205,7 @@ public interface ArrayUtils {
     /**
      * Converts a specified array into a String.
      *
-     * @param split    The devide between every instance
+     * @param split    The divide between every instance
      * @param toString Converts the specified type into String
      * @param array    The array to be converted
      * @param <T>      The class type of the array
@@ -215,7 +215,7 @@ public interface ArrayUtils {
         return collect(toString, (old, obj) -> old + split + toString.apply(obj), array);
     }
 
-    static <T> String toString(String split, Function<T, String> toString, Collection<T> collection){
+    static <T> String toString(String split, Function<T, String> toString, Collection<T> collection) {
         return collection.stream().map(toString).collect(Collectors.joining(split));
     }
 
@@ -263,7 +263,7 @@ public interface ArrayUtils {
      * Gets the "best" values from the collection
      *
      * @param function convert element to value
-     * @param compare  compare two values (current best > comparison)
+     * @param compare  compare two values (current best &gt; comparison)
      * @param equal    checks the two value are equal
      * @param array    the original array
      * @param <T>      element type
@@ -279,7 +279,7 @@ public interface ArrayUtils {
      * Gets the "best" values from the collection
      *
      * @param function   convert element to value
-     * @param compare    compare two values (current best > comparison)
+     * @param compare    compare two values (current best &gt; comparison)
      * @param equal      checks the two value are equal
      * @param collection the original array
      * @param <T>        element type
