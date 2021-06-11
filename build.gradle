@@ -26,14 +26,14 @@ dependencies {
     compileOnly 'net.kyori:adventure-text-serializer-plain:4.7.0'
 }
 
-/*publishing {
+publishing {
     publications {
         maven(MavenPublication) {
             groupId = project.group
-            artifactId = 'library'
+            artifactId = project.name
             version = project.version
 
             from components.java
         }
     }
-}*/
+}
