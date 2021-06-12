@@ -224,7 +224,6 @@ public class BlockTypes1V13 extends CommonBlockTypes {
     public static final BlockType GRANITE = CorePlugin.getPlatform().getBlockType("minecraft:granite").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType GRASS = CorePlugin.getPlatform().getBlockType("minecraft:grass").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType GRASS_BLOCK = CorePlugin.getPlatform().getBlockType("minecraft:grass_block").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRASS_PATH = CorePlugin.getPlatform().getBlockType("minecraft:grass_path").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType GRAVEL = CorePlugin.getPlatform().getBlockType("minecraft:gravel").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType GRAY_BANNER = CorePlugin.getPlatform().getBlockType("minecraft:gray_banner").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType GRAY_BED = CorePlugin.getPlatform().getBlockType("minecraft:gray_bed").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));

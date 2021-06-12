@@ -30,7 +30,7 @@ public class CommonBlockTypes {
     public static final BlockType BONE_BLOCK = CorePlugin.getPlatform().getBlockType("minecraft:bone_block").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType BOOKSHELF = CorePlugin.getPlatform().getBlockType("minecraft:bookshelf").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType BREWING_STAND = CorePlugin.getPlatform().getBlockType("minecraft:brewing_stand").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BRICKS;
+    public static final BlockType BRICKS = CorePlugin.getPlatform().getBlockType("minecraft:bricks").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType BRICK_STAIRS = CorePlugin.getPlatform().getBlockType("minecraft:brick_stairs").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType BROWN_GLAZED_TERRACOTTA = CorePlugin.getPlatform().getBlockType("minecraft:brown_glazed_terracotta").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType BROWN_MUSHROOM = CorePlugin.getPlatform().getBlockType("minecraft:brown_mushroom").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
@@ -86,7 +86,7 @@ public class CommonBlockTypes {
     public static final BlockType GOLD_BLOCK = CorePlugin.getPlatform().getBlockType("minecraft:gold_block").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType GOLD_ORE = CorePlugin.getPlatform().getBlockType("minecraft:gold_ore").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType GRASS = CorePlugin.getPlatform().getBlockType("minecraft:grass").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRASS_PATH = CorePlugin.getPlatform().getBlockType("minecraft:grass_path").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
+    public static final BlockType GRASS_PATH;
     public static final BlockType GRAVEL = CorePlugin.getPlatform().getBlockType("minecraft:gravel").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType GRAY_GLAZED_TERRACOTTA = CorePlugin.getPlatform().getBlockType("minecraft:gray_glazed_terracotta").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType GRAY_SHULKER_BOX = CorePlugin.getPlatform().getBlockType("minecraft:gray_shulker_box").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
@@ -126,13 +126,13 @@ public class CommonBlockTypes {
     public static final BlockType NETHER_BRICK_STAIRS = CorePlugin.getPlatform().getBlockType("minecraft:nether_brick_stairs").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType NETHER_WART = CorePlugin.getPlatform().getBlockType("minecraft:nether_wart").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType NETHER_WART_BLOCK = CorePlugin.getPlatform().getBlockType("minecraft:nether_wart_block").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_DOOR;
-    public static final BlockType OAK_FENCE;
-    public static final BlockType OAK_FENCE_GATE;
-    public static final BlockType OAK_SIGN;
+    public static final BlockType OAK_DOOR = CorePlugin.getPlatform().getBlockType("minecraft:oak_door").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
+    public static final BlockType OAK_FENCE = CorePlugin.getPlatform().getBlockType("minecraft:oak_fence").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
+    public static final BlockType OAK_FENCE_GATE = CorePlugin.getPlatform().getBlockType("minecraft:oak_fence_gate").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
+    public static final BlockType OAK_SIGN = CorePlugin.getPlatform().getBlockType("minecraft:oak_sign").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType OAK_STAIRS = CorePlugin.getPlatform().getBlockType("minecraft:oak_stairs").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_TRAPDOOR;
-    public static final BlockType OAK_WALL_SIGN;
+    public static final BlockType OAK_TRAPDOOR = CorePlugin.getPlatform().getBlockType("minecraft:oak_trapdoor").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
+    public static final BlockType OAK_WALL_SIGN = CorePlugin.getPlatform().getBlockType("minecraft:oak_wall_sign").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType OBSERVER = CorePlugin.getPlatform().getBlockType("minecraft:observer").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType OBSIDIAN = CorePlugin.getPlatform().getBlockType("minecraft:obsidian").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType ORANGE_GLAZED_TERRACOTTA = CorePlugin.getPlatform().getBlockType("minecraft:orange_glazed_terracotta").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
@@ -191,9 +191,9 @@ public class CommonBlockTypes {
     public static final BlockType TRAPPED_CHEST = CorePlugin.getPlatform().getBlockType("minecraft:trapped_chest").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType TRIPWIRE = CorePlugin.getPlatform().getBlockType("minecraft:tripwire").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType TRIPWIRE_HOOK = CorePlugin.getPlatform().getBlockType("minecraft:tripwire_hook").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MOVING_PISTON;
+    public static final BlockType MOVING_PISTON = CorePlugin.getPlatform().getBlockType("minecraft:moving_piston").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType VINE = CorePlugin.getPlatform().getBlockType("minecraft:vine").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType NOTE_BLOCK;
+    public static final BlockType NOTE_BLOCK = CorePlugin.getPlatform().getBlockType("minecraft:note_block").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType WATER = CorePlugin.getPlatform().getBlockType("minecraft:water").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType WHEAT = CorePlugin.getPlatform().getBlockType("minecraft:wheat").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     public static final BlockType WHITE_GLAZED_TERRACOTTA = CorePlugin.getPlatform().getBlockType("minecraft:white_glazed_terracotta").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
@@ -203,34 +203,13 @@ public class CommonBlockTypes {
 
     static {
         int[] mcVersion = CorePlugin.getPlatform().getMinecraftVersion();
-        String standingSign;
-        String wallSign;
-        String oakDoor;
-        String oakTrapDoor;
-        String oakFenceGate;
-        String oakFence;
-        String movingPiston;
-        String noteBlock;
-        String bricks;
-        oakDoor = "minecraft:oak_door";
-        movingPiston = "minecraft:moving_piston";
-        noteBlock = "minecraft:note_block";
-        bricks = "minecraft:bricks";
-        oakTrapDoor = "minecraft:oak_trapdoor";
-        oakFenceGate = "minecraft:oak_fence_gate";
-        oakFence = "minecraft:oak_fence";
-
-        standingSign = "minecraft:oak_sign";
-        wallSign = "minecraft:oak_wall_sign";
-        OAK_SIGN = CorePlugin.getPlatform().getBlockType(standingSign).orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-        OAK_WALL_SIGN = CorePlugin.getPlatform().getBlockType(wallSign).orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-        OAK_DOOR = CorePlugin.getPlatform().getBlockType(oakDoor).orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-        NOTE_BLOCK = CorePlugin.getPlatform().getBlockType(noteBlock).orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-        MOVING_PISTON = CorePlugin.getPlatform().getBlockType(movingPiston).orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-        BRICKS = CorePlugin.getPlatform().getBlockType(bricks).orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-        OAK_TRAPDOOR = CorePlugin.getPlatform().getBlockType(oakTrapDoor).orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-        OAK_FENCE_GATE = CorePlugin.getPlatform().getBlockType(oakFenceGate).orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-        OAK_FENCE = CorePlugin.getPlatform().getBlockType(oakFence).orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
+        String grassPath;
+        if (mcVersion[0] == 1 && mcVersion[1] == 16) {
+            grassPath = "minecraft:grass_path";
+        } else {
+            grassPath = "minecraft:dirt_path";
+        }
+        GRASS_PATH = CorePlugin.getPlatform().getBlockType(grassPath).orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
     }
 
 }
