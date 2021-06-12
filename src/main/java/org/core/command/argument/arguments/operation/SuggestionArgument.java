@@ -11,9 +11,20 @@ import java.io.IOException;
 public abstract class SuggestionArgument<A> implements CommandArgument<A> {
 
     protected final ParseCommandArgument<A> argument;
+    protected final String id;
 
-    public SuggestionArgument(ParseCommandArgument<A> argument) {
+    public SuggestionArgument(CommandArgument<A> argument){
+        this(argument.getId(), argument);
+    }
+
+    public SuggestionArgument(String id, ParseCommandArgument<A> argument) {
         this.argument = argument;
+        this.id = id;
+    }
+
+    @Override
+    public String getId() {
+        return this.id;
     }
 
     @Override
