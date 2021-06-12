@@ -10,26 +10,53 @@ import org.core.source.command.CommandSource;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * The magic that is the CommandContext. Everything important about the command processing can be found
+ * in this class.
+ */
 public class CommandContext {
 
     private final String[] commands;
     private final CommandSource source;
     private final Set<ArgumentCommand> potentialCommands = new HashSet<>();
 
+    /**
+     * @param source   The command source who is running the command
+     * @param commands The potential commands of the command context
+     * @param command  The string arguments that the source wrote
+     */
     public CommandContext(CommandSource source, Set<ArgumentCommand> commands, String... command) {
         this.commands = command;
         this.potentialCommands.addAll(commands);
         this.source = source;
     }
 
+    /**
+     * Gets the raw string arguments that the command source used
+     *
+     * @return A String array of the raw string arguments
+     */
     public String[] getCommand() {
         return this.commands;
     }
 
+    /**
+     * The source of the command
+     *
+     * @return The command sender
+     */
     public CommandSource getSource() {
         return this.source;
     }
 
+    /**
+     * Gets the suggestions for the next argument in the command.
+     * This is based upon the argument command provided as well as the raw
+     * string arguments. The suggestion will be to the last of the raw string argument
+     *
+     * @param command The command to target
+     * @return A list of suggestions for the current context and provided command
+     */
     public List<String> getSuggestions(ArgumentCommand command) {
         List<CommandArgument<?>> arguments = command.getArguments();
         int commandArgument = 0;
@@ -67,10 +94,30 @@ public class CommandContext {
         return ret;
     }
 
+    /**
+     * Gets the argument value of the command argument provided
+     *
+     * @param command The command to target
+     * @param id      The command argument that should be used
+     * @param <T>     The expected type of argument (by providing the command argument, the type will be the same unless the argument is breaking the standard)
+     * @return The value of the argument
+     * @throws IllegalArgumentException If the provided id argument is not part of the command
+     * @throws IllegalStateException    Argument requested is asking for string requirements then what is provided
+     */
     public <T> T getArgument(ArgumentCommand command, CommandArgument<T> id) {
         return this.getArgument(command, id.getId());
     }
 
+    /**
+     * Gets the argument value of the id provided
+     *
+     * @param command The command to target
+     * @param id      The id of the argument to get
+     * @param <T>     The expected type of argument
+     * @return The value of the argument
+     * @throws IllegalArgumentException If the provided id argument is not part of the command
+     * @throws IllegalStateException    Argument requested is asking for string requirements then what is provided
+     */
     public <T> T getArgument(ArgumentCommand command, String id) {
         List<CommandArgument<?>> arguments = command.getArguments();
         if (arguments.stream().noneMatch(a -> a.getId().equals(id))) {
@@ -88,7 +135,7 @@ public class CommandContext {
                 continue;
             }
             if (this.commands.length < commandArgument) {
-                throw new IllegalArgumentException("Not enough provided arguments for value of that argument");
+                throw new IllegalStateException("Not enough provided arguments for value of that argument");
             }
             try {
                 CommandArgumentResult<?> entry = this.parse(arg, commandArgument);
@@ -103,6 +150,12 @@ public class CommandContext {
         throw new IllegalArgumentException("Argument ID of '" + id + "' not found within command");
     }
 
+    /**
+     * If there is a issue with the command the user is attempting to parse, you can
+     * get all the errors with this function. The error is not specific to the command argument
+     *
+     * @return A set of all errors
+     */
     public Set<ErrorContext> getErrors() {
         Set<ErrorContext> map = new HashSet<>();
         for (ArgumentCommand command : this.potentialCommands) {
@@ -131,6 +184,11 @@ public class CommandContext {
         return ArrayUtils.getBests(ErrorContext::getArgumentFailedAt, (b, c) -> b > c, Integer::equals, map);
     }
 
+    /**
+     * Gets the command the user is targeting
+     *
+     * @return A single argument command, if none can be found then {@link Optional#empty()} will be used
+     */
     public Optional<ArgumentCommand> getCompleteCommand() {
         return this.potentialCommands.stream().filter(command -> {
             List<CommandArgument<?>> arguments = command.getArguments();
@@ -154,6 +212,11 @@ public class CommandContext {
 
     }
 
+    /**
+     * Gets all potential commands from what the user has entered
+     *
+     * @return A set of all the potential commands
+     */
     public Set<ArgumentCommand> getPotentialCommands() {
         Map<ArgumentCommand, Integer> map = new HashMap<>();
         this.potentialCommands.forEach(c -> {

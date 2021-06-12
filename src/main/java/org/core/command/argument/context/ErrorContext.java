@@ -5,12 +5,12 @@ import org.core.command.argument.CommandArgument;
 
 public class ErrorContext {
 
-    private ArgumentCommand command;
-    private int argumentFailedAt;
-    private CommandArgument<?> argument;
-    private String error;
+    private final ArgumentCommand command;
+    private final int argumentFailedAt;
+    private final CommandArgument<?> argument;
+    private final String error;
 
-    public ErrorContext(ArgumentCommand command, int argumentFailedAt, CommandArgument<?> argument, String error){
+    public ErrorContext(ArgumentCommand command, int argumentFailedAt, CommandArgument<?> argument, String error) {
         this.command = command;
         this.argumentFailedAt = argumentFailedAt;
         this.argument = argument;

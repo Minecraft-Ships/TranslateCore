@@ -13,6 +13,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Gets a world from a single argument, if the source of the command is locatable then this command
+ * becomes optional whereby if the string argument is not provided then it will use the world the source is in.
+ */
 public class WorldArgument implements CommandArgument<WorldExtent> {
 
     private final String id;

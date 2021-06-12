@@ -12,6 +12,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Gets a single identifiable object from the collection provided by {@link #getAll()}
+ * @param <I> The return class type of the argument
+ */
 public abstract class IdentifiableArgument<I extends Identifiable> implements CommandArgument<I> {
 
     private final String id;
@@ -20,6 +24,10 @@ public abstract class IdentifiableArgument<I extends Identifiable> implements Co
         this.id = id;
     }
 
+    /**
+     * Gets all possible values that the argument could be
+     * @return A collection of all possible values
+     */
     public abstract Collection<I> getAll();
 
     @Override

@@ -17,8 +17,15 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * The argument launcher converts a {@link ArgumentCommand} into a registered command.
+ */
 public interface ArgumentLauncher extends BaseCommandLauncher {
 
+    /**
+     * Gets the registered argument commands to this command
+     * @return A set of registered Argument Command
+     */
     Set<ArgumentCommand> getCommands();
 
     @Override

@@ -13,6 +13,15 @@ public class RemainingArgument<T> implements CommandArgument<List<T>> {
     private final String id;
     private final List<CommandArgument<T>> argument;
 
+    @Deprecated
+    public RemainingArgument(String id) {
+        throw new RuntimeException("Remaining Argument requires at least 1 argument");
+    }
+
+    public RemainingArgument(CommandArgument<T> argument) {
+        this(argument.getId(), argument);
+    }
+
     @SafeVarargs
     public RemainingArgument(String id, CommandArgument<T>... argument) {
         this(id, Arrays.asList(argument));

@@ -13,6 +13,15 @@ public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
     private final String id;
     private final List<CommandArgument<? extends Collection<T>>> argument;
 
+    @Deprecated
+    public FlatRemainingArgument(String ignored) {
+        throw new RuntimeException("Flat Remaining Argument requires at least one argument");
+    }
+
+    public FlatRemainingArgument(CommandArgument<? extends Collection<T>> argument) {
+        this(argument.getId(), argument);
+    }
+
     @SafeVarargs
     public FlatRemainingArgument(String id, CommandArgument<? extends Collection<T>>... argument) {
         this(id, Arrays.asList(argument));
