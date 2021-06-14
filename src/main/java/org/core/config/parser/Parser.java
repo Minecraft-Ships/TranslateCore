@@ -17,11 +17,13 @@ public interface Parser <O, T> {
     StringToWorldParser STRING_TO_WORLD = new StringToWorldParser();
     StringToStringParser STRING_TO_STRING_PARSER = new StringToStringParser();
     StringToVector3Int STRING_TO_VECTOR3INT = new StringToVector3Int();
-    StringToUniquieIdParser STRING_TO_UNIQUIE_ID = new StringToUniquieIdParser();
+    StringToUniqueIdParser STRING_TO_UNIQUE_ID = new StringToUniqueIdParser();
     StringToMinecraftTimeUnitParser STRING_TO_MINECRAFT_TIME_UNIT = new StringToMinecraftTimeUnitParser();
     StringToBlockPosition STRING_TO_BLOCK_POSITION = new StringToBlockPosition();
     StringToExactPosition STRING_TO_EXACT_POSITION = new StringToExactPosition();
     StringToATextLegacyParser STRING_TO_TEXT = new StringToATextLegacyParser();
+    StringToTimeParser STRING_TO_TIME = new StringToTimeParser();
+    StringToTimeRangeParser STRING_TO_TIME_RANGE = new StringToTimeRangeParser();
 
     Optional<T> parse(O original);
     O unparse(T value);
