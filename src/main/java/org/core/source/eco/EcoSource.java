@@ -22,10 +22,11 @@ public interface EcoSource extends Source {
     }
 
     default void removeBalance(BigDecimal decimal){
-        if(getBalance().doubleValue() < decimal.doubleValue()){
-            throw new IllegalStateException("not enough money");
+        BigDecimal bal = this.getBalance();
+        if(bal.doubleValue() < decimal.doubleValue()){
+            throw new IllegalStateException("Costs " + decimal.doubleValue() + ", you don't have enough. You have " + getBalance().doubleValue());
         }
-        setBalance(getBalance().subtract(decimal));
+        setBalance(bal.subtract(decimal));
     }
 
     default void removeBalance(double amount){
