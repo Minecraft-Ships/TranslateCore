@@ -21,15 +21,14 @@ public interface EcoSource extends Source {
         addBalance(new BigDecimal(amount));
     }
 
-    default boolean removeBalance(BigDecimal decimal){
+    default void removeBalance(BigDecimal decimal){
         if(getBalance().doubleValue() < decimal.doubleValue()){
-            return false;
+            throw new IllegalStateException("not enough money");
         }
         setBalance(getBalance().subtract(decimal));
-        return true;
     }
 
-    default boolean removeBalance(double amount){
-        return removeBalance(new BigDecimal(amount));
+    default void removeBalance(double amount){
+        removeBalance(new BigDecimal(amount));
     }
 }
