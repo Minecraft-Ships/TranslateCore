@@ -9,9 +9,8 @@ import org.core.entity.living.human.AbstractHuman;
 import org.core.entity.living.human.player.LivePlayer;
 
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LivePlayerArgument implements CommandArgument<LivePlayer> {
@@ -43,14 +42,13 @@ public class LivePlayerArgument implements CommandArgument<LivePlayer> {
     }
 
     @Override
-    public List<String> suggest(CommandContext commandContext, CommandArgumentContext<LivePlayer> argument) {
+    public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<LivePlayer> argument) {
         String command = commandContext.getCommand()[argument.getFirstArgument()];
         return CorePlugin.getServer()
                 .getOnlinePlayers()
                 .stream()
                 .map(AbstractHuman::getName)
                 .filter(p -> p.toLowerCase().startsWith(command.toLowerCase()))
-                .sorted(Comparator.naturalOrder())
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }

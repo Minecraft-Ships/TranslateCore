@@ -7,7 +7,8 @@ import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ExactArgument implements CommandArgument<String> {
 
@@ -15,12 +16,12 @@ public class ExactArgument implements CommandArgument<String> {
     private final String[] lookup;
     private final boolean caseSens;
 
-    public ExactArgument(String id){
+    public ExactArgument(String id) {
         this(id, false, id);
     }
 
-    public ExactArgument(String id, boolean caseSens, String... lookup){
-        if(lookup.length == 0){
+    public ExactArgument(String id, boolean caseSens, String... lookup) {
+        if (lookup.length == 0) {
             throw new IllegalArgumentException("Lookup cannot be []");
         }
         this.id = id;
@@ -28,7 +29,7 @@ public class ExactArgument implements CommandArgument<String> {
         this.caseSens = caseSens;
     }
 
-    public String[] getLookup(){
+    public String[] getLookup() {
         return this.lookup;
     }
 
@@ -37,9 +38,9 @@ public class ExactArgument implements CommandArgument<String> {
         return this.id;
     }
 
-    private boolean anyMatch(String arg){
-        for(String a : this.lookup){
-            if((this.caseSens && a.equals(arg)) || (!this.caseSens && a.equalsIgnoreCase(arg))){
+    private boolean anyMatch(String arg) {
+        for (String a : this.lookup) {
+            if ((this.caseSens && a.equals(arg)) || (!this.caseSens && a.equalsIgnoreCase(arg))) {
                 return true;
             }
         }
@@ -49,21 +50,21 @@ public class ExactArgument implements CommandArgument<String> {
     @Override
     public CommandArgumentResult<String> parse(CommandContext context, CommandArgumentContext<String> argument) throws IOException {
         String arg = context.getCommand()[argument.getFirstArgument()];
-        if(anyMatch(arg)){
+        if (anyMatch(arg)) {
             return CommandArgumentResult.from(argument, arg);
         }
         throw new IOException("Unknown argument of '" + arg + "'");
     }
 
     @Override
-    public List<String> suggest(CommandContext context, CommandArgumentContext<String> argument) {
+    public Set<String> suggest(CommandContext context, CommandArgumentContext<String> argument) {
         String arg = "";
-        if(context.getCommand().length > argument.getFirstArgument()){
+        if (context.getCommand().length > argument.getFirstArgument()) {
             arg = context.getCommand()[argument.getFirstArgument()];
         }
-        List<String> args = new ArrayList<>();
-        for(String look : this.lookup){
-            if(look.toLowerCase().startsWith(arg.toLowerCase())){
+        Set<String> args = new HashSet<>();
+        for (String look : this.lookup) {
+            if (look.toLowerCase().startsWith(arg.toLowerCase())) {
                 args.add(look);
             }
         }

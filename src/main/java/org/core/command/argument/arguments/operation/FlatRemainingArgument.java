@@ -7,6 +7,7 @@ import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
 
@@ -76,22 +77,23 @@ public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
     }
 
     @Override
-    public List<String> suggest(CommandContext context, CommandArgumentContext<List<T>> argument) {
+    public Set<String> suggest(CommandContext context, CommandArgumentContext<List<T>> argument) {
         int A = argument.getFirstArgument();
         while (A < context.getCommand().length) {
+            final int B = A;
             CommandArgumentResult<? extends Collection<T>> entry;
             try {
                 entry = parseAny(context, A);
             } catch (IOException e) {
-                List<String> list = new ArrayList<>();
-                for (CommandArgument<? extends Collection<T>> arg : this.argument) {
-                    list.addAll(suggest(context, A, arg));
-                }
-                return list;
+                return this
+                        .argument
+                        .stream()
+                        .flatMap(a -> suggest(context, B, a).stream())
+                        .collect(Collectors.toSet());
             }
             A = entry.getPosition();
         }
-        return Collections.emptyList();
+        return Collections.emptySet();
     }
 
     private <R extends Collection<T>> Collection<String> suggest(CommandContext context, int A, CommandArgument<R> arg) {

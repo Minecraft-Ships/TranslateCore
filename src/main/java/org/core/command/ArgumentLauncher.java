@@ -11,10 +11,7 @@ import org.core.source.command.CommandSource;
 import org.core.source.viewer.CommandViewer;
 import org.core.text.TextColours;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +21,7 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
 
     /**
      * Gets the registered argument commands to this command
+     *
      * @return A set of registered Argument Command
      */
     Set<ArgumentCommand> getCommands();
@@ -65,13 +63,13 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
     default List<String> tab(CommandSource source, String... args) {
         CommandContext commandContext = new CommandContext(source, this.getCommands(), args);
         Set<ArgumentCommand> commands = commandContext.getPotentialCommands();
-        List<String> tab = new ArrayList<>();
+        TreeSet<String> tab = new TreeSet<>();
         commands.forEach(c -> {
             if (!c.hasPermission(source)) {
                 return;
             }
             tab.addAll(commandContext.getSuggestions(c));
         });
-        return tab;
+        return new ArrayList<>(tab);
     }
 }

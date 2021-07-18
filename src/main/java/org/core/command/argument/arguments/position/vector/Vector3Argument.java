@@ -8,8 +8,8 @@ import org.core.vector.type.Vector3;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.function.Function;
 
 public class Vector3Argument<N extends Number> implements CommandArgument<Vector3<N>> {
@@ -46,7 +46,7 @@ public class Vector3Argument<N extends Number> implements CommandArgument<Vector
     }
 
     @Override
-    public List<String> suggest(CommandContext context, CommandArgumentContext<Vector3<N>> argument) {
+    public Collection<String> suggest(CommandContext context, CommandArgumentContext<Vector3<N>> argument) {
         String[] cmd = context.getCommand();
         int min = Math.min(3, cmd.length - argument.getFirstArgument());
         for (int A = 0; A < min; A++) {
@@ -57,6 +57,6 @@ public class Vector3Argument<N extends Number> implements CommandArgument<Vector
                 return this.numberArgument[A].suggest(context, argContext);
             }
         }
-        return Collections.emptyList();
+        return Collections.emptySet();
     }
 }

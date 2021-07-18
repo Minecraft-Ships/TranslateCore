@@ -7,13 +7,14 @@ import org.core.command.argument.context.CommandContext;
 import org.core.utils.Identifiable;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Gets a single identifiable object from the collection provided by {@link #getAll()}
+ *
  * @param <I> The return class type of the argument
  */
 public abstract class IdentifiableArgument<I extends Identifiable> implements CommandArgument<I> {
@@ -26,6 +27,7 @@ public abstract class IdentifiableArgument<I extends Identifiable> implements Co
 
     /**
      * Gets all possible values that the argument could be
+     *
      * @return A collection of all possible values
      */
     public abstract Collection<I> getAll();
@@ -46,12 +48,12 @@ public abstract class IdentifiableArgument<I extends Identifiable> implements Co
     }
 
     @Override
-    public List<String> suggest(CommandContext context, CommandArgumentContext<I> argument) {
+    public Set<String> suggest(CommandContext context, CommandArgumentContext<I> argument) {
         String id = context.getCommand()[argument.getFirstArgument()];
-        List<String> suggest = new ArrayList<>();
-        this.getAll().stream().filter(a -> a.getId().toLowerCase().startsWith(id.toLowerCase()) || a.getName().toLowerCase().startsWith(id.toLowerCase())).forEach(a -> {
-            suggest.add(a.getId());
-        });
-        return suggest;
+        return this.getAll()
+                .stream()
+                .filter(a -> a.getId().toLowerCase().startsWith(id.toLowerCase()) || a.getName().toLowerCase().startsWith(id.toLowerCase()))
+                .map(Identifiable::getId)
+                .collect(Collectors.toSet());
     }
 }

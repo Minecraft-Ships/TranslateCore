@@ -8,8 +8,8 @@ import org.core.config.parser.StringParser;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.BiFunction;
 
 public class StringParserArgument<P> implements CommandArgument<P> {
@@ -18,7 +18,7 @@ public class StringParserArgument<P> implements CommandArgument<P> {
     private final BiFunction<CommandContext, CommandArgumentContext<P>, StringParser<P>> function;
     private final BiFunction<CommandArgumentContext<P>, StringParser<P>, String> failMessage;
 
-    public StringParserArgument(String id, BiFunction<CommandContext, CommandArgumentContext<P>, StringParser<P>> function, BiFunction<CommandArgumentContext<P>, StringParser<P>, String> failMessage){
+    public StringParserArgument(String id, BiFunction<CommandContext, CommandArgumentContext<P>, StringParser<P>> function, BiFunction<CommandArgumentContext<P>, StringParser<P>, String> failMessage) {
         this.id = id;
         this.function = function;
         this.failMessage = failMessage;
@@ -38,12 +38,12 @@ public class StringParserArgument<P> implements CommandArgument<P> {
     }
 
     @Override
-    public List<String> suggest(CommandContext commandContext, CommandArgumentContext<P> argument) {
+    public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<P> argument) {
         StringParser<P> parser = this.function.apply(commandContext, argument);
         String peek = argument.getFocusArgument();
-        if(!(parser instanceof StringParser.Suggestible)){
-            return Collections.emptyList();
+        if (!(parser instanceof StringParser.Suggestible)) {
+            return Collections.emptySet();
         }
-        return ((StringParser.Suggestible<P>)parser).getStringSuggestions(peek);
+        return new HashSet<>(((StringParser.Suggestible<P>) parser).getStringSuggestions(peek));
     }
 }

@@ -7,7 +7,7 @@ import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 public class StringArgument implements CommandArgument<String> {
 
@@ -30,7 +30,7 @@ public class StringArgument implements CommandArgument<String> {
     }
 
     @Override
-    public List<String> suggest(CommandContext commandContext, CommandArgumentContext<String> argument) {
-        return Collections.emptyList();
+    public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<String> argument) {
+        return Collections.emptySet();
     }
 }

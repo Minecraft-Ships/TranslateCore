@@ -9,8 +9,8 @@ import org.core.world.WorldExtent;
 import org.core.world.position.Positionable;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -45,8 +45,8 @@ public class WorldArgument implements CommandArgument<WorldExtent> {
     }
 
     @Override
-    public List<String> suggest(CommandContext commandContext, CommandArgumentContext<WorldExtent> argument) {
+    public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<WorldExtent> argument) {
         String worldPeek = commandContext.getCommand()[argument.getFirstArgument()];
-        return CorePlugin.getServer().getWorlds().stream().map(WorldExtent::getName).filter(n -> n.toLowerCase().startsWith(worldPeek)).collect(Collectors.toList());
+        return CorePlugin.getServer().getWorlds().stream().map(WorldExtent::getName).filter(n -> n.toLowerCase().startsWith(worldPeek)).collect(Collectors.toSet());
     }
 }

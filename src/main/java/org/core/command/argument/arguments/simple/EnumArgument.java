@@ -8,8 +8,8 @@ import org.core.command.argument.context.CommandContext;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -50,12 +50,12 @@ public class EnumArgument<E extends Enum<?>> implements CommandArgument<E> {
     }
 
     @Override
-    public List<String> suggest(CommandContext commandContext, CommandArgumentContext<E> argument) {
+    public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<E> argument) {
         String peek = commandContext.getCommand()[argument.getFirstArgument()];
         try {
-            return Stream.of(this.getValues()).map(e -> e.name()).filter(n -> n.startsWith(peek.toUpperCase())).collect(Collectors.toList());
+            return Stream.of(this.getValues()).map(e -> e.name()).filter(n -> n.startsWith(peek.toUpperCase())).collect(Collectors.toSet());
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            return Collections.emptyList();
+            return Collections.emptySet();
         }
     }
 }

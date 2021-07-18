@@ -7,6 +7,7 @@ import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class RemainingArgument<T> implements CommandArgument<List<T>> {
 
@@ -72,22 +73,18 @@ public class RemainingArgument<T> implements CommandArgument<List<T>> {
     }
 
     @Override
-    public List<String> suggest(CommandContext context, CommandArgumentContext<List<T>> argument) {
+    public Set<String> suggest(CommandContext context, CommandArgumentContext<List<T>> argument) {
         int A = argument.getFirstArgument();
         while (A < context.getCommand().length) {
+            final int B = A;
             CommandArgumentResult<T> entry;
             try {
                 entry = parseAny(context, A);
             } catch (IOException e) {
-                List<String> list = new ArrayList<>();
-                for (CommandArgument<T> arg : this.argument) {
-                    CommandArgumentContext<T> argumentContext = new CommandArgumentContext<>(arg, A, context.getCommand());
-                    list.addAll(arg.suggest(context, argumentContext));
-                }
-                return list;
+                return this.argument.stream().flatMap(a -> a.suggest(context, new CommandArgumentContext<>(a, B, context.getCommand())).stream()).collect(Collectors.toSet());
             }
             A = entry.getPosition();
         }
-        return Collections.emptyList();
+        return Collections.emptySet();
     }
 }

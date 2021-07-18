@@ -9,7 +9,7 @@ import org.core.world.position.impl.Position;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 public abstract class PositionArgument<N extends Number, P extends Position<N>> implements CommandArgument<P> {
 
@@ -41,7 +41,7 @@ public abstract class PositionArgument<N extends Number, P extends Position<N>> 
     }
 
     @Override
-    public List<String> suggest(CommandContext commandContext, CommandArgumentContext<P> argument) {
-        return Collections.emptyList();
+    public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<P> argument) {
+        return Collections.emptySet();
     }
 }

@@ -6,7 +6,7 @@ import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 import java.util.function.Function;
 
 public class MappedArgumentWrapper<T, J> implements CommandArgument<T> {
@@ -32,7 +32,7 @@ public class MappedArgumentWrapper<T, J> implements CommandArgument<T> {
     }
 
     @Override
-    public List<String> suggest(CommandContext context, CommandArgumentContext<T> argument) {
+    public Collection<String> suggest(CommandContext context, CommandArgumentContext<T> argument) {
         CommandArgumentContext<J> argContext = new CommandArgumentContext<>(this.commandArgument, argument.getFirstArgument(), context.getCommand());
         return this.commandArgument.suggest(context, argContext);
     }

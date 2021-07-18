@@ -6,16 +6,14 @@ import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
-import java.util.AbstractMap;
 import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 public class IntegerArgument implements CommandArgument<Integer> {
 
     private final String id;
 
-    public IntegerArgument(String id){
+    public IntegerArgument(String id) {
         this.id = id;
     }
 
@@ -26,15 +24,15 @@ public class IntegerArgument implements CommandArgument<Integer> {
 
     @Override
     public CommandArgumentResult<Integer> parse(CommandContext context, CommandArgumentContext<Integer> argument) throws IOException {
-        try{
+        try {
             return CommandArgumentResult.from(argument, Integer.parseInt(context.getCommand()[argument.getFirstArgument()]));
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IOException("'" + context.getCommand()[argument.getFirstArgument()] + "' is not a number");
         }
     }
 
     @Override
-    public List<String> suggest(CommandContext commandContext, CommandArgumentContext<Integer> argument) {
-        return Collections.emptyList();
+    public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<Integer> argument) {
+        return Collections.emptySet();
     }
 }

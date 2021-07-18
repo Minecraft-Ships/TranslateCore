@@ -8,7 +8,7 @@ import org.core.command.argument.context.CommandContext;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -52,8 +52,8 @@ public class AnyArgument<A> implements CommandArgument<A> {
     }
 
     @Override
-    public List<String> suggest(CommandContext context, CommandArgumentContext<A> argument) {
+    public Set<String> suggest(CommandContext context, CommandArgumentContext<A> argument) {
         String arg = context.getCommand()[argument.getFirstArgument()];
-        return this.supply.apply(context, argument).stream().map(toString).filter(v -> v.toLowerCase().startsWith(arg)).collect(Collectors.toList());
+        return this.supply.apply(context, argument).stream().map(toString).filter(v -> v.toLowerCase().startsWith(arg)).collect(Collectors.toSet());
     }
 }

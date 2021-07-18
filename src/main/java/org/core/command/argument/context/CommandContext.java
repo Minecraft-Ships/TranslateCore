@@ -57,7 +57,7 @@ public class CommandContext {
      * @param command The command to target
      * @return A list of suggestions for the current context and provided command
      */
-    public List<String> getSuggestions(ArgumentCommand command) {
+    public Collection<String> getSuggestions(ArgumentCommand command) {
         List<CommandArgument<?>> arguments = command.getArguments();
         int commandArgument = 0;
         List<OptionalArgument<?>> optionalArguments = new ArrayList<>();
@@ -85,9 +85,9 @@ public class CommandContext {
             }
         }
         if (optionalArguments.isEmpty()) {
-            return Collections.emptyList();
+            return Collections.emptySet();
         }
-        List<String> ret = new ArrayList<>();
+        Set<String> ret = new HashSet<>();
         for (OptionalArgument<?> argument : optionalArguments) {
             ret.addAll(suggest(argument, commandArgument));
         }
@@ -265,9 +265,9 @@ public class CommandContext {
         return arg.parse(this, argContext);
     }
 
-    private <T> List<String> suggest(CommandArgument<T> arg, int commandArgument) {
+    private <T> Collection<String> suggest(CommandArgument<T> arg, int commandArgument) {
         if (this.commands.length <= commandArgument) {
-            return Collections.emptyList();
+            return Collections.emptySet();
         }
         return arg.suggest(this, new CommandArgumentContext<>(arg, commandArgument, this.commands));
     }

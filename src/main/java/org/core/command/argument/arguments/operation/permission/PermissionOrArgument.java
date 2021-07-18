@@ -9,8 +9,8 @@ import org.core.command.argument.context.CommandContext;
 import org.core.source.command.CommandSource;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.function.Predicate;
 
 /**
@@ -52,7 +52,7 @@ public class PermissionOrArgument<T> implements CommandArgument<T> {
     }
 
     @Override
-    public List<String> suggest(CommandContext context, CommandArgumentContext<T> argument) {
+    public Collection<String> suggest(CommandContext context, CommandArgumentContext<T> argument) {
         if (this.permission.test(context.getSource())) {
             if (this.with instanceof SuggestCommandArgument) {
                 return ((SuggestCommandArgument<T>) this.with).suggest(context, argument);
@@ -61,6 +61,6 @@ public class PermissionOrArgument<T> implements CommandArgument<T> {
         if (this.or instanceof SuggestCommandArgument) {
             return ((SuggestCommandArgument<T>) this.or).suggest(context, argument);
         }
-        return Collections.emptyList();
+        return Collections.emptySet();
     }
 }

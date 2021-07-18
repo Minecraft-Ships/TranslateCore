@@ -9,7 +9,7 @@ import org.core.entity.living.human.player.LivePlayer;
 import org.core.entity.living.human.player.User;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class UserArgument implements CommandArgument<User> {
@@ -40,7 +40,7 @@ public class UserArgument implements CommandArgument<User> {
     }
 
     @Override
-    public List<String> suggest(CommandContext commandContext, CommandArgumentContext<User> argument) {
+    public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<User> argument) {
         return CorePlugin.getServer().getOfflineUsers().stream().sorted((o1, o2) -> {
             if (o1 instanceof LivePlayer && o2 instanceof LivePlayer) {
                 return 0;
@@ -54,6 +54,6 @@ public class UserArgument implements CommandArgument<User> {
             return -1;
         })
                 .map(User::getName)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }

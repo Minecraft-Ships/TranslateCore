@@ -149,8 +149,6 @@ public class LegacyText implements AText {
         }
         String plain = ((AText) obj).toPlain();
         String thisPlain = this.toPlain();
-        System.out.println("Original: " + thisPlain);
-        System.out.println("Compare: " + plain);
 
         return thisPlain.equals(plain);
     }

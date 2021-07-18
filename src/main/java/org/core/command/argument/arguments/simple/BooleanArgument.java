@@ -6,8 +6,8 @@ import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BooleanArgument implements CommandArgument<Boolean> {
 
@@ -35,9 +35,9 @@ public class BooleanArgument implements CommandArgument<Boolean> {
     }
 
     @Override
-    public List<String> suggest(CommandContext commandContext, CommandArgumentContext<Boolean> argument) {
+    public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<Boolean> argument) {
         String peek = commandContext.getCommand()[argument.getFirstArgument()];
-        List<String> list = new ArrayList<>();
+        Set<String> list = new HashSet<>();
         if ("true".startsWith(peek.toLowerCase())) {
             list.add("true");
         }

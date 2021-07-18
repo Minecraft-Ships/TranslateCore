@@ -7,7 +7,7 @@ import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 public class DoubleArgument implements CommandArgument<Double> {
 
@@ -32,7 +32,7 @@ public class DoubleArgument implements CommandArgument<Double> {
     }
 
     @Override
-    public List<String> suggest(CommandContext commandContext, CommandArgumentContext<Double> argument) {
-        return Collections.emptyList();
+    public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<Double> argument) {
+        return Collections.emptySet();
     }
 }

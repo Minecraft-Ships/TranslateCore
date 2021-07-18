@@ -7,7 +7,7 @@ import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 public class OptionalArgument<T> implements CommandArgument<T> {
 
@@ -59,7 +59,7 @@ public class OptionalArgument<T> implements CommandArgument<T> {
     }
 
     @Override
-    public List<String> suggest(CommandContext commandContext, CommandArgumentContext<T> argument) {
+    public Collection<String> suggest(CommandContext commandContext, CommandArgumentContext<T> argument) {
         return this.arg.suggest(commandContext, argument);
     }
 
