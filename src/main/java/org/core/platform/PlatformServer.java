@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public interface PlatformServer {
 
@@ -18,11 +19,11 @@ public interface PlatformServer {
 
     Collection<LivePlayer> getOnlinePlayers();
 
-    Optional<User> getOfflineUser(UUID uuid);
+    CompletableFuture<Optional<User>> getOfflineUser(UUID uuid);
 
-    Optional<User> getOfflineUser(String lastName);
+    CompletableFuture<Optional<User>> getOfflineUser(String lastName);
 
-    Collection<User> getOfflineUsers();
+    Collection<CompletableFuture<User>> getOfflineUsers();
 
     TPSExecutor getTPSExecutor();
 
