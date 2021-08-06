@@ -49,6 +49,7 @@ public interface AText {
     static AText ofPlain(String text) {
         try {
             Class.forName("net.kyori.adventure.text.Component");
+            Class.forName("net.kyori.adventure.text.serializer.plain.PlainComponentSerializer");
             return AdventureText.plain(text);
         } catch (ClassNotFoundException e) {
             return new LegacyText(null, text, Collections.emptyList());
@@ -57,7 +58,11 @@ public interface AText {
 
     static AText ofLegacy(String text) {
         try {
-            Class.forName("net.kyori.adventure");
+            Class.forName("net.kyori.adventure.text.Component");
+            Class.forName("net.kyori.adventure.text.serializer.plain.PlainComponentSerializer");
+            Class.forName("net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer");
+
+
             return AdventureText.legacy(text);
         } catch (ClassNotFoundException e) {
             return new LegacyText(null, text, Collections.emptyList());
