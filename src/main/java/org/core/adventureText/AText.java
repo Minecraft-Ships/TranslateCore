@@ -61,8 +61,6 @@ public interface AText {
             Class.forName("net.kyori.adventure.text.Component");
             Class.forName("net.kyori.adventure.text.serializer.plain.PlainComponentSerializer");
             Class.forName("net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer");
-
-
             return AdventureText.legacy(text);
         } catch (ClassNotFoundException e) {
             return new LegacyText(null, text, Collections.emptyList());

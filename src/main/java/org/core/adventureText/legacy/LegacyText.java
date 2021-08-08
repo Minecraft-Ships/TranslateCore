@@ -53,7 +53,9 @@ public class LegacyText implements AText {
             aText = AText.ofPlain("");
         }
         if (this.text != null) {
-            text = this.text.replaceAll(containing, aText.toLegacy());
+            //SOMETHING ISNT RIGHT HERE
+            String legacyText = aText.toLegacy();
+            text = this.text.replaceAll(containing, legacyText);
         }
         final AText finalText = aText;
         List<LegacyText> children = this.children.stream().map(lt -> lt.withAllAs(containing, finalText)).collect(Collectors.toList());
@@ -127,16 +129,16 @@ public class LegacyText implements AText {
             return new LegacyText(null, text, Collections.emptyList());
         }
         List<LegacyText> collection = Stream.of(split).filter(v -> v.length() != 0).map(v -> {
-            char at = v.charAt(0);
-            Optional<TextColour> opLegacy = NamedTextColours
-                    .colours()
-                    .parallelStream()
-                    .filter(tc -> tc.getLegacy().map(c -> c == at).orElse(false))
-                    .findAny();
-            return opLegacy
-                    .map(textColour -> new LegacyText(textColour, v.substring(1), Collections.emptyList()))
-                    .orElseGet(() -> new LegacyText(null, v, Collections.emptyList()));
-        })
+                    char at = v.charAt(0);
+                    Optional<TextColour> opLegacy = NamedTextColours
+                            .colours()
+                            .parallelStream()
+                            .filter(tc -> tc.getLegacy().map(c -> c == at).orElse(false))
+                            .findAny();
+                    return opLegacy
+                            .map(textColour -> new LegacyText(textColour, v.substring(1), Collections.emptyList()))
+                            .orElseGet(() -> new LegacyText(null, v, Collections.emptyList()));
+                })
                 .collect(Collectors.toList());
 
         return new LegacyText(null, null, collection);
