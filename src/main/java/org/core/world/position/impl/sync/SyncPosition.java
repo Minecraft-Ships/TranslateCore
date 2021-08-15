@@ -5,14 +5,12 @@ import org.core.entity.EntityType;
 import org.core.entity.LiveEntity;
 import org.core.entity.living.human.player.LivePlayer;
 import org.core.vector.type.Vector3;
-import org.core.world.ChunkExtent;
 import org.core.world.direction.Direction;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.BlockDetails;
 import org.core.world.position.block.details.BlockSnapshot;
 import org.core.world.position.block.entity.LiveTileEntity;
 import org.core.world.position.flags.PositionFlag;
-import org.core.world.position.impl.ExactPosition;
 import org.core.world.position.impl.Position;
 
 import java.util.Optional;
@@ -20,7 +18,7 @@ import java.util.Optional;
 public interface SyncPosition<A extends Number> extends Position<A> {
 
     @Override
-    BlockSnapshot<SyncBlockPosition> getBlockDetails();
+    BlockSnapshot.SyncBlockSnapshot getBlockDetails();
 
     SyncPosition<A> setBlock(BlockDetails details, PositionFlag.SetFlag... flags);
 
@@ -44,7 +42,7 @@ public interface SyncPosition<A extends Number> extends Position<A> {
         return setBlock(type.getDefaultBlockDetails());
     }
 
-    default SyncPosition<A> setBlock(BlockDetails details){
+    default SyncPosition<A> setBlock(BlockDetails details) {
         return setBlock(details, new PositionFlag.SetFlag[0]);
     }
 

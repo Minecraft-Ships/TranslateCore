@@ -4,6 +4,7 @@ import org.core.entity.living.human.player.LivePlayer;
 import org.core.entity.living.human.player.User;
 import org.core.platform.tps.TPSExecutor;
 import org.core.world.WorldExtent;
+import org.core.world.position.block.details.BlockSnapshot;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -18,6 +19,12 @@ public interface PlatformServer {
     Optional<WorldExtent> getWorldByPlatformSpecific(String name);
 
     Collection<LivePlayer> getOnlinePlayers();
+
+    void applyBlockSnapshots(Collection<BlockSnapshot.AsyncBlockSnapshot> collection, Plugin plugin, Runnable onComplete);
+
+    default void applyBlockSnapshots(Collection<BlockSnapshot.SyncBlockSnapshot> collection) {
+        collection.forEach(bs -> bs.getPosition().setBlock(bs));
+    }
 
     CompletableFuture<Optional<User>> getOfflineUser(UUID uuid);
 
