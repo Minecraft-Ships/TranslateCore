@@ -1,6 +1,6 @@
 package org.core.command.argument.arguments.position;
 
-import org.core.CorePlugin;
+import org.core.TranslateCore;
 import org.core.command.argument.CommandArgument;
 import org.core.command.argument.CommandArgumentResult;
 import org.core.command.argument.context.CommandArgumentContext;
@@ -33,7 +33,7 @@ public class WorldArgument implements CommandArgument<WorldExtent> {
     @Override
     public CommandArgumentResult<WorldExtent> parse(CommandContext context, CommandArgumentContext<WorldExtent> argument) throws IOException {
         String worldName = context.getCommand()[argument.getFirstArgument()];
-        Optional<WorldExtent> opWorld = CorePlugin.getServer().getWorld(worldName, true);
+        Optional<WorldExtent> opWorld = TranslateCore.getServer().getWorld(worldName, true);
         if (opWorld.isPresent()) {
             return CommandArgumentResult.from(argument, opWorld.get());
         }
@@ -47,6 +47,6 @@ public class WorldArgument implements CommandArgument<WorldExtent> {
     @Override
     public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<WorldExtent> argument) {
         String worldPeek = commandContext.getCommand()[argument.getFirstArgument()];
-        return CorePlugin.getServer().getWorlds().stream().map(WorldExtent::getName).filter(n -> n.toLowerCase().startsWith(worldPeek)).collect(Collectors.toSet());
+        return TranslateCore.getServer().getWorlds().stream().map(WorldExtent::getName).filter(n -> n.toLowerCase().startsWith(worldPeek)).collect(Collectors.toSet());
     }
 }

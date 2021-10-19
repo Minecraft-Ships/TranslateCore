@@ -1,6 +1,6 @@
 package org.core.event;
 
-import org.core.platform.Plugin;
+import org.core.platform.plugin.Plugin;
 
 import java.util.Map;
 import java.util.Set;

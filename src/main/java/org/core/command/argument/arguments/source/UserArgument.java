@@ -1,6 +1,6 @@
 package org.core.command.argument.arguments.source;
 
-import org.core.CorePlugin;
+import org.core.TranslateCore;
 import org.core.command.argument.CommandArgument;
 import org.core.command.argument.CommandArgumentResult;
 import org.core.command.argument.context.CommandArgumentContext;
@@ -31,7 +31,7 @@ public class UserArgument implements CommandArgument<User> {
     public CommandArgumentResult<User> parse(CommandContext context, CommandArgumentContext<User> argument) throws IOException {
         String command = context.getCommand()[argument.getFirstArgument()];
         try {
-            return CorePlugin
+            return TranslateCore
                     .getServer()
                     .getOfflineUser(command)
                     .get()
@@ -44,7 +44,7 @@ public class UserArgument implements CommandArgument<User> {
 
     @Override
     public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<User> argument) {
-        return CorePlugin
+        return TranslateCore
                 .getServer()
                 .getOfflineUsers()
                 .stream()

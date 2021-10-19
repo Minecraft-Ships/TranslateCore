@@ -1,6 +1,6 @@
 package org.core.command;
 
-import org.core.CorePlugin;
+import org.core.TranslateCore;
 import org.core.adventureText.AText;
 import org.core.adventureText.format.NamedTextColours;
 import org.core.command.argument.ArgumentCommand;
@@ -51,7 +51,7 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
         }
         if (!opCommand.get().hasPermission(source)) {
             if (source instanceof CommandViewer) {
-                ((CommandViewer) source).sendMessage(CorePlugin.buildText(TextColours.RED + " You do not have permission for that command. You require " + opCommand.get().getPermissionNode()));
+                ((CommandViewer) source).sendMessage(TranslateCore.buildText(TextColours.RED + " You do not have permission for that command. You require " + opCommand.get().getPermissionNode()));
                 return true;
             }
             return false;

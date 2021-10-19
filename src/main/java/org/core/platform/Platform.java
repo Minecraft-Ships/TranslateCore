@@ -15,6 +15,8 @@ import org.core.inventory.item.data.dye.DyeType;
 import org.core.inventory.item.data.dye.DyeTypes;
 import org.core.inventory.item.type.ItemTypeCommon;
 import org.core.permission.Permission;
+import org.core.platform.plugin.Plugin;
+import org.core.platform.plugin.details.CorePluginVersion;
 import org.core.text.TextColour;
 import org.core.text.TextColours;
 import org.core.utils.Singleton;
@@ -30,6 +32,7 @@ import org.core.world.position.flags.physics.ApplyPhysicsFlag;
 import org.core.world.position.flags.physics.ApplyPhysicsFlags;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
@@ -108,13 +111,25 @@ public interface Platform {
 
     Collection<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntities();
 
-    int[] getMinecraftVersion();
+    CorePluginVersion getMinecraftVersion();
 
     @NotNull PlatformDetails getDetails();
 
     @NotNull ConfigurationFormat getConfigFormat();
 
     Set<Plugin> getPlugins();
+
+    File getPlatformPluginsFolder();
+
+    File getPlatformConfigFolder();
+
+    default File getTranslatePluginsFolder() {
+        return new File("Translate/Plugins");
+    }
+
+    default File getTranslateConfigFolder() {
+        return new File("Translate/Config");
+    }
 
     <E extends CustomEvent> E callEvent(E event);
 

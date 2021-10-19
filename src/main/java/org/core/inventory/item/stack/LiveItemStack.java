@@ -1,6 +1,6 @@
 package org.core.inventory.item.stack;
 
-import org.core.CorePlugin;
+import org.core.TranslateCore;
 import org.core.entity.InventoryHoldingEntity;
 import org.core.entity.ItemHoldingEntity;
 import org.core.entity.LiveEntity;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface LiveItemStack extends ItemStack {
 
     default Optional<SyncExactPosition> getPosition(){
-        for (WorldExtent extent : CorePlugin.getServer().getWorlds()){
+        for (WorldExtent extent : TranslateCore.getServer().getWorlds()){
             for(LiveTileEntity tile : extent.getTileEntities()){
                 if(!(tile instanceof ContainerTileEntity)){
                     continue;

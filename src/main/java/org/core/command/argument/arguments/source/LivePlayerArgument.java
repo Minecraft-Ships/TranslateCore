@@ -1,6 +1,6 @@
 package org.core.command.argument.arguments.source;
 
-import org.core.CorePlugin;
+import org.core.TranslateCore;
 import org.core.command.argument.CommandArgument;
 import org.core.command.argument.CommandArgumentResult;
 import org.core.command.argument.context.CommandArgumentContext;
@@ -29,7 +29,7 @@ public class LivePlayerArgument implements CommandArgument<LivePlayer> {
     @Override
     public CommandArgumentResult<LivePlayer> parse(CommandContext context, CommandArgumentContext<LivePlayer> argument) throws IOException {
         String command = context.getCommand()[argument.getFirstArgument()];
-        Optional<LivePlayer> opPlayer = CorePlugin.getServer()
+        Optional<LivePlayer> opPlayer = TranslateCore.getServer()
                 .getOnlinePlayers()
                 .stream()
                 .filter(p -> p.getName().equalsIgnoreCase(command))
@@ -44,7 +44,7 @@ public class LivePlayerArgument implements CommandArgument<LivePlayer> {
     @Override
     public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<LivePlayer> argument) {
         String command = commandContext.getCommand()[argument.getFirstArgument()];
-        return CorePlugin.getServer()
+        return TranslateCore.getServer()
                 .getOnlinePlayers()
                 .stream()
                 .map(AbstractHuman::getName)

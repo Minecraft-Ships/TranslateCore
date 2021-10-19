@@ -1,6 +1,6 @@
 package org.core.config.parser.unspecific.unspecific;
 
-import org.core.CorePlugin;
+import org.core.TranslateCore;
 import org.core.config.ConfigurationNode;
 import org.core.config.ConfigurationStream;
 import org.core.config.parser.unspecific.UnspecificParser;
@@ -59,7 +59,7 @@ public class InventoryParser implements UnspecificParser<InventorySnapshot> {
 
     @Override
     public String getId() {
-        return "coreto" + CorePlugin.getPlatform().getDetails().getIdName() + ":inventory";
+        return "coreto" + TranslateCore.getPlatform().getDetails().getIdName() + ":inventory";
     }
 
     @Override

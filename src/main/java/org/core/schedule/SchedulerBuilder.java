@@ -1,6 +1,6 @@
 package org.core.schedule;
 
-import org.core.platform.Plugin;
+import org.core.platform.plugin.Plugin;
 import org.core.schedule.unit.TimeUnit;
 
 import java.util.Optional;

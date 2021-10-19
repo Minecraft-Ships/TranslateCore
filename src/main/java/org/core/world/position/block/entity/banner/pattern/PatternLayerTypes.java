@@ -1,12 +1,12 @@
 package org.core.world.position.block.entity.banner.pattern;
 
-import org.core.CorePlugin;
+import org.core.TranslateCore;
 import org.core.utils.Guaranteed;
 import org.core.utils.Singleton;
 
 public class PatternLayerTypes implements Guaranteed<PatternLayerType> {
 
-    public static final Singleton<PatternLayerType> BASE = CorePlugin.getPlatform().get(new PatternLayerTypes("minecraft:base"));
+    public static final Singleton<PatternLayerType> BASE = TranslateCore.getPlatform().get(new PatternLayerTypes("minecraft:base"));
 
     private final String id;
 

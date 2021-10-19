@@ -1,6 +1,6 @@
 package org.core.config.parser.parsers;
 
-import org.core.CorePlugin;
+import org.core.TranslateCore;
 import org.core.config.parser.StringParser;
 import org.core.platform.Platform;
 import org.core.world.position.block.BlockType;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class StringToBlockTypeParser implements StringParser.Suggestible<BlockType> {
     @Override
     public Optional<BlockType> parse(String original) {
-        Platform platform = CorePlugin.getPlatform();
+        Platform platform = TranslateCore.getPlatform();
         return platform.getBlockType(original);
     }
 
@@ -24,11 +24,11 @@ public class StringToBlockTypeParser implements StringParser.Suggestible<BlockTy
 
     @Override
     public List<BlockType> getSuggestions(String peek) {
-        return CorePlugin.getPlatform().getBlockTypes().stream().filter(bt -> bt.getId().toLowerCase().startsWith(peek.toLowerCase())).collect(Collectors.toList());
+        return TranslateCore.getPlatform().getBlockTypes().stream().filter(bt -> bt.getId().toLowerCase().startsWith(peek.toLowerCase())).collect(Collectors.toList());
     }
 
     @Override
     public List<BlockType> getSuggestions() {
-        return new ArrayList<>(CorePlugin.getPlatform().getBlockTypes());
+        return new ArrayList<>(TranslateCore.getPlatform().getBlockTypes());
     }
 }

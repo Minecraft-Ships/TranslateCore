@@ -2,7 +2,7 @@ package org.core.world.position.impl.async;
 
 import org.core.entity.living.human.player.LivePlayer;
 import org.core.platform.PlatformDetails;
-import org.core.platform.Plugin;
+import org.core.platform.plugin.Plugin;
 import org.core.threadsafe.FutureResult;
 import org.core.threadsafe.ThreadSafe;
 import org.core.vector.type.Vector3;

@@ -1,6 +1,6 @@
 package org.core.entity;
 
-import org.core.CorePlugin;
+import org.core.TranslateCore;
 import org.core.entity.living.animal.chicken.ChickenSnapshot;
 import org.core.entity.living.animal.chicken.LiveChicken;
 import org.core.entity.living.animal.cow.CowSnapshot;
@@ -36,18 +36,18 @@ import org.core.utils.Singleton;
  */
 public class EntityTypes<T extends LiveEntity, S extends EntitySnapshot<T>> implements Guaranteed<EntityType<T, S>> {
 
-    public static final Singleton<EntityType<LiveClassicZombie, ClassicZombieSnapshot>> ZOMBIE = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:zombie"));
-    public static final Singleton<EntityType<LiveHuman, HumanSnapshot>> HUMAN = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:human"));
-    public static final Singleton<EntityType<LivePlayer, PlayerSnapshot>> PLAYER = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:player"));
-    public static final Singleton<EntityType<LiveChicken, ChickenSnapshot>> CHICKEN = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:chicken"));
-    public static final Singleton<EntityType<LiveCow, CowSnapshot>> COW = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:cow"));
-    public static final Singleton<EntityType<LiveItemFrame, ItemFrameSnapshot>> ITEM_FRAME = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:itemframe"));
-    public static final Singleton<EntityType<LiveDroppedItem, DroppedItemSnapshot>> DROPPED_ITEM = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:droppeditem"));
-    public static final Singleton<EntityType<LiveCod, CodSnapshot>> COD = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:cod"));
-    public static final Singleton<EntityType<LiveBat, BatSnapshot>> BAT = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:bat"));
-    public static final Singleton<EntityType<LiveSnowballEntity, SnowballEntitySnapshot>> SNOWBALL = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:snowball"));
-    public static final Singleton<EntityType<LiveParrot, ParrotSnapshot>> PARROT = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:parrot"));
-    public static final Singleton<EntityType<LiveCreeperEntity, CreeperEntitySnapshot>> CREEPER = CorePlugin.getPlatform().get(new EntityTypes<>("minecraft:creeper"));
+    public static final Singleton<EntityType<LiveClassicZombie, ClassicZombieSnapshot>> ZOMBIE = TranslateCore.getPlatform().get(new EntityTypes<>("minecraft:zombie"));
+    public static final Singleton<EntityType<LiveHuman, HumanSnapshot>> HUMAN = TranslateCore.getPlatform().get(new EntityTypes<>("minecraft:human"));
+    public static final Singleton<EntityType<LivePlayer, PlayerSnapshot>> PLAYER = TranslateCore.getPlatform().get(new EntityTypes<>("minecraft:player"));
+    public static final Singleton<EntityType<LiveChicken, ChickenSnapshot>> CHICKEN = TranslateCore.getPlatform().get(new EntityTypes<>("minecraft:chicken"));
+    public static final Singleton<EntityType<LiveCow, CowSnapshot>> COW = TranslateCore.getPlatform().get(new EntityTypes<>("minecraft:cow"));
+    public static final Singleton<EntityType<LiveItemFrame, ItemFrameSnapshot>> ITEM_FRAME = TranslateCore.getPlatform().get(new EntityTypes<>("minecraft:itemframe"));
+    public static final Singleton<EntityType<LiveDroppedItem, DroppedItemSnapshot>> DROPPED_ITEM = TranslateCore.getPlatform().get(new EntityTypes<>("minecraft:droppeditem"));
+    public static final Singleton<EntityType<LiveCod, CodSnapshot>> COD = TranslateCore.getPlatform().get(new EntityTypes<>("minecraft:cod"));
+    public static final Singleton<EntityType<LiveBat, BatSnapshot>> BAT = TranslateCore.getPlatform().get(new EntityTypes<>("minecraft:bat"));
+    public static final Singleton<EntityType<LiveSnowballEntity, SnowballEntitySnapshot>> SNOWBALL = TranslateCore.getPlatform().get(new EntityTypes<>("minecraft:snowball"));
+    public static final Singleton<EntityType<LiveParrot, ParrotSnapshot>> PARROT = TranslateCore.getPlatform().get(new EntityTypes<>("minecraft:parrot"));
+    public static final Singleton<EntityType<LiveCreeperEntity, CreeperEntitySnapshot>> CREEPER = TranslateCore.getPlatform().get(new EntityTypes<>("minecraft:creeper"));
 
     private final String id;
 

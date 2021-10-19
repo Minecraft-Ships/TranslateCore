@@ -1,6 +1,6 @@
 package org.core.config.parser.parsers;
 
-import org.core.CorePlugin;
+import org.core.TranslateCore;
 import org.core.config.parser.StringParser;
 import org.core.world.WorldExtent;
 import org.core.world.position.impl.sync.SyncBlockPosition;
@@ -16,7 +16,7 @@ public class StringToBlockPosition implements StringParser<SyncBlockPosition> {
             int x = Integer.parseInt(split[0]);
             int y = Integer.parseInt(split[1]);
             int z = Integer.parseInt(split[2]);
-            WorldExtent world = CorePlugin.getServer().getWorldByPlatformSpecific(split[3]).get();
+            WorldExtent world = TranslateCore.getServer().getWorldByPlatformSpecific(split[3]).get();
             return Optional.of(world.getPosition(x, y, z));
         }catch (Throwable e) {
             return Optional.empty();

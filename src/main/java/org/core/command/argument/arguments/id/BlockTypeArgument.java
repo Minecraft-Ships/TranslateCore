@@ -1,6 +1,6 @@
 package org.core.command.argument.arguments.id;
 
-import org.core.CorePlugin;
+import org.core.TranslateCore;
 import org.core.world.position.block.BlockType;
 
 import java.util.Collection;
@@ -16,6 +16,6 @@ public class BlockTypeArgument extends IdentifiableArgument<BlockType>{
 
     @Override
     public Collection<BlockType> getAll() {
-        return CorePlugin.getPlatform().getBlockTypes();
+        return TranslateCore.getPlatform().getBlockTypes();
     }
 }

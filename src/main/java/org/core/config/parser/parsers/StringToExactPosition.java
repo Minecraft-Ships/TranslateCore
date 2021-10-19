@@ -1,6 +1,6 @@
 package org.core.config.parser.parsers;
 
-import org.core.CorePlugin;
+import org.core.TranslateCore;
 import org.core.config.parser.StringParser;
 import org.core.world.WorldExtent;
 import org.core.world.position.impl.sync.SyncExactPosition;
@@ -16,7 +16,7 @@ public class StringToExactPosition implements StringParser<SyncExactPosition> {
             double x = Double.parseDouble(split[0]);
             double y = Double.parseDouble(split[1]);
             double z = Double.parseDouble(split[2]);
-            WorldExtent world = CorePlugin.getServer().getWorldByPlatformSpecific(split[3]).get();
+            WorldExtent world = TranslateCore.getServer().getWorldByPlatformSpecific(split[3]).get();
             return Optional.of(world.getPosition(x, y, z));
         }catch (Throwable e) {
             return Optional.empty();

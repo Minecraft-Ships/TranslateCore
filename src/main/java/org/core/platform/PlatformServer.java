@@ -2,7 +2,7 @@ package org.core.platform;
 
 import org.core.entity.living.human.player.LivePlayer;
 import org.core.entity.living.human.player.User;
-import org.core.platform.tps.TPSExecutor;
+import org.core.platform.plugin.Plugin;
 import org.core.world.WorldExtent;
 import org.core.world.position.block.details.BlockSnapshot;
 
@@ -32,8 +32,6 @@ public interface PlatformServer {
 
     Collection<CompletableFuture<User>> getOfflineUsers();
 
-    TPSExecutor getTPSExecutor();
-
     default Optional<WorldExtent> getWorld(String name, boolean justName) {
         if (justName) {
             return getWorlds().stream().filter(w -> w.getName().equals(name)).findAny();
@@ -43,13 +41,5 @@ public interface PlatformServer {
 
     default Optional<WorldExtent> getWorld(UUID uuid) {
         return getWorlds().stream().filter(w -> w.getUniqueId().equals(uuid)).findAny();
-    }
-
-    default double getTPS() {
-        return getTPSExecutor().getTPS();
-    }
-
-    default double getTPS(int ticks) {
-        return getTPSExecutor().getTPS(ticks);
     }
 }
