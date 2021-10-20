@@ -10,3 +10,10 @@ See it [here](https://github.com/Minecraft-Ships/ShipsForCore/wiki)
 ## Developing towards ShipsCore?
 
 Get started [here](https://github.com/Minecraft-Ships/ShipsForCore/wiki/Starting-Development)
+
+## Building StandAlone
+
+Run the TranslateCore with the implementation you wish with the following command
+
+``java -cp TranslateCore.jar org.core.terminal.Terminal``
+

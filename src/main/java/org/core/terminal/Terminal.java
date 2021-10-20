@@ -32,10 +32,12 @@ public class Terminal {
                         OUTPUT = new File(fileName);
                     }
                     A = A + 1;
+                    break;
                 case "main":
                 case "boot":
                     PATH_TO_MAIN = args[A + 1];
                     A = A + 1;
+                    break;
                 default:
                     System.err.println("Unknown argument of " + arg);
             }
