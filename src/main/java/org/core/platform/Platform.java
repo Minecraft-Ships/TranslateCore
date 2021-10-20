@@ -124,11 +124,11 @@ public interface Platform {
     File getPlatformConfigFolder();
 
     default File getTranslatePluginsFolder() {
-        return new File("Translate/Plugins");
+        return new File("translate/plugins");
     }
 
     default File getTranslateConfigFolder() {
-        return new File("Translate/Config");
+        return new File("translate/configs");
     }
 
     <E extends CustomEvent> E callEvent(E event);

@@ -5,12 +5,14 @@ import org.core.config.ConfigurationStream;
 import org.core.event.EventManager;
 import org.core.platform.Platform;
 import org.core.platform.PlatformServer;
+import org.core.platform.plugin.CorePlugin;
 import org.core.schedule.SchedulerBuilder;
 import org.core.source.command.ConsoleSource;
 import org.core.text.Text;
 import org.core.world.boss.ServerBossBar;
 
-import java.io.File;
+import java.io.*;
+import java.util.Optional;
 
 public interface TranslateCore {
 
@@ -62,6 +64,35 @@ public interface TranslateCore {
 
     static ServerBossBar createBossBar() {
         return TranslateCore.CoreImplementation.getImplementation().bossBuilder();
+    }
+
+    static Optional<Class<? extends CorePlugin>> getStandAloneLauncher() {
+        InputStream is = TranslateCore.class.getResourceAsStream("META-INF/translate-core.properties");
+        if (is==null) {
+            return Optional.empty();
+        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        Optional<String> opPath = br.lines().filter(line -> line.startsWith("stand-alone: ")).findFirst();
+        try {
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (!opPath.isPresent()) {
+            return Optional.empty();
+        }
+        String path = opPath.get().substring(13);
+        Class<?> clazz;
+        try {
+            clazz = Class.forName(path);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Could not find class of " + path, e);
+        }
+        if (clazz.isAssignableFrom(CorePlugin.class)) {
+            return Optional.of((Class<? extends CorePlugin>) clazz);
+        }
+        return Optional.empty();
+
     }
 
     abstract class CoreImplementation implements TranslateCore {
