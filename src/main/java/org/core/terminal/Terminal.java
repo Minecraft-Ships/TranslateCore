@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -16,7 +15,7 @@ public class Terminal {
     private static File PATH_TO_CORE;
     private static String PATH_TO_MAIN;
     private static File OUTPUT;
-    private static String TEMP = "Temporary";
+    private static final String TEMP = "Temporary";
 
     public static void main(String[] args) {
         for (int A = 0; A < args.length; A++) {
@@ -29,7 +28,7 @@ public class Terminal {
                     if (OUTPUT==null) {
                         String[] folders = args[A + 1].split("/");
                         String fileName = folders[folders.length - 1];
-                        OUTPUT = new File(fileName);
+                        OUTPUT = new File("Standalone - " + fileName);
                     }
                     A = A + 1;
                     break;
@@ -86,10 +85,10 @@ public class Terminal {
             return;
         }
 
-        Path temp;
+        File temp = new File(TEMP);
 
         try {
-            temp = Files.createTempDirectory(TEMP);
+            Files.createDirectories(temp.toPath());
         } catch (IOException e) {
             System.err.println("Cannot create folder");
             e.printStackTrace();
@@ -100,13 +99,23 @@ public class Terminal {
         copyToTemp(temp, thisJar);
         copyToTemp(temp, core);
 
-        OUTPUT.getParentFile().mkdirs();
+        if (OUTPUT.getParentFile()!=null) {
+            OUTPUT.getParentFile().mkdirs();
+        }
         try {
             OUTPUT.createNewFile();
             ZipOutputStream out = new ZipOutputStream(new FileOutputStream(OUTPUT));
-            Files.walk(temp).forEach(path -> {
-                ZipEntry zipEntry = new ZipEntry(path.toString());
+            Files.walk(temp.toPath()).forEach(path -> {
+                String pathStr = path.toString().substring(9);
+                if (pathStr.startsWith("\\")) {
+                    pathStr = pathStr.substring(1);
+                }
+                System.out.println("Path: " + pathStr);
+                ZipEntry zipEntry = new ZipEntry(pathStr);
                 try {
+                    if (Files.isDirectory(path)) {
+                        return;
+                    }
                     byte[] bytes = Files.readAllBytes(path);
                     out.putNextEntry(zipEntry);
                     out.write(bytes);
@@ -115,6 +124,10 @@ public class Terminal {
                     e.printStackTrace();
                 }
             });
+            ZipEntry entry = new ZipEntry("META-INF/translate-core.properties");
+            out.putNextEntry(entry);
+            out.write(PATH_TO_MAIN.getBytes());
+            out.closeEntry();
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -124,21 +137,30 @@ public class Terminal {
 
     }
 
-    private static void copyToTemp(Path temp, JarFile thisJar) {
+    private static void copyToTemp(File temp, JarFile thisJar) {
         thisJar.stream()
                 .forEach(entry -> {
+                    File tempFolder = temp;
+                    if (entry.getName().startsWith(tempFolder.getName() + "\\")) {
+                        tempFolder = temp.getParentFile();
+                    }
                     if (entry.isDirectory()) {
                         try {
-                            Files.createTempDirectory(temp, entry.getName());
-                        } catch (IOException e) {
+                            new File(tempFolder, entry.getName()).mkdirs();
+                        } catch (Exception e) {
                             System.err.println("Failed to create folder: " + e.getMessage());
+                            System.err.println("Path: " + temp.getAbsolutePath());
+                            System.err.println("Entry: " + entry.getName());
                         }
                         return;
                     }
                     try {
                         InputStream stream = thisJar.getInputStream(entry);
-                        Path tempFile = Files.createTempFile(TEMP, entry.getName());
-                        Files.copy(stream, tempFile);
+                        File tempFile = new File(tempFolder, entry.getName());
+                        if (tempFile.exists()) {
+                            return;
+                        }
+                        Files.copy(stream, tempFile.toPath());
                     } catch (IOException e) {
                         e.printStackTrace();
                         return;
