@@ -96,7 +96,7 @@ public interface TranslateCore {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Could not find class of " + path, e);
         }
-        if (clazz.isAssignableFrom(CorePlugin.class)) {
+        if (CorePlugin.class.isAssignableFrom(clazz)) {
             return Optional.of((Class<? extends CorePlugin>) clazz);
         }
         return Optional.empty();
