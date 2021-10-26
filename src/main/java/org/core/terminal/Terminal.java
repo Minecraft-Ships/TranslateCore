@@ -107,8 +107,8 @@ public class Terminal {
             ZipOutputStream out = new ZipOutputStream(new FileOutputStream(OUTPUT));
             Files.walk(temp.toPath()).forEach(path -> {
                 String pathStr = path.toString().substring(9);
-                if (pathStr.startsWith("\\")) {
-                    pathStr = pathStr.substring(1);
+                if (pathStr.startsWith(File.separator)) {
+                    pathStr = pathStr.substring(File.separator.length());
                 }
                 System.out.println("Path: " + pathStr);
                 ZipEntry zipEntry = new ZipEntry(pathStr);
