@@ -30,6 +30,7 @@ import org.core.world.position.block.entity.banner.pattern.PatternLayerTypes;
 import org.core.world.position.block.grouptype.BlockGroup;
 import org.core.world.position.flags.physics.ApplyPhysicsFlag;
 import org.core.world.position.flags.physics.ApplyPhysicsFlags;
+import org.core.world.structure.Structure;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -103,6 +104,8 @@ public interface Platform {
     Collection<ApplyPhysicsFlag> getApplyPhysics();
 
     Collection<Permission> getPermissions();
+
+    Collection<Structure> getStructures();
 
     @NotNull Permission register(@NotNull String permissionNode);
 
