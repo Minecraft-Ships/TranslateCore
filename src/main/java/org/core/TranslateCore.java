@@ -67,7 +67,7 @@ public interface TranslateCore {
     }
 
     static Optional<Class<? extends CorePlugin>> getStandAloneLauncher() {
-        InputStream is = TranslateCore.class.getResourceAsStream("META-INF/translate-core.properties");
+        InputStream is = TranslateCore.class.getResourceAsStream("/META-INF/translate-core.properties");
         if (is==null) {
             return Optional.empty();
         }
