@@ -89,7 +89,7 @@ public interface TranslateCore {
         if (!opPath.isPresent()) {
             return Optional.empty();
         }
-        String path = opPath.get().substring(13);
+        String path = opPath.get().substring(12);
         Class<?> clazz;
         try {
             clazz = Class.forName(path);
