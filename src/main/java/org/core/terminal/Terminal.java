@@ -152,7 +152,7 @@ public class Terminal {
             });
             ZipEntry entry = new ZipEntry("META-INF/translate-core.properties");
             out.putNextEntry(entry);
-            out.write(PATH_TO_MAIN.getBytes());
+            out.write(("stand-alone=" + PATH_TO_MAIN).getBytes());
             out.closeEntry();
             out.close();
         } catch (IOException e) {

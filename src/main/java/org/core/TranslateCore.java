@@ -12,6 +12,7 @@ import org.core.text.Text;
 import org.core.world.boss.ServerBossBar;
 
 import java.io.*;
+import java.util.Collections;
 import java.util.Optional;
 
 public interface TranslateCore {
@@ -67,12 +68,19 @@ public interface TranslateCore {
     }
 
     static Optional<Class<? extends CorePlugin>> getStandAloneLauncher() {
+        try {
+
+            Collections.list(TranslateCore.class.getClassLoader().getResources("/META-INF/")).forEach(System.out::println);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         InputStream is = TranslateCore.class.getResourceAsStream("/META-INF/translate-core.properties");
         if (is==null) {
             return Optional.empty();
         }
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        Optional<String> opPath = br.lines().filter(line -> line.startsWith("stand-alone: ")).findFirst();
+        Optional<String> opPath = br.lines().filter(line -> line.startsWith("stand-alone=")).findFirst();
         try {
             br.close();
         } catch (IOException e) {
