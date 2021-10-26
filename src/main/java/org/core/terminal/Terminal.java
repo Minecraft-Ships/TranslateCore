@@ -1,12 +1,18 @@
 package org.core.terminal;
 
+import org.core.platform.plugin.CorePlugin;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.util.jar.JarFile;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -99,6 +105,17 @@ public class Terminal {
         copyToTemp(temp, thisJar);
         copyToTemp(temp, core);
 
+        CorePlugin plugin;
+        try {
+            URLClassLoader classLoader = new URLClassLoader(new URL[]{Terminal.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL(), PATH_TO_CORE.toURI().toURL()});
+            Class<?> clazz = classLoader.loadClass(PATH_TO_MAIN);
+            plugin = (CorePlugin) clazz.getConstructor().newInstance();
+        } catch (IOException | ClassNotFoundException | URISyntaxException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
+            System.err.println("Could not load");
+            e.printStackTrace();
+            return;
+        }
+
         if (OUTPUT.getParentFile()!=null) {
             OUTPUT.getParentFile().mkdirs();
         }
@@ -114,6 +131,15 @@ public class Terminal {
                 ZipEntry zipEntry = new ZipEntry(pathStr);
                 try {
                     if (Files.isDirectory(path)) {
+                        return;
+                    }
+                    if (pathStr.endsWith("plugin.yml")) {
+                        String lines = Files.lines(path).collect(Collectors.joining("\n"));
+                        lines = lines.replaceAll("name: TranslateCore", "name: " + plugin.getPluginName());
+                        lines = lines.replaceAll("version: 1.0.0", "version: " + plugin.getPluginVersion().asString());
+                        out.putNextEntry(zipEntry);
+                        out.write(lines.getBytes());
+                        out.closeEntry();
                         return;
                     }
                     byte[] bytes = Files.readAllBytes(path);
