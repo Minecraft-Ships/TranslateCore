@@ -28,6 +28,10 @@ public interface Plugin {
         //not implemented
     }
 
+    default void onCoreFinishedInit(){
+        //not implemented
+    }
+
     @NotNull Object getPlatformLauncher();
 
 
