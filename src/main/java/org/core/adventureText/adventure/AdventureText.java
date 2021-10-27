@@ -10,6 +10,7 @@ import org.core.adventureText.AText;
 import org.core.adventureText.format.NamedTextColours;
 import org.core.adventureText.format.TextColour;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -57,28 +58,30 @@ public class AdventureText implements AText {
     @Override
     public Optional<TextColour> getColour() {
         TextColor colour = this.component.color();
-        if (colour == null) {
+        if (colour==null) {
             return Optional.empty();
         }
-        TextColour textColour = null;
         if (colour instanceof NamedTextColor) {
             NamedTextColor namedTextColor = ((NamedTextColor) colour);
             Optional<TextColour> opText = NamedTextColours
                     .colours()
                     .parallelStream()
-                    .filter(tc -> tc.getBlue() == namedTextColor.blue())
-                    .filter(tc -> tc.getGreen() == namedTextColor.green())
-                    .filter(tc -> tc.getRed() == namedTextColor.red())
+                    .filter(tc -> tc.getBlue()==namedTextColor.blue())
+                    .filter(tc -> tc.getGreen()==namedTextColor.green())
+                    .filter(tc -> tc.getRed()==namedTextColor.red())
                     .findAny();
             if (opText.isPresent()) {
                 return opText;
             }
         }
-        return Optional.of(new TextColour(null, null, colour.red(), colour.green(), colour.blue()));
+        return Optional.of(new TextColour(colour.red(), colour.green(), colour.blue()));
     }
 
     @Override
-    public @NotNull AText withColour(TextColour colour) {
+    public @NotNull AText withColour(@Nullable TextColour colour) {
+        if (colour==null) {
+            return new AdventureText(this.component.color(null));
+        }
         return new AdventureText(this.component.color(TextColor.color(colour.getRed(), colour.getGreen(), colour.getBlue())));
     }
 
