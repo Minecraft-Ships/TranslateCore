@@ -93,20 +93,38 @@ public interface AText {
     /**
      * Removes the colour. See {@link #withColour(TextColour)} for more info
      *
-     * @return
+     * @return The modified text
      */
     default AText removeColour() {
         return withColour(null);
     }
 
+    /**
+     * Checks if the provided text is equal via legacy text
+     *
+     * @param text The text to compare
+     * @return boolean check
+     */
     default boolean equalsLegacy(AText text) {
         return this.toLegacy().equals(text.toLegacy());
     }
 
+    /**
+     * Checks if the provided text has the same text
+     *
+     * @param text The provided text
+     * @return boolean check
+     */
     default boolean equalsIgnoreCase(AText text) {
         return this.toPlain().equalsIgnoreCase(text.toPlain());
     }
 
+    /**
+     * Converts a string with no formatting into AText
+     *
+     * @param text The text to wrap
+     * @return The text object
+     */
     static AText ofPlain(String text) {
         try {
             Class.forName("net.kyori.adventure.text.Component");
@@ -117,6 +135,12 @@ public interface AText {
         }
     }
 
+    /**
+     * Converts a string with legacy formatting into AText
+     *
+     * @param text The text to wrap
+     * @return The text object
+     */
     static AText ofLegacy(String text) {
         try {
             Class.forName("net.kyori.adventure.text.Component");

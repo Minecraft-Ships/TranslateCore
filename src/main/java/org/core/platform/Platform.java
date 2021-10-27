@@ -38,6 +38,9 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Info about the platform TranslateCore is running on
+ */
 public interface Platform {
 
     @NotNull Singleton<BossColour> get(BossColours colours);

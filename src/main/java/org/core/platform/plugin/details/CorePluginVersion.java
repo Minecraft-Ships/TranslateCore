@@ -2,6 +2,9 @@ package org.core.platform.plugin.details;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Gets the plugin version in the form of major.minor.patch
+ */
 public class CorePluginVersion implements PluginVersion {
 
     final int major;
