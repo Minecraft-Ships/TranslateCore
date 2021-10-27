@@ -10,30 +10,91 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * AText is a wrapper for all text on the server. If the server platform has AdventureComponent provided with it
+ * (such as Sponge or Paper) then AText will wrap over that, however if the platform doesn't have AdventureComponent
+ * then AText will wrap over a String using Legacy chat colours.
+ * <p>
+ * AText is immutable, therefore any modifications you do will be applied to the result of the method
+ */
 public interface AText {
 
+    /**
+     * Adds the provided text to the end of this text
+     *
+     * @param aText The text to add to the end
+     * @return The modified text
+     */
     @NotNull
     AText append(@NotNull AText aText);
 
+    /**
+     * Checks if the provided text is included in this text
+     * Note, that colours must match, if you don't need to match colours, then use {@link #toPlain()}
+     *
+     * @param aText The text to check for
+     * @return if the provided text is contained
+     */
     boolean contains(@NotNull AText aText);
 
+    /**
+     * Replace all the matching with the provided AText
+     *
+     * @param containing The text to look for
+     * @param aText      The text to replace with
+     * @return The modified text
+     */
     @NotNull
     AText withAllAs(@NotNull String containing, @Nullable AText aText);
 
+    /**
+     * Gets the text colour of this text
+     *
+     * @return The colour of the text - if colour is not changed, then it will be {@link Optional#empty()}
+     */
     Optional<TextColour> getColour();
 
+    /**
+     * Changes the colour of this text with the provided colour,
+     * this can be null to remove the colour. Removing the colour
+     * will set the colour to the default. If default and this has
+     * a parent with a colour then that colour will be displayed on this text
+     *
+     * @param colour The colour to change to
+     * @return The modified text
+     */
     @NotNull
     AText withColour(@Nullable TextColour colour);
 
+    /**
+     * Gets the children of the AText
+     *
+     * @return The children of the AText
+     */
     @NotNull
     List<AText> getChildren();
 
+    /**
+     * Gets the text within this text
+     *
+     * @return the text in String form
+     */
     @NotNull
     String toPlain();
 
+    /**
+     * Gets the text in legacy form
+     *
+     * @return the legacy text in String form
+     */
     @NotNull
     String toLegacy();
 
+    /**
+     * Removes the colour. See {@link #withColour(TextColour)} for more info
+     *
+     * @return
+     */
     default AText removeColour() {
         return withColour(null);
     }
