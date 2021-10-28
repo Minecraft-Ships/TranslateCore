@@ -37,6 +37,10 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
                 if (!errors.isEmpty()) {
                     ErrorContext error = errors.iterator().next();
                     viewer.sendMessage(AText.ofPlain(error.getError()).withColour(NamedTextColours.RED));
+                    if (errors.size() > 8) {
+                        return false;
+                    }
+
                     errors
                             .parallelStream()
                             .map(e -> e.getArgument().getUsage())

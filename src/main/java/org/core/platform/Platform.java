@@ -1,5 +1,6 @@
 package org.core.platform;
 
+import org.core.TranslateCore;
 import org.core.config.ConfigurationFormat;
 import org.core.config.parser.unspecific.UnspecificParser;
 import org.core.config.parser.unspecific.UnspecificParsers;
@@ -130,10 +131,16 @@ public interface Platform {
     File getPlatformConfigFolder();
 
     default File getTranslatePluginsFolder() {
+        if (TranslateCore.getStandAloneLauncher().isPresent()) {
+            return this.getPlatformPluginsFolder();
+        }
         return new File("translate/plugins");
     }
 
     default File getTranslateConfigFolder() {
+        if (TranslateCore.getStandAloneLauncher().isPresent()) {
+            return this.getPlatformConfigFolder();
+        }
         return new File("translate/configs");
     }
 
