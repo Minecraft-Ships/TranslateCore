@@ -4,6 +4,7 @@ import org.core.event.Event;
 
 public interface Cancellable extends Event {
 
-    public boolean isCancelled();
-    public void setCancelled(boolean value);
+    boolean isCancelled();
+
+    void setCancelled(boolean value);
 }

@@ -28,17 +28,17 @@ public interface Parser <O, T> {
     Optional<T> parse(O original);
     O unparse(T value);
 
-    static <E extends Enum> StringToEnumParser<E> getEnumParser(Class<E> clazz){
+    static <E extends Enum<E>> StringToEnumParser<E> getEnumParser(Class<E> clazz){
         return new StringToEnumParser<>(clazz);
     }
 
-    static <O, T> List<T> parseList(Parser<O, T> parser, Collection<O> collection){
+    static <O, T> List<T> parseList(Parser<? super O, ? extends T> parser, Collection<O> collection){
         List<T> list = new ArrayList<>();
         collection.forEach(v -> parser.parse(v).ifPresent(list::add));
         return list;
     }
 
-    static <O, T> List<O> unparseList(Parser<O, T> parser, Collection<T> collection){
+    static <O, T> List<O> unparseList(Parser<? extends O, ? super T> parser, Collection<T> collection){
         List<O> list = new ArrayList<>();
         collection.forEach(v -> list.add(parser.unparse(v)));
         return list;

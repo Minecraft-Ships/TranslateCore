@@ -5,9 +5,9 @@ import org.core.utils.Guaranteed;
 
 public class ItemTypeCommon implements Guaranteed<ItemType> {
 
-    private String id;
+    private final String id;
 
-    public ItemTypeCommon(String name){
+    public ItemTypeCommon(String name) {
         this.id = name;
     }
 
@@ -18,7 +18,7 @@ public class ItemTypeCommon implements Guaranteed<ItemType> {
 
     @Override
     public String getName() {
-        String nameLowercase = getId().split(":")[1];
+        String nameLowercase = this.getId().split(":")[1];
         char first = Character.toUpperCase(nameLowercase.charAt(0));
         return first + nameLowercase.substring(1);
     }

@@ -7,7 +7,7 @@ import org.core.world.direction.Direction;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncPosition;
 
-public interface EntityInteractEvent<E extends Entity> extends EntityEvent<E>, Cancellable {
+public interface EntityInteractEvent<E extends Entity<?>> extends EntityEvent<E>, Cancellable {
 
     int PRIMARY_CLICK_ACTION = 0;
     int SECONDARY_CLICK_ACTION = 1;
@@ -16,12 +16,12 @@ public interface EntityInteractEvent<E extends Entity> extends EntityEvent<E>, C
 
     int getClickAction();
 
-    interface WithBlock<E extends Entity> extends EntityInteractEvent<E>{
+    interface WithBlock<E extends Entity<?>> extends EntityInteractEvent<E> {
 
         @Override
         SyncBlockPosition getInteractPosition();
 
-        interface AsPlayer extends EntityInteractEvent.WithBlock<LivePlayer>{
+        interface AsPlayer extends EntityInteractEvent.WithBlock<LivePlayer> {
 
             Direction getClickedBlockFace();
 

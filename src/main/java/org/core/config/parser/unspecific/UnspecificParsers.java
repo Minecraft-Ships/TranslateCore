@@ -8,8 +8,12 @@ import org.core.utils.Guaranteed;
 @Deprecated
 public class UnspecificParsers<T> implements Guaranteed<UnspecificParser<T>> {
 
-    public static final UnspecificParser<ItemStack> ITEM_STACK = TranslateCore.getPlatform().get(new UnspecificParsers<>("coreto" + TranslateCore.getPlatform().getDetails().getIdName() + ":itemstack", "ItemStack"));
-    public static final UnspecificParser<Inventory> INVENTORY = TranslateCore.getPlatform().get(new UnspecificParsers<>("coreto" + TranslateCore.getPlatform().getDetails().getIdName() + ":inventory", "Inventory"));
+    public static final UnspecificParser<ItemStack> ITEM_STACK = TranslateCore
+            .getPlatform()
+            .get(new UnspecificParsers<>("coreto" + TranslateCore.getPlatform().getDetails().getIdName() + ":itemstack", "ItemStack"));
+    public static final UnspecificParser<Inventory> INVENTORY = TranslateCore
+            .getPlatform()
+            .get(new UnspecificParsers<>("coreto" + TranslateCore.getPlatform().getDetails().getIdName() + ":inventory", "Inventory"));
 
     private final String name;
     private final String idName;

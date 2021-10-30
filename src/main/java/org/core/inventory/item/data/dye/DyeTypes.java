@@ -4,11 +4,9 @@ import org.core.utils.Guaranteed;
 
 public class DyeTypes implements Guaranteed<DyeType> {
 
+    private final String id;
 
-
-    private String id;
-
-    public DyeTypes(String id){
+    public DyeTypes(String id) {
         this.id = id;
     }
 
@@ -19,7 +17,7 @@ public class DyeTypes implements Guaranteed<DyeType> {
 
     @Override
     public String getName() {
-        String nameLowercase = getId().split(":")[1];
+        String nameLowercase = this.getId().split(":")[1];
         char first = Character.toUpperCase(nameLowercase.charAt(0));
         return first + nameLowercase.substring(1);
     }

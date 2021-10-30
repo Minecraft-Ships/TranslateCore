@@ -13,9 +13,13 @@ public interface Inventory {
         Set<InventoryPart> getFirstChildren();
 
         @Override
-        default Optional<Slot> getSlot(int slotPos){
-            Optional<InventoryPart> opPart = getFirstChildren().stream().filter(c -> c.getSlot(slotPos).isPresent()).findFirst();
-            if(!opPart.isPresent()){
+        default Optional<Slot> getSlot(int slotPos) {
+            Optional<InventoryPart> opPart = this
+                    .getFirstChildren()
+                    .stream()
+                    .filter(c -> c.getSlot(slotPos).isPresent())
+                    .findFirst();
+            if (!opPart.isPresent()) {
                 return Optional.empty();
             }
             return opPart.get().getSlot(slotPos);
@@ -24,10 +28,12 @@ public interface Inventory {
     }
 
     Set<Slot> getSlots();
+
     Optional<Slot> getSlot(int slotPos);
+
     Inventory createSnapshot();
 
-    default int getSlotCount(){
-        return getSlots().size();
+    default int getSlotCount() {
+        return this.getSlots().size();
     }
 }

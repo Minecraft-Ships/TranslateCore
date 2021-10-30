@@ -21,7 +21,7 @@ public class PatternLayerTypes implements Guaranteed<PatternLayerType> {
 
     @Override
     public String getName() {
-        String nameLowercase = getId().split(":")[1];
+        String nameLowercase = this.getId().split(":")[1];
         char first = Character.toUpperCase(nameLowercase.charAt(0));
         return first + nameLowercase.substring(1);
     }

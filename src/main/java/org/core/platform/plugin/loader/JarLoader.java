@@ -31,6 +31,7 @@ public class JarLoader {
                     try {
                         return classLoader.loadClass(name);
                     } catch (ClassNotFoundException e) {
+                        //noinspection ReturnOfNull
                         return null;
                     }
                 })

@@ -1,5 +1,6 @@
 package org.core.config.parser.parsers;
 
+import org.core.config.parser.Parser;
 import org.core.config.parser.StringParser;
 import org.core.vector.type.Vector3;
 
@@ -9,7 +10,7 @@ public class StringToVector3Int implements StringParser<Vector3<Integer>> {
 
     @Override
     public Optional<Vector3<Integer>> parse(String original) {
-        StringToIntegerParser stip = new StringToIntegerParser();
+        Parser<String, Integer> stip = new StringToIntegerParser();
             String[] split = original.split(",");
             if(split.length != 3){
                 return Optional.empty();

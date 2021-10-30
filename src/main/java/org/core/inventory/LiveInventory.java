@@ -1,20 +1,15 @@
 package org.core.inventory;
 
+import org.core.world.position.impl.Position;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
 
-public interface LiveInventory extends PositionableInventory {
+public interface LiveInventory<S extends Position<?>> extends PositionableInventory<S> {
 
-    interface LiveExactInventory extends LiveInventory {
-
-        @Override
-        public SyncExactPosition getPosition();
+    interface LiveExactInventory extends LiveInventory<SyncExactPosition> {
 
     }
 
-    interface LiveBlockInventory extends LiveInventory{
-
-        @Override
-        public SyncBlockPosition getPosition();
+    interface LiveBlockInventory extends LiveInventory<SyncBlockPosition> {
     }
 }

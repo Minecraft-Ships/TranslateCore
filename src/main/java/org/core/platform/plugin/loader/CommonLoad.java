@@ -17,7 +17,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class CommonLoad {
+public final class CommonLoad {
+
+    private CommonLoad() {
+        throw new RuntimeException("Should not init class");
+    }
 
     private static boolean canLoad(Class<?> clazz) {
         @NotNull PlatformDetails details = TranslateCore.getPlatform().getDetails();

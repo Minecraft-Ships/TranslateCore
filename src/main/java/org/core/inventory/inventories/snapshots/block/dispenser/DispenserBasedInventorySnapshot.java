@@ -18,7 +18,7 @@ public abstract class DispenserBasedInventorySnapshot implements DispenserBasedI
     protected Grid3x3 grid;
 
     @Override
-    public SyncBlockPosition getPosition(){
+    public SyncBlockPosition getPosition() {
         return this.position;
     }
 
@@ -38,9 +38,16 @@ public abstract class DispenserBasedInventorySnapshot implements DispenserBasedI
     }
 
 
-    public void apply(DispenserBasedInventory inv){
-        for(Slot slot : this.getSlots()){
-            slot.getItem().ifPresent(f -> inv.getSlot(slot.getPosition().get()).get().setItem(f));
+    public void apply(Inventory inv) {
+        for (Slot slot : this.getSlots()) {
+            slot
+                    .getItem()
+                    .ifPresent(f ->
+                            inv
+                                    .getSlot(slot.getPosition().orElseThrow(() -> new IllegalStateException(
+                    "Unknown slot position")))
+                                    .orElseThrow(() -> new IllegalStateException("Unknown slot position"))
+                                    .setItem(f));
         }
     }
 }

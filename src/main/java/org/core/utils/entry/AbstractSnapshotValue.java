@@ -1,12 +1,11 @@
 package org.core.utils.entry;
 
-import java.lang.reflect.Type;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 public abstract class AbstractSnapshotValue<O, V> implements SnapshotValue<O, V>{
 
-    public static abstract class AbstractIdentitySnapshotValue<O, V> extends AbstractSnapshotValue<O, V> implements SnapshotValue.IdentifySnapshotValue<O, V> {
+    public abstract static class AbstractIdentitySnapshotValue<O, V> extends AbstractSnapshotValue<O, V> implements SnapshotValue.IdentifySnapshotValue<O, V> {
 
         private final String id;
         private final String name;
@@ -35,6 +34,7 @@ public abstract class AbstractSnapshotValue<O, V> implements SnapshotValue<O, V>
     public AbstractSnapshotValue(V value, Function<O, V> getter, BiConsumer<O, V> setter){
         this.getter = getter;
         this.setter = setter;
+        this.value = value;
     }
 
     @Override

@@ -12,11 +12,11 @@ public interface Explosion extends Positionable {
     interface EntityExplosion extends Explosion {
 
         @Override
-        Entity getSource();
+        Entity<?> getSource();
 
         @Override
         default SyncExactPosition getPosition(){
-            return getSource().getPosition();
+            return this.getSource().getPosition();
         }
 
     }

@@ -50,9 +50,12 @@ public class Vector3Argument<N extends Number> implements CommandArgument<Vector
         String[] cmd = context.getCommand();
         int min = Math.min(3, cmd.length - argument.getFirstArgument());
         for (int A = 0; A < min; A++) {
-            CommandArgumentContext<N> argContext = new CommandArgumentContext<>(this.numberArgument[A], argument.getFirstArgument() + A, cmd);
+            CommandArgumentContext<N> argContext = new CommandArgumentContext<>(
+                    this.numberArgument[A],
+                    argument.getFirstArgument() + A,
+                    cmd);
             try {
-                N number = this.numberArgument[A].parse(context, argContext).getValue();
+                this.numberArgument[A].parse(context, argContext).getValue();
             } catch (IOException e) {
                 return this.numberArgument[A].suggest(context, argContext);
             }

@@ -4,6 +4,7 @@ import org.core.inventory.inventories.general.block.dispenser.DispenserInventory
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.BlockTypes;
 import org.core.world.position.block.entity.LiveTileEntity;
+import org.core.world.position.block.entity.container.ContainerTileEntity;
 import org.core.world.position.block.entity.container.dispenser.LiveDispenserTileEntity;
 
 import java.util.Optional;
@@ -19,8 +20,8 @@ public abstract class DispenserInventorySnapshot extends DispenserBasedInventory
         if (!(opTile.get() instanceof LiveDispenserTileEntity)) {
             return;
         }
-        LiveDispenserTileEntity ldte = (LiveDispenserTileEntity) opTile.get();
-        apply(ldte.getInventory());
+        ContainerTileEntity ldte = (ContainerTileEntity) opTile.get();
+        this.apply(ldte.getInventory());
     }
 
     @Override

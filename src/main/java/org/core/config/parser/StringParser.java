@@ -30,13 +30,13 @@ public interface StringParser<T extends Object> extends Parser<String, T> {
 
         default List<String> getStringSuggestions(){
             List<String> suggestions = new ArrayList<>();
-            getSuggestions().stream().forEach(v -> suggestions.add(unparse(v)));
+            this.getSuggestions().forEach(v -> suggestions.add(this.unparse(v)));
             return suggestions;
         }
 
         default List<String> getStringSuggestions(String peek){
             List<String> suggestions = new ArrayList<>();
-            getSuggestions(peek).stream().forEach(v -> suggestions.add(unparse(v)));
+            this.getSuggestions(peek).forEach(v -> suggestions.add(this.unparse(v)));
             return suggestions;
         }
 

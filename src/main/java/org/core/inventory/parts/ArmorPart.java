@@ -8,18 +8,25 @@ import java.util.Set;
 
 public interface ArmorPart extends InventoryPart {
 
-    public Slot getHelmetSlot();
-    public Slot getArmorSlot();
-    public Slot getLeggingsSlot();
-    public Slot getShoesSlot();
+    Slot getHelmetSlot();
+
+    Slot getArmorSlot();
+
+    Slot getLeggingsSlot();
+
+    Slot getShoesSlot();
 
     @Override
-    default ArmorPartSnapshot createSnapshot(){
+    default ArmorPartSnapshot createSnapshot() {
         return new ArmorPartSnapshot(this);
     }
 
     @Override
-    default Set<Slot> getSlots(){
-        return new HashSet<>(Arrays.asList(getHelmetSlot(), getArmorSlot(), getLeggingsSlot(), getShoesSlot()));
+    default Set<Slot> getSlots() {
+        return new HashSet<>(Arrays.asList(
+                this.getHelmetSlot(),
+                this.getArmorSlot(),
+                this.getLeggingsSlot(),
+                this.getShoesSlot()));
     }
 }

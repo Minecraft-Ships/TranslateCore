@@ -1,6 +1,8 @@
 package org.core.platform.plugin;
 
 import org.core.TranslateCore;
+import org.core.adventureText.AText;
+import org.core.adventureText.format.NamedTextColours;
 import org.core.config.ConfigurationFormat;
 import org.core.config.ConfigurationStream;
 import org.core.platform.plugin.details.PluginVersion;
@@ -84,7 +86,7 @@ public interface Plugin {
     default @NotNull Optional<ConfigurationStream.ConfigurationFile> createConfig(String configName, File file) {
         InputStream stream = this.getClass().getClassLoader().getResourceAsStream(configName);
         if (stream==null) {
-            System.err.println("Request for '" + configName + "' could not be found");
+            TranslateCore.getConsole().sendMessage(AText.ofPlain("Reqest for '" + configName + "' could not be found").withColour(NamedTextColours.RED));
             return Optional.empty();
         }
         try {

@@ -10,7 +10,7 @@ public interface Else {
 
     }
 
-    static <O, E extends O, F> F canCast(O obj, Class<E> castTo, Function<E, F> casted, Function<O, F> fail) {
+    static <O, E extends O, F> F canCast(O obj, Class<E> castTo, Function<? super E, F> casted, Function<O, ? extends F> fail) {
         if (castTo.isInstance(obj)) {
             return casted.apply((E) obj);
         }

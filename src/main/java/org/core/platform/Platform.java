@@ -18,8 +18,6 @@ import org.core.inventory.item.type.ItemTypeCommon;
 import org.core.permission.Permission;
 import org.core.platform.plugin.Plugin;
 import org.core.platform.plugin.details.CorePluginVersion;
-import org.core.text.TextColour;
-import org.core.text.TextColours;
 import org.core.utils.Singleton;
 import org.core.world.boss.colour.BossColour;
 import org.core.world.boss.colour.BossColours;
@@ -55,9 +53,6 @@ public interface Platform {
     @Deprecated
     <T> UnspecificParser<T> get(UnspecificParsers<T> itemStack);
 
-    @Deprecated
-    @NotNull TextColour get(TextColours id);
-
     @NotNull Singleton<DyeType> get(DyeTypes id);
 
     @NotNull Singleton<PatternLayerType> get(PatternLayerTypes id);
@@ -69,9 +64,6 @@ public interface Platform {
     Optional<BlockType> getBlockType(String id);
 
     Optional<ItemType> getItemType(String id);
-
-    @Deprecated
-    Optional<TextColour> getTextColour(String id);
 
     Optional<DyeType> getDyeType(String id);
 
@@ -91,9 +83,6 @@ public interface Platform {
     Collection<BlockType> getBlockTypes();
 
     Collection<ItemType> getItemTypes();
-
-    @Deprecated
-    Collection<TextColour> getTextColours();
 
     Collection<DyeType> getDyeTypes();
 
@@ -134,27 +123,27 @@ public interface Platform {
         if (TranslateCore.getStandAloneLauncher().isPresent()) {
             return this.getPlatformPluginsFolder();
         }
-        return new File("translate/plugins");
+        return new File("translate" + File.pathSeparatorChar + "plugins");
     }
 
     default File getTranslateConfigFolder() {
         if (TranslateCore.getStandAloneLauncher().isPresent()) {
             return this.getPlatformConfigFolder();
         }
-        return new File("translate/configs");
+        return new File("translate" + File.pathSeparatorChar + "configs");
     }
 
     <E extends CustomEvent> E callEvent(E event);
 
     default Optional<BlockGroup> getBlockGroup(@NotNull String id) {
-        return getBlockGroups().stream().filter(g -> g.getId().equals(id)).findFirst();
+        return this.getBlockGroups().stream().filter(g -> g.getId().equals(id)).findFirst();
     }
 
     default Optional<Plugin> getPlugin(@NotNull String name) {
-        return getPlugins().stream().filter(p -> p.getPluginName().equals(name)).findAny();
+        return this.getPlugins().stream().filter(p -> p.getPluginName().equals(name)).findAny();
     }
 
     default Optional<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntity(@NotNull BlockType type) {
-        return getDefaultTileEntities().stream().filter(t -> t.getSupportedBlocks().stream().anyMatch(ty -> ty.equals(type))).findFirst();
+        return this.getDefaultTileEntities().stream().filter(t -> t.getSupportedBlocks().stream().anyMatch(ty -> ty.equals(type))).findFirst();
     }
 }

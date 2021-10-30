@@ -23,7 +23,7 @@ public class BossColours implements Guaranteed<BossColour> {
 
     @Override
     public String getId() {
-        return "minecraft." + getName().toLowerCase().replaceAll(" ", "_");
+        return "minecraft." + this.getName().toLowerCase().replaceAll(" ", "_");
     }
 
     @Override

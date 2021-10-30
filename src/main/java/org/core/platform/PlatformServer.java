@@ -22,7 +22,7 @@ public interface PlatformServer {
 
     void applyBlockSnapshots(Collection<BlockSnapshot.AsyncBlockSnapshot> collection, Plugin plugin, Runnable onComplete);
 
-    default void applyBlockSnapshots(Collection<BlockSnapshot.SyncBlockSnapshot> collection) {
+    default void applyBlockSnapshots(Collection<? extends BlockSnapshot.SyncBlockSnapshot> collection) {
         collection.forEach(bs -> bs.getPosition().setBlock(bs));
     }
 
@@ -34,12 +34,12 @@ public interface PlatformServer {
 
     default Optional<WorldExtent> getWorld(String name, boolean justName) {
         if (justName) {
-            return getWorlds().stream().filter(w -> w.getName().equals(name)).findAny();
+            return this.getWorlds().stream().filter(w -> w.getName().equals(name)).findAny();
         }
-        return getWorldByPlatformSpecific(name);
+        return this.getWorldByPlatformSpecific(name);
     }
 
     default Optional<WorldExtent> getWorld(UUID uuid) {
-        return getWorlds().stream().filter(w -> w.getUniqueId().equals(uuid)).findAny();
+        return this.getWorlds().stream().filter(w -> w.getUniqueId().equals(uuid)).findAny();
     }
 }

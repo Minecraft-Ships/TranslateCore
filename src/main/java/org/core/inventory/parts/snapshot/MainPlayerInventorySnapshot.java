@@ -1,22 +1,24 @@
 package org.core.inventory.parts.snapshot;
 
+import org.core.inventory.Inventory;
 import org.core.inventory.parts.MainPlayerInventory;
 import org.core.inventory.parts.Slot;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MainPlayerInventorySnapshot implements MainPlayerInventory, InventoryPartSnapshot {
 
     protected Set<Slot> slots = new HashSet<>();
 
-    public MainPlayerInventorySnapshot(MainPlayerInventory snapshot){
+    public MainPlayerInventorySnapshot(Inventory snapshot) {
         this(snapshot.getSlots());
     }
 
-    public MainPlayerInventorySnapshot(Collection<Slot> slots){
-        slots.stream().forEach(s -> this.slots.add(s.createSnapshot()));
+    public MainPlayerInventorySnapshot(Collection<? extends Slot> slots) {
+        this.slots.addAll(slots.stream().map(Slot::createSnapshot).collect(Collectors.toSet()));
     }
 
     @Override

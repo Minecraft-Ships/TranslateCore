@@ -15,9 +15,8 @@ public interface ZombieInventory<Z extends Zombie<LiveEntity> & LiveEntity> exte
     ZombieInventorySnapshot createSnapshot();
 
     @Override
-    default Set<Slot> getSlots(){
-        Set<Slot> slots = new HashSet<>();
-        slots.addAll(this.getArmor().getSlots());
+    default Set<Slot> getSlots() {
+        Set<Slot> slots = new HashSet<>(this.getArmor().getSlots());
         slots.add(this.getMainHoldingItem());
         slots.add(this.getOffHoldingItem());
         return slots;

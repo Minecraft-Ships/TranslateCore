@@ -10,26 +10,26 @@ public interface EcoSource extends Source {
     void setBalance(BigDecimal decimal);
 
     default void setBalance(double amount){
-        setBalance(new BigDecimal(amount));
+        this.setBalance(new BigDecimal(amount));
     }
 
     default void addBalance(BigDecimal decimal){
-        setBalance(decimal.add(getBalance()));
+        this.setBalance(decimal.add(this.getBalance()));
     }
 
     default void addBalance(double amount){
-        addBalance(new BigDecimal(amount));
+        this.addBalance(new BigDecimal(amount));
     }
 
     default void removeBalance(BigDecimal decimal){
         BigDecimal bal = this.getBalance();
         if(bal.doubleValue() < decimal.doubleValue()){
-            throw new IllegalStateException("Costs " + decimal.doubleValue() + ", you don't have enough. You have " + getBalance().doubleValue());
+            throw new IllegalStateException("Costs " + decimal.doubleValue() + ", you don't have enough. You have " + this.getBalance().doubleValue());
         }
-        setBalance(bal.subtract(decimal));
+        this.setBalance(bal.subtract(decimal));
     }
 
     default void removeBalance(double amount){
-        removeBalance(new BigDecimal(amount));
+        this.removeBalance(new BigDecimal(amount));
     }
 }

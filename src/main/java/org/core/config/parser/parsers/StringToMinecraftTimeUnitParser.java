@@ -28,7 +28,12 @@ public class StringToMinecraftTimeUnitParser implements StringParser.Suggestible
 
     @Override
     public List<TimeUnit> getSuggestions(String peek) {
-        return this.getSuggestions().stream().filter(u -> u.name().startsWith(peek.toUpperCase())).sorted((c1, c2) -> c1.name().compareToIgnoreCase(c2.name())).collect(Collectors.toList());
+        return this
+                .getSuggestions()
+                .stream()
+                .filter(u -> u.name().startsWith(peek.toUpperCase()))
+                .sorted((c1, c2) -> c1.name().compareToIgnoreCase(c2.name()))
+                .collect(Collectors.toList());
     }
 
     @Override

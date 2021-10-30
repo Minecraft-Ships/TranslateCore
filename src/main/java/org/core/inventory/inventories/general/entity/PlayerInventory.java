@@ -18,11 +18,11 @@ public interface PlayerInventory extends BasicEntityInventory<LivePlayer> {
     @Override
     default Set<Slot> getSlots(){
         Set<Slot> slots = new HashSet<>();
-        slots.addAll(getHotbar().getSlots());
-        slots.addAll(getMainInventory().getSlots());
-        slots.addAll(getArmor().getSlots());
-        slots.add(getOffHoldingItem());
-        slots.addAll(getCraftingGrid().getSlots());
+        slots.addAll(this.getHotbar().getSlots());
+        slots.addAll(this.getMainInventory().getSlots());
+        slots.addAll(this.getArmor().getSlots());
+        slots.add(this.getOffHoldingItem());
+        slots.addAll(this.getCraftingGrid().getSlots());
         return slots;
     }
 
@@ -31,11 +31,16 @@ public interface PlayerInventory extends BasicEntityInventory<LivePlayer> {
 
     @Override
     default Slot getMainHoldingItem(){
-        return getHotbar().getSelectedSlot();
+        return this.getHotbar().getSelectedSlot();
     }
 
     @Override
     default Set<InventoryPart> getFirstChildren(){
-        return new HashSet<>(Arrays.asList(getArmor(), getOffHoldingItem(), getCraftingGrid(), getMainInventory(), getHotbar()));
+        return new HashSet<>(Arrays.asList(
+                this.getArmor(),
+                this.getOffHoldingItem(),
+                this.getCraftingGrid(),
+                this.getMainInventory(),
+                this.getHotbar()));
     }
 }

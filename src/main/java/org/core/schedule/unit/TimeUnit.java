@@ -8,11 +8,11 @@ public enum TimeUnit {
     SECONDS(i -> i * 20, i -> i / 20.0),
     MINUTES(i -> (i * 20) * 100, i -> (i / 100.0) / 20);
 
-    private final Function<Integer, Integer> convertFrom;
-    private final Function<Integer, Double> convertTo;
+    private final Function<? super Integer, Integer> convertFrom;
+    private final Function<? super Integer, Double> convertTo;
 
 
-    TimeUnit(Function<Integer, Integer> function, Function<Integer, Double> from) {
+    TimeUnit(Function<? super Integer, Integer> function, Function<? super Integer, Double> from) {
         this.convertFrom = function;
         this.convertTo = from;
     }
@@ -26,7 +26,7 @@ public enum TimeUnit {
      */
     @Deprecated
     public int getTicks(int time) {
-        return fromTicks(time);
+        return this.fromTicks(time);
     }
 
     /**

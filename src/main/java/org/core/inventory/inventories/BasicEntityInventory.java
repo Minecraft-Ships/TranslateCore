@@ -15,13 +15,17 @@ import java.util.Set;
 public interface BasicEntityInventory<E extends LiveEntity> extends Inventory.Parent {
 
     ArmorPart getArmor();
+
     Slot getMainHoldingItem();
+
     Slot getOffHoldingItem();
+
     SyncExactPosition getPosition();
+
     Optional<E> getAttachedEntity();
 
     @Override
-    default Set<InventoryPart> getFirstChildren(){
-        return new HashSet<>(Arrays.asList(getArmor(), getMainHoldingItem(), getOffHoldingItem()));
+    default Set<InventoryPart> getFirstChildren() {
+        return new HashSet<>(Arrays.asList(this.getArmor(), this.getMainHoldingItem(), this.getOffHoldingItem()));
     }
 }

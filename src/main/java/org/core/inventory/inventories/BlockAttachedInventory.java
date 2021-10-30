@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface BlockAttachedInventory extends PositionableInventory.BlockPositionableInventory {
 
-    public BlockType[] getAllowedBlockType();
+    BlockType[] getAllowedBlockType();
 
-    default Optional<LiveTileEntity> getAttachedTileEntity(){
-        return getPosition().getTileEntity();
+    default Optional<LiveTileEntity> getAttachedTileEntity() {
+        return this.getPosition().getTileEntity();
     }
 }

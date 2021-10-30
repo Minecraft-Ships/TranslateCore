@@ -24,11 +24,11 @@ public class TimeRange {
     }
 
     public LocalTime getTime() {
-        return time;
+        return this.time;
     }
 
     public int getTicks() {
-        return ticks;
+        return this.ticks;
     }
 
     public LocalTime getEndTime() {

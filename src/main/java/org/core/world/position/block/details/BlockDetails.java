@@ -42,6 +42,6 @@ public interface BlockDetails {
     <T> BlockDetails set(Class<? extends KeyedData<T>> data, T value);
 
     default <T> Optional<T> getUnspecified(Class<? extends KeyedData<?>> dataClass) {
-        return get((Class<? extends KeyedData<T>>) dataClass);
+        return this.get((Class<? extends KeyedData<T>>) dataClass);
     }
 }

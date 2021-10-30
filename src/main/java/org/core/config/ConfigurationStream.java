@@ -1,6 +1,9 @@
 package org.core.config;
 
 import org.array.utils.ArrayUtils;
+import org.core.TranslateCore;
+import org.core.adventureText.AText;
+import org.core.adventureText.format.NamedTextColours;
 import org.core.config.parser.Parser;
 import org.core.config.parser.StringMapParser;
 import org.core.config.parser.StringParser;
@@ -8,6 +11,7 @@ import org.core.config.parser.StringParser;
 import java.io.File;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public interface ConfigurationStream {
 
@@ -58,25 +62,25 @@ public interface ConfigurationStream {
     }
 
     default <T> void set(ConfigurationNode node, StringMapParser<T> parser, T value) {
-        set(node, parser.unparse(value));
+        this.set(node, parser.unparse(value));
     }
 
     default <T> void set(ConfigurationNode node, StringParser<T> parser, T value) {
         if (parser.equals(Parser.STRING_TO_BOOLEAN)) {
-            set(node, (Boolean) value);
+            this.set(node, (Boolean) value);
             return;
         } else if (parser.equals(Parser.STRING_TO_DOUBLE)) {
-            set(node, ((Number) value).doubleValue());
+            this.set(node, ((Number) value).doubleValue());
             return;
         } else if (parser.equals(Parser.STRING_TO_INTEGER)) {
-            set(node, ((Number) value).intValue());
+            this.set(node, ((Number) value).intValue());
             return;
         }
         try {
-            set(node, parser.unparse(value));
+            this.set(node, parser.unparse(value));
         } catch (ClassCastException e) {
-            System.err.println("Path: " + ArrayUtils.toString(".", t -> t, node.getPath()));
-            System.err.println("Value: (" + value.getClass().getName() + ") '" + value.toString() + "'");
+            TranslateCore.getConsole().sendMessage(AText.ofPlain("Path: " + String.join(".", node.getPath())).withColour(NamedTextColours.RED));
+            TranslateCore.getConsole().sendMessage(AText.ofPlain("Value: (" + value.getClass().getName() + ") '" + value + "'").withColour(NamedTextColours.RED));
             e.printStackTrace();
         }
     }
@@ -90,7 +94,7 @@ public interface ConfigurationStream {
     }
 
     default <T, C extends Collection<T>> void set(ConfigurationNode.KnownParser.CollectionKnown<T, C> node, C value) {
-        set(node, node.getParser(), value);
+        this.set(node, node.getParser(), value);
     }
 
     default <T> void set(ConfigurationNode.GroupKnown<T> node, Collection<T> values) {
@@ -98,8 +102,18 @@ public interface ConfigurationStream {
         values.forEach(v -> {
             String key = node.toKey(v);
             Parser<String, T> mappedValue = node.getValueParsers().get(key);
-            if (mappedValue == null) {
-                throw new IllegalStateException("Can not save GroupKnown. Unknown Key of '" + key + "' from '" + ArrayUtils.toString(", ", t -> "\"" + t + "\"", node.getValueParsers().keySet()) + "' which was created from GroupKnown.toKey(T)");
+            if (mappedValue==null) {
+                throw new IllegalStateException(
+                        "Can not save GroupKnown. Unknown Key of '"
+                                + key
+                                + "' from '"
+                                + node
+                                .getValueParsers()
+                                .keySet()
+                                .stream()
+                                .map(t -> "\"" + t + "\t")
+                                .collect(Collectors.joining(", "))
+                                + "' which was created from GroupKnown.toKey(T)");
             }
             String value = mappedValue.unparse(v);
             map.put(key, value);
@@ -108,13 +122,13 @@ public interface ConfigurationStream {
 
     }
 
-    default <T> Optional<T> parse(ConfigurationNode node, Parser<String, T> parser) {
+    default <T> Optional<T> parse(ConfigurationNode node, Parser<? super String, T> parser) {
         if (parser.equals(Parser.STRING_TO_INTEGER)) {
-            return (Optional<T>) getInteger(node);
+            return (Optional<T>) this.getInteger(node);
         } else if (parser.equals(Parser.STRING_TO_DOUBLE)) {
-            return (Optional<T>) getDouble(node);
+            return (Optional<T>) this.getDouble(node);
         } else if (parser.equals(Parser.STRING_TO_BOOLEAN)) {
-            return (Optional<T>) getBoolean(node);
+            return (Optional<T>) this.getBoolean(node);
         }
         Optional<String> opValue = this.getString(node);
         if (!opValue.isPresent()) {
@@ -125,9 +139,9 @@ public interface ConfigurationStream {
 
     default <T> Optional<T> parse(ConfigurationNode.KnownParser<?, T> node) {
         if (node.getParser() instanceof StringParser) {
-            return parse(node, (StringParser<T>) node.getParser());
+            return this.parse(node, (StringParser<T>) node.getParser());
         } else if (node.getParser() instanceof StringMapParser) {
-            return parse(node, (StringMapParser<T>) node.getParser());
+            return this.parse(node, (StringMapParser<T>) node.getParser());
         } else {
             throw new IllegalArgumentException("Unknown type of parser of '" + node.getParser().getClass().getName() + "', ConfigurationStream.parse(ConfigurationNode.KnownParser) only accepts StringParser and StringMapParser");
         }
@@ -147,21 +161,21 @@ public interface ConfigurationStream {
     }
 
     default <T> T parse(ConfigurationNode node, StringParser<T> parser, T value) {
-        return parse(node, parser).orElse(value);
+        return this.parse(node, parser).orElse(value);
     }
 
     default <T> T parse(ConfigurationNode node, StringMapParser<T> parser, T value) {
-        return parse(node, parser).orElse(value);
+        return this.parse(node, parser).orElse(value);
     }
 
     default <T> T parse(ConfigurationNode.KnownParser<?, T> node, T value) {
-        return parse(node).orElse(value);
+        return this.parse(node).orElse(value);
     }
 
     default <T, C extends Collection<T>> C parseCollection(ConfigurationNode.GroupKnown<T> node, C collection) {
         node.getValueParsers().forEach((key, value) -> {
             ConfigurationNode directNode = new ConfigurationNode(ArrayUtils.join(String.class, node.getPath(), new String[]{key}));
-            Optional<String> opValue = getString(directNode);
+            Optional<String> opValue = this.getString(directNode);
             if (!opValue.isPresent()) {
                 return;
             }
@@ -175,11 +189,11 @@ public interface ConfigurationStream {
     }
 
     default <T, C extends Collection<T>> C parseCollection(ConfigurationNode.KnownParser<String, T> node, C collection) {
-        return parseCollection(node, node.getParser(), collection);
+        return this.parseCollection(node, node.getParser(), collection);
     }
 
     default boolean getBoolean(ConfigurationNode node, boolean value) {
-        return getBoolean(node).orElse(value);
+        return this.getBoolean(node).orElse(value);
     }
 
     default double getDouble(ConfigurationNode node, double value) {

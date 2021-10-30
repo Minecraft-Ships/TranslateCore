@@ -31,7 +31,7 @@ public class CorePluginVersion implements PluginVersion {
 
     @Override
     public @NotNull String asString() {
-        return getMajor() + "." + getMinor() + "." + getPatch();
+        return this.getMajor() + "." + this.getMinor() + "." + this.getPatch();
     }
 
 }

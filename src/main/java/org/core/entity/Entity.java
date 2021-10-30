@@ -1,7 +1,6 @@
 package org.core.entity;
 
 import org.core.adventureText.AText;
-import org.core.text.Text;
 import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
 import org.core.world.direction.EightFacingDirection;
@@ -12,7 +11,6 @@ import org.core.world.position.block.BlockTypes;
 import org.core.world.position.impl.Position;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
-import org.core.world.position.impl.sync.SyncPosition;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -111,16 +109,6 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      * @param text the name to be
      * @return itself for chaining
      */
-    @Deprecated
-    Entity<T> setCustomName(Text text);
-
-    /**
-     * Sets the custom name of the entity.
-     * For players this is the display name.
-     *
-     * @param text the name to be
-     * @return itself for chaining
-     */
     Entity<T> setCustomName(@Nullable AText text);
 
     /**
@@ -205,7 +193,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      * @param entities Collection of entities to add
      * @return itself for chaining
      */
-    Entity<T> addPassengers(Collection<T> entities);
+    Entity<T> addPassengers(Collection<? extends T> entities);
 
     /**
      * Removes passengers to the current entity.
@@ -235,7 +223,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      * @return itself for chaining
      */
     default Entity<T> setVelocity(double x, double y, double z) {
-        return setVelocity(Vector3.valueOf(x, y, z));
+        return this.setVelocity(Vector3.valueOf(x, y, z));
     }
 
     /**
@@ -244,7 +232,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      * @return if this has passengers
      */
     default boolean hasPassengers() {
-        return !getPassengers().isEmpty();
+        return !this.getPassengers().isEmpty();
     }
 
     /**
@@ -258,7 +246,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      */
     @SuppressWarnings("unchecked")
     default Entity<T> addPassengers(T... entities) {
-        return addPassengers(Arrays.asList(entities));
+        return this.addPassengers(Arrays.asList(entities));
     }
 
     /**
@@ -272,7 +260,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      */
     @SuppressWarnings("unchecked")
     default Entity<T> removePassengers(T... entities) {
-        return removePassengers(Arrays.asList(entities));
+        return this.removePassengers(Arrays.asList(entities));
     }
 
     /**
@@ -281,7 +269,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      * @return itself for chaining
      */
     default Entity<T> clearPassengers() {
-        return removePassengers(getPassengers());
+        return this.removePassengers(this.getPassengers());
     }
 
     /**
@@ -295,7 +283,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      * @return itself for chaining
      */
     default Entity<T> setPosition(double x, double y, double z) {
-        return setPosition(getPosition().getWorld().getPosition(x, y, z));
+        return this.setPosition(this.getPosition().getWorld().getPosition(x, y, z));
     }
 
     /**
@@ -307,7 +295,8 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      * @return itself for chaining
      */
     default Entity<T> setPosition(Vector3<? extends Number> vector) {
-        return setPosition(vector.getRawX().doubleValue(), vector.getRawY().doubleValue(), vector.getRawZ().doubleValue());
+        return this.setPosition(vector.getRawX().doubleValue(), vector.getRawY().doubleValue(),
+                vector.getRawZ().doubleValue());
     }
 
     /**
@@ -316,7 +305,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      * @return A direction of the entities facing direction
      */
     default Direction getFacingDirection() {
-        double yaw = getYaw();
+        double yaw = this.getYaw();
         if (yaw < 0) {
             yaw = yaw + 360;
         }
@@ -365,7 +354,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      * @return The attached block if present
      */
     default Optional<SyncBlockPosition> getAttachedTo() {
-        SyncBlockPosition block = getPosition().getRelative(Vector3.valueOf(0, -0.1, 0)).toBlockPosition();
+        SyncBlockPosition block = this.getPosition().getRelative(Vector3.valueOf(0, -0.1, 0)).toBlockPosition();
         if (block.getBlockType().equals(BlockTypes.AIR)) {
             return Optional.empty();
         }

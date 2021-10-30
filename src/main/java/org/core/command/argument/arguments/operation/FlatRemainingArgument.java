@@ -42,12 +42,12 @@ public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
             try {
                 return parse(context, B, this.argument.get(A));
             } catch (IOException e) {
-                if (A == 0) {
+                if (A==0) {
                     e1 = e;
                 }
             }
         }
-        if (e1 == null) {
+        if (e1==null) {
             //shouldnt be possible
             throw new IOException("Unknown error occurred");
         }
@@ -69,7 +69,7 @@ public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
         int A = argument.getFirstArgument();
         List<T> list = new ArrayList<>();
         while (A < context.getCommand().length) {
-            CommandArgumentResult<? extends Collection<T>> entry = parseAny(context, A);
+            CommandArgumentResult<? extends Collection<T>> entry = this.parseAny(context, A);
             A = entry.getPosition();
             list.addAll(entry.getValue());
         }
@@ -83,12 +83,12 @@ public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
             final int B = A;
             CommandArgumentResult<? extends Collection<T>> entry;
             try {
-                entry = parseAny(context, A);
+                entry = this.parseAny(context, A);
             } catch (IOException e) {
                 return this
                         .argument
                         .stream()
-                        .flatMap(a -> suggest(context, B, a).stream())
+                        .flatMap(a -> this.suggest(context, B, a).stream())
                         .collect(Collectors.toSet());
             }
             A = entry.getPosition();

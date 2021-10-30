@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class StringToEnumParser<E extends Enum> implements StringParser.Suggestible<E> {
+public class StringToEnumParser<E extends Enum<E>> implements StringParser.Suggestible<E> {
 
-    private Class<E> clazz;
+    private final Class<E> clazz;
 
-    public StringToEnumParser(Class<E> clazz){
+    public StringToEnumParser(Class<E> clazz) {
         this.clazz = clazz;
     }
 
@@ -21,18 +21,14 @@ public class StringToEnumParser<E extends Enum> implements StringParser.Suggesti
     @SuppressWarnings("unchecked")
     public Optional<E> parse(String original) {
         try {
-            E[] values = (E[])clazz.getMethod("values").invoke(null);
-            for(E value : values){
-                if(value.name().equalsIgnoreCase(original)){
+            E[] values = (E[]) this.clazz.getMethod("values").invoke(null);
+            for (E value : values) {
+                if (value.name().equalsIgnoreCase(original)) {
                     return Optional.of(value);
                 }
             }
             return Optional.empty();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return Optional.empty();
@@ -45,20 +41,20 @@ public class StringToEnumParser<E extends Enum> implements StringParser.Suggesti
 
     @Override
     public List<E> getSuggestions(String peek) {
-        return getSuggestions().stream().filter(e -> e.name().toLowerCase().startsWith(peek.toLowerCase())).collect(Collectors.toList());
+        return this
+                .getSuggestions()
+                .stream()
+                .filter(e -> e.name().toLowerCase().startsWith(peek.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<E> getSuggestions() {
         try {
-            E[] values = (E[])clazz.getMethod("values").invoke(null);
+            E[] values = (E[]) this.clazz.getMethod("values").invoke(null);
             return Arrays.asList(values);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }
         return new ArrayList<>();

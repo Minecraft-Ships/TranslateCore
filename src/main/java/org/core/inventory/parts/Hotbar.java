@@ -4,14 +4,16 @@ import org.core.inventory.parts.snapshot.HotbarSnapshot;
 
 public interface Hotbar extends InventoryPart {
 
-    public int getSelectedSlotPos();
+    int getSelectedSlotPos();
 
     @Override
-    default HotbarSnapshot createSnapshot(){
+    default HotbarSnapshot createSnapshot() {
         return new HotbarSnapshot(this);
     }
 
-    public default Slot getSelectedSlot(){
-        return this.getSlot(getSelectedSlotPos()).get();
+    default Slot getSelectedSlot() {
+        return this
+                .getSlot(this.getSelectedSlotPos())
+                .orElseThrow(() -> new IllegalStateException("Cannot get slot of " + this.getSelectedSlotPos()));
     }
 }

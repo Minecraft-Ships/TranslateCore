@@ -21,7 +21,7 @@ public interface KeyedData<T> {
         map.put("Openable", OPENABLE);
         map.put("WaterLogged", WATER_LOGGED);
         map.put("TiledEntity", TILED_ENTITY);
-        map.put("MutliDirectional", MULTI_DIRECTIONAL);
+        map.put("MultiDirectional", MULTI_DIRECTIONAL);
         return map;
     }
 }

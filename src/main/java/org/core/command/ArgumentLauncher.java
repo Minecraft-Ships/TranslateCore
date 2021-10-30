@@ -1,6 +1,5 @@
 package org.core.command;
 
-import org.core.TranslateCore;
 import org.core.adventureText.AText;
 import org.core.adventureText.format.NamedTextColours;
 import org.core.command.argument.ArgumentCommand;
@@ -9,7 +8,6 @@ import org.core.command.argument.context.ErrorContext;
 import org.core.exceptions.NotEnoughArguments;
 import org.core.source.command.CommandSource;
 import org.core.source.viewer.CommandViewer;
-import org.core.text.TextColours;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -55,7 +53,7 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
         }
         if (!opCommand.get().hasPermission(source)) {
             if (source instanceof CommandViewer) {
-                ((CommandViewer) source).sendMessage(TranslateCore.buildText(TextColours.RED + " You do not have permission for that command. You require " + opCommand.get().getPermissionNode()));
+                ((CommandViewer) source).sendMessage(AText.ofPlain("You do not have permission for that command. You require " + opCommand.get().getPermissionNode()).withColour(NamedTextColours.RED));
                 return true;
             }
             return false;

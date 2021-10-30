@@ -13,7 +13,10 @@ import java.util.Collections;
 public class BlockTypesArgument extends FlatRemainingArgument<BlockType> {
 
     public BlockTypesArgument(String id) {
-        super(id, new MappedArgumentWrapper<>(new BlockGroupArgument(id), g -> Arrays.asList(g.getGrouped())), new MappedArgumentWrapper<>(new BlockTypeArgument(id), Collections::singletonList));
+        super(
+                id,
+                new MappedArgumentWrapper<>(new BlockGroupArgument(id), g -> Arrays.asList(g.getGrouped())),
+                new MappedArgumentWrapper<>(new BlockTypeArgument(id), Collections::singletonList));
     }
 
 }

@@ -14,6 +14,6 @@ public interface PatternLayers {
     PatternLayersSnapshot createSnapshot();
 
     default PatternLayers addLayers(PatternLayer... layers){
-        return addLayers(Arrays.asList(layers));
+        return this.addLayers(Arrays.asList(layers));
     }
 }

@@ -8,10 +8,11 @@ import java.util.stream.Collectors;
 
 public interface ArrayUtils {
 
+    @Deprecated
     static <T, F> T collect(Function<F, T> function, BiFunction<T, F, T> biFunction, Iterable<F> iterable) {
         T result = null;
         for (F obj : iterable) {
-            if (result == null) {
+            if (result==null) {
                 result = function.apply(obj);
                 continue;
             }
@@ -20,6 +21,7 @@ public interface ArrayUtils {
         return result;
     }
 
+    @Deprecated
     static String collect(String split, Iterable<String> iterable) {
         return collect(t -> t, (old, t) -> old + split + t, iterable);
     }
@@ -47,7 +49,7 @@ public interface ArrayUtils {
         Map<String, Map.Entry<T, Integer>> map = new HashMap<>();
         collection.forEach(v -> {
             T value = function.apply(v);
-            if (value == null) {
+            if (value==null) {
                 return;
             }
             String id = toID.apply(value);
@@ -73,6 +75,7 @@ public interface ArrayUtils {
      * @param <T>        the element type
      * @return the total
      */
+    @Deprecated
     static <T> int countInt(int start, Function<T, Integer> function, Iterable<T> collection) {
         return count(start, function, Integer::sum, collection);
     }
@@ -86,6 +89,7 @@ public interface ArrayUtils {
      * @param <T>        the element type
      * @return the total
      */
+    @Deprecated
     static <T> double countDouble(double start, Function<T, Double> function, Iterable<T> collection) {
         return count(start, function, Double::sum, collection);
     }
@@ -101,6 +105,7 @@ public interface ArrayUtils {
      * @param <N>        the type of number
      * @return the total.
      */
+    @Deprecated
     static <T, N extends Number> N count(N start, Function<T, N> function, BiFunction<N, N, N> add, Iterable<T> collection) {
         N num = start;
         for (T value : collection) {
@@ -198,6 +203,7 @@ public interface ArrayUtils {
      * @return A string output
      */
     @SafeVarargs
+    @Deprecated
     static <T> String toString(String split, Function<T, String> toString, T... array) {
         return toString(split, toString, Arrays.asList(array));
     }
@@ -211,10 +217,12 @@ public interface ArrayUtils {
      * @param <T>      The class type of the array
      * @return A string output
      */
+    @Deprecated
     static <T> String toString(String split, Function<T, String> toString, Iterable<T> array) {
         return collect(toString, (old, obj) -> old + split + toString.apply(obj), array);
     }
 
+    @Deprecated
     static <T> String toString(String split, Function<T, String> toString, Collection<T> collection) {
         return collection.stream().map(toString).collect(Collectors.joining(split));
     }
@@ -246,7 +254,7 @@ public interface ArrayUtils {
         T value = null;
         Integer best = null;
         for (T value1 : collection) {
-            if (value == null) {
+            if (value==null) {
                 value = value1;
                 best = function.apply(value1);
             }
@@ -290,7 +298,7 @@ public interface ArrayUtils {
         Set<T> value = new HashSet<>();
         N best = null;
         for (T value1 : collection) {
-            if (best == null) {
+            if (best==null) {
                 value.add(value1);
                 best = function.apply(value1);
             }
@@ -351,6 +359,7 @@ public interface ArrayUtils {
         return array;
     }
 
+    @SafeVarargs
     static <T> T[] join(Class<T> clazz, T[]... arrays) {
         List<T> list = new ArrayList<>();
         for (T[] array : arrays) {
@@ -391,7 +400,7 @@ public interface ArrayUtils {
         if (combineStartWith) {
             split[0] = toSplit.substring(0, startWith + split[0].length());
         }
-        if (startWith == 0) {
+        if (startWith==0) {
             return split;
         }
         newSplit = new String[split.length];

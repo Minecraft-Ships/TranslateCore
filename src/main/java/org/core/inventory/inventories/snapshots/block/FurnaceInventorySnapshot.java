@@ -5,6 +5,7 @@ import org.core.inventory.inventories.general.block.FurnaceInventory;
 import org.core.inventory.parts.Slot;
 import org.core.inventory.parts.snapshot.SlotSnapshot;
 import org.core.world.position.block.entity.LiveTileEntity;
+import org.core.world.position.block.entity.container.furnace.FurnaceTileEntity;
 import org.core.world.position.block.entity.container.furnace.LiveFurnaceTileEntity;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 
@@ -17,7 +18,7 @@ public abstract class FurnaceInventorySnapshot implements FurnaceInventory, Inve
     protected SlotSnapshot smeltingSlot;
     protected SyncBlockPosition position;
 
-    public void apply(FurnaceInventory fi){
+    public void apply(FurnaceInventory fi) {
         this.fuelSlot.getItem().ifPresent(f -> fi.getFuelSlot().setItem(f));
         this.resultsSlot.getItem().ifPresent(f -> fi.getResultsSlot().setItem(f));
         this.smeltingSlot.getItem().ifPresent(f -> fi.getSmeltingSlot().setItem(f));
@@ -34,7 +35,7 @@ public abstract class FurnaceInventorySnapshot implements FurnaceInventory, Inve
     }
 
     @Override
-    public Slot getSmeltingSlot(){
+    public Slot getSmeltingSlot() {
         return this.smeltingSlot;
     }
 
@@ -44,15 +45,15 @@ public abstract class FurnaceInventorySnapshot implements FurnaceInventory, Inve
     }
 
     @Override
-    public void apply(){
+    public void apply() {
         Optional<LiveTileEntity> opTile = this.position.getTileEntity();
-        if(!opTile.isPresent()){
+        if (!opTile.isPresent()) {
             return;
         }
-        if (!(opTile.get() instanceof LiveFurnaceTileEntity)){
+        if (!(opTile.get() instanceof LiveFurnaceTileEntity)) {
             return;
         }
-        LiveFurnaceTileEntity lfte = (LiveFurnaceTileEntity) opTile.get();
-        apply(lfte.getInventory());
+        FurnaceTileEntity lfte = (FurnaceTileEntity) opTile.get();
+        this.apply(lfte.getInventory());
     }
 }

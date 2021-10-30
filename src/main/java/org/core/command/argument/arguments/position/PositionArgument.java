@@ -36,7 +36,7 @@ public abstract class PositionArgument<N extends Number, P extends Position<N>> 
         CommandArgumentResult<N> x = this.positionArgument.parse(context, new CommandArgumentContext<>(this.positionArgument, extent.getPosition() + 1, context.getCommand()));
         CommandArgumentResult<N> y = this.positionArgument.parse(context, new CommandArgumentContext<>(this.positionArgument, x.getPosition(), context.getCommand()));
         CommandArgumentResult<N> z = this.positionArgument.parse(context, new CommandArgumentContext<>(this.positionArgument, y.getPosition(), context.getCommand()));
-        P pos = build(extent.getValue(), x.getValue(), y.getValue(), z.getValue());
+        P pos = this.build(extent.getValue(), x.getValue(), y.getValue(), z.getValue());
         return new CommandArgumentResult<>(z.getPosition(), pos);
     }
 

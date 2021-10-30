@@ -37,12 +37,12 @@ public class AdventureText implements AText {
 
     @Override
     public @NotNull AText append(@NotNull AText aText) {
-        return new AdventureText(this.component.append(toAdventure(aText).component));
+        return new AdventureText(this.component.append(this.toAdventure(aText).component));
     }
 
     @Override
     public boolean contains(@NotNull AText aText) {
-        return this.component.contains(toAdventure(aText).component);
+        return this.component.contains(this.toAdventure(aText).component);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AdventureText implements AText {
                 TextReplacementConfig
                         .builder()
                         .matchLiteral(containing)
-                        .replacement(toAdventure(aText).component)
+                        .replacement(this.toAdventure(aText).component)
                         .build()));
     }
 

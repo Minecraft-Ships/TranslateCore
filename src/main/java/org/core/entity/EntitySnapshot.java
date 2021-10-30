@@ -23,7 +23,8 @@ public interface EntitySnapshot<E extends LiveEntity> extends Entity<EntitySnaps
          * @return The entity of the snapshot
          */
         default E getEntity(){
-            return this.getCreatedFrom().get();
+            return this.getCreatedFrom().orElseThrow(() -> new IllegalStateException("Cannot get entity, is the " +
+                    "implementation correct?"));
         }
 
     }

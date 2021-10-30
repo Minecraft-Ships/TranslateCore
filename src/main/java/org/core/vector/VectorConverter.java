@@ -9,8 +9,8 @@ public interface VectorConverter {
 
         class AbstractSpecificWrapper<N extends Number, V extends Vector<N, ?>> implements Specific<N, V> {
 
-            private VectorConverter converter;
-            private Function<BigDecimal, N> function;
+            private final VectorConverter converter;
+            private final Function<BigDecimal, N> function;
 
             public AbstractSpecificWrapper(VectorConverter converter, Function<BigDecimal, N> function){
                 this.converter = converter;
@@ -36,7 +36,7 @@ public interface VectorConverter {
         Function<BigDecimal, N> getConverter();
 
         default V convert(Vector<?, ?> vector){
-            return (V)convert(this.getConverter(), vector);
+            return (V)this.convert(this.getConverter(), vector);
         }
 
     }

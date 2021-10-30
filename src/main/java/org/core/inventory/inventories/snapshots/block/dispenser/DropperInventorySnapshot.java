@@ -4,6 +4,7 @@ import org.core.inventory.inventories.general.block.dispenser.DropperInventory;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.BlockTypes;
 import org.core.world.position.block.entity.LiveTileEntity;
+import org.core.world.position.block.entity.container.ContainerTileEntity;
 import org.core.world.position.block.entity.container.dropper.LiveDropperTileEntity;
 
 import java.util.Optional;
@@ -19,8 +20,8 @@ public abstract class DropperInventorySnapshot extends DispenserBasedInventorySn
         if (!(opTile.get() instanceof LiveDropperTileEntity)) {
             return;
         }
-        LiveDropperTileEntity ldte = (LiveDropperTileEntity) opTile.get();
-        apply(ldte.getInventory());
+        ContainerTileEntity ldte = (ContainerTileEntity) opTile.get();
+        this.apply(ldte.getInventory());
     }
 
     @Override

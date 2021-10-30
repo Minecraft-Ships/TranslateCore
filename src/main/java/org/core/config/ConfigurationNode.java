@@ -13,10 +13,13 @@ public class ConfigurationNode {
 
     public static class GroupKnown<T> extends ConfigurationNode {
 
-        private Supplier<Map<String, Parser<String, T>>> values;
-        private Function<T, String> toKey;
+        private final Supplier<? extends Map<String, Parser<String, T>>> values;
+        private final Function<? super T, String> toKey;
 
-        public GroupKnown(Supplier<Map<String, Parser<String, T>>> values, Function<T, String> toKey, String... path) {
+        public GroupKnown(
+                Supplier<? extends Map<String, Parser<String, T>>> values,
+                Function<? super T, String> toKey,
+                String... path) {
             super(path);
             this.values = values;
             this.toKey = toKey;
@@ -87,7 +90,7 @@ public class ConfigurationNode {
     private final String[] path;
 
     public ConfigurationNode(String... path) {
-        if (path.length == 0) {
+        if (path.length==0) {
             throw new IllegalArgumentException("Node must have a path specified");
         }
         this.path = path;

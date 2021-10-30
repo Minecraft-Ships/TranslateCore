@@ -17,16 +17,16 @@ public interface TileEntitySnapshot <E extends LiveTileEntity> extends TileEntit
 
     @SuppressWarnings("unchecked")
     default E apply(SyncBlockPosition position) throws BlockNotSupported {
-        if(!getSupportedBlocks().stream().anyMatch(b -> position.getBlockType().equals(b))){
+        if(this.getSupportedBlocks().stream().noneMatch(b -> position.getBlockType().equals(b))){
             throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());
         }
         Optional<LiveTileEntity> opTileEntity = position.getTileEntity();
         if(!opTileEntity.isPresent()){
             throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());
         }
-        if(!getDeclaredClass().isAssignableFrom(opTileEntity.get().getClass())){
+        if(!this.getDeclaredClass().isAssignableFrom(opTileEntity.get().getClass())){
             throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());
         }
-        return apply((E)opTileEntity.get());
+        return this.apply((E)opTileEntity.get());
     }
 }

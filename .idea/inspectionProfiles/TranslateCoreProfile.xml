@@ -1,0 +1,21 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="TranslateCoreProfile" />
+    <inspection_tool class="1d3f61ab-d207-305c-a54e-4abae8b3ab63" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <searchConfiguration name="Missing Event" suppressId="missing-event" problemDescriptor="Missing Event" text="@HEvent&#10;$ReturnType$ $Method$();" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="member">
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="ReturnType" within="" contains="" />
+        <constraint name="Method" target="true" within="" contains="" />
+      </searchConfiguration>
+      <searchConfiguration name="Multi Parameter Event" suppressId="multi-parameter-event" problemDescriptor="Cannot have multiple events in a single event handler" text="@HEvent&#10;$ReturnType$ $Method$($ParameterType$ $Parameter$);" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="member">
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="ReturnType" within="" contains="" />
+        <constraint name="Method" within="" contains="" />
+        <constraint name="ParameterType" within="" contains="" />
+        <constraint name="Parameter" minCount="2" maxCount="2147483647" within="" contains="" />
+      </searchConfiguration>
+    </inspection_tool>
+    <inspection_tool class="ad8fbb3a-ff69-306e-a736-b370172bb572" enabled="true" level="ERROR" enabled_by_default="true" />
+  </profile>
+</component>

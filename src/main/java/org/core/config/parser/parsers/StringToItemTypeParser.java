@@ -24,7 +24,12 @@ public class StringToItemTypeParser implements StringParser.Suggestible<ItemType
 
     @Override
     public List<ItemType> getSuggestions(String peek) {
-        return TranslateCore.getPlatform().getItemTypes().stream().filter(it -> it.getId().toLowerCase().startsWith(peek.toLowerCase())).collect(Collectors.toList());
+        return TranslateCore
+                .getPlatform()
+                .getItemTypes()
+                .stream()
+                .filter(it -> it.getId().toLowerCase().startsWith(peek.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     @Override

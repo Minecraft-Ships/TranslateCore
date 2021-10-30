@@ -17,9 +17,8 @@ public class BlockGroups {
         IMPLEMENTATION = new BlockGroups().registerFields(CommonBlockGroups.class);
         CorePluginVersion version = TranslateCore.getPlatform().getMinecraftVersion();
         if (version.getMajor()==1) {
-            if (version.getMinor() >= 13) {
-                IMPLEMENTATION.registerFields(BlockGroups1V13.class);
-            }
+            IMPLEMENTATION.registerFields(BlockGroups1V13.class);
+
         }
     }
 
@@ -30,7 +29,7 @@ public class BlockGroups {
         return this;
     }
 
-    public BlockGroups register(Collection<BlockGroup> groups) {
+    public BlockGroups register(Collection<? extends BlockGroup> groups) {
         this.groups.addAll(groups);
         return this;
     }

@@ -10,6 +10,6 @@ public interface EntityInventorySnapshot <E extends LiveEntity> extends Inventor
 
     @Override
     default void apply() {
-        getAttachedEntity().ifPresent(e -> apply(e));
+        this.getAttachedEntity().ifPresent(this::apply);
     }
 }

@@ -5,9 +5,9 @@ import org.core.world.position.block.BlockType;
 
 public class BlockGroup implements Identifiable {
 
-    private String id;
-    private String name;
-    private BlockType[] grouped;
+    private final String id;
+    private final String name;
+    private final BlockType[] grouped;
 
     public BlockGroup(String id, String name, BlockType... types){
         this.id = id;

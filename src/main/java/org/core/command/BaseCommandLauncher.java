@@ -12,7 +12,7 @@ public interface BaseCommandLauncher {
     boolean hasPermission(CommandSource source);
 
     default String getUsage(CommandSource source){
-        return getName();
+        return this.getName();
     }
 
     boolean run(CommandSource source, String... args) throws NotEnoughArguments;

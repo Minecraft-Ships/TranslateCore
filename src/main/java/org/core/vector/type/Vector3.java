@@ -84,7 +84,8 @@ public class Vector3<N extends Number> extends Vector<N, Vector3<N>> {
     }
 
     public double distanceSquared(Number x, Number y, Number z){
-        return distanceSquared(this.createNew(BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(y.doubleValue()), BigDecimal.valueOf(z.doubleValue())));
+        return this.distanceSquared(this.createNew(BigDecimal.valueOf(x.doubleValue()),
+                BigDecimal.valueOf(y.doubleValue()), BigDecimal.valueOf(z.doubleValue())));
     }
 
     @Override

@@ -4,8 +4,8 @@ import org.core.vector.type.Vector3;
 
 public class Bounds<N extends Number> {
 
-    private Vector3<N> min;
-    private Vector3<N> max;
+    private final Vector3<N> min;
+    private final Vector3<N> max;
 
     public Bounds(Vector3<N> min, Vector3<N> max) {
         this.max = max;
@@ -21,7 +21,7 @@ public class Bounds<N extends Number> {
     }
 
     public boolean contains(Vector3<Integer> vector) {
-        return contains(vector.getX(), vector.getY(), vector.getZ());
+        return this.contains(vector.getX(), vector.getY(), vector.getZ());
     }
 
     public boolean contains(int x, int y, int z) {

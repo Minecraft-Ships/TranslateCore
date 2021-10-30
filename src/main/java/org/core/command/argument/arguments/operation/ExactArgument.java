@@ -1,14 +1,15 @@
 package org.core.command.argument.arguments.operation;
 
-import org.array.utils.ArrayUtils;
 import org.core.command.argument.CommandArgument;
 import org.core.command.argument.CommandArgumentResult;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ExactArgument implements CommandArgument<String> {
 
@@ -21,7 +22,7 @@ public class ExactArgument implements CommandArgument<String> {
     }
 
     public ExactArgument(String id, boolean caseSens, String... lookup) {
-        if (lookup.length == 0) {
+        if (lookup.length==0) {
             throw new IllegalArgumentException("Lookup cannot be []");
         }
         this.id = id;
@@ -50,7 +51,7 @@ public class ExactArgument implements CommandArgument<String> {
     @Override
     public CommandArgumentResult<String> parse(CommandContext context, CommandArgumentContext<String> argument) throws IOException {
         String arg = context.getCommand()[argument.getFirstArgument()];
-        if (anyMatch(arg)) {
+        if (this.anyMatch(arg)) {
             return CommandArgumentResult.from(argument, arg);
         }
         throw new IOException("Unknown argument of '" + arg + "'");
@@ -73,6 +74,11 @@ public class ExactArgument implements CommandArgument<String> {
 
     @Override
     public String getUsage() {
-        return "<" + ArrayUtils.toString("/", t -> "\"" + t + "\"", this.lookup) + ">";
+        return "<" +
+                Arrays
+                        .stream(this.lookup)
+                        .map(l -> "\"" + l + "\"")
+                        .collect(Collectors.joining(" / "))
+                + ">";
     }
 }

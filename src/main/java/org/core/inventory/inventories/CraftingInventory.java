@@ -12,10 +12,11 @@ import java.util.Set;
 public interface CraftingInventory extends Inventory.Parent, BlockAttachedInventory {
 
     CraftGrid getCraftingGrid();
+
     Slot getResult();
 
     @Override
-    default Set<InventoryPart> getFirstChildren(){
-        return new HashSet<>(Arrays.asList(getCraftingGrid(), getResult()));
+    default Set<InventoryPart> getFirstChildren() {
+        return new HashSet<>(Arrays.asList(this.getCraftingGrid(), this.getResult()));
     }
 }

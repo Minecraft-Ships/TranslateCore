@@ -27,17 +27,17 @@ public interface FurnaceInventory extends BlockAttachedInventory, Inventory.Pare
     @Override
     default Set<InventoryPart> getFirstChildren() {
         Set<InventoryPart> set = new HashSet<>();
-        set.add(getFuelSlot());
-        set.add(getResultsSlot());
+        set.add(this.getFuelSlot());
+        set.add(this.getResultsSlot());
         return set;
     }
 
     @Override
     default Set<Slot> getSlots() {
         Set<Slot> slots = new HashSet<>();
-        slots.add(getFuelSlot());
-        slots.add(getResultsSlot());
-        slots.add(getSmeltingSlot());
+        slots.add(this.getFuelSlot());
+        slots.add(this.getResultsSlot());
+        slots.add(this.getSmeltingSlot());
         return slots;
     }
 

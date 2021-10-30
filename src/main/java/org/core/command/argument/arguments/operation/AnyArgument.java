@@ -16,20 +16,20 @@ import java.util.stream.Collectors;
 public class AnyArgument<A> implements CommandArgument<A> {
 
     private final String id;
-    private final Function<A, String> toString;
-    private final BiFunction<Collection<A>, String, A> fromString;
+    private final Function<? super A, String> toString;
+    private final BiFunction<? super Collection<A>, String, ? extends A> fromString;
     private final BiFunction<CommandContext, CommandArgumentContext<A>, Collection<A>> supply;
 
     @SafeVarargs
-    public AnyArgument(String id, Function<A, String> toString, BiFunction<Collection<A>, String, A> fromString, A... array) {
+    public AnyArgument(String id, Function<A, String> toString, BiFunction<? super Collection<A>, String, A> fromString, A... array) {
         this(id, toString, fromString, Arrays.asList(array));
     }
 
-    public AnyArgument(String id, Function<A, String> toString, BiFunction<Collection<A>, String, A> fromString, Collection<A> collection) {
+    public AnyArgument(String id, Function<A, String> toString, BiFunction<? super Collection<A>, String, ? extends A> fromString, Collection<A> collection) {
         this(id, toString, fromString, (c, a) -> collection);
     }
 
-    public AnyArgument(String id, Function<A, String> toString, BiFunction<Collection<A>, String, A> fromString, BiFunction<CommandContext, CommandArgumentContext<A>, Collection<A>> supply) {
+    public AnyArgument(String id, Function<? super A, String> toString, BiFunction<? super Collection<A>, String, ? extends A> fromString, BiFunction<CommandContext, CommandArgumentContext<A>, Collection<A>> supply) {
         this.id = id;
         this.toString = toString;
         this.fromString = fromString;
@@ -45,7 +45,7 @@ public class AnyArgument<A> implements CommandArgument<A> {
     public CommandArgumentResult<A> parse(CommandContext context, CommandArgumentContext<A> argument) throws IOException {
         String arg = context.getCommand()[argument.getFirstArgument()];
         A result = this.fromString.apply(this.supply.apply(context, argument), arg);
-        if (result == null) {
+        if (result==null) {
             throw new IOException("Unknown value of " + arg);
         }
         return CommandArgumentResult.from(argument, 0, result);

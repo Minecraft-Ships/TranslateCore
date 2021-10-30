@@ -2,6 +2,7 @@ package org.core.inventory.inventories.snapshots.entity;
 
 import org.core.entity.living.hostile.undead.classic.ClassicZombie;
 import org.core.entity.living.hostile.undead.classic.LiveClassicZombie;
+import org.core.inventory.inventories.BasicEntityInventory;
 import org.core.inventory.inventories.general.entity.ZombieInventory;
 import org.core.inventory.parts.ArmorPart;
 import org.core.inventory.parts.Slot;
@@ -16,15 +17,16 @@ public abstract class ZombieInventorySnapshot implements ZombieInventory<LiveCla
     protected Slot secondHoldingItem;
     protected LiveClassicZombie zombie;
 
-    public ZombieInventorySnapshot(ZombieInventory<? extends ClassicZombie> inv){
+    public ZombieInventorySnapshot(BasicEntityInventory<? extends ClassicZombie<?>> inv) {
         this.armorPart = inv.getArmor().createSnapshot();
         this.mainHoldingItem = inv.getMainHoldingItem().createSnapshot();
         this.secondHoldingItem = inv.getOffHoldingItem().createSnapshot();
-        this.zombie = (LiveClassicZombie) inv.getAttachedEntity().get();
+        this.zombie = (LiveClassicZombie) inv.getAttachedEntity().orElseThrow(() -> new IllegalStateException("Could " +
+                "not find attached entity"));
     }
 
     @Override
-    public SyncExactPosition getPosition(){
+    public SyncExactPosition getPosition() {
         return this.zombie.getPosition();
     }
 
@@ -39,12 +41,12 @@ public abstract class ZombieInventorySnapshot implements ZombieInventory<LiveCla
     }
 
     @Override
-    public Slot getOffHoldingItem(){
+    public Slot getOffHoldingItem() {
         return this.secondHoldingItem;
     }
 
     @Override
-    public Optional<LiveClassicZombie> getAttachedEntity(){
+    public Optional<LiveClassicZombie> getAttachedEntity() {
         return Optional.of(this.zombie);
     }
 }

@@ -1,9 +1,11 @@
 package org.core.inventory.inventories.snapshots.block;
 
+import org.core.inventory.Inventory;
 import org.core.inventory.InventorySnapshot;
 import org.core.inventory.inventories.general.block.ChestInventory;
 import org.core.inventory.parts.Slot;
 import org.core.world.position.block.entity.LiveTileEntity;
+import org.core.world.position.block.entity.container.chest.ChestTileEntity;
 import org.core.world.position.block.entity.container.chest.LiveChestTileEntity;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 
@@ -19,21 +21,29 @@ public abstract class ChestInventorySnapshot implements ChestInventory, Inventor
     }
 
     @Override
-    public void apply(){
+    public void apply() {
         Optional<LiveTileEntity> opTile = this.position.getTileEntity();
-        if(!opTile.isPresent()){
+        if (!opTile.isPresent()) {
             return;
         }
-        if (!(opTile.get() instanceof LiveChestTileEntity)){
+        if (!(opTile.get() instanceof LiveChestTileEntity)) {
             return;
         }
-        LiveChestTileEntity lcte = (LiveChestTileEntity)opTile.get();
-        apply(lcte.getInventory());
+        ChestTileEntity lcte = (ChestTileEntity) opTile.get();
+        this.apply(lcte.getInventory());
     }
 
-    public void apply(ChestInventory inv){
-        for(Slot slot : this.getSlots()){
-            slot.getItem().ifPresent(f -> inv.getSlot(slot.getPosition().get()).get().setItem(f));
+    public void apply(Inventory inv) {
+        for (Slot slot : this.getSlots()) {
+            slot
+                    .getItem()
+                    .ifPresent(f -> inv
+                            .getSlot(slot
+                                    .getPosition()
+                                    .orElseThrow(() -> new IllegalStateException(
+                                            "Unknown slot position")))
+                            .orElseThrow(() -> new IllegalStateException("Unknown slot position"))
+                            .setItem(f));
         }
     }
 }

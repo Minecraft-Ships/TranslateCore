@@ -12,9 +12,9 @@ import java.util.function.Function;
 public class MappedArgumentWrapper<T, J> implements CommandArgument<T> {
 
     private final CommandArgument<J> commandArgument;
-    private final Function<J, T> convert;
+    private final Function<? super J, ? extends T> convert;
 
-    public MappedArgumentWrapper(CommandArgument<J> commandArgument, Function<J, T> convert) {
+    public MappedArgumentWrapper(CommandArgument<J> commandArgument, Function<? super J, ? extends T> convert) {
         this.commandArgument = commandArgument;
         this.convert = convert;
     }

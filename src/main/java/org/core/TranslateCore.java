@@ -8,11 +8,9 @@ import org.core.platform.PlatformServer;
 import org.core.platform.plugin.CorePlugin;
 import org.core.schedule.SchedulerBuilder;
 import org.core.source.command.ConsoleSource;
-import org.core.text.Text;
 import org.core.world.boss.ServerBossBar;
 
 import java.io.*;
-import java.util.Collections;
 import java.util.Optional;
 
 public interface TranslateCore {
@@ -29,9 +27,6 @@ public interface TranslateCore {
 
     PlatformServer getRawServer();
 
-    @Deprecated
-    Text textBuilder(String chars);
-
     ServerBossBar bossBuilder();
 
     static Platform getPlatform() {
@@ -40,11 +35,6 @@ public interface TranslateCore {
 
     static ConsoleSource getConsole() {
         return TranslateCore.CoreImplementation.getImplementation().getRawConsole();
-    }
-
-    @Deprecated
-    static Text buildText(String text) {
-        return TranslateCore.CoreImplementation.getImplementation().textBuilder(text);
     }
 
     static SchedulerBuilder createSchedulerBuilder() {
@@ -68,13 +58,6 @@ public interface TranslateCore {
     }
 
     static Optional<Class<? extends CorePlugin>> getStandAloneLauncher() {
-        try {
-
-            Collections.list(TranslateCore.class.getClassLoader().getResources("/META-INF/")).forEach(System.out::println);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         InputStream is = TranslateCore.class.getResourceAsStream("/META-INF/translate-core.properties");
         if (is==null) {
             return Optional.empty();

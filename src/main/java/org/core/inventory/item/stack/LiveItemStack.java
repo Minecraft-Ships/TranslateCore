@@ -13,31 +13,31 @@ import java.util.Optional;
 
 public interface LiveItemStack extends ItemStack {
 
-    default Optional<SyncExactPosition> getPosition(){
-        for (WorldExtent extent : TranslateCore.getServer().getWorlds()){
-            for(LiveTileEntity tile : extent.getTileEntities()){
-                if(!(tile instanceof ContainerTileEntity)){
+    default Optional<SyncExactPosition> getPosition() {
+        for (WorldExtent extent : TranslateCore.getServer().getWorlds()) {
+            for (LiveTileEntity tile : extent.getTileEntities()) {
+                if (!(tile instanceof ContainerTileEntity)) {
                     continue;
                 }
                 ContainerTileEntity cTile = (ContainerTileEntity) tile;
-                if (cTile.getInventory().getSlots().stream().filter(i -> i.getItem().isPresent()).anyMatch(i -> i.getItem().get().equals(this))){
+                if (cTile.getInventory().getSlots().stream().filter(i -> i.getItem().isPresent()).anyMatch(i -> i.getItem().get().equals(this))) {
                     return Optional.of(tile.getPosition().toExactPosition());
                 }
             }
-            for (LiveEntity entity : extent.getEntities()){
-                if(entity instanceof ItemHoldingEntity){
-                    ItemHoldingEntity ihEntity = (ItemHoldingEntity)entity;
+            for (LiveEntity entity : extent.getEntities()) {
+                if (entity instanceof ItemHoldingEntity) {
+                    ItemHoldingEntity<?> ihEntity = (ItemHoldingEntity<?>) entity;
                     Optional<ItemStack> opItem = ihEntity.getHoldingItem().getItem();
-                    if(!opItem.isPresent()){
+                    if (!opItem.isPresent()) {
                         continue;
                     }
-                    if(opItem.get().equals(this)){
+                    if (opItem.get().equals(this)) {
                         return Optional.of(entity.getPosition());
                     }
                 }
-                if(entity instanceof InventoryHoldingEntity){
-                    InventoryHoldingEntity ihEntity = (InventoryHoldingEntity)entity;
-                    if (ihEntity.getInventory().getSlots().stream().filter(slot -> slot.getItem().isPresent()).anyMatch(slot -> slot.getItem().get().equals(this))){
+                if (entity instanceof InventoryHoldingEntity) {
+                    InventoryHoldingEntity<?> ihEntity = (InventoryHoldingEntity<?>) entity;
+                    if (ihEntity.getInventory().getSlots().stream().filter(slot -> slot.getItem().isPresent()).anyMatch(slot -> slot.getItem().get().equals(this))) {
                         return Optional.of(entity.getPosition());
                     }
                 }

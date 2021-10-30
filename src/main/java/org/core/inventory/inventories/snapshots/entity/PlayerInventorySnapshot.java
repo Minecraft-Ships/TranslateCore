@@ -24,7 +24,8 @@ public abstract class PlayerInventorySnapshot implements PlayerInventory, Entity
         this.hotbar = inventory.getHotbar().createSnapshot();
         this.craftGridSnapshot = inventory.getCraftingGrid().createSnapshot();
         this.inventory = inventory.getMainInventory().createSnapshot();
-        this.player = inventory.getAttachedEntity().get();
+        this.player = inventory.getAttachedEntity().orElseThrow(() -> new IllegalStateException("Could not get " +
+                "attached entity"));
     }
 
     @Override
@@ -34,7 +35,7 @@ public abstract class PlayerInventorySnapshot implements PlayerInventory, Entity
 
     @Override
     public Slot getOffHoldingItem() {
-        return offHand;
+        return this.offHand;
     }
 
     @Override

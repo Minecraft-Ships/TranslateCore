@@ -1,5 +1,6 @@
 package org.core.inventory.inventories.snapshots;
 
+import org.core.inventory.Inventory;
 import org.core.inventory.InventorySnapshot;
 import org.core.inventory.parts.Slot;
 import org.core.inventory.parts.snapshot.SlotSnapshot;
@@ -11,17 +12,17 @@ import java.util.Set;
 
 public class UnknownInventorySnapshot implements InventorySnapshot {
 
-    private Set<Slot> slots = new HashSet<>();
+    private final Set<Slot> slots = new HashSet<>();
 
-    public UnknownInventorySnapshot(){
+    public UnknownInventorySnapshot() {
 
     }
 
-    public UnknownInventorySnapshot(InventorySnapshot inventory){
+    public UnknownInventorySnapshot(Inventory inventory) {
         this.slots.addAll(inventory.getSlots());
     }
 
-    public UnknownInventorySnapshot(Collection<SlotSnapshot> collection){
+    public UnknownInventorySnapshot(Collection<? extends SlotSnapshot> collection) {
         this.slots.addAll(collection);
     }
 
@@ -37,7 +38,7 @@ public class UnknownInventorySnapshot implements InventorySnapshot {
 
     @Override
     public Optional<Slot> getSlot(int slotPos) {
-        return this.slots.stream().filter(s -> s.getPosition().isPresent()).filter(s -> s.getPosition().get() == slotPos).findAny();
+        return this.slots.stream().filter(s -> s.getPosition().isPresent()).filter(s -> s.getPosition().get()==slotPos).findAny();
     }
 
     @Override

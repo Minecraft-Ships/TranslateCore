@@ -18,18 +18,18 @@ public class ErrorContext {
     }
 
     public ArgumentCommand getCommand() {
-        return command;
+        return this.command;
     }
 
     public int getArgumentFailedAt() {
-        return argumentFailedAt;
+        return this.argumentFailedAt;
     }
 
     public CommandArgument<?> getArgument() {
-        return argument;
+        return this.argument;
     }
 
     public String getError() {
-        return error;
+        return this.error;
     }
 }

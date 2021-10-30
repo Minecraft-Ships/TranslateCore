@@ -21,7 +21,7 @@ import java.util.function.Predicate;
 public class PermissionOrArgument<T> implements CommandArgument<T> {
 
     private final String id;
-    private final Predicate<CommandSource> permission;
+    private final Predicate<? super CommandSource> permission;
     private final ParseCommandArgument<T> with;
     private final ParseCommandArgument<T> or;
 
@@ -31,7 +31,7 @@ public class PermissionOrArgument<T> implements CommandArgument<T> {
      * @param with       The command argument to use if the user has permission
      * @param or         The command argument to use if the user doesn't have permission
      */
-    public PermissionOrArgument(String id, Predicate<CommandSource> permission, ParseCommandArgument<T> with, ParseCommandArgument<T> or) {
+    public PermissionOrArgument(String id, Predicate<? super CommandSource> permission, ParseCommandArgument<T> with, ParseCommandArgument<T> or) {
         this.id = id;
         this.permission = permission;
         this.with = with;

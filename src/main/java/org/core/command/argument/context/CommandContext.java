@@ -18,14 +18,14 @@ public class CommandContext {
 
     private final String[] commands;
     private final CommandSource source;
-    private final Set<ArgumentCommand> potentialCommands = new HashSet<>();
+    private final Collection<ArgumentCommand> potentialCommands = new HashSet<>();
 
     /**
      * @param source   The command source who is running the command
      * @param commands The potential commands of the command context
      * @param command  The string arguments that the source wrote
      */
-    public CommandContext(CommandSource source, Set<ArgumentCommand> commands, String... command) {
+    public CommandContext(CommandSource source, Collection<ArgumentCommand> commands, String... command) {
         this.commands = command;
         this.potentialCommands.addAll(commands);
         this.source = source;
@@ -60,9 +60,9 @@ public class CommandContext {
     public Collection<String> getSuggestions(ArgumentCommand command) {
         List<CommandArgument<?>> arguments = command.getArguments();
         int commandArgument = 0;
-        List<OptionalArgument<?>> optionalArguments = new ArrayList<>();
+        Collection<OptionalArgument<?>> optionalArguments = new ArrayList<>();
         for (CommandArgument<?> arg : arguments) {
-            if (this.commands.length == commandArgument) {
+            if (this.commands.length==commandArgument) {
                 if (arg instanceof OptionalArgument) {
                     optionalArguments.add((OptionalArgument<?>) arg);
                     continue;
@@ -74,7 +74,7 @@ public class CommandContext {
             }
             try {
                 CommandArgumentResult<?> entry = this.parse(arg, commandArgument);
-                if (commandArgument == entry.getPosition() && arg instanceof OptionalArgument) {
+                if (commandArgument==entry.getPosition() && arg instanceof OptionalArgument) {
                     optionalArguments.add((OptionalArgument<?>) arg);
                 } else {
                     optionalArguments.clear();
@@ -87,9 +87,9 @@ public class CommandContext {
         if (optionalArguments.isEmpty()) {
             return Collections.emptySet();
         }
-        Set<String> ret = new HashSet<>();
+        Collection<String> ret = new HashSet<>();
         for (OptionalArgument<?> argument : optionalArguments) {
-            ret.addAll(suggest(argument, commandArgument));
+            ret.addAll(this.suggest(argument, commandArgument));
         }
         return ret;
     }
@@ -125,7 +125,7 @@ public class CommandContext {
         }
         int commandArgument = 0;
         for (CommandArgument<?> arg : arguments) {
-            if (this.commands.length == commandArgument && arg instanceof OptionalArgument) {
+            if (this.commands.length==commandArgument && arg instanceof OptionalArgument) {
                 if (arg.getId().equals(id)) {
                     try {
                         return (T) this.parse(arg, commandArgument).getValue();
@@ -157,12 +157,12 @@ public class CommandContext {
      * @return A set of all errors
      */
     public Set<ErrorContext> getErrors() {
-        Set<ErrorContext> map = new HashSet<>();
+        Collection<ErrorContext> map = new HashSet<>();
         for (ArgumentCommand command : this.potentialCommands) {
             List<CommandArgument<?>> arguments = command.getArguments();
             int commandArgument = 0;
             for (CommandArgument<?> arg : arguments) {
-                if (this.commands.length == commandArgument && arg instanceof OptionalArgument) {
+                if (this.commands.length==commandArgument && arg instanceof OptionalArgument) {
                     continue;
                 }
                 if (this.commands.length <= commandArgument) {
@@ -194,7 +194,7 @@ public class CommandContext {
             List<CommandArgument<?>> arguments = command.getArguments();
             int commandArgument = 0;
             for (CommandArgument<?> arg : arguments) {
-                if (this.commands.length == commandArgument && arg instanceof OptionalArgument) {
+                if (this.commands.length==commandArgument && arg instanceof OptionalArgument) {
                     continue;
                 }
                 if (this.commands.length <= commandArgument) {
@@ -207,7 +207,7 @@ public class CommandContext {
                     return false;
                 }
             }
-            return this.commands.length == commandArgument;
+            return this.commands.length==commandArgument;
         }).findAny();
 
     }
@@ -224,7 +224,7 @@ public class CommandContext {
             int commandArgument = 0;
             int completeArguments = 0;
             for (CommandArgument<?> arg : arguments) {
-                if (this.commands.length == commandArgument && arg instanceof OptionalArgument) {
+                if (this.commands.length==commandArgument && arg instanceof OptionalArgument) {
                     continue;
                 }
                 if (this.commands.length <= commandArgument) {
@@ -233,8 +233,7 @@ public class CommandContext {
                 }
                 try {
                     CommandArgumentResult<?> entry = this.parse(arg, commandArgument);
-                    boolean check = false;
-                    if (commandArgument != entry.getPosition()) {
+                    if (commandArgument!=entry.getPosition()) {
                         commandArgument = entry.getPosition();
                         completeArguments++;
                     }
@@ -253,7 +252,7 @@ public class CommandContext {
                 current = entry.getValue();
                 set.clear();
             }
-            if (entry.getValue() == current) {
+            if (entry.getValue()==current) {
                 set.add(entry.getKey());
             }
         }
