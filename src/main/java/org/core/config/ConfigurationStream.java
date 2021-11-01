@@ -31,7 +31,7 @@ public interface ConfigurationStream {
 
     Optional<String> getString(ConfigurationNode node);
 
-    <T, C extends Collection<T>> C parseCollection(ConfigurationNode node, Parser<String, T> parser, C collection);
+    <T, C extends Collection<T>> C parseCollection(ConfigurationNode node, Parser<? super String, T> parser, C collection);
 
     void set(ConfigurationNode node, int value);
 
@@ -41,7 +41,7 @@ public interface ConfigurationStream {
 
     void set(ConfigurationNode node, String value);
 
-    <T> void set(ConfigurationNode node, Parser<String, T> parser, Collection<T> collection);
+    <T> void set(ConfigurationNode node, Parser<String, ? super T> parser, Collection<T> collection);
 
     Set<ConfigurationNode> getChildren(ConfigurationNode node);
 
@@ -93,11 +93,11 @@ public interface ConfigurationStream {
         this.set(node, node.getParser(), value);
     }
 
-    default <T, C extends Collection<T>> void set(ConfigurationNode.KnownParser.CollectionKnown<T, C> node, C value) {
+    default <T, C extends Collection<T>> void set(ConfigurationNode.KnownParser.CollectionKnown<T> node, C value) {
         this.set(node, node.getParser(), value);
     }
 
-    default <T> void set(ConfigurationNode.GroupKnown<T> node, Collection<T> values) {
+    default <T> void set(ConfigurationNode.GroupKnown<T> node, Collection<? extends T> values) {
         Map<String, String> map = new HashMap<>();
         values.forEach(v -> {
             String key = node.toKey(v);
@@ -139,7 +139,7 @@ public interface ConfigurationStream {
 
     default <T> Optional<T> parse(ConfigurationNode.KnownParser<?, T> node) {
         if (node.getParser() instanceof StringParser) {
-            return this.parse(node, (StringParser<T>) node.getParser());
+            return this.parse(node, (Parser<? super String, T>) node.getParser());
         } else if (node.getParser() instanceof StringMapParser) {
             return this.parse(node, (StringMapParser<T>) node.getParser());
         } else {

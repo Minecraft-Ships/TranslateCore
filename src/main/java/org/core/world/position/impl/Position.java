@@ -30,24 +30,24 @@ public interface Position<N extends Number> {
     ExactPosition getRelative(double x, double y, double z);
 
     default BlockType getBlockType() {
-        return getBlockDetails().getType();
+        return this.getBlockDetails().getType();
     }
 
     default Position<N> getRelative(Direction direction) {
         Vector3<Integer> vector = direction.getAsVector();
-        return getRelative(vector.getX(), vector.getY(), vector.getZ());
+        return this.getRelative(vector.getX(), vector.getY(), vector.getZ());
     }
 
     default N getX() {
-        return getPosition().getX();
+        return this.getPosition().getX();
     }
 
     default N getY() {
-        return getPosition().getY();
+        return this.getPosition().getY();
     }
 
     default N getZ() {
-        return getPosition().getZ();
+        return this.getPosition().getZ();
     }
 
     static BlockPosition toBlock(Position<? extends Number> position) {
@@ -55,7 +55,7 @@ public interface Position<N extends Number> {
             return (BlockPosition) position;
         }
         if (position instanceof ExactPosition) {
-            return ((SyncExactPosition) position).toBlockPosition();
+            return ((ExactPosition) position).toBlockPosition();
         }
         throw new IllegalStateException("Unknown Position implementation");
     }

@@ -34,7 +34,7 @@ public interface SyncPosition<A extends Number> extends Position<A> {
     @Override
     SyncPosition<A> getRelative(Direction direction);
 
-    <E extends LiveEntity, S extends EntitySnapshot<E>> Optional<S> createEntity(EntityType<E, S> type);
+    <E extends LiveEntity, S extends EntitySnapshot<E>> Optional<S> createEntity(EntityType<E, ? extends S> type);
 
     SyncPosition<A> destroy();
 

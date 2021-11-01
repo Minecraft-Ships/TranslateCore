@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+@SuppressWarnings({"HardCodedStringLiteral", "UseOfSystemOutOrSystemErr", "CallToSystemExit"})
 public class Terminal {
 
     private static File PATH_TO_CORE;
@@ -34,6 +35,7 @@ public class Terminal {
                     if (OUTPUT==null) {
                         String[] folders = args[A + 1].split("/");
                         String fileName = folders[folders.length - 1];
+                        //noinspection NonThreadSafeLazyInitialization
                         OUTPUT = new File("Standalone - " + fileName);
                     }
                     A = A + 1;
@@ -134,7 +136,7 @@ public class Terminal {
                         return;
                     }
                     if (pathStr.endsWith("plugin.yml")) {
-                        String lines = Files.lines(path).collect(Collectors.joining("\n"));
+                        String lines = Files.lines(path).collect(Collectors.joining(File.separator));
                         lines = lines.replaceAll("name: TranslateCore", "name: " + plugin.getPluginName());
                         lines = lines.replaceAll("version: 1.0.0", "version: " + plugin.getPluginVersion().asString());
                         out.putNextEntry(zipEntry);
@@ -158,7 +160,6 @@ public class Terminal {
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
-            return;
         }
 
     }
@@ -189,7 +190,6 @@ public class Terminal {
                         Files.copy(stream, tempFile.toPath());
                     } catch (IOException e) {
                         e.printStackTrace();
-                        return;
                     }
                 });
     }

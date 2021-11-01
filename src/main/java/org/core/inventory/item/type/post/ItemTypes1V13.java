@@ -5,6 +5,7 @@ import org.core.inventory.item.ItemType;
 import org.core.inventory.item.type.ItemTypeCommon;
 import org.core.utils.Singleton;
 
+@SuppressWarnings("unused")
 public class ItemTypes1V13 extends ItemTypeCommon {
 
     public static final Singleton<ItemType> ACACIA_BOAT = TranslateCore.getPlatform().get(new ItemTypes1V13("minecraft:acacia_boat"));

@@ -1,5 +1,6 @@
 package org.core.config;
 
+@SuppressWarnings("unused")
 public class ConfigurationFormat {
 
     public static final String MEDIA_TYPE_STORAGE = "Markup Language";

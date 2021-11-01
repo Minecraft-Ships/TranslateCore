@@ -4,6 +4,7 @@ import org.core.TranslateCore;
 import org.core.utils.Guaranteed;
 import org.core.utils.Singleton;
 
+@SuppressWarnings("unused")
 public class BossColours implements Guaranteed<BossColour> {
 
     public static final Singleton<BossColour> BLUE = TranslateCore.getPlatform().get(new BossColours("Blue"));

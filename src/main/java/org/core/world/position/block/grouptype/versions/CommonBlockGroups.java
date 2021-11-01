@@ -2,6 +2,7 @@ package org.core.world.position.block.grouptype.versions;
 
 import org.core.world.position.block.blocktypes.CommonBlockTypes;
 
+@SuppressWarnings("unused")
 public interface CommonBlockGroups {
 
     CoreBlockGroup OAK_SIGN = new CoreBlockGroup("Oak Sign",

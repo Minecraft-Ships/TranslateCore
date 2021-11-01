@@ -6,6 +6,7 @@ import org.core.world.position.block.BlockType;
 /**
  * <p>All Minecraft 1.14 blocks</p>
  */
+@SuppressWarnings("unused")
 public class BlockTypes1V14 extends BlockTypes1V13 {
 
     public static final BlockType ACACIA_SIGN = TranslateCore.getPlatform().getBlockType("minecraft:acacia_sign").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));

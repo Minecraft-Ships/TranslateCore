@@ -4,7 +4,6 @@ import org.core.config.parser.Parser;
 import org.core.config.parser.StringMapParser;
 import org.core.config.parser.StringParser;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -35,7 +34,7 @@ public class ConfigurationNode {
 
     }
 
-    public abstract static class KnownParser<P, T> extends ConfigurationNode {
+    public static class KnownParser<P, T> extends ConfigurationNode {
 
         public static class ChildKnown<T> extends KnownParser<Map<String, String>, T> {
 
@@ -49,7 +48,7 @@ public class ConfigurationNode {
             }
         }
 
-        public static class CollectionKnown<T, K extends Collection<T>> extends KnownParser<String, T> {
+        public static class CollectionKnown<T> extends KnownParser<String, T> {
 
 
             public CollectionKnown(Parser<String, T> parser, String... path) {
@@ -77,7 +76,7 @@ public class ConfigurationNode {
 
         protected final Parser<P, T> parser;
 
-        public KnownParser(Parser<P, T> parser, String... path) {
+        protected KnownParser(Parser<P, T> parser, String... path) {
             super(path);
             this.parser = parser;
         }

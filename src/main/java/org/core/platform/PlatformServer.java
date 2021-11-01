@@ -20,7 +20,7 @@ public interface PlatformServer {
 
     Collection<LivePlayer> getOnlinePlayers();
 
-    void applyBlockSnapshots(Collection<BlockSnapshot.AsyncBlockSnapshot> collection, Plugin plugin, Runnable onComplete);
+    void applyBlockSnapshots(Collection<? extends BlockSnapshot.AsyncBlockSnapshot> collection, Plugin plugin, Runnable onComplete);
 
     default void applyBlockSnapshots(Collection<? extends BlockSnapshot.SyncBlockSnapshot> collection) {
         collection.forEach(bs -> bs.getPosition().setBlock(bs));

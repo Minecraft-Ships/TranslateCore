@@ -12,7 +12,7 @@ import java.util.Set;
 public interface ZombieInventory<Z extends Zombie<LiveEntity> & LiveEntity> extends BasicEntityInventory<Z> {
 
     @Override
-    ZombieInventorySnapshot createSnapshot();
+    ZombieInventorySnapshot<Z> createSnapshot();
 
     @Override
     default Set<Slot> getSlots() {

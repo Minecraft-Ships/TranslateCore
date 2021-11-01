@@ -3,6 +3,7 @@ package org.core.world.position.block.grouptype.versions;
 import org.core.world.position.block.blocktypes.CommonBlockTypes;
 import org.core.world.position.block.blocktypes.post.BlockTypes1V13;
 
+@SuppressWarnings("unused")
 public interface BlockGroups1V13 {
 
     CoreBlockGroup AIR = new CoreBlockGroup("Air", BlockTypes1V13.AIR, BlockTypes1V13.CAVE_AIR, BlockTypes1V13.VOID_AIR);
