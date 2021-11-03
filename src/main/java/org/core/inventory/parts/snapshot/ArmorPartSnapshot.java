@@ -5,17 +5,17 @@ import org.core.inventory.parts.Slot;
 
 public class ArmorPartSnapshot implements ArmorPart, InventoryPartSnapshot {
 
-    protected SlotSnapshot helmet;
-    protected SlotSnapshot armor;
-    protected SlotSnapshot leggings;
-    protected SlotSnapshot shoes;
+    protected final SlotSnapshot helmet;
+    protected final SlotSnapshot armor;
+    protected final SlotSnapshot leggings;
+    protected final SlotSnapshot shoes;
 
-    public ArmorPartSnapshot(ArmorPart part){
+    public ArmorPartSnapshot(ArmorPart part) {
         this(part.getHelmetSlot(), part.getArmorSlot(), part.getLeggingsSlot(), part.getShoesSlot());
 
     }
 
-    public ArmorPartSnapshot(Slot helmet, Slot armor, Slot leggings, Slot shoes){
+    public ArmorPartSnapshot(Slot helmet, Slot armor, Slot leggings, Slot shoes) {
         this.helmet = helmet.createSnapshot();
         this.armor = armor.createSnapshot();
         this.leggings = leggings.createSnapshot();

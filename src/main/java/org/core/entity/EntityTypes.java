@@ -62,7 +62,7 @@ public class EntityTypes<T extends LiveEntity, S extends EntitySnapshot<T>> impl
 
     @Override
     public String getName() {
-        String nameLowercase = getId().split(":")[1];
+        String nameLowercase = this.getId().split(":")[1];
         char first = Character.toUpperCase(nameLowercase.charAt(0));
         return first + nameLowercase.substring(1);
     }

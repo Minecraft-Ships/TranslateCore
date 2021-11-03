@@ -17,19 +17,19 @@ public class AnyArgument<A> implements CommandArgument<A> {
 
     private final String id;
     private final Function<? super A, String> toString;
-    private final BiFunction<? super Collection<A>, String, ? extends A> fromString;
-    private final BiFunction<CommandContext, CommandArgumentContext<A>, Collection<A>> supply;
+    private final BiFunction<? super Collection<A>, ? super String, ? extends A> fromString;
+    private final BiFunction<? super CommandContext, ? super CommandArgumentContext<A>, ? extends Collection<A>> supply;
 
     @SafeVarargs
-    public AnyArgument(String id, Function<A, String> toString, BiFunction<? super Collection<A>, String, A> fromString, A... array) {
+    public AnyArgument(String id, Function<? super A, String> toString, BiFunction<? super Collection<A>, ? super String, ? extends A> fromString, A... array) {
         this(id, toString, fromString, Arrays.asList(array));
     }
 
-    public AnyArgument(String id, Function<A, String> toString, BiFunction<? super Collection<A>, String, ? extends A> fromString, Collection<A> collection) {
+    public AnyArgument(String id, Function<? super A, String> toString, BiFunction<? super Collection<A>, ? super String, ? extends A> fromString, Collection<A> collection) {
         this(id, toString, fromString, (c, a) -> collection);
     }
 
-    public AnyArgument(String id, Function<? super A, String> toString, BiFunction<? super Collection<A>, String, ? extends A> fromString, BiFunction<CommandContext, CommandArgumentContext<A>, Collection<A>> supply) {
+    public AnyArgument(String id, Function<? super A, String> toString, BiFunction<? super Collection<A>, ? super String, ? extends A> fromString, BiFunction<? super CommandContext, ? super CommandArgumentContext<A>, ? extends Collection<A>> supply) {
         this.id = id;
         this.toString = toString;
         this.fromString = fromString;
@@ -54,6 +54,6 @@ public class AnyArgument<A> implements CommandArgument<A> {
     @Override
     public Set<String> suggest(CommandContext context, CommandArgumentContext<A> argument) {
         String arg = context.getCommand()[argument.getFirstArgument()];
-        return this.supply.apply(context, argument).stream().map(toString).filter(v -> v.toLowerCase().startsWith(arg)).collect(Collectors.toSet());
+        return this.supply.apply(context, argument).stream().map(this.toString).filter(v -> v.toLowerCase().startsWith(arg)).collect(Collectors.toSet());
     }
 }

@@ -100,7 +100,7 @@ public interface AText {
      * @return The modified text
      */
     default AText removeColour() {
-        return withColour(null);
+        return this.withColour(null);
     }
 
     /**

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class Grid2x2Snapshot implements InventoryPartSnapshot, Grid2x2 {
 
-    protected Set<Slot> slots = new HashSet<>();
+    protected final Set<Slot> slots = new HashSet<>();
 
     public Grid2x2Snapshot(Inventory part) {
         this(part.getSlots());

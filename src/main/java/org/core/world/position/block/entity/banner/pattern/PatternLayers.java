@@ -7,7 +7,7 @@ import java.util.List;
 public interface PatternLayers {
 
     List<PatternLayer> getLayers();
-    PatternLayers addLayers(Collection<PatternLayer> layers);
+    PatternLayers addLayers(Collection<? extends PatternLayer> layers);
     PatternLayers addLayer(int A, PatternLayer layer);
     PatternLayers removeLayer(int layer);
     PatternLayers removeLayers();

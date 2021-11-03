@@ -6,10 +6,11 @@ import java.util.function.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("BoundedWildcard")
 public interface ArrayUtils {
 
     @Deprecated
-    static <T, F> T collect(Function<F, T> function, BiFunction<T, F, T> biFunction, Iterable<F> iterable) {
+    static <T, F> T collect(Function<? super F, ? extends T> function, BiFunction<? super T, ? super F, ? extends T> biFunction, Iterable<? extends F> iterable) {
         T result = null;
         for (F obj : iterable) {
             if (result==null) {
@@ -374,13 +375,11 @@ public interface ArrayUtils {
         for (; A < array1.length; A++) {
             array[A] = array1[A];
         }
-        for (int B = 0; B < array2.length; B++) {
-            array[A + B] = array2[B];
-        }
+        System.arraycopy(array2, 0, array, A, array2.length);
         return array;
     }
 
-    static String[] splitBy(String toSplit, int startWith, boolean combineStartWith, Predicate<Character> splitBy) {
+    static String[] splitBy(String toSplit, int startWith, boolean combineStartWith, Predicate<? super Character> splitBy) {
         String[] split = new String[0];
         int previousSplit = startWith;
         for (int A = startWith; A < toSplit.length(); A++) {

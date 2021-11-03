@@ -48,27 +48,27 @@ public interface BlockPosition extends Position<Integer> {
     }
 
     default boolean isInLineOfSight(final Vector3<Integer> vector, FourFacingDirection direction) {
-        return isInLineOfSight(vector, direction, BlockTypes.AIR.getDefaultBlockDetails(), BlockTypes.CAVE_AIR.getDefaultBlockDetails(), BlockTypes.VOID_AIR.getDefaultBlockDetails());
+        return this.isInLineOfSight(vector, direction, BlockTypes.AIR.getDefaultBlockDetails(), BlockTypes.CAVE_AIR.getDefaultBlockDetails(), BlockTypes.VOID_AIR.getDefaultBlockDetails());
     }
 
     default boolean isInLineOfSight(final Vector3<Integer> vector, FourFacingDirection direction, BlockDetails... details) {
-        return isInLineOfSight(vector, direction, Arrays.asList(details));
+        return this.isInLineOfSight(vector, direction, Arrays.asList(details));
     }
 
     default boolean isInLineOfSight(final Vector3<Integer> vector, FourFacingDirection direction, final Collection<BlockDetails> ignored) {
-        return isInLineOfSight(vector.getX(), vector.getY(), vector.getZ(), direction, ignored);
+        return this.isInLineOfSight(vector.getX(), vector.getY(), vector.getZ(), direction, ignored);
     }
 
     default boolean isInLineOfSight(final int x, final int y, final int z, FourFacingDirection direction) {
-        return isInLineOfSight(x, y, z, direction, BlockTypes.AIR.getDefaultBlockDetails(), BlockTypes.CAVE_AIR.getDefaultBlockDetails(), BlockTypes.VOID_AIR.getDefaultBlockDetails());
+        return this.isInLineOfSight(x, y, z, direction, BlockTypes.AIR.getDefaultBlockDetails(), BlockTypes.CAVE_AIR.getDefaultBlockDetails(), BlockTypes.VOID_AIR.getDefaultBlockDetails());
     }
 
     default boolean isInLineOfSight(final int x, final int y, final int z, FourFacingDirection direction, BlockDetails... details) {
-        return isInLineOfSight(x, y, z, direction, Arrays.asList(details));
+        return this.isInLineOfSight(x, y, z, direction, Arrays.asList(details));
     }
 
     default boolean isInLineOfSight(final int x, final int y, final int z, FourFacingDirection direction, final Collection<BlockDetails> ignored) {
-        if (x == getX() && y == getY() && z == getZ()) {
+        if (x ==this.getX() && y ==this.getY() && z ==this.getZ()) {
             return true;
         }
         int diffX = this.getX() - x;

@@ -17,7 +17,7 @@ public interface Else {
         return fail.apply(obj);
     }
 
-    static <F, E extends Throwable> F throwOr(Class<E> clazz, ThrowableConsumer<F, E> consumer, F fail) {
+    static <F, E extends Throwable> F throwOr(Class<E> clazz, ThrowableConsumer<? extends F, E> consumer, F fail) {
         try {
             return consumer.run();
         } catch (Throwable e) {

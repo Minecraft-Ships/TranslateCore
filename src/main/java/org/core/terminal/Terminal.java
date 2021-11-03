@@ -17,12 +17,16 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 @SuppressWarnings({"HardCodedStringLiteral", "UseOfSystemOutOrSystemErr", "CallToSystemExit"})
-public class Terminal {
+public final class Terminal {
 
     private static File PATH_TO_CORE;
     private static String PATH_TO_MAIN;
     private static File OUTPUT;
     private static final String TEMP = "Temporary";
+
+    private Terminal() {
+        throw new RuntimeException("Should not be init");
+    }
 
     public static void main(String[] args) {
         for (int A = 0; A < args.length; A++) {

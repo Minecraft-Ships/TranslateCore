@@ -21,6 +21,6 @@ public interface SyncBlockPosition extends SyncPosition<Integer>, BlockPosition 
 
     @Override
     default SyncExactPosition toExactPosition(){
-        return getWorld().getPosition(this.getX().doubleValue(), this.getY().doubleValue(), this.getZ().doubleValue());
+        return this.getWorld().getPosition(this.getX().doubleValue(), this.getY().doubleValue(), this.getZ().doubleValue());
     }
 }

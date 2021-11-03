@@ -11,6 +11,7 @@ public class AbstractWrappedCollection<T> implements WrappedCollection<T> {
         this.values = values;
     }
 
+    @SafeVarargs
     public AbstractWrappedCollection(T... values) {
         this(Arrays.asList(values));
     }

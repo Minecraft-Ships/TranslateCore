@@ -39,11 +39,11 @@ public interface SyncPosition<A extends Number> extends Position<A> {
     SyncPosition<A> destroy();
 
     default SyncPosition<A> setBlock(BlockType type) {
-        return setBlock(type.getDefaultBlockDetails());
+        return this.setBlock(type.getDefaultBlockDetails());
     }
 
     default SyncPosition<A> setBlock(BlockDetails details) {
-        return setBlock(details, new PositionFlag.SetFlag[0]);
+        return this.setBlock(details, new PositionFlag.SetFlag[0]);
     }
 
 }

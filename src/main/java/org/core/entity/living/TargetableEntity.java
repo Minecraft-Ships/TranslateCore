@@ -10,6 +10,6 @@ public interface TargetableEntity<E extends Entity<?>> extends Entity<E> {
     TargetableEntity<E> setTargetEntity(E entity);
 
     default TargetableEntity<E> removeTargetEntity(){
-        return setTargetEntity(null);
+        return this.setTargetEntity(null);
     }
 }

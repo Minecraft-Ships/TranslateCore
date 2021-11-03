@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class SlotSnapshot implements InventoryPartSnapshot, Slot {
 
-    protected Integer slotPos;
+    protected final Integer slotPos;
     protected ItemStackSnapshot itemstack;
 
     public SlotSnapshot(Slot slot){

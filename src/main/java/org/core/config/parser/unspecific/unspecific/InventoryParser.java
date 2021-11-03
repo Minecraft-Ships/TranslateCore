@@ -37,7 +37,7 @@ public class InventoryParser implements UnspecificParser<InventorySnapshot> {
 
     @Override
     public Optional<InventorySnapshot> parse(ConfigurationStream file, ConfigurationNode node) {
-        UnknownInventorySnapshot inv = new UnknownInventorySnapshot();
+        InventorySnapshot inv = new UnknownInventorySnapshot();
         file.getChildren(node).forEach(i -> {
             String[] totalPath = i.getPath();
             try{
@@ -46,7 +46,7 @@ public class InventoryParser implements UnspecificParser<InventorySnapshot> {
                 if(!opStack.isPresent()){
                     return;
                 }
-                SlotSnapshot snapshot = new SlotSnapshot(slotIndex, opStack.get());
+                Slot snapshot = new SlotSnapshot(slotIndex, opStack.get());
                 inv.getSlots().add(snapshot);
             }catch (NumberFormatException ignore){
             }

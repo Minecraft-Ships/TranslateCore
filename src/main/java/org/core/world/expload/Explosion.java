@@ -7,7 +7,7 @@ import org.core.world.position.impl.sync.SyncExactPosition;
 
 import java.util.Collection;
 
-public interface Explosion extends Positionable {
+public interface Explosion extends Positionable<SyncExactPosition> {
 
     interface EntityExplosion extends Explosion {
 
@@ -15,12 +15,13 @@ public interface Explosion extends Positionable {
         Entity<?> getSource();
 
         @Override
-        default SyncExactPosition getPosition(){
+        default SyncExactPosition getPosition() {
             return this.getSource().getPosition();
         }
 
     }
 
     Collection<SyncBlockPosition> getAffectedPositions();
+
     Object getSource();
 }

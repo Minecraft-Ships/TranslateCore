@@ -34,12 +34,12 @@ public interface WrappedCollection<E> extends Collection<E> {
         return this.getWrappedCollection().removeAll(Arrays.asList(values));
     }
 
-    default boolean contains(boolean parallel, Predicate<E> equals) {
+    default boolean contains(boolean parallel, Predicate<? super E> equals) {
         Stream<E> stream = parallel ? this.parallelStream():this.stream();
         return stream.anyMatch(equals);
     }
 
-    default <T, A, C extends Collection<T>, R extends Collector<? super T, A, C>> C map(boolean parallel, Function<E, T> function, R collector) {
+    default <T, A, C extends Collection<T>, R extends Collector<? super T, A, C>> C map(boolean parallel, Function<? super E, T> function, R collector) {
         Stream<E> stream = parallel ? this.parallelStream():this.stream();
         return stream.map(function).collect(collector);
     }

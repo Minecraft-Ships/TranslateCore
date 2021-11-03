@@ -14,10 +14,10 @@ public interface ArmoredEntity<E extends Entity<?>> extends ItemHoldingEntity<E>
     BasicEntityInventory<? extends LiveEntity> getInventory();
 
     default ArmorPart getArmor(){
-        return getInventory().getArmor();
+        return this.getInventory().getArmor();
     }
 
     default Slot getHoldingItem(){
-        return getInventory().getMainHoldingItem();
+        return this.getInventory().getMainHoldingItem();
     }
 }

@@ -18,7 +18,6 @@ public class StringToEnumParser<E extends Enum<E>> implements StringParser.Sugge
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Optional<E> parse(String original) {
         try {
             E[] values = (E[]) this.clazz.getMethod("values").invoke(null);
@@ -49,7 +48,6 @@ public class StringToEnumParser<E extends Enum<E>> implements StringParser.Sugge
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<E> getSuggestions() {
         try {
             E[] values = (E[]) this.clazz.getMethod("values").invoke(null);

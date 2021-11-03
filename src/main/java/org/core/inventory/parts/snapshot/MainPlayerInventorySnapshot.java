@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class MainPlayerInventorySnapshot implements MainPlayerInventory, InventoryPartSnapshot {
 
-    protected Set<Slot> slots = new HashSet<>();
+    protected final Set<Slot> slots = new HashSet<>();
 
     public MainPlayerInventorySnapshot(Inventory snapshot) {
         this(snapshot.getSlots());

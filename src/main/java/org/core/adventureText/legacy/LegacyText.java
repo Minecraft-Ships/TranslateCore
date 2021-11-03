@@ -116,7 +116,7 @@ public class LegacyText implements AText {
             if (at!=TextColour.SYMBOL) {
                 continue;
             }
-            builder.append(text.substring(previous, A - 1));
+            builder.append(text, previous, A - 1);
             A++;
             previous = A;
         }

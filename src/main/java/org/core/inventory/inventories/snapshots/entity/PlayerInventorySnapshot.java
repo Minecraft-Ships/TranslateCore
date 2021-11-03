@@ -11,14 +11,14 @@ import java.util.Optional;
 
 public abstract class PlayerInventorySnapshot implements PlayerInventory, EntityInventorySnapshot<LivePlayer> {
 
-    protected SlotSnapshot offHand;
-    protected ArmorPartSnapshot armor;
-    protected HotbarSnapshot hotbar;
-    protected Grid2x2Snapshot craftGridSnapshot;
-    protected MainPlayerInventorySnapshot inventory;
-    protected LivePlayer player;
+    protected final SlotSnapshot offHand;
+    protected final ArmorPartSnapshot armor;
+    protected final HotbarSnapshot hotbar;
+    protected final Grid2x2Snapshot craftGridSnapshot;
+    protected final MainPlayerInventorySnapshot inventory;
+    protected final LivePlayer player;
 
-    public PlayerInventorySnapshot(PlayerInventory inventory){
+    public PlayerInventorySnapshot(PlayerInventory inventory) {
         this.armor = inventory.getArmor().createSnapshot();
         this.offHand = inventory.getOffHoldingItem().createSnapshot();
         this.hotbar = inventory.getHotbar().createSnapshot();
@@ -29,7 +29,7 @@ public abstract class PlayerInventorySnapshot implements PlayerInventory, Entity
     }
 
     @Override
-    public void apply(){
+    public void apply() {
         this.apply(this.player);
     }
 

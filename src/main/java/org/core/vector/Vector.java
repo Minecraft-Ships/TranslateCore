@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
 
-    protected BigDecimal[] points;
-    protected Function<BigDecimal, N> toNumber;
+    protected final BigDecimal[] points;
+    protected final Function<BigDecimal, N> toNumber;
 
     protected abstract VSelf createNew(BigDecimal... values);
 

@@ -7,6 +7,8 @@ import org.core.world.position.impl.BlockPosition;
 import org.core.world.position.impl.async.ASyncBlockPosition;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 /**
@@ -38,6 +40,10 @@ public interface BlockDetails {
     BlockDetails createCopyOf();
 
     <T> Optional<T> get(Class<? extends KeyedData<T>> data);
+
+    default <T, C extends Collection<T>> Collection<T> getAll(Class<? extends KeyedData<C>> data) {
+        return this.get(data).map(t -> (Collection<T>) t).orElseGet(Collections::emptySet);
+    }
 
     <T> BlockDetails set(Class<? extends KeyedData<T>> data, T value);
 

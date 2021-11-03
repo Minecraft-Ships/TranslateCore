@@ -7,10 +7,10 @@ import java.util.Optional;
 
 public class Direction {
 
-    protected Vector3<Integer> vector;
-    protected String name;
-    protected String left;
-    protected String opposite;
+    protected final Vector3<Integer> vector;
+    protected final String name;
+    protected final String left;
+    protected final String opposite;
 
     protected Direction(String name, Vector3<Integer> asVector, String opposite, String left) {
         this.left = left;

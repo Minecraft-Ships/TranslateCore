@@ -40,7 +40,7 @@ public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
         IOException e1 = null;
         for (int A = 0; A < this.argument.size(); A++) {
             try {
-                return parse(context, B, this.argument.get(A));
+                return this.parse(context, B, this.argument.get(A));
             } catch (IOException e) {
                 if (A==0) {
                     e1 = e;

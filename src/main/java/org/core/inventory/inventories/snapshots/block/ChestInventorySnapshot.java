@@ -5,7 +5,7 @@ import org.core.inventory.InventorySnapshot;
 import org.core.inventory.inventories.general.block.ChestInventory;
 import org.core.inventory.parts.Slot;
 import org.core.world.position.block.entity.LiveTileEntity;
-import org.core.world.position.block.entity.container.chest.ChestTileEntity;
+import org.core.world.position.block.entity.container.ContainerTileEntity;
 import org.core.world.position.block.entity.container.chest.LiveChestTileEntity;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 
@@ -29,7 +29,7 @@ public abstract class ChestInventorySnapshot implements ChestInventory, Inventor
         if (!(opTile.get() instanceof LiveChestTileEntity)) {
             return;
         }
-        ChestTileEntity lcte = (ChestTileEntity) opTile.get();
+        ContainerTileEntity lcte = (ContainerTileEntity) opTile.get();
         this.apply(lcte.getInventory());
     }
 

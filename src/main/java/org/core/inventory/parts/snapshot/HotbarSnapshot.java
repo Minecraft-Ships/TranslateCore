@@ -11,18 +11,18 @@ import java.util.stream.Collectors;
 
 public class HotbarSnapshot implements Hotbar, InventoryPartSnapshot {
 
-    protected int selected;
-    protected Set<Slot> slots = new HashSet<>();
+    protected final int selected;
+    protected final Set<Slot> slots = new HashSet<>();
 
-    public HotbarSnapshot(Hotbar bar){
+    public HotbarSnapshot(Hotbar bar) {
         this(bar.getSelectedSlotPos(), bar.getSlots());
     }
 
-    public HotbarSnapshot(int selected, Slot... slots){
+    public HotbarSnapshot(int selected, Slot... slots) {
         this(selected, Arrays.asList(slots));
     }
 
-    public HotbarSnapshot(int selected, Collection<? extends Slot> slots){
+    public HotbarSnapshot(int selected, Collection<? extends Slot> slots) {
         this.selected = selected;
         this.slots.addAll(slots.stream().map(Slot::createSnapshot).collect(Collectors.toSet()));
     }

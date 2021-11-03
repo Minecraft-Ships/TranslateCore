@@ -7,7 +7,7 @@ import org.core.world.position.impl.sync.SyncBlockPosition;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface TileEntitySnapshot <E extends LiveTileEntity> extends TileEntity {
+public interface TileEntitySnapshot<E extends LiveTileEntity> extends TileEntity {
 
     Class<E> getDeclaredClass();
 
@@ -15,18 +15,17 @@ public interface TileEntitySnapshot <E extends LiveTileEntity> extends TileEntit
 
     Collection<BlockType> getSupportedBlocks();
 
-    @SuppressWarnings("unchecked")
     default E apply(SyncBlockPosition position) throws BlockNotSupported {
-        if(this.getSupportedBlocks().stream().noneMatch(b -> position.getBlockType().equals(b))){
+        if (this.getSupportedBlocks().stream().noneMatch(b -> position.getBlockType().equals(b))) {
             throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());
         }
         Optional<LiveTileEntity> opTileEntity = position.getTileEntity();
-        if(!opTileEntity.isPresent()){
+        if (!opTileEntity.isPresent()) {
             throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());
         }
-        if(!this.getDeclaredClass().isAssignableFrom(opTileEntity.get().getClass())){
+        if (!this.getDeclaredClass().isAssignableFrom(opTileEntity.get().getClass())) {
             throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());
         }
-        return this.apply((E)opTileEntity.get());
+        return this.apply((E) opTileEntity.get());
     }
 }

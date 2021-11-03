@@ -13,10 +13,10 @@ import java.util.Optional;
 public abstract class ZombieInventorySnapshot<Z extends Zombie<LiveEntity> & LiveEntity> implements ZombieInventory<Z>,
         EntityInventorySnapshot<Z> {
 
-    protected ArmorPart armorPart;
-    protected Slot mainHoldingItem;
-    protected Slot secondHoldingItem;
-    protected Z zombie;
+    protected final ArmorPart armorPart;
+    protected final Slot mainHoldingItem;
+    protected final Slot secondHoldingItem;
+    protected final Z zombie;
 
     public ZombieInventorySnapshot(BasicEntityInventory<? extends Z> inv) {
         this.armorPart = inv.getArmor().createSnapshot();

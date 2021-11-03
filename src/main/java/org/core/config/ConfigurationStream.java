@@ -188,7 +188,7 @@ public interface ConfigurationStream {
         return collection;
     }
 
-    default <T, C extends Collection<T>> C parseCollection(ConfigurationNode.KnownParser<String, T> node, C collection) {
+    default <T, C extends Collection<T>> C parseCollection(ConfigurationNode.KnownParser<? super String, T> node, C collection) {
         return this.parseCollection(node, node.getParser(), collection);
     }
 
