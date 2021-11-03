@@ -25,11 +25,15 @@ tasks.withType(Javadoc) {
 }
 
 sonarqube {
-  properties {
-    property "sonar.projectKey", "Minecraft-Ships_TranslateCore"
-    property "sonar.organization", "minecraft-ships"
-    property "sonar.host.url", "https://sonarcloud.io"
-  }
+    properties {
+        property "sonar.projectKey", "Minecraft-Ships_TranslateCore"
+        property "sonar.organization", "minecraft-ships"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
+
+test {
+    useJUnitPlatform()
 }
 
 dependencies {
@@ -37,6 +41,14 @@ dependencies {
     compileOnly group: 'net.kyori', name: 'adventure-api', version: '4.7.0'
     compileOnly 'net.kyori:adventure-text-serializer-legacy:4.7.0'
     compileOnly 'net.kyori:adventure-text-serializer-plain:4.7.0'
+
+    testImplementation 'org.mockito:mockito-core:4.0.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.0.0'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+
+
 }
 
 publishing {
