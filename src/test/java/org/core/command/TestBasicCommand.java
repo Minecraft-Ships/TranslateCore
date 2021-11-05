@@ -92,5 +92,23 @@ public class TestBasicCommand {
         Assertions.assertTrue(value);
     }
 
+    @Test
+    public void testRun() {
+        ArgumentCommand command = new TestArgumentCommand(this.permission);
+        CommandContext context = new CommandContext(this.consoleSource, Collections.singletonList(command));
+
+        // Act
+        boolean result;
+        try {
+            result = command.run(context);
+        } catch (NotEnoughArguments e) {
+            Assertions.fail(e);
+            return;
+        }
+
+        // Assert
+        Assertions.assertTrue(result, "Command failed to run");
+    }
+
 
 }
