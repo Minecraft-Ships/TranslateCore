@@ -7,7 +7,7 @@ import org.core.world.position.block.BlockType;
 /**
  * <p>All Blocks found between legacy blocks and after Minecraft 1.13</p>
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "HardCodedStringLiteral", "DuplicateStringLiteralInspection", "NonFinalUtilityClass"})
 public class CommonBlockTypes {
 
     public static final BlockType ACACIA_DOOR = TranslateCore.getPlatform().getBlockType("minecraft:acacia_door").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));

@@ -7,6 +7,7 @@ import org.core.entity.LiveEntity;
 @SuppressWarnings("unchecked")
 public interface ClassicZombieSnapshot extends ClassicZombie<EntitySnapshot<? extends LiveEntity>>, EntitySnapshot<LiveClassicZombie> {
 
+    @SuppressWarnings("override")
     default EntityType<LiveClassicZombie, ClassicZombieSnapshot> getType(){
         return ClassicZombie.super.getType();
     }

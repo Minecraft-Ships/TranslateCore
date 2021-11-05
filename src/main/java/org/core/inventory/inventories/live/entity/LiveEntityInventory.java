@@ -13,6 +13,6 @@ public interface LiveEntityInventory<E extends LiveEntity> extends BasicEntityIn
 
     @Override
     default SyncExactPosition getPosition() {
-        return this.getAttachedEntity().get().getPosition();
+        return this.getAttachedEntity().orElseThrow(() -> new IllegalStateException("Cannot get attached entity")).getPosition();
     }
 }

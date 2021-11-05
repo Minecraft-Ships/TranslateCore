@@ -3,7 +3,7 @@ package org.core.config.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface StringParser<T extends Object> extends Parser<String, T> {
+public interface StringParser<T> extends Parser<String, T> {
 
     /*interface SpecialParser<T> extends StringParser<T> {
 

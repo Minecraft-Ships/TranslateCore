@@ -23,7 +23,14 @@ public class InventoryParser implements UnspecificParser<InventorySnapshot> {
         Set<Slot> slots = value.getSlots();
         for(int A = 0; A < slotCount; A++){
             final int B = A;
-            Slot slot = slots.stream().filter(s -> s.getPosition().isPresent()).filter(s -> s.getPosition().get() == B).findAny().get();
+            Slot slot =
+                    slots
+                            .stream()
+                            .filter(s -> s.getPosition().isPresent())
+                            .filter(s -> s.getPosition().orElseThrow(() -> new IllegalStateException("You broke logic")) == B)
+                            .findAny()
+                            .orElseThrow(() -> new IllegalStateException("Cannot find slot with index of " + B))
+                            ;
             slot.getItem().ifPresent(i -> {
                 String[] path = new String[node.getPath().length + 1];
                 for(int C = 0; C < node.getPath().length; C++){

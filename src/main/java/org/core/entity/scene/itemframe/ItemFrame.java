@@ -16,6 +16,7 @@ public interface ItemFrame<E extends Entity<?>> extends AttachableEntity<E>, Ite
     boolean getItemRotationFlip();
     ItemFrame<E> setItemRotation(Direction direction, boolean flip) throws DirectionNotSupported;
 
+    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveItemFrame, ItemFrameSnapshot> getType() {
         return EntityTypes.ITEM_FRAME.get();

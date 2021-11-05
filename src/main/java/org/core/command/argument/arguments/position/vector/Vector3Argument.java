@@ -20,6 +20,7 @@ public class Vector3Argument<N extends Number> implements CommandArgument<Vector
 
     public Vector3Argument(String id, Function<BigDecimal, N> convert, CommandArgument<N> xArgument, CommandArgument<N> yArgument, CommandArgument<N> zArgument) {
         this.id = id;
+        //noinspection unchecked
         this.numberArgument = new CommandArgument[]{xArgument, yArgument, zArgument};
         this.function = convert;
     }
@@ -55,6 +56,7 @@ public class Vector3Argument<N extends Number> implements CommandArgument<Vector
                     argument.getFirstArgument() + A,
                     cmd);
             try {
+                //noinspection ResultOfMethodCallIgnored
                 this.numberArgument[A].parse(context, argContext).getValue();
             } catch (IOException e) {
                 return this.numberArgument[A].suggest(context, argContext);

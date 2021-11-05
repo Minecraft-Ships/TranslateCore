@@ -15,6 +15,7 @@ import org.core.inventory.item.ItemType;
 import org.core.inventory.item.data.dye.DyeType;
 import org.core.inventory.item.data.dye.DyeTypes;
 import org.core.inventory.item.type.ItemTypeCommon;
+import org.core.permission.CorePermission;
 import org.core.permission.Permission;
 import org.core.platform.plugin.Plugin;
 import org.core.platform.plugin.details.CorePluginVersion;
@@ -100,7 +101,10 @@ public interface Platform {
 
     Collection<Structure> getStructures();
 
+    @Deprecated
     @NotNull Permission register(@NotNull String permissionNode);
+
+    @NotNull CorePermission register(CorePermission permissionNode);
 
     @Deprecated
     Collection<UnspecificParser<?>> getUnspecifiedParsers();

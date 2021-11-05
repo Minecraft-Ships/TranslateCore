@@ -74,6 +74,7 @@ public class ExactArgument implements CommandArgument<String> {
 
     @Override
     public String getUsage() {
+        //noinspection HardcodedFileSeparator
         return "<" +
                 Arrays
                         .stream(this.lookup)

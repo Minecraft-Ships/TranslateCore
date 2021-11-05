@@ -6,6 +6,7 @@ import org.core.entity.LiveEntity;
 
 public interface PlayerSnapshot extends Player<EntitySnapshot<? extends LiveEntity>>, EntitySnapshot.NoneDestructibleSnapshot<LivePlayer> {
 
+    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LivePlayer, PlayerSnapshot> getType(){
         return Player.super.getType();

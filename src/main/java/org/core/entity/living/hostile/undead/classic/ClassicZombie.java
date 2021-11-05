@@ -10,6 +10,7 @@ public interface ClassicZombie<E extends Entity<?>> extends Zombie<E> {
 
     ZombieInventory<LiveClassicZombie> getInventory();
 
+    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveClassicZombie, ClassicZombieSnapshot> getType() {
         return EntityTypes.ZOMBIE.get();

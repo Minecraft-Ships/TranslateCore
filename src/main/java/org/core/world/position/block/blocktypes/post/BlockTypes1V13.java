@@ -7,7 +7,7 @@ import org.core.world.position.block.blocktypes.CommonBlockTypes;
 /**
  * <p>All BlockTypes new to Minecraft 1.13</p>
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "DuplicateStringLiteralInspection", "ExtendsUtilityClass"})
 public class BlockTypes1V13 extends CommonBlockTypes {
 
     public static final BlockType ACACIA_TRAPDOOR = TranslateCore.getPlatform().getBlockType("minecraft:acacia_trapdoor").orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));

@@ -16,6 +16,7 @@ public class AbstractWrappedCollection<T> implements WrappedCollection<T> {
         this(Arrays.asList(values));
     }
 
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     public boolean equals(Object o) {
         return this.getWrappedCollection().equals(o);

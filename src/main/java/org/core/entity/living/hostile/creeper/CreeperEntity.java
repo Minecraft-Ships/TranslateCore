@@ -11,6 +11,7 @@ public interface CreeperEntity<E extends Entity<?>> extends HostileEntity<E> {
 
     CreeperEntity<E> setCharged(boolean check);
 
+    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveCreeperEntity, CreeperEntitySnapshot> getType() {
         return EntityTypes.CREEPER.get();

@@ -5,6 +5,7 @@ import org.core.entity.LiveEntity;
 
 public interface LiveCreeperEntity extends CreeperEntity<LiveEntity>, LiveEntity {
 
+    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveCreeperEntity, CreeperEntitySnapshot> getType() {
         return CreeperEntity.super.getType();

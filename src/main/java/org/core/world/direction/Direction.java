@@ -40,11 +40,13 @@ public class Direction {
     }
 
     public Direction getRightAngleLeft() {
-        return Direction.getDirection(this.left).get();
+        return Direction.getDirection(this.left).orElseThrow(() -> new IllegalArgumentException("Cannot get " +
+                "direction of " + this.left));
     }
 
     public Direction getRightAngleRight() {
-        return Direction.getDirection(this.left).get().getOpposite();
+        return Direction.getDirection(this.left).orElseThrow(() -> new IllegalArgumentException("Cannot get " +
+                "direction of " + this.left)).getOpposite();
     }
 
     public static Direction[] withYDirections(Direction... directions) {

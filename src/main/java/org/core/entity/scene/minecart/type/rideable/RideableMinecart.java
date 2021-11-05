@@ -8,16 +8,17 @@ import java.util.Optional;
 
 public interface RideableMinecart<E extends Entity<?>> extends Minecart<E> {
 
+    @SuppressWarnings("DeprecatedIsStillUsed")
     @Deprecated
     Collection<E> getPassengers();
 
-    default boolean isEmpty(){
+    default boolean isEmpty() {
         return this.getPassengers().isEmpty();
     }
 
-    default Optional<E> getRider(){
+    default Optional<E> getRider() {
         Collection<E> passengers = this.getPassengers();
-        if (passengers.isEmpty()){
+        if (passengers.isEmpty()) {
             return Optional.empty();
         }
         return Optional.of(passengers.iterator().next());

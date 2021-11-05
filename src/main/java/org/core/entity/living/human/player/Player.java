@@ -10,6 +10,7 @@ public interface Player<E extends Entity<?>> extends AbstractHuman<E>, User {
 
     boolean isViewingInventory();
 
+    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LivePlayer, PlayerSnapshot> getType() {
         return EntityTypes.PLAYER.get();

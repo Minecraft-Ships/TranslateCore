@@ -21,6 +21,7 @@ public interface WrappedCollection<E> extends Collection<E> {
         throw new RuntimeException("addAll requires at least one result");
     }
 
+    @SuppressWarnings("unchecked")
     default boolean addAll(E... values) {
         return this.getWrappedCollection().addAll(Arrays.asList(values));
     }
@@ -30,6 +31,7 @@ public interface WrappedCollection<E> extends Collection<E> {
         throw new RuntimeException("removeAll requires at least one result");
     }
 
+    @SuppressWarnings("SuspiciousMethodCalls")
     default boolean removeAll(Object... values) {
         return this.getWrappedCollection().removeAll(Arrays.asList(values));
     }
@@ -79,9 +81,10 @@ public interface WrappedCollection<E> extends Collection<E> {
         return this.getWrappedCollection().toArray();
     }
 
+    @SuppressWarnings({"NullableProblems", "unchecked", "SuspiciousToArrayCall"})
     @NotNull
     @Override
-    default <T> T @NotNull [] toArray(@NotNull T[] a) {
+    default <T> T[] toArray(@NotNull T... a) {
         return this.getWrappedCollection().toArray(a);
     }
 

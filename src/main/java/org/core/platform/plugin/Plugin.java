@@ -90,6 +90,7 @@ public interface Plugin {
             return Optional.empty();
         }
         try {
+            //noinspection ResultOfMethodCallIgnored
             file.getParentFile().mkdirs();
             Files.copy(stream, file.toPath());
         } catch (IOException e) {

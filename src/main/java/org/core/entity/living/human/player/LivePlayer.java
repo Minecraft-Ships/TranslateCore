@@ -10,19 +10,21 @@ import java.util.Optional;
 
 public interface LivePlayer extends Player<LiveEntity>, LiveEntity, CommandViewer {
 
+    @Deprecated
     boolean hasPermission(String permission);
 
     Optional<BlockPosition> getBlockLookingAt(int scanLength);
 
-    default Optional<BlockPosition> getBlockLookingAt(){
+    default Optional<BlockPosition> getBlockLookingAt() {
         return this.getBlockLookingAt(7);
     }
 
-    default EntityType<LivePlayer, PlayerSnapshot> getType(){
+    @SuppressWarnings("unchecked")
+    default EntityType<LivePlayer, PlayerSnapshot> getType() {
         return Player.super.getType();
     }
 
-    default boolean hasPermission(Permission permission){
+    default boolean hasPermission(Permission permission) {
         return permission.hasPermission(this);
     }
 
