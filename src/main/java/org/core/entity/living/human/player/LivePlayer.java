@@ -24,8 +24,6 @@ public interface LivePlayer extends Player<LiveEntity>, LiveEntity, CommandViewe
         return Player.super.getType();
     }
 
-    default boolean hasPermission(Permission permission) {
-        return permission.hasPermission(this);
-    }
+    boolean hasPermission(Permission permission);
 
 }
