@@ -130,8 +130,8 @@ public final class Terminal {
             ZipOutputStream out = new ZipOutputStream(new FileOutputStream(OUTPUT));
             Files.walk(temp.toPath()).forEach(path -> {
                 String pathStr = path.toString().substring(9);
-                if (pathStr.startsWith("\n")) {
-                    pathStr = pathStr.substring("\n".length());
+                if (pathStr.startsWith(File.pathSeparator)) {
+                    pathStr = pathStr.substring(File.pathSeparator.length());
                 }
                 System.out.println("Path: " + pathStr);
                 ZipEntry zipEntry = new ZipEntry(pathStr);
