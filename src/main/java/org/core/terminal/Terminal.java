@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-@SuppressWarnings({"HardCodedStringLiteral", "UseOfSystemOutOrSystemErr", "CallToSystemExit", "ResultOfMethodCallIgnored"})
+@SuppressWarnings({"HardCodedStringLiteral", "UseOfSystemOutOrSystemErr", "CallToSystemExit", "ResultOfMethodCallIgnored", "HardcodedFileSeparator"})
 public final class Terminal {
 
     private static File PATH_TO_CORE;
@@ -133,6 +133,9 @@ public final class Terminal {
                 if (pathStr.startsWith("\\")) {
                     pathStr = pathStr.substring("\\".length());
                 }
+                if (pathStr.startsWith("/")) {
+                    pathStr = pathStr.substring("/".length());
+                }
                 System.out.println("Path: " + pathStr);
                 ZipEntry zipEntry = new ZipEntry(pathStr);
                 try {
@@ -156,7 +159,7 @@ public final class Terminal {
                     e.printStackTrace();
                 }
             });
-            ZipEntry entry = new ZipEntry("META-INF\\translate-core.properties");
+            ZipEntry entry = new ZipEntry("META-INF/translate-core.properties");
             out.putNextEntry(entry);
             out.write(("stand-alone=" + PATH_TO_MAIN).getBytes());
             out.closeEntry();
