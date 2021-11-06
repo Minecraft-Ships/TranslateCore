@@ -172,7 +172,7 @@ public final class Terminal {
         thisJar.stream()
                 .forEach(entry -> {
                     File tempFolder = temp;
-                    if (entry.getName().startsWith(tempFolder.getName() + File.separatorChar)) {
+                    if (entry.getName().startsWith(tempFolder.getName() + File.pathSeparator)) {
                         tempFolder = temp.getParentFile();
                     }
                     if (entry.isDirectory()) {
