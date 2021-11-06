@@ -156,7 +156,7 @@ public final class Terminal {
                     e.printStackTrace();
                 }
             });
-            ZipEntry entry = new ZipEntry("META-INF" + File.pathSeparatorChar + "translate-core.properties");
+            ZipEntry entry = new ZipEntry("META-INF\\translate-core.properties");
             out.putNextEntry(entry);
             out.write(("stand-alone=" + PATH_TO_MAIN).getBytes());
             out.closeEntry();
@@ -172,7 +172,7 @@ public final class Terminal {
         thisJar.stream()
                 .forEach(entry -> {
                     File tempFolder = temp;
-                    if (entry.getName().startsWith(tempFolder.getName() + File.pathSeparator)) {
+                    if (entry.getName().startsWith(tempFolder.getName() + "\\")) {
                         tempFolder = temp.getParentFile();
                     }
                     if (entry.isDirectory()) {
