@@ -130,8 +130,8 @@ public final class Terminal {
             ZipOutputStream out = new ZipOutputStream(new FileOutputStream(OUTPUT));
             Files.walk(temp.toPath()).forEach(path -> {
                 String pathStr = path.toString().substring(9);
-                if (pathStr.startsWith(File.separator)) {
-                    pathStr = pathStr.substring(File.separator.length());
+                if (pathStr.startsWith("\n")) {
+                    pathStr = pathStr.substring("\n".length());
                 }
                 System.out.println("Path: " + pathStr);
                 ZipEntry zipEntry = new ZipEntry(pathStr);
@@ -140,7 +140,7 @@ public final class Terminal {
                         return;
                     }
                     if (pathStr.endsWith("plugin.yml")) {
-                        String lines = Files.lines(path).collect(Collectors.joining(File.separator));
+                        String lines = Files.lines(path).collect(Collectors.joining("\n"));
                         lines = lines.replaceAll("name: TranslateCore", "name: " + plugin.getPluginName());
                         lines = lines.replaceAll("version: 1.0.0", "version: " + plugin.getPluginVersion().asString());
                         out.putNextEntry(zipEntry);
