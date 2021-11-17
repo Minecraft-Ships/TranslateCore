@@ -7,6 +7,7 @@ import org.core.vector.type.Vector3;
 import org.core.world.WorldExtent;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public interface Structure {
 
     void place(StructurePlacementBuilder builder);
 
-    void serialize(File file);
+    void serialize(File file) throws IOException;
 
 
 }

@@ -31,6 +31,7 @@ import org.core.world.position.block.grouptype.BlockGroup;
 import org.core.world.position.flags.physics.ApplyPhysicsFlag;
 import org.core.world.position.flags.physics.ApplyPhysicsFlags;
 import org.core.world.structure.Structure;
+import org.core.world.structure.StructureBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -100,6 +101,8 @@ public interface Platform {
     Collection<Permission> getPermissions();
 
     Collection<Structure> getStructures();
+
+    @NotNull Structure register(StructureBuilder builder);
 
     @Deprecated
     @NotNull Permission register(@NotNull String permissionNode);
