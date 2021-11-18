@@ -130,14 +130,14 @@ public interface Platform {
         if (TranslateCore.getStandAloneLauncher().isPresent()) {
             return this.getPlatformPluginsFolder();
         }
-        return new File("translate" + File.pathSeparatorChar + "plugins");
+        return new File("translate/plugins");
     }
 
     default File getTranslateConfigFolder() {
         if (TranslateCore.getStandAloneLauncher().isPresent()) {
             return this.getPlatformConfigFolder();
         }
-        return new File("translate" + File.pathSeparatorChar + "configs");
+        return new File("translate/configs");
     }
 
     <E extends CustomEvent> E callEvent(E event);
