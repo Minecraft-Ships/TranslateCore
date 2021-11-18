@@ -108,11 +108,11 @@ public class AdventureText implements AText {
         return this.toPlain().equals(((AText) obj).toPlain());
     }
 
-    public static AdventureText plain(String text) {
+    public static AdventureText plain(@NotNull String text) {
         return new AdventureText(PlainComponentSerializer.plain().deserialize(text));
     }
 
-    public static AdventureText legacy(String text) {
+    public static AdventureText legacy(@NotNull String text) {
         return new AdventureText(LegacyComponentSerializer.legacySection().deserialize(text));
     }
 }

@@ -129,7 +129,7 @@ public interface AText {
      * @param text The text to wrap
      * @return The text object
      */
-    static AText ofPlain(String text) {
+    static AText ofPlain(@NotNull String text) {
         try {
             Class.forName(COMPONENT_CLASS_PATH);
             Class.forName(PLAIN_COMPONENT_CLASS_PATH);
@@ -145,7 +145,7 @@ public interface AText {
      * @param text The text to wrap
      * @return The text object
      */
-    static AText ofLegacy(String text) {
+    static AText ofLegacy(@NotNull String text) {
         try {
             Class.forName(COMPONENT_CLASS_PATH);
             Class.forName(PLAIN_COMPONENT_CLASS_PATH);
