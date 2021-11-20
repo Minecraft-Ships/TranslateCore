@@ -48,12 +48,18 @@ public class OptionalArgument<T> implements CommandArgument<T> {
 
     @Override
     public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) throws IOException {
-        if (context.getCommand().length == argument.getFirstArgument()) {
+        if (context.getCommand().length==argument.getFirstArgument()) {
+            if (this.value==null) {
+                return CommandArgumentResult.from(argument, 0, null);
+            }
             return CommandArgumentResult.from(argument, 0, this.value.parse(context, argument).getValue());
         }
         try {
             return this.arg.parse(context, argument);
         } catch (IOException e) {
+            if (this.value==null) {
+                return CommandArgumentResult.from(argument, 0, null);
+            }
             return CommandArgumentResult.from(argument, 0, this.value.parse(context, argument).getValue());
         }
     }

@@ -32,9 +32,11 @@ import org.core.world.position.flags.physics.ApplyPhysicsFlag;
 import org.core.world.position.flags.physics.ApplyPhysicsFlags;
 import org.core.world.structure.Structure;
 import org.core.world.structure.StructureBuilder;
+import org.core.world.structure.StructureFileBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
@@ -103,6 +105,8 @@ public interface Platform {
     Collection<Structure> getStructures();
 
     @NotNull Structure register(StructureBuilder builder);
+
+    @NotNull Structure register(StructureFileBuilder builder) throws IOException;
 
     @Deprecated
     @NotNull Permission register(@NotNull String permissionNode);
