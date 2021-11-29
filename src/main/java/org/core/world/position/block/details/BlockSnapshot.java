@@ -13,6 +13,10 @@ public interface BlockSnapshot<P extends BlockPosition> extends BlockDetails, Po
 
         @Override
         BlockSnapshot.SyncBlockSnapshot createCopyOf();
+
+        default void restore() {
+            this.getPosition().setBlock(this);
+        }
     }
 
     interface AsyncBlockSnapshot extends BlockSnapshot<ASyncBlockPosition> {

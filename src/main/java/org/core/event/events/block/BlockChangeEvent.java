@@ -15,6 +15,7 @@ import java.util.Collection;
 public interface BlockChangeEvent extends BlockEvent, PlatformEvent {
 
     BlockDetails getBeforeState();
+
     BlockDetails getAfterState();
 
     interface Break extends BlockChangeEvent {
@@ -28,6 +29,16 @@ public interface BlockChangeEvent extends BlockEvent, PlatformEvent {
             interface ByExplosion extends Break, Pre {
 
                 Explosion getExplosion();
+
+            }
+
+        }
+
+        interface Mid extends Break {
+
+            interface ByExplosion extends Mid {
+
+                Explosion.ExplosionSnapshot getExplosion();
 
             }
 
