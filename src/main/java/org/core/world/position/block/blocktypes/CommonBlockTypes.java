@@ -206,12 +206,13 @@ public class CommonBlockTypes {
     static {
         CorePluginVersion mcVersion = TranslateCore.getPlatform().getMinecraftVersion();
         String grassPath;
-        if (mcVersion.getMinor()==1 && mcVersion.getMinor()==16) {
+        if (mcVersion.getMajor()==1 && mcVersion.getMinor()==16) {
             grassPath = "minecraft:grass_path";
         } else {
             grassPath = "minecraft:dirt_path";
         }
-        GRASS_PATH = TranslateCore.getPlatform().getBlockType(grassPath).orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
+        GRASS_PATH = TranslateCore.getPlatform().getBlockType(grassPath).orElseThrow(() -> new IllegalStateException(
+                "Failed to find blocktype of " + grassPath));
     }
 
 }
