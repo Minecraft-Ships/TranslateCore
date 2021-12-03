@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("BoundedWildcard")
 public interface ArrayUtils {
 
-    @Deprecated
+    @Deprecated(forRemoval = true)
     static <T, F> T collect(Function<? super F, ? extends T> function, BiFunction<? super T, ? super F, ? extends T> biFunction, Iterable<? extends F> iterable) {
         T result = null;
         for (F obj : iterable) {
@@ -22,7 +22,7 @@ public interface ArrayUtils {
         return result;
     }
 
-    @Deprecated
+    @Deprecated(forRemoval = true)
     static String collect(String split, Iterable<String> iterable) {
         return collect(t -> t, (old, t) -> old + split + t, iterable);
     }
@@ -76,7 +76,7 @@ public interface ArrayUtils {
      * @param <T>        the element type
      * @return the total
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     static <T> int countInt(int start, Function<T, Integer> function, Iterable<T> collection) {
         return count(start, function, Integer::sum, collection);
     }
@@ -90,7 +90,7 @@ public interface ArrayUtils {
      * @param <T>        the element type
      * @return the total
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     static <T> double countDouble(double start, Function<T, Double> function, Iterable<T> collection) {
         return count(start, function, Double::sum, collection);
     }
@@ -106,7 +106,7 @@ public interface ArrayUtils {
      * @param <N>        the type of number
      * @return the total.
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     static <T, N extends Number> N count(N start, Function<T, N> function, BiFunction<N, N, N> add, Iterable<T> collection) {
         N num = start;
         for (T value : collection) {
@@ -204,7 +204,7 @@ public interface ArrayUtils {
      * @return A string output
      */
     @SafeVarargs
-    @Deprecated
+    @Deprecated(forRemoval = true)
     static <T> String toString(String split, Function<T, String> toString, T... array) {
         return toString(split, toString, Arrays.asList(array));
     }
@@ -218,7 +218,7 @@ public interface ArrayUtils {
      * @param <T>      The class type of the array
      * @return A string output
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     static <T> String toString(String split, Function<T, String> toString, Iterable<T> array) {
         return collect(toString, (old, obj) -> old + split + toString.apply(obj), array);
     }

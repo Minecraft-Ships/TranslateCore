@@ -23,7 +23,7 @@ public interface BlockDetails {
      */
     BlockType getType();
 
-    @Deprecated
+    @Deprecated(forRemoval = true)
     <T extends BlockPosition> BlockSnapshot<T> createSnapshot(T position);
 
     BlockSnapshot.AsyncBlockSnapshot createSnapshot(ASyncBlockPosition position);

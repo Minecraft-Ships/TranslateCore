@@ -24,7 +24,7 @@ public enum TimeUnit {
      * @return ticks that result in the same value as your provided value
      * @deprecated Use {@link #fromTicks}
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     public int getTicks(int time) {
         return this.fromTicks(time);
     }

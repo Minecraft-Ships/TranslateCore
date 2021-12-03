@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface LivePlayer extends Player<LiveEntity>, LiveEntity, CommandViewer {
 
-    @Deprecated
+    @Deprecated(forRemoval = true)
     boolean hasPermission(String permission);
 
     Optional<BlockPosition> getBlockLookingAt(int scanLength);
