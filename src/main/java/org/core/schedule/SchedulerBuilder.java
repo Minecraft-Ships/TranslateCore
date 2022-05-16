@@ -4,6 +4,7 @@ import org.core.platform.plugin.Plugin;
 import org.core.schedule.unit.TimeUnit;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public interface SchedulerBuilder {
 
@@ -23,9 +24,20 @@ public interface SchedulerBuilder {
 
     SchedulerBuilder setIterationUnit(TimeUnit unit);
 
-    SchedulerBuilder setExecutor(Runnable runnable);
+    @Deprecated
+    default SchedulerBuilder setExecutor(Runnable runnable) {
+        this.setRunner((r) -> runnable.run());
+        return this;
+    }
 
-    Runnable getExecutor();
+    @Deprecated
+    default Runnable getExecutor() {
+        return () -> this.getRunner().accept(null);
+    }
+
+    SchedulerBuilder setRunner(Consumer<Scheduler> runner);
+
+    Consumer<Scheduler> getRunner();
 
     SchedulerBuilder setToRunAfter(Scheduler scheduler);
 
