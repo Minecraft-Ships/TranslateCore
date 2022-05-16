@@ -9,9 +9,9 @@ repositories {
     mavenCentral()
 }
 
-group = 'org.ships'
+group = 'org.core'
 version = '1.0-SNAPSHOT'
-description = 'ShipsCore'
+description = 'TranslateCore'
 java.sourceCompatibility = JavaVersion.VERSION_16
 
 compileJava.options.encoding = 'UTF-8'
