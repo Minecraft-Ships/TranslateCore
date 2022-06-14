@@ -37,6 +37,10 @@ public interface CorePlugin extends Plugin, Comparable<CorePlugin> {
     @NotNull
     CorePluginVersion getPluginVersion();
 
+    default void onShutdown() {
+
+    }
+
     @Override
     default int compareTo(@NotNull CorePlugin o) {
         for (LoadOnlyOnPlatform dependsOn : this.getDependingOn()) {
