@@ -6,6 +6,7 @@ import org.core.event.EventManager;
 import org.core.platform.Platform;
 import org.core.platform.PlatformServer;
 import org.core.platform.plugin.CorePlugin;
+import org.core.schedule.ScheduleManager;
 import org.core.schedule.SchedulerBuilder;
 import org.core.source.command.ConsoleSource;
 import org.core.world.boss.ServerBossBar;
@@ -17,17 +18,26 @@ public interface TranslateCore {
 
     Platform getRawPlatform();
 
+    ScheduleManager getRawScheduleManager();
+
     EventManager getRawEventManager();
 
     ConsoleSource getRawConsole();
 
-    SchedulerBuilder createRawSchedulerBuilder();
+    @Deprecated(forRemoval = true)
+    default SchedulerBuilder createRawSchedulerBuilder() {
+        return this.getRawScheduleManager().schedule();
+    }
 
     ConfigurationStream.ConfigurationFile createRawConfigurationFile(File file, ConfigurationFormat type);
 
     PlatformServer getRawServer();
 
     ServerBossBar bossBuilder();
+
+    static ScheduleManager getScheduleManager() {
+        return TranslateCore.CoreImplementation.getImplementation().getRawScheduleManager();
+    }
 
     static Platform getPlatform() {
         return TranslateCore.CoreImplementation.getImplementation().getRawPlatform();
@@ -37,6 +47,7 @@ public interface TranslateCore {
         return TranslateCore.CoreImplementation.getImplementation().getRawConsole();
     }
 
+    @Deprecated(forRemoval = true)
     static SchedulerBuilder createSchedulerBuilder() {
         return TranslateCore.CoreImplementation.getImplementation().createRawSchedulerBuilder();
     }
@@ -59,7 +70,7 @@ public interface TranslateCore {
 
     static Optional<Class<? extends CorePlugin>> getStandAloneLauncher() {
         InputStream is = TranslateCore.class.getResourceAsStream("/META-INF/translate-core.properties");
-        if (is==null) {
+        if (is == null) {
             return Optional.empty();
         }
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -69,7 +80,7 @@ public interface TranslateCore {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (!opPath.isPresent()) {
+        if (opPath.isEmpty()) {
             return Optional.empty();
         }
         String path = opPath.get().substring(12);
