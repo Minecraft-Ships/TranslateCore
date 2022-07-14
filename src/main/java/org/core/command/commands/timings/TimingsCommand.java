@@ -1,5 +1,6 @@
 package org.core.command.commands.timings;
 
+import com.sun.management.OperatingSystemMXBean;
 import org.core.TranslateCore;
 import org.core.adventureText.AText;
 import org.core.command.argument.ArgumentCommand;
@@ -9,12 +10,12 @@ import org.core.exceptions.NotEnoughArguments;
 import org.core.permission.CorePermission;
 import org.core.permission.Permission;
 import org.core.schedule.Scheduler;
-import org.core.source.command.CommandSource;
 import org.core.source.viewer.CommandViewer;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -41,25 +42,26 @@ public class TimingsCommand implements ArgumentCommand {
         if (!(commandContext.getSource() instanceof CommandViewer viewer)) {
             return false;
         }
+        OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
         viewer.sendMessage(AText.ofPlain("Getting timings"));
+        viewer.sendMessage(AText.ofPlain("CPU usage: " + osBean.getCpuLoad()));
+        viewer.sendMessage(AText.ofPlain("CPU process usage: " + osBean.getProcessCpuLoad()));
 
         new Thread(() -> {
             Collection<Scheduler> schedules = TranslateCore.getScheduleManager().getSchedules();
-            ThreadMXBean mxThread = ManagementFactory.getThreadMXBean();
+            viewer.sendMessage(AText.ofPlain("Scheduled tasks: " + schedules.size()));
             for (Scheduler scheduler : schedules) {
-                if (!(scheduler instanceof Scheduler.Threaded threaded)) {
-                    continue;
+                viewer.sendMessage(AText.ofPlain("|---|" + scheduler.getDisplayName() + " - " + scheduler.getPlugin().getPluginId() + " |---|"));
+                viewer.sendMessage(AText.ofPlain(" - ASync: " + scheduler.isAsync()));
+
+                Optional<LocalTime> startRunner = scheduler.getStartRunnerTime();
+                if (startRunner.isEmpty()) {
+                    viewer.sendMessage(AText.ofPlain(" - Run Time: Not started"));
+                } else {
+                    int duration = scheduler.getEndTime().orElseGet(LocalTime::now).getNano() - (startRunner.get().getNano());
+                    viewer.sendMessage(AText.ofPlain(" - Run Time: " + duration));
                 }
-                threaded.getRunning().ifPresent(thread -> {
-                    long cpuTime = mxThread.getThreadCpuTime(thread.getId());
-
-                    Duration duration = Duration.ofNanos(cpuTime);
-
-                    viewer.sendMessage(AText.ofPlain("|---|" + scheduler.getDisplayName() + "|---|"));
-                    viewer.sendMessage(AText.ofPlain(" - Plugin: " + scheduler.getPlugin().getPluginId()));
-                    viewer.sendMessage(AText.ofPlain(" - Thread time (Milli-seconds): " + duration.toMillis()));
-                    viewer.sendMessage(AText.ofPlain(" - Thread time (Seconds): " + duration.toSeconds()));
-                });
+                viewer.sendMessage(AText.ofPlain(" - Has Ended: " + scheduler.getEndTime().isPresent()));
             }
         }).start();
         return true;

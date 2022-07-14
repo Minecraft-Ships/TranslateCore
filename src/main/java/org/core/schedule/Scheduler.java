@@ -2,6 +2,7 @@ package org.core.schedule;
 
 import org.core.platform.plugin.Plugin;
 
+import java.time.LocalTime;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -18,6 +19,14 @@ public interface Scheduler {
         void cancel();
 
     }
+
+    Optional<LocalTime> getStartScheduleTime();
+
+    Optional<LocalTime> getStartRunnerTime();
+
+    Optional<LocalTime> getEndTime();
+
+    boolean isAsync();
 
     String getDisplayName();
 
