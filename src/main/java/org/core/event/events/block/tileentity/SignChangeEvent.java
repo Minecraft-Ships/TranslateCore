@@ -10,7 +10,9 @@ import org.core.world.position.block.entity.sign.SignTileEntitySnapshot;
 public interface SignChangeEvent extends PlatformEvent, BlockEvent, Cancellable {
 
     SignTileEntitySnapshot getTo();
+
     SignChangeEvent setTo(SignTileEntitySnapshot snapshot);
+
     SignTileEntitySnapshot getFrom();
 
     interface ByPlayer extends SignChangeEvent, EntityEvent<LivePlayer> {

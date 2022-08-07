@@ -8,7 +8,8 @@ import java.math.BigDecimal;
 
 public class Vector3IntegerArgument extends Vector3Argument<Integer> {
 
-    public Vector3IntegerArgument(String id, CommandArgument<Integer> xArgument, CommandArgument<Integer> yArgument, CommandArgument<Integer> zArgument) {
+    public Vector3IntegerArgument(String id, CommandArgument<Integer> xArgument, CommandArgument<Integer> yArgument,
+            CommandArgument<Integer> zArgument) {
         super(id, BigDecimal::intValue, xArgument, yArgument, zArgument);
     }
 

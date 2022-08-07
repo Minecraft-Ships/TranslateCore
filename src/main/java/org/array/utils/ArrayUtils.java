@@ -10,10 +10,11 @@ import java.util.stream.Collectors;
 public interface ArrayUtils {
 
     @Deprecated(forRemoval = true)
-    static <T, F> T collect(Function<? super F, ? extends T> function, BiFunction<? super T, ? super F, ? extends T> biFunction, Iterable<? extends F> iterable) {
+    static <T, F> T collect(Function<? super F, ? extends T> function,
+            BiFunction<? super T, ? super F, ? extends T> biFunction, Iterable<? extends F> iterable) {
         T result = null;
         for (F obj : iterable) {
-            if (result==null) {
+            if (result == null) {
                 result = function.apply(obj);
                 continue;
             }
@@ -50,7 +51,7 @@ public interface ArrayUtils {
         Map<String, Map.Entry<T, Integer>> map = new HashMap<>();
         collection.forEach(v -> {
             T value = function.apply(v);
-            if (value==null) {
+            if (value == null) {
                 return;
             }
             String id = toID.apply(value);
@@ -60,7 +61,8 @@ public interface ArrayUtils {
             }
             map.put(id, new AbstractMap.SimpleEntry<>(value, 1));
         });
-        Set<Map.Entry<String, Map.Entry<T, Integer>>> best = getBests(e -> e.getValue().getValue(), (c, b) -> c > b, Integer::equals, map.entrySet());
+        Set<Map.Entry<String, Map.Entry<T, Integer>>> best = getBests(e -> e.getValue().getValue(), (c, b) -> c > b,
+                Integer::equals, map.entrySet());
         if (best.isEmpty()) {
             return new HashSet<>();
         }
@@ -107,7 +109,8 @@ public interface ArrayUtils {
      * @return the total.
      */
     @Deprecated(forRemoval = true)
-    static <T, N extends Number> N count(N start, Function<T, N> function, BiFunction<N, N, N> add, Iterable<T> collection) {
+    static <T, N extends Number> N count(N start, Function<T, N> function, BiFunction<N, N, N> add,
+            Iterable<T> collection) {
         N num = start;
         for (T value : collection) {
             num = add.apply(function.apply(value), num);
@@ -132,7 +135,8 @@ public interface ArrayUtils {
      * @param <T>        The supplier
      * @return The new array
      */
-    static <A, E, I, T extends Collection<E>> T convert(Collector<E, I, T> collector, Function<A, E> consumer, Iterable<A> collection) {
+    static <A, E, I, T extends Collection<E>> T convert(Collector<E, I, T> collector, Function<A, E> consumer,
+            Iterable<A> collection) {
         I supplier = collector.supplier().get();
         collection.forEach(e -> collector.accumulator().accept(supplier, consumer.apply(e)));
         return collector.finisher().apply(supplier);
@@ -251,11 +255,12 @@ public interface ArrayUtils {
      * @param <T>        element type
      * @return the "best" element - optional if no best can be found
      */
-    static <T> Optional<T> getBest(Function<T, Integer> function, BiPredicate<Integer, Integer> compare, Iterable<T> collection) {
+    static <T> Optional<T> getBest(Function<T, Integer> function, BiPredicate<Integer, Integer> compare,
+            Iterable<T> collection) {
         T value = null;
         Integer best = null;
         for (T value1 : collection) {
-            if (value==null) {
+            if (value == null) {
                 value = value1;
                 best = function.apply(value1);
             }
@@ -280,7 +285,8 @@ public interface ArrayUtils {
      * @return the best elements
      */
     @SafeVarargs
-    static <T, N extends Number> Set<T> getBests(Function<T, N> function, BiPredicate<N, N> compare, BiPredicate<N, N> equal, T... array) {
+    static <T, N extends Number> Set<T> getBests(Function<T, N> function, BiPredicate<N, N> compare,
+            BiPredicate<N, N> equal, T... array) {
         return getBests(function, compare, equal, Arrays.asList(array));
     }
 
@@ -295,11 +301,12 @@ public interface ArrayUtils {
      * @param <N>        The value to compare
      * @return the best elements
      */
-    static <T, N extends Number> Set<T> getBests(Function<T, N> function, BiPredicate<N, N> compare, BiPredicate<N, N> equal, Iterable<T> collection) {
+    static <T, N extends Number> Set<T> getBests(Function<T, N> function, BiPredicate<N, N> compare,
+            BiPredicate<N, N> equal, Iterable<T> collection) {
         Set<T> value = new HashSet<>();
         N best = null;
         for (T value1 : collection) {
-            if (best==null) {
+            if (best == null) {
                 value.add(value1);
                 best = function.apply(value1);
             }
@@ -327,7 +334,9 @@ public interface ArrayUtils {
         }
         String[] arr = new String[max - min];
         if (max + 1 - min >= 0) {
-            if (max - min >= 0) System.arraycopy(array, min, arr, 0, max - min);
+            if (max - min >= 0) {
+                System.arraycopy(array, min, arr, 0, max - min);
+            }
         }
         return arr;
     }
@@ -379,7 +388,8 @@ public interface ArrayUtils {
         return array;
     }
 
-    static String[] splitBy(String toSplit, int startWith, boolean combineStartWith, Predicate<? super Character> splitBy) {
+    static String[] splitBy(String toSplit, int startWith, boolean combineStartWith,
+            Predicate<? super Character> splitBy) {
         String[] split = new String[0];
         int previousSplit = startWith;
         for (int A = startWith; A < toSplit.length(); A++) {
@@ -399,7 +409,7 @@ public interface ArrayUtils {
         if (combineStartWith) {
             split[0] = toSplit.substring(0, startWith + split[0].length());
         }
-        if (startWith==0) {
+        if (startWith == 0) {
             return split;
         }
         newSplit = new String[split.length];

@@ -17,7 +17,10 @@ public class StringToBlockPosition implements StringParser<SyncBlockPosition> {
             int y = Integer.parseInt(split[1]);
             int z = Integer.parseInt(split[2]);
             WorldExtent world =
-                    TranslateCore.getServer().getWorldByPlatformSpecific(split[3]).orElseThrow(() -> new IllegalStateException("Cannot find world by " + split[3]));
+                    TranslateCore
+                            .getServer()
+                            .getWorldByPlatformSpecific(split[3])
+                            .orElseThrow(() -> new IllegalStateException("Cannot find world by " + split[3]));
             return Optional.of(world.getPosition(x, y, z));
         } catch (Throwable e) {
             return Optional.empty();

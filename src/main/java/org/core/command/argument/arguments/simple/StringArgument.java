@@ -23,7 +23,8 @@ public class StringArgument implements CommandArgument<String> {
     }
 
     @Override
-    public CommandArgumentResult<String> parse(CommandContext context, CommandArgumentContext<String> argument) throws IOException {
+    public CommandArgumentResult<String> parse(CommandContext context, CommandArgumentContext<String> argument) throws
+            IOException {
         String text = context.getCommand()[argument.getFirstArgument()];
         return CommandArgumentResult.from(argument, text);
 

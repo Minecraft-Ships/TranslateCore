@@ -22,35 +22,6 @@ import java.util.Optional;
 @ExtendWith(MockitoExtension.class)
 public class TestBasicCommand {
 
-    private static class TestArgumentCommand implements ArgumentCommand {
-
-        private final Permission permission;
-
-        private TestArgumentCommand(Permission permission) {
-            this.permission = permission;
-        }
-
-        @Override
-        public List<CommandArgument<?>> getArguments() {
-            return Collections.emptyList();
-        }
-
-        @Override
-        public String getDescription() {
-            return "Test Description";
-        }
-
-        @Override
-        public Optional<Permission> getPermissionNode() {
-            return Optional.of(this.permission);
-        }
-
-        @Override
-        public boolean run(CommandContext commandContext, String... args) throws NotEnoughArguments {
-            return true;
-        }
-    }
-
     @Mock
     LivePlayer playerSource;
     @Mock
@@ -108,6 +79,35 @@ public class TestBasicCommand {
 
         // Assert
         Assertions.assertTrue(result, "Command failed to run");
+    }
+
+    private static class TestArgumentCommand implements ArgumentCommand {
+
+        private final Permission permission;
+
+        private TestArgumentCommand(Permission permission) {
+            this.permission = permission;
+        }
+
+        @Override
+        public List<CommandArgument<?>> getArguments() {
+            return Collections.emptyList();
+        }
+
+        @Override
+        public String getDescription() {
+            return "Test Description";
+        }
+
+        @Override
+        public Optional<Permission> getPermissionNode() {
+            return Optional.of(this.permission);
+        }
+
+        @Override
+        public boolean run(CommandContext commandContext, String... args) throws NotEnoughArguments {
+            return true;
+        }
     }
 
 

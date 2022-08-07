@@ -5,8 +5,10 @@ public class ConfigurationFormat {
 
     public static final String MEDIA_TYPE_STORAGE = "Markup Language";
 
-    public static final ConfigurationFormat FORMAT_YAML = new ConfigurationFormat("Yet Another Markup Language", MEDIA_TYPE_STORAGE, "yml", "yaml");
-    public static final ConfigurationFormat FORMAT_JSON = new ConfigurationFormat("JavaScript Object Notation", MEDIA_TYPE_STORAGE, "json");
+    public static final ConfigurationFormat FORMAT_YAML = new ConfigurationFormat("Yet Another Markup Language",
+            MEDIA_TYPE_STORAGE, "yml", "yaml");
+    public static final ConfigurationFormat FORMAT_JSON = new ConfigurationFormat("JavaScript Object Notation",
+            MEDIA_TYPE_STORAGE, "json");
 
     private final String type;
     private final String name;

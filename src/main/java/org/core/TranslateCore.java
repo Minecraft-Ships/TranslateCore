@@ -16,25 +16,6 @@ import java.util.Optional;
 
 public interface TranslateCore {
 
-    Platform getRawPlatform();
-
-    ScheduleManager getRawScheduleManager();
-
-    EventManager getRawEventManager();
-
-    ConsoleSource getRawConsole();
-
-    @Deprecated(forRemoval = true)
-    default SchedulerBuilder createRawSchedulerBuilder() {
-        return this.getRawScheduleManager().schedule();
-    }
-
-    ConfigurationStream.ConfigurationFile createRawConfigurationFile(File file, ConfigurationFormat type);
-
-    PlatformServer getRawServer();
-
-    ServerBossBar bossBuilder();
-
     static ScheduleManager getScheduleManager() {
         return TranslateCore.CoreImplementation.getImplementation().getRawScheduleManager();
     }
@@ -96,6 +77,25 @@ public interface TranslateCore {
         return Optional.empty();
 
     }
+
+    Platform getRawPlatform();
+
+    ScheduleManager getRawScheduleManager();
+
+    EventManager getRawEventManager();
+
+    ConsoleSource getRawConsole();
+
+    @Deprecated(forRemoval = true)
+    default SchedulerBuilder createRawSchedulerBuilder() {
+        return this.getRawScheduleManager().schedule();
+    }
+
+    ConfigurationStream.ConfigurationFile createRawConfigurationFile(File file, ConfigurationFormat type);
+
+    PlatformServer getRawServer();
+
+    ServerBossBar bossBuilder();
 
     abstract class CoreImplementation implements TranslateCore {
 

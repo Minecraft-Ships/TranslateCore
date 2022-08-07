@@ -7,5 +7,6 @@ import java.util.UUID;
 public interface User extends EcoSource {
 
     String getName();
+
     UUID getUniqueId();
 }

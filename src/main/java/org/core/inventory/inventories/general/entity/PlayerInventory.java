@@ -12,11 +12,13 @@ import java.util.Set;
 public interface PlayerInventory extends BasicEntityInventory<LivePlayer> {
 
     Hotbar getHotbar();
+
     Grid2x2 getCraftingGrid();
+
     MainPlayerInventory getMainInventory();
 
     @Override
-    default Set<Slot> getSlots(){
+    default Set<Slot> getSlots() {
         Set<Slot> slots = new HashSet<>();
         slots.addAll(this.getHotbar().getSlots());
         slots.addAll(this.getMainInventory().getSlots());
@@ -30,12 +32,12 @@ public interface PlayerInventory extends BasicEntityInventory<LivePlayer> {
     PlayerInventorySnapshot createSnapshot();
 
     @Override
-    default Slot getMainHoldingItem(){
+    default Slot getMainHoldingItem() {
         return this.getHotbar().getSelectedSlot();
     }
 
     @Override
-    default Set<InventoryPart> getFirstChildren(){
+    default Set<InventoryPart> getFirstChildren() {
         return new HashSet<>(Arrays.asList(
                 this.getArmor(),
                 this.getOffHoldingItem(),

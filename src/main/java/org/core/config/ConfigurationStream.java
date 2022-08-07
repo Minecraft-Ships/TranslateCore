@@ -15,12 +15,6 @@ import java.util.stream.Collectors;
 
 public interface ConfigurationStream {
 
-    interface ConfigurationFile extends ConfigurationStream {
-
-        File getFile();
-
-    }
-
     ConfigurationFormat getFormat();
 
     Optional<Double> getDouble(ConfigurationNode node);
@@ -31,7 +25,8 @@ public interface ConfigurationStream {
 
     Optional<String> getString(ConfigurationNode node);
 
-    <T, C extends Collection<T>> C parseCollection(ConfigurationNode node, Parser<? super String, T> parser, C collection);
+    <T, C extends Collection<T>> C parseCollection(ConfigurationNode node, Parser<? super String, T> parser,
+            C collection);
 
     void set(ConfigurationNode node, int value);
 
@@ -79,8 +74,16 @@ public interface ConfigurationStream {
         try {
             this.set(node, parser.unparse(value));
         } catch (ClassCastException e) {
-            TranslateCore.getConsole().sendMessage(AText.ofPlain("Path: " + String.join(".", node.getPath())).withColour(NamedTextColours.RED));
-            TranslateCore.getConsole().sendMessage(AText.ofPlain("Value: (" + value.getClass().getName() + ") '" + value + "'").withColour(NamedTextColours.RED));
+            TranslateCore
+                    .getConsole()
+                    .sendMessage(AText
+                            .ofPlain("Path: " + String.join(".", node.getPath()))
+                            .withColour(NamedTextColours.RED));
+            TranslateCore
+                    .getConsole()
+                    .sendMessage(AText
+                            .ofPlain("Value: (" + value.getClass().getName() + ") '" + value + "'")
+                            .withColour(NamedTextColours.RED));
             e.printStackTrace();
         }
     }
@@ -102,7 +105,7 @@ public interface ConfigurationStream {
         values.forEach(v -> {
             String key = node.toKey(v);
             Parser<String, T> mappedValue = node.getValueParsers().get(key);
-            if (mappedValue==null) {
+            if (mappedValue == null) {
                 throw new IllegalStateException(
                         "Can not save GroupKnown. Unknown Key of '"
                                 + key
@@ -143,14 +146,17 @@ public interface ConfigurationStream {
         } else if (node.getParser() instanceof StringMapParser) {
             return this.parse(node, (StringMapParser<T>) node.getParser());
         } else {
-            throw new IllegalArgumentException("Unknown type of parser of '" + node.getParser().getClass().getName() + "', ConfigurationStream.parse(ConfigurationNode.KnownParser) only accepts StringParser and StringMapParser");
+            throw new IllegalArgumentException("Unknown type of parser of '" + node.getParser().getClass().getName() +
+                    "', ConfigurationStream.parse(ConfigurationNode.KnownParser) only accepts StringParser and " +
+                    "StringMapParser");
         }
     }
 
     default <T> Optional<T> parse(ConfigurationNode node, StringMapParser<T> parser) {
         Map<String, String> map = new HashMap<>();
         for (String k : parser.getKeys()) {
-            ConfigurationNode node1 = new ConfigurationNode(ArrayUtils.join(String.class, node.getPath(), k.split("\\.")));
+            ConfigurationNode node1 = new ConfigurationNode(
+                    ArrayUtils.join(String.class, node.getPath(), k.split("\\.")));
             Optional<String> opString = this.getString(node1);
             if (!opString.isPresent()) {
                 return Optional.empty();
@@ -174,7 +180,8 @@ public interface ConfigurationStream {
 
     default <T, C extends Collection<T>> C parseCollection(ConfigurationNode.GroupKnown<T> node, C collection) {
         node.getValueParsers().forEach((key, value) -> {
-            ConfigurationNode directNode = new ConfigurationNode(ArrayUtils.join(String.class, node.getPath(), new String[]{key}));
+            ConfigurationNode directNode = new ConfigurationNode(
+                    ArrayUtils.join(String.class, node.getPath(), new String[]{key}));
             Optional<String> opValue = this.getString(directNode);
             if (!opValue.isPresent()) {
                 return;
@@ -188,7 +195,8 @@ public interface ConfigurationStream {
         return collection;
     }
 
-    default <T, C extends Collection<T>> C parseCollection(ConfigurationNode.KnownParser<? super String, T> node, C collection) {
+    default <T, C extends Collection<T>> C parseCollection(ConfigurationNode.KnownParser<? super String, T> node,
+            C collection) {
         return this.parseCollection(node, node.getParser(), collection);
     }
 
@@ -206,6 +214,12 @@ public interface ConfigurationStream {
 
     default String getString(ConfigurationNode node, String value) {
         return this.getString(node).orElse(value);
+    }
+
+    interface ConfigurationFile extends ConfigurationStream {
+
+        File getFile();
+
     }
 
 }

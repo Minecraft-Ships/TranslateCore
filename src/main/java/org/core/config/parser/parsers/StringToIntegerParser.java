@@ -11,14 +11,14 @@ public class StringToIntegerParser implements StringParser<Integer> {
         try {
             int value = Integer.parseInt(original);
             return Optional.of(value);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return Optional.empty();
         }
     }
 
     @Override
     public String unparse(Integer value) {
-        if(value == null){
+        if (value == null) {
             return "" + 0;
         }
         return "" + value;

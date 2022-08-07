@@ -7,7 +7,7 @@ public interface LiveCod extends Cod<LiveEntity>, LiveEntity {
 
     @SuppressWarnings("unchecked")
     @Override
-    default EntityType<LiveCod, CodSnapshot> getType(){
+    default EntityType<LiveCod, CodSnapshot> getType() {
         return Cod.super.getType();
     }
 }

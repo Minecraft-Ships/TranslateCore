@@ -12,7 +12,7 @@ public interface InventoryPart extends Inventory {
                 .getSlots()
                 .stream()
                 .filter(s -> s.getPosition().isPresent())
-                .filter(s -> s.getPosition().get()==slotPos)
+                .filter(s -> s.getPosition().get() == slotPos)
                 .findFirst();
     }
 }

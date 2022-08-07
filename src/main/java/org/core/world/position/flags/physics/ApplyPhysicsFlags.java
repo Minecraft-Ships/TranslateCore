@@ -6,8 +6,12 @@ import org.core.utils.Singleton;
 
 public class ApplyPhysicsFlags implements Guaranteed<ApplyPhysicsFlag> {
 
-    public static final Singleton<ApplyPhysicsFlag> DEFAULT = TranslateCore.getPlatform().get(new ApplyPhysicsFlags("Default"));
-    public static final Singleton<ApplyPhysicsFlag> NONE = TranslateCore.getPlatform().get(new ApplyPhysicsFlags("None"));
+    public static final Singleton<ApplyPhysicsFlag> DEFAULT = TranslateCore
+            .getPlatform()
+            .get(new ApplyPhysicsFlags("Default"));
+    public static final Singleton<ApplyPhysicsFlag> NONE = TranslateCore
+            .getPlatform()
+            .get(new ApplyPhysicsFlags("None"));
 
     private final String name;
 

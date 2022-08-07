@@ -12,7 +12,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class DispenserBasedInventorySnapshot implements DispenserBasedInventory, InventorySnapshot, Inventory.Parent {
+public abstract class DispenserBasedInventorySnapshot
+        implements DispenserBasedInventory, InventorySnapshot, Inventory.Parent {
 
     protected SyncBlockPosition position;
     protected Grid3x3 grid;
@@ -45,7 +46,7 @@ public abstract class DispenserBasedInventorySnapshot implements DispenserBasedI
                     .ifPresent(f ->
                             inv
                                     .getSlot(slot.getPosition().orElseThrow(() -> new IllegalStateException(
-                    "Unknown slot position")))
+                                            "Unknown slot position")))
                                     .orElseThrow(() -> new IllegalStateException("Unknown slot position"))
                                     .setItem(f));
         }

@@ -9,7 +9,7 @@ public class BlockGroup implements Identifiable {
     private final String name;
     private final BlockType[] grouped;
 
-    public BlockGroup(String id, String name, BlockType... types){
+    public BlockGroup(String id, String name, BlockType... types) {
         this.id = id;
         this.name = name;
         this.grouped = types;

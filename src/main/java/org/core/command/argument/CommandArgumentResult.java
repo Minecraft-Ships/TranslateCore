@@ -13,20 +13,20 @@ public class CommandArgumentResult<T> {
         this.value = value;
     }
 
-    public int getPosition() {
-        return this.position;
-    }
-
-    public @NotNull T getValue() {
-        return this.value;
-    }
-
     public static <T> CommandArgumentResult<T> from(CommandArgumentContext<T> argumentContext, T value) {
         return from(argumentContext, 1, value);
     }
 
     public static <T> CommandArgumentResult<T> from(CommandArgumentContext<T> argumentContext, int length, T value) {
         return new CommandArgumentResult<>(argumentContext.getFirstArgument() + length, value);
+    }
+
+    public int getPosition() {
+        return this.position;
+    }
+
+    public @NotNull T getValue() {
+        return this.value;
     }
 
 

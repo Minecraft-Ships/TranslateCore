@@ -4,7 +4,7 @@ import org.core.command.argument.arguments.simple.number.IntegerArgument;
 import org.core.world.WorldExtent;
 import org.core.world.position.impl.BlockPosition;
 
-public class BlockPositionArgument extends PositionArgument<Integer, BlockPosition>{
+public class BlockPositionArgument extends PositionArgument<Integer, BlockPosition> {
 
     public BlockPositionArgument(String id) {
         super(id, new IntegerArgument(""));

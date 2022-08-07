@@ -33,6 +33,32 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
     SyncExactPosition getPosition();
 
     /**
+     * Sets the position for the entity to be in.
+     * <p>
+     * Note that platforms that hold more then position information
+     * in the Position class will be applied to the entity too. Such
+     * as, Bukkits Location holds rotation data, therefore this should
+     * be set first and then the rotation data.
+     *
+     * @param position The position for the entity to be in
+     * @return itself for chaining
+     */
+    Entity<T> setPosition(Position<? extends Number> position);
+
+    /**
+     * Sets the position of the entity without
+     * the need of a Position, this maintains
+     * the world that the entity is in
+     *
+     * @param vector the new position
+     * @return itself for chaining
+     */
+    default Entity<T> setPosition(Vector3<? extends Number> vector) {
+        return this.setPosition(vector.getRawX().doubleValue(), vector.getRawY().doubleValue(),
+                vector.getRawZ().doubleValue());
+    }
+
+    /**
      * Gets the type of the entity
      *
      * @param <E> Itself as a LiveEntity
@@ -48,12 +74,34 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
     EntitySnapshot<? extends LiveEntity> createSnapshot();
 
     /**
+     * Sets if the entity has gravity or not
+     *
+     * @param check If the entity should have gravity
+     * @return itself for chaining
+     */
+    Entity<T> setGravity(boolean check);
+
+    /**
+     * Gets the current pitch of the entity
+     *
+     * @return the current pitch of the entity
+     */
+    double getPitch();
+
+    /**
      * Sets the pitch of the entities rotation
      *
      * @param value The pitch to be
      * @return Itself for chaining
      */
     Entity<T> setPitch(double value);
+
+    /**
+     * Gets the yaw of the current entity
+     *
+     * @return the current yaw of the entity
+     */
+    double getYaw();
 
     /**
      * Sets the Yaw of the entities rotation
@@ -64,6 +112,15 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
     Entity<T> setYaw(double value);
 
     /**
+     * Gets the roll of the entity,
+     * note that as Bukkit does not support
+     * roll, then the result will be 0
+     *
+     * @return The roll of the entity
+     */
+    double getRoll();
+
+    /**
      * Sets the Roll of the entities rotation.
      * Note that bukkit does not support roll,
      * therefore there will be no result in Bukkit
@@ -72,75 +129,6 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      * @return Itself for chaining
      */
     Entity<T> setRoll(double value);
-
-    /**
-     * Sets the position for the entity to be in.
-     * <p>
-     * Note that platforms that hold more then position information
-     * in the Position class will be applied to the entity too. Such
-     * as, Bukkits Location holds rotation data, therefore this should
-     * be set first and then the rotation data.
-     *
-     * @param position The position for the entity to be in
-     * @return itself for chaining
-     */
-    Entity<T> setPosition(Position<? extends Number> position);
-
-    /**
-     * Sets if the entity has gravity or not
-     *
-     * @param check If the entity should have gravity
-     * @return itself for chaining
-     */
-    Entity<T> setGravity(boolean check);
-
-    /**
-     * Sets the velocity of the entity
-     *
-     * @param velocity the velocity to be
-     * @return itself for chaining
-     */
-    Entity<T> setVelocity(Vector3<Double> velocity);
-
-    /**
-     * Sets the custom name of the entity.
-     * For players this is the display name.
-     *
-     * @param text the name to be
-     * @return itself for chaining
-     */
-    Entity<T> setCustomName(@Nullable AText text);
-
-    /**
-     * Sets if the custom name should be visible
-     *
-     * @param visible if the name should be visible
-     * @return itself for chaining
-     */
-    Entity<T> setCustomNameVisible(boolean visible);
-
-    /**
-     * Gets the current pitch of the entity
-     *
-     * @return the current pitch of the entity
-     */
-    double getPitch();
-
-    /**
-     * Gets the yaw of the current entity
-     *
-     * @return the current yaw of the entity
-     */
-    double getYaw();
-
-    /**
-     * Gets the roll of the entity,
-     * note that as Bukkit does not support
-     * roll, then the result will be 0
-     *
-     * @return The roll of the entity
-     */
-    double getRoll();
 
     /**
      * Checks if the entity has gravity
@@ -157,6 +145,14 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
     Vector3<Double> getVelocity();
 
     /**
+     * Sets the velocity of the entity
+     *
+     * @param velocity the velocity to be
+     * @return itself for chaining
+     */
+    Entity<T> setVelocity(Vector3<Double> velocity);
+
+    /**
      * Gets the custom name of the entity, even
      * if the custom name is not visible
      *
@@ -165,11 +161,28 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
     Optional<AText> getCustomName();
 
     /**
+     * Sets the custom name of the entity.
+     * For players this is the display name.
+     *
+     * @param text the name to be
+     * @return itself for chaining
+     */
+    Entity<T> setCustomName(@Nullable AText text);
+
+    /**
      * Checks if the custom name should be visible
      *
      * @return if the custom name is visible
      */
     boolean isCustomNameVisible();
+
+    /**
+     * Sets if the custom name should be visible
+     *
+     * @param visible if the name should be visible
+     * @return itself for chaining
+     */
+    Entity<T> setCustomNameVisible(boolean visible);
 
     /**
      * Gets the passengers of the entity.
@@ -284,19 +297,6 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      */
     default Entity<T> setPosition(double x, double y, double z) {
         return this.setPosition(this.getPosition().getWorld().getPosition(x, y, z));
-    }
-
-    /**
-     * Sets the position of the entity without
-     * the need of a Position, this maintains
-     * the world that the entity is in
-     *
-     * @param vector the new position
-     * @return itself for chaining
-     */
-    default Entity<T> setPosition(Vector3<? extends Number> vector) {
-        return this.setPosition(vector.getRawX().doubleValue(), vector.getRawY().doubleValue(),
-                vector.getRawZ().doubleValue());
     }
 
     /**

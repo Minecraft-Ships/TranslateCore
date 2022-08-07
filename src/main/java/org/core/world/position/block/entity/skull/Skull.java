@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface Skull extends TileEntity {
 
     Optional<User> getOwner();
+
     Skull setOwner(User user);
 }

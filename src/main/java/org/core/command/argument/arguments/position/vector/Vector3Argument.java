@@ -18,7 +18,8 @@ public class Vector3Argument<N extends Number> implements CommandArgument<Vector
     private final CommandArgument<N>[] numberArgument;
     private final Function<BigDecimal, N> function;
 
-    public Vector3Argument(String id, Function<BigDecimal, N> convert, CommandArgument<N> xArgument, CommandArgument<N> yArgument, CommandArgument<N> zArgument) {
+    public Vector3Argument(String id, Function<BigDecimal, N> convert, CommandArgument<N> xArgument,
+            CommandArgument<N> yArgument, CommandArgument<N> zArgument) {
         this.id = id;
         //noinspection unchecked
         this.numberArgument = new CommandArgument[]{xArgument, yArgument, zArgument};
@@ -31,14 +32,16 @@ public class Vector3Argument<N extends Number> implements CommandArgument<Vector
     }
 
     @Override
-    public CommandArgumentResult<Vector3<N>> parse(CommandContext context, CommandArgumentContext<Vector3<N>> argument) throws IOException {
+    public CommandArgumentResult<Vector3<N>> parse(CommandContext context,
+            CommandArgumentContext<Vector3<N>> argument) throws IOException {
         String[] cmd = context.getCommand();
         if (cmd.length < (argument.getFirstArgument() + 3)) {
             throw new IOException("X Y and Z are required");
         }
         BigDecimal[] numbers = new BigDecimal[3];
         for (int A = 0; A < 3; A++) {
-            CommandArgumentContext<N> argContext = new CommandArgumentContext<>(this.numberArgument[A], argument.getFirstArgument() + A, cmd);
+            CommandArgumentContext<N> argContext = new CommandArgumentContext<>(this.numberArgument[A],
+                    argument.getFirstArgument() + A, cmd);
             N number = this.numberArgument[A].parse(context, argContext).getValue();
             numbers[A] = BigDecimal.valueOf(number.doubleValue());
         }

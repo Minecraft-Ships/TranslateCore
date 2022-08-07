@@ -7,7 +7,7 @@ import org.core.entity.LiveEntity;
 public interface LiveCow extends Cow<LiveEntity>, LiveEntity {
 
     @SuppressWarnings("override")
-    default EntityType<LiveCow, CowSnapshot> getType(){
+    default EntityType<LiveCow, CowSnapshot> getType() {
         return Cow.super.getType();
     }
 

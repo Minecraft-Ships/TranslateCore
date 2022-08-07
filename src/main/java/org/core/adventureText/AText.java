@@ -24,6 +24,39 @@ public interface AText {
     String LEGACY_COMPONENT_CLASS_PATH = "net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer";
 
     /**
+     * Converts a string with no formatting into AText
+     *
+     * @param text The text to wrap
+     * @return The text object
+     */
+    static AText ofPlain(@NotNull String text) {
+        try {
+            Class.forName(COMPONENT_CLASS_PATH);
+            Class.forName(PLAIN_COMPONENT_CLASS_PATH);
+            return AdventureText.plain(text);
+        } catch (ClassNotFoundException e) {
+            return new LegacyText(null, text, Collections.emptyList());
+        }
+    }
+
+    /**
+     * Converts a string with legacy formatting into AText
+     *
+     * @param text The text to wrap
+     * @return The text object
+     */
+    static AText ofLegacy(@NotNull String text) {
+        try {
+            Class.forName(COMPONENT_CLASS_PATH);
+            Class.forName(PLAIN_COMPONENT_CLASS_PATH);
+            Class.forName(LEGACY_COMPONENT_CLASS_PATH);
+            return AdventureText.legacy(text);
+        } catch (ClassNotFoundException e) {
+            return new LegacyText(null, text, Collections.emptyList());
+        }
+    }
+
+    /**
      * Adds the provided text to the end of this text
      *
      * @param aText The text to add to the end
@@ -121,39 +154,6 @@ public interface AText {
      */
     default boolean equalsIgnoreCase(AText text) {
         return this.toPlain().equalsIgnoreCase(text.toPlain());
-    }
-
-    /**
-     * Converts a string with no formatting into AText
-     *
-     * @param text The text to wrap
-     * @return The text object
-     */
-    static AText ofPlain(@NotNull String text) {
-        try {
-            Class.forName(COMPONENT_CLASS_PATH);
-            Class.forName(PLAIN_COMPONENT_CLASS_PATH);
-            return AdventureText.plain(text);
-        } catch (ClassNotFoundException e) {
-            return new LegacyText(null, text, Collections.emptyList());
-        }
-    }
-
-    /**
-     * Converts a string with legacy formatting into AText
-     *
-     * @param text The text to wrap
-     * @return The text object
-     */
-    static AText ofLegacy(@NotNull String text) {
-        try {
-            Class.forName(COMPONENT_CLASS_PATH);
-            Class.forName(PLAIN_COMPONENT_CLASS_PATH);
-            Class.forName(LEGACY_COMPONENT_CLASS_PATH);
-            return AdventureText.legacy(text);
-        } catch (ClassNotFoundException e) {
-            return new LegacyText(null, text, Collections.emptyList());
-        }
     }
 
 }

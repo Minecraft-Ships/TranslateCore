@@ -25,23 +25,23 @@ public interface SchedulerBuilder {
     SchedulerBuilder setIterationUnit(TimeUnit unit);
 
     @Deprecated
+    default Runnable getExecutor() {
+        return () -> this.getRunner().accept(null);
+    }
+
+    @Deprecated
     default SchedulerBuilder setExecutor(Runnable runnable) {
         this.setRunner((r) -> runnable.run());
         return this;
     }
 
-    @Deprecated
-    default Runnable getExecutor() {
-        return () -> this.getRunner().accept(null);
-    }
+    Consumer<Scheduler> getRunner();
 
     SchedulerBuilder setRunner(Consumer<Scheduler> runner);
 
-    Consumer<Scheduler> getRunner();
+    Optional<Scheduler> getToRunAfter();
 
     SchedulerBuilder setToRunAfter(Scheduler scheduler);
-
-    Optional<Scheduler> getToRunAfter();
 
     Optional<String> getDisplayName();
 

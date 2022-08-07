@@ -22,7 +22,10 @@ public interface MathUtils {
         }
         TreeSet<Map.Entry<N, Integer>> counts = new TreeSet<>(Comparator.comparingInt(Map.Entry::getValue));
         for (N value : collection) {
-            Optional<Map.Entry<N, Integer>> opEntry = counts.parallelStream().filter(entry -> compare.test(value, entry.getKey())).findAny();
+            Optional<Map.Entry<N, Integer>> opEntry = counts
+                    .parallelStream()
+                    .filter(entry -> compare.test(value, entry.getKey()))
+                    .findAny();
             if (opEntry.isPresent()) {
                 opEntry.get().setValue(opEntry.get().getValue() + 1);
                 continue;

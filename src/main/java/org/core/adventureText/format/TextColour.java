@@ -9,13 +9,12 @@ import java.util.Optional;
  */
 public class TextColour {
 
+    public static final char SYMBOL = '§';
     private final int red;
     private final int green;
     private final int blue;
     private final String name;
     private final Character legacy;
-
-    public static final char SYMBOL = '§';
 
     /**
      * Creates a text colour using RGB. Note that this will only work if AdventureComponent is enabled

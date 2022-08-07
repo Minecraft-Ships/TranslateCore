@@ -11,23 +11,8 @@ import java.util.Collection;
 
 public class OptionalArgument<T> implements CommandArgument<T> {
 
-    public static class WrappedParser<T> implements ParseCommandArgument<T> {
-
-        private final T value;
-
-        public WrappedParser(T value) {
-            this.value = value;
-        }
-
-        @Override
-        public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) {
-            return CommandArgumentResult.from(argument, 0, this.value);
-        }
-    }
-
     private final CommandArgument<T> arg;
     private final ParseCommandArgument<T> value;
-
     public OptionalArgument(CommandArgument<T> arg, T value) {
         this(arg, new WrappedParser<>(value));
     }
@@ -47,9 +32,10 @@ public class OptionalArgument<T> implements CommandArgument<T> {
     }
 
     @Override
-    public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) throws IOException {
-        if (context.getCommand().length==argument.getFirstArgument()) {
-            if (this.value==null) {
+    public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) throws
+            IOException {
+        if (context.getCommand().length == argument.getFirstArgument()) {
+            if (this.value == null) {
                 return CommandArgumentResult.from(argument, 0, null);
             }
             return CommandArgumentResult.from(argument, 0, this.value.parse(context, argument).getValue());
@@ -57,7 +43,7 @@ public class OptionalArgument<T> implements CommandArgument<T> {
         try {
             return this.arg.parse(context, argument);
         } catch (IOException e) {
-            if (this.value==null) {
+            if (this.value == null) {
                 return CommandArgumentResult.from(argument, 0, null);
             }
             return CommandArgumentResult.from(argument, 0, this.value.parse(context, argument).getValue());
@@ -73,5 +59,19 @@ public class OptionalArgument<T> implements CommandArgument<T> {
     public String getUsage() {
         String original = this.getOriginalArgument().getUsage();
         return "[" + original.substring(1, original.length() - 1) + "]";
+    }
+
+    public static class WrappedParser<T> implements ParseCommandArgument<T> {
+
+        private final T value;
+
+        public WrappedParser(T value) {
+            this.value = value;
+        }
+
+        @Override
+        public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) {
+            return CommandArgumentResult.from(argument, 0, this.value);
+        }
     }
 }

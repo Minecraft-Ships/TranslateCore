@@ -24,7 +24,12 @@ public class StringToBlockTypeParser implements StringParser.Suggestible<BlockTy
 
     @Override
     public List<BlockType> getSuggestions(String peek) {
-        return TranslateCore.getPlatform().getBlockTypes().stream().filter(bt -> bt.getId().toLowerCase().startsWith(peek.toLowerCase())).collect(Collectors.toList());
+        return TranslateCore
+                .getPlatform()
+                .getBlockTypes()
+                .stream()
+                .filter(bt -> bt.getId().toLowerCase().startsWith(peek.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     @Override

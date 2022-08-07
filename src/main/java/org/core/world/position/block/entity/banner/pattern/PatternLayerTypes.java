@@ -6,7 +6,9 @@ import org.core.utils.Singleton;
 
 public class PatternLayerTypes implements Guaranteed<PatternLayerType> {
 
-    public static final Singleton<PatternLayerType> BASE = TranslateCore.getPlatform().get(new PatternLayerTypes("minecraft:base"));
+    public static final Singleton<PatternLayerType> BASE = TranslateCore
+            .getPlatform()
+            .get(new PatternLayerTypes("minecraft:base"));
 
     private final String id;
 

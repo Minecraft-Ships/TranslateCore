@@ -18,7 +18,9 @@ public class StringParserArgument<P> implements CommandArgument<P> {
     private final BiFunction<? super CommandContext, ? super CommandArgumentContext<P>, ? extends StringParser<P>> function;
     private final BiFunction<? super CommandArgumentContext<P>, ? super StringParser<P>, String> failMessage;
 
-    public StringParserArgument(String id, BiFunction<? super CommandContext, ? super CommandArgumentContext<P>, ? extends StringParser<P>> function, BiFunction<? super CommandArgumentContext<P>, ? super StringParser<P>, String> failMessage) {
+    public StringParserArgument(String id,
+            BiFunction<? super CommandContext, ? super CommandArgumentContext<P>, ? extends StringParser<P>> function,
+            BiFunction<? super CommandArgumentContext<P>, ? super StringParser<P>, String> failMessage) {
         this.id = id;
         this.function = function;
         this.failMessage = failMessage;
@@ -30,7 +32,8 @@ public class StringParserArgument<P> implements CommandArgument<P> {
     }
 
     @Override
-    public CommandArgumentResult<P> parse(CommandContext context, CommandArgumentContext<P> argument) throws IOException {
+    public CommandArgumentResult<P> parse(CommandContext context, CommandArgumentContext<P> argument) throws
+            IOException {
         StringParser<P> parser = this.function.apply(context, argument);
         String arg = argument.getFocusArgument();
         P value = parser.parse(arg).orElseThrow(() -> new IOException(this.failMessage.apply(argument, parser)));

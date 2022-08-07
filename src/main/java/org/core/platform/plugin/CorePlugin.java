@@ -15,7 +15,8 @@ public interface CorePlugin extends Plugin, Comparable<CorePlugin> {
     /**
      * Runs when the core plugin is constructed.
      *
-     * @param pluginLauncher The plugin launcher is its native launcher, this should be the same as what is returned in {@link Plugin#getPlatformLauncher()}
+     * @param pluginLauncher The plugin launcher is its native launcher, this should be the same as what is returned
+     *                       in {@link Plugin#getPlatformLauncher()}
      */
     void onConstruct(@NotNull Object pluginLauncher);
 
@@ -47,7 +48,7 @@ public interface CorePlugin extends Plugin, Comparable<CorePlugin> {
             if (!dependsOn.platform().equals(o.getPluginId())) {
                 continue;
             }
-            if (dependsOn.getLoadType()==LoadType.BEFORE) {
+            if (dependsOn.getLoadType() == LoadType.BEFORE) {
                 return -1;
             }
             return 1;
@@ -56,7 +57,7 @@ public interface CorePlugin extends Plugin, Comparable<CorePlugin> {
             if (!dependsOn.platform().equals(o.getPluginId())) {
                 continue;
             }
-            if (dependsOn.getLoadType()==LoadType.BEFORE) {
+            if (dependsOn.getLoadType() == LoadType.BEFORE) {
                 return 1;
             }
             return -1;
@@ -66,7 +67,7 @@ public interface CorePlugin extends Plugin, Comparable<CorePlugin> {
 
     default LoadOnlyOnPlatform[] getDependingOn() {
         LoadOnlyOn loadOnlyOn = this.getClass().getAnnotation(LoadOnlyOn.class);
-        if (loadOnlyOn==null) {
+        if (loadOnlyOn == null) {
             return new LoadOnlyOnPlatform[0];
         }
         return loadOnlyOn.on();

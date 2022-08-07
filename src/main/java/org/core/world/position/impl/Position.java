@@ -15,41 +15,6 @@ import org.core.world.position.impl.sync.SyncExactPosition;
 @ThreadSafe(impl = {PlatformDetails.BUKKIT_ID})
 public interface Position<N extends Number> {
 
-    Vector3<Integer> getChunkPosition();
-
-    WorldExtent getWorld();
-
-    BlockSnapshot<? extends BlockPosition> getBlockDetails();
-
-    Vector3<N> getPosition();
-
-    Position<N> getRelative(Vector3<?> vector);
-
-    Position<N> getRelative(int x, int y, int z);
-
-    ExactPosition getRelative(double x, double y, double z);
-
-    default BlockType getBlockType() {
-        return this.getBlockDetails().getType();
-    }
-
-    default Position<N> getRelative(Direction direction) {
-        Vector3<Integer> vector = direction.getAsVector();
-        return this.getRelative(vector.getX(), vector.getY(), vector.getZ());
-    }
-
-    default N getX() {
-        return this.getPosition().getX();
-    }
-
-    default N getY() {
-        return this.getPosition().getY();
-    }
-
-    default N getZ() {
-        return this.getPosition().getZ();
-    }
-
     static BlockPosition toBlock(Position<? extends Number> position) {
         if (position instanceof BlockPosition) {
             return (BlockPosition) position;
@@ -96,5 +61,40 @@ public interface Position<N extends Number> {
             return (ASyncExactPosition) position;
         }
         return position.getWorld().getAsyncPosition(position.getX(), position.getY(), position.getZ());
+    }
+
+    Vector3<Integer> getChunkPosition();
+
+    WorldExtent getWorld();
+
+    BlockSnapshot<? extends BlockPosition> getBlockDetails();
+
+    Vector3<N> getPosition();
+
+    Position<N> getRelative(Vector3<?> vector);
+
+    Position<N> getRelative(int x, int y, int z);
+
+    ExactPosition getRelative(double x, double y, double z);
+
+    default BlockType getBlockType() {
+        return this.getBlockDetails().getType();
+    }
+
+    default Position<N> getRelative(Direction direction) {
+        Vector3<Integer> vector = direction.getAsVector();
+        return this.getRelative(vector.getX(), vector.getY(), vector.getZ());
+    }
+
+    default N getX() {
+        return this.getPosition().getX();
+    }
+
+    default N getY() {
+        return this.getPosition().getY();
+    }
+
+    default N getZ() {
+        return this.getPosition().getZ();
     }
 }

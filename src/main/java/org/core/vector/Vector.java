@@ -12,17 +12,17 @@ public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
     protected final BigDecimal[] points;
     protected final Function<BigDecimal, N> toNumber;
 
-    protected abstract VSelf createNew(BigDecimal... values);
-
-    public abstract <Num extends Number> Vector<Num, ?> toVector(Function<BigDecimal, Num> function);
-
-
     public Vector(Function<BigDecimal, N> function, BigDecimal... points) {
         this.points = points;
         this.toNumber = function;
     }
 
-    private VSelf action(VSelf vector, BiFunction<? super BigDecimal, ? super BigDecimal, ? extends BigDecimal> function) {
+    protected abstract VSelf createNew(BigDecimal... values);
+
+    public abstract <Num extends Number> Vector<Num, ?> toVector(Function<BigDecimal, Num> function);
+
+    private VSelf action(VSelf vector,
+            BiFunction<? super BigDecimal, ? super BigDecimal, ? extends BigDecimal> function) {
         BigDecimal[] array = new BigDecimal[this.points.length];
         for (int A = 0; A < this.points.length; A++) {
             array[A] = function.apply(this.points[A], vector.getRawPoint(A));
@@ -70,7 +70,8 @@ public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
         return converter.convert(this);
     }
 
-    public <Num extends Number, C extends Vector<Num, ?>> C toVector(Function<BigDecimal, Num> function, VectorConverter converter) {
+    public <Num extends Number, C extends Vector<Num, ?>> C toVector(Function<BigDecimal, Num> function,
+            VectorConverter converter) {
         return (C) converter.convert(function, this);
     }
 
@@ -101,11 +102,11 @@ public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
             return false;
         }
         Vector<?, ?> vector = (Vector<?, ?>) obj;
-        if (vector.getPointCount()!=this.getPointCount()) {
+        if (vector.getPointCount() != this.getPointCount()) {
             return false;
         }
         for (int A = 0; A < this.getPointCount(); A++) {
-            if (this.getRawPoint(A).doubleValue()!=vector.getRawPoint(A).doubleValue()) {
+            if (this.getRawPoint(A).doubleValue() != vector.getRawPoint(A).doubleValue()) {
                 return false;
             }
         }

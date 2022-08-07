@@ -42,19 +42,20 @@ public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
             try {
                 return this.parse(context, B, this.argument.get(A));
             } catch (IOException e) {
-                if (A==0) {
+                if (A == 0) {
                     e1 = e;
                 }
             }
         }
-        if (e1==null) {
+        if (e1 == null) {
             //shouldnt be possible
             throw new IOException("Unknown error occurred");
         }
         throw e1;
     }
 
-    private <R extends Collection<T>> CommandArgumentResult<R> parse(CommandContext context, int B, CommandArgument<R> argument) throws IOException {
+    private <R extends Collection<T>> CommandArgumentResult<R> parse(CommandContext context, int B,
+            CommandArgument<R> argument) throws IOException {
         CommandArgumentContext<R> argumentContext = new CommandArgumentContext<>(argument, B, context.getCommand());
         return argument.parse(context, argumentContext);
     }
@@ -65,7 +66,8 @@ public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
     }
 
     @Override
-    public CommandArgumentResult<List<T>> parse(CommandContext context, CommandArgumentContext<List<T>> argument) throws IOException {
+    public CommandArgumentResult<List<T>> parse(CommandContext context, CommandArgumentContext<List<T>> argument) throws
+            IOException {
         int A = argument.getFirstArgument();
         List<T> list = new ArrayList<>();
         while (A < context.getCommand().length) {
@@ -96,7 +98,8 @@ public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
         return Collections.emptySet();
     }
 
-    private <R extends Collection<T>> Collection<String> suggest(CommandContext context, int A, CommandArgument<R> arg) {
+    private <R extends Collection<T>> Collection<String> suggest(CommandContext context, int A,
+            CommandArgument<R> arg) {
         CommandArgumentContext<R> argumentContext = new CommandArgumentContext<>(arg, A, context.getCommand());
         return arg.suggest(context, argumentContext);
     }

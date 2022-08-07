@@ -37,17 +37,19 @@ public interface WrappedCollection<E> extends Collection<E> {
     }
 
     default boolean contains(boolean parallel, Predicate<? super E> equals) {
-        Stream<E> stream = parallel ? this.parallelStream():this.stream();
+        Stream<E> stream = parallel ? this.parallelStream() : this.stream();
         return stream.anyMatch(equals);
     }
 
-    default <T, A, C extends Collection<T>, R extends Collector<? super T, A, C>> C map(boolean parallel, Function<? super E, T> function, R collector) {
-        Stream<E> stream = parallel ? this.parallelStream():this.stream();
+    default <T, A, C extends Collection<T>, R extends Collector<? super T, A, C>> C map(boolean parallel,
+            Function<? super E, T> function, R collector) {
+        Stream<E> stream = parallel ? this.parallelStream() : this.stream();
         return stream.map(function).collect(collector);
     }
 
-    default <T, A, C extends Collection<T>, R extends Collector<? super T, A, C>> C cast(boolean parallel, Class<T> clazz, R collector) {
-        Stream<E> stream = parallel ? this.parallelStream():this.stream();
+    default <T, A, C extends Collection<T>, R extends Collector<? super T, A, C>> C cast(boolean parallel,
+            Class<T> clazz, R collector) {
+        Stream<E> stream = parallel ? this.parallelStream() : this.stream();
         return stream.filter(clazz::isInstance).map(r -> (T) r).collect(collector);
     }
 

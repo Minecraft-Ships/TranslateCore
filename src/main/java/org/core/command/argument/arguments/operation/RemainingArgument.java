@@ -40,7 +40,8 @@ public class RemainingArgument<T> implements CommandArgument<List<T>> {
         IOException e1 = null;
         for (int A = 0; A < this.argument.size(); A++) {
             try {
-                CommandArgumentContext<T> argumentContext = new CommandArgumentContext<>(this.argument.get(A), B, context.getCommand());
+                CommandArgumentContext<T> argumentContext = new CommandArgumentContext<>(this.argument.get(A), B,
+                        context.getCommand());
                 return this.argument.get(A).parse(context, argumentContext);
             } catch (IOException e) {
                 if (A == 0) {
@@ -61,7 +62,8 @@ public class RemainingArgument<T> implements CommandArgument<List<T>> {
     }
 
     @Override
-    public CommandArgumentResult<List<T>> parse(CommandContext context, CommandArgumentContext<List<T>> argument) throws IOException {
+    public CommandArgumentResult<List<T>> parse(CommandContext context, CommandArgumentContext<List<T>> argument) throws
+            IOException {
         int A = argument.getFirstArgument();
         List<T> list = new ArrayList<>();
         while (A < context.getCommand().length) {
@@ -81,7 +83,12 @@ public class RemainingArgument<T> implements CommandArgument<List<T>> {
             try {
                 entry = this.parseAny(context, A);
             } catch (IOException e) {
-                return this.argument.stream().flatMap(a -> a.suggest(context, new CommandArgumentContext<>(a, B, context.getCommand())).stream()).collect(Collectors.toSet());
+                return this.argument
+                        .stream()
+                        .flatMap(a -> a
+                                .suggest(context, new CommandArgumentContext<>(a, B, context.getCommand()))
+                                .stream())
+                        .collect(Collectors.toSet());
             }
             A = entry.getPosition();
         }

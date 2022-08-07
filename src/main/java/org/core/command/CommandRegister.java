@@ -7,12 +7,12 @@ public class CommandRegister {
 
     private final Set<CommandLauncher> commands = new HashSet<>();
 
-    public CommandRegister register(CommandLauncher launcher){
+    public CommandRegister register(CommandLauncher launcher) {
         this.commands.add(launcher);
         return this;
     }
 
-    public Set<CommandLauncher> getCommands(){
+    public Set<CommandLauncher> getCommands() {
         return this.commands;
     }
 

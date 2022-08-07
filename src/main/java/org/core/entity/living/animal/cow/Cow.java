@@ -9,7 +9,7 @@ import org.core.entity.living.animal.AnimalEntity;
 public interface Cow<E extends Entity<?>> extends AnimalEntity<E> {
 
     @Override
-    default EntityType<LiveCow, CowSnapshot> getType(){
+    default EntityType<LiveCow, CowSnapshot> getType() {
         return EntityTypes.COW.get();
     }
 

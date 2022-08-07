@@ -13,8 +13,6 @@ import org.core.schedule.Scheduler;
 import org.core.source.viewer.CommandViewer;
 
 import java.lang.management.ManagementFactory;
-import java.lang.management.ThreadMXBean;
-import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Collections;
@@ -51,14 +49,16 @@ public class TimingsCommand implements ArgumentCommand {
             Collection<Scheduler> schedules = TranslateCore.getScheduleManager().getSchedules();
             viewer.sendMessage(AText.ofPlain("Scheduled tasks: " + schedules.size()));
             for (Scheduler scheduler : schedules) {
-                viewer.sendMessage(AText.ofPlain("|---|" + scheduler.getDisplayName() + " - " + scheduler.getPlugin().getPluginId() + " |---|"));
+                viewer.sendMessage(AText.ofPlain(
+                        "|---|" + scheduler.getDisplayName() + " - " + scheduler.getPlugin().getPluginId() + " |---|"));
                 viewer.sendMessage(AText.ofPlain(" - ASync: " + scheduler.isAsync()));
 
                 Optional<LocalTime> startRunner = scheduler.getStartRunnerTime();
                 if (startRunner.isEmpty()) {
                     viewer.sendMessage(AText.ofPlain(" - Run Time: Not started"));
                 } else {
-                    int duration = scheduler.getEndTime().orElseGet(LocalTime::now).getNano() - (startRunner.get().getNano());
+                    int duration =
+                            scheduler.getEndTime().orElseGet(LocalTime::now).getNano() - (startRunner.get().getNano());
                     viewer.sendMessage(AText.ofPlain(" - Run Time: " + duration));
                 }
                 viewer.sendMessage(AText.ofPlain(" - Has Ended: " + scheduler.getEndTime().isPresent()));

@@ -6,7 +6,7 @@ public interface Permission {
 
     String getPermissionValue();
 
-    default boolean hasPermission(LivePlayer player){
+    default boolean hasPermission(LivePlayer player) {
         return player.hasPermission(this);
     }
 }

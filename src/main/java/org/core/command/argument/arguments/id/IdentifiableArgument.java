@@ -38,7 +38,8 @@ public abstract class IdentifiableArgument<I extends Identifiable> implements Co
     }
 
     @Override
-    public CommandArgumentResult<I> parse(CommandContext context, CommandArgumentContext<I> argument) throws IOException {
+    public CommandArgumentResult<I> parse(CommandContext context, CommandArgumentContext<I> argument) throws
+            IOException {
         String id = context.getCommand()[argument.getFirstArgument()];
         Optional<I> opIdent = this.getAll().stream().filter(a -> a.getId().equalsIgnoreCase(id)).findAny();
         if (!opIdent.isPresent()) {
@@ -52,7 +53,8 @@ public abstract class IdentifiableArgument<I extends Identifiable> implements Co
         String id = context.getCommand()[argument.getFirstArgument()];
         return this.getAll()
                 .stream()
-                .filter(a -> a.getId().toLowerCase().startsWith(id.toLowerCase()) || a.getName().toLowerCase().startsWith(id.toLowerCase()))
+                .filter(a -> a.getId().toLowerCase().startsWith(id.toLowerCase()) ||
+                        a.getName().toLowerCase().startsWith(id.toLowerCase()))
                 .map(Identifiable::getId)
                 .collect(Collectors.toSet());
     }

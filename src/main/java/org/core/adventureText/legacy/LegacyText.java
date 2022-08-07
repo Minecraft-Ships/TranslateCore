@@ -37,9 +37,9 @@ public class LegacyText implements AText {
 
     @Override
     public boolean contains(@NotNull AText aText) {
-        if (this.text!=null) {
+        if (this.text != null) {
             LegacyText legacy = this.toLegacy(aText);
-            if (legacy.text!=null && this.text.contains(legacy.text)) {
+            if (legacy.text != null && this.text.contains(legacy.text)) {
                 return true;
             }
         }
@@ -49,16 +49,19 @@ public class LegacyText implements AText {
     @Override
     public @NotNull LegacyText withAllAs(@NotNull String containing, @Nullable AText aText) {
         String text = null;
-        if (aText==null) {
+        if (aText == null) {
             aText = AText.ofPlain("");
         }
-        if (this.text!=null) {
+        if (this.text != null) {
             //SOMETHING ISNT RIGHT HERE
             String legacyText = aText.toLegacy();
             text = this.text.replaceAll(containing, legacyText);
         }
         final AText finalText = aText;
-        List<LegacyText> children = this.children.stream().map(lt -> lt.withAllAs(containing, finalText)).collect(Collectors.toList());
+        List<LegacyText> children = this.children
+                .stream()
+                .map(lt -> lt.withAllAs(containing, finalText))
+                .collect(Collectors.toList());
         return new LegacyText(this.colour, text, children);
     }
 
@@ -79,7 +82,7 @@ public class LegacyText implements AText {
 
     @Override
     public @NotNull String toPlain() {
-        if (this.text!=null) {
+        if (this.text != null) {
             String text = this.text;
 
             for (TextColour colour : NamedTextColours.colours()) {
@@ -97,10 +100,10 @@ public class LegacyText implements AText {
     @Override
     public @NotNull String toLegacy() {
         StringBuilder builder = new StringBuilder();
-        if (this.colour!=null) {
+        if (this.colour != null) {
             builder.append(this.colour.getLegacy().map(c -> TextColour.SYMBOL + "" + c).orElse(""));
         }
-        if (this.text!=null) {
+        if (this.text != null) {
             builder.append(this.text);
         }
         String children = this.children.stream().map(LegacyText::toLegacy).collect(Collectors.joining(""));
@@ -113,7 +116,7 @@ public class LegacyText implements AText {
         int previous = 0;
         for (int A = 0; A < text.length(); A++) {
             char at = text.charAt(A);
-            if (at!=TextColour.SYMBOL) {
+            if (at != TextColour.SYMBOL) {
                 continue;
             }
             builder.append(text, previous, A - 1);
@@ -125,7 +128,7 @@ public class LegacyText implements AText {
 
     public LegacyText legacy(@NotNull String text) {
         String[] split = text.split("" + TextColour.SYMBOL);
-        if (split.length==0 || split.length==1) {
+        if (split.length == 0 || split.length == 1) {
             return new LegacyText(null, text, Collections.emptyList());
         }
         List<LegacyText> collection = Stream.of(split).filter(v -> !v.isEmpty()).map(v -> {
@@ -133,7 +136,7 @@ public class LegacyText implements AText {
                     Optional<TextColour> opLegacy = NamedTextColours
                             .colours()
                             .parallelStream()
-                            .filter(tc -> tc.getLegacy().map(c -> c==at).orElse(false))
+                            .filter(tc -> tc.getLegacy().map(c -> c == at).orElse(false))
                             .findAny();
                     return opLegacy
                             .map(textColour -> new LegacyText(textColour, v.substring(1), Collections.emptyList()))

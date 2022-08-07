@@ -62,7 +62,7 @@ public class CommandContext {
         int commandArgument = 0;
         Collection<OptionalArgument<?>> optionalArguments = new ArrayList<>();
         for (CommandArgument<?> arg : arguments) {
-            if (this.commands.length==commandArgument) {
+            if (this.commands.length == commandArgument) {
                 if (arg instanceof OptionalArgument) {
                     optionalArguments.add((OptionalArgument<?>) arg);
                     continue;
@@ -74,7 +74,7 @@ public class CommandContext {
             }
             try {
                 CommandArgumentResult<?> entry = this.parse(arg, commandArgument);
-                if (commandArgument==entry.getPosition() && arg instanceof OptionalArgument) {
+                if (commandArgument == entry.getPosition() && arg instanceof OptionalArgument) {
                     optionalArguments.add((OptionalArgument<?>) arg);
                 } else {
                     optionalArguments.clear();
@@ -99,7 +99,8 @@ public class CommandContext {
      *
      * @param command The command to target
      * @param id      The command argument that should be used
-     * @param <T>     The expected type of argument (by providing the command argument, the type will be the same unless the argument is breaking the standard)
+     * @param <T>     The expected type of argument (by providing the command argument, the type will be the same
+     *           unless the argument is breaking the standard)
      * @return The value of the argument
      * @throws IllegalArgumentException If the provided id argument is not part of the command
      * @throws IllegalStateException    Argument requested is asking for string requirements then what is provided
@@ -125,7 +126,7 @@ public class CommandContext {
         }
         int commandArgument = 0;
         for (CommandArgument<?> arg : arguments) {
-            if (this.commands.length==commandArgument && arg instanceof OptionalArgument) {
+            if (this.commands.length == commandArgument && arg instanceof OptionalArgument) {
                 if (arg.getId().equals(id)) {
                     try {
                         return (T) this.parse(arg, commandArgument).getValue();
@@ -162,7 +163,7 @@ public class CommandContext {
             List<CommandArgument<?>> arguments = command.getArguments();
             int commandArgument = 0;
             for (CommandArgument<?> arg : arguments) {
-                if (this.commands.length==commandArgument && arg instanceof OptionalArgument) {
+                if (this.commands.length == commandArgument && arg instanceof OptionalArgument) {
                     continue;
                 }
                 if (this.commands.length <= commandArgument) {
@@ -194,7 +195,7 @@ public class CommandContext {
             List<CommandArgument<?>> arguments = command.getArguments();
             int commandArgument = 0;
             for (CommandArgument<?> arg : arguments) {
-                if (this.commands.length==commandArgument && arg instanceof OptionalArgument) {
+                if (this.commands.length == commandArgument && arg instanceof OptionalArgument) {
                     continue;
                 }
                 if (this.commands.length <= commandArgument) {
@@ -207,7 +208,7 @@ public class CommandContext {
                     return false;
                 }
             }
-            return this.commands.length==commandArgument;
+            return this.commands.length == commandArgument;
         }).findAny();
 
     }
@@ -224,7 +225,7 @@ public class CommandContext {
             int commandArgument = 0;
             int completeArguments = 0;
             for (CommandArgument<?> arg : arguments) {
-                if (this.commands.length==commandArgument && arg instanceof OptionalArgument) {
+                if (this.commands.length == commandArgument && arg instanceof OptionalArgument) {
                     continue;
                 }
                 if (this.commands.length <= commandArgument) {
@@ -233,7 +234,7 @@ public class CommandContext {
                 }
                 try {
                     CommandArgumentResult<?> entry = this.parse(arg, commandArgument);
-                    if (commandArgument!=entry.getPosition()) {
+                    if (commandArgument != entry.getPosition()) {
                         commandArgument = entry.getPosition();
                         completeArguments++;
                     }
@@ -252,7 +253,7 @@ public class CommandContext {
                 current = entry.getValue();
                 set.clear();
             }
-            if (entry.getValue()==current) {
+            if (entry.getValue() == current) {
                 set.add(entry.getKey());
             }
         }

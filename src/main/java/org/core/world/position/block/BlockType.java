@@ -42,7 +42,8 @@ public interface BlockType extends Identifiable {
     }
 
     /**
-     * <p>Gets all block types that are like the current. E.G if this was White_Wool then all Wool types would be like it</p>
+     * <p>Gets all block types that are like the current. E.G if this was White_Wool then all Wool types would be
+     * like it</p>
      *
      * @return All blocks types that are like the current block type.
      */

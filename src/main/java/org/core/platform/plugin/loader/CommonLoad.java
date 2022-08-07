@@ -33,11 +33,14 @@ public final class CommonLoad {
             return false;
         }
         LoadOnlyOn load = clazz.getAnnotation(LoadOnlyOn.class);
-        if (load==null) {
+        if (load == null) {
             return true;
         }
         LoadOnlyOnPlatform[] on = load.on();
-        Optional<LoadOnlyOnPlatform> opPlatform = Stream.of(on).filter(loadOnlyOn -> details.getIdName().equals(loadOnlyOn.platform())).findAny();
+        Optional<LoadOnlyOnPlatform> opPlatform = Stream
+                .of(on)
+                .filter(loadOnlyOn -> details.getIdName().equals(loadOnlyOn.platform()))
+                .findAny();
         if (!opPlatform.isPresent()) {
             return false;
         }
@@ -45,8 +48,8 @@ public final class CommonLoad {
         int[] minMCVersion = opPlatform.get().minMCVersion();
         int[] maxVersion = opPlatform.get().maxVersion();
         int[] minVersion = opPlatform.get().minVersion();
-        if ((maxMCVersion.length==3) || (minMCVersion.length==3)) {
-            if (maxMCVersion.length==3) {
+        if ((maxMCVersion.length == 3) || (minMCVersion.length == 3)) {
+            if (maxMCVersion.length == 3) {
                 if (maxMCVersion[0] > mcVersion.getMajor()) {
                     return false;
                 }
@@ -58,8 +61,8 @@ public final class CommonLoad {
                 }
             }
         }
-        if ((maxVersion.length==3) || (minVersion.length==3)) {
-            if (maxVersion.length==3) {
+        if ((maxVersion.length == 3) || (minVersion.length == 3)) {
+            if (maxVersion.length == 3) {
                 if (maxVersion[0] < mcVersion.getMajor()) {
                     return false;
                 }

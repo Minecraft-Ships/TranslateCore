@@ -8,7 +8,7 @@ public interface ChickenSnapshot extends Chicken<EntitySnapshot<? extends LiveEn
 
     @SuppressWarnings("unchecked")
     @Override
-    default EntityType<LiveChicken, ChickenSnapshot> getType(){
+    default EntityType<LiveChicken, ChickenSnapshot> getType() {
         return Chicken.super.getType();
     }
 

@@ -24,6 +24,14 @@ public class AdventureText implements AText {
         this.component = component;
     }
 
+    public static AdventureText plain(@NotNull String text) {
+        return new AdventureText(PlainComponentSerializer.plain().deserialize(text));
+    }
+
+    public static AdventureText legacy(@NotNull String text) {
+        return new AdventureText(LegacyComponentSerializer.legacySection().deserialize(text));
+    }
+
     private AdventureText toAdventure(AText aText) {
         if (aText instanceof AdventureText) {
             return (AdventureText) aText;
@@ -58,7 +66,7 @@ public class AdventureText implements AText {
     @Override
     public Optional<TextColour> getColour() {
         TextColor colour = this.component.color();
-        if (colour==null) {
+        if (colour == null) {
             return Optional.empty();
         }
         if (colour instanceof NamedTextColor) {
@@ -66,9 +74,9 @@ public class AdventureText implements AText {
             Optional<TextColour> opText = NamedTextColours
                     .colours()
                     .parallelStream()
-                    .filter(tc -> tc.getBlue()==namedTextColor.blue())
-                    .filter(tc -> tc.getGreen()==namedTextColor.green())
-                    .filter(tc -> tc.getRed()==namedTextColor.red())
+                    .filter(tc -> tc.getBlue() == namedTextColor.blue())
+                    .filter(tc -> tc.getGreen() == namedTextColor.green())
+                    .filter(tc -> tc.getRed() == namedTextColor.red())
                     .findAny();
             if (opText.isPresent()) {
                 return opText;
@@ -79,10 +87,11 @@ public class AdventureText implements AText {
 
     @Override
     public @NotNull AText withColour(@Nullable TextColour colour) {
-        if (colour==null) {
+        if (colour == null) {
             return new AdventureText(this.component.color(null));
         }
-        return new AdventureText(this.component.color(TextColor.color(colour.getRed(), colour.getGreen(), colour.getBlue())));
+        return new AdventureText(
+                this.component.color(TextColor.color(colour.getRed(), colour.getGreen(), colour.getBlue())));
     }
 
     @Override
@@ -106,13 +115,5 @@ public class AdventureText implements AText {
             return false;
         }
         return this.toPlain().equals(((AText) obj).toPlain());
-    }
-
-    public static AdventureText plain(@NotNull String text) {
-        return new AdventureText(PlainComponentSerializer.plain().deserialize(text));
-    }
-
-    public static AdventureText legacy(@NotNull String text) {
-        return new AdventureText(LegacyComponentSerializer.legacySection().deserialize(text));
     }
 }

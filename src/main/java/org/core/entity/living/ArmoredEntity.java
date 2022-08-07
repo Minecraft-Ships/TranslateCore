@@ -13,11 +13,11 @@ public interface ArmoredEntity<E extends Entity<?>> extends ItemHoldingEntity<E>
     @Override
     BasicEntityInventory<? extends LiveEntity> getInventory();
 
-    default ArmorPart getArmor(){
+    default ArmorPart getArmor() {
         return this.getInventory().getArmor();
     }
 
-    default Slot getHoldingItem(){
+    default Slot getHoldingItem() {
         return this.getInventory().getMainHoldingItem();
     }
 }

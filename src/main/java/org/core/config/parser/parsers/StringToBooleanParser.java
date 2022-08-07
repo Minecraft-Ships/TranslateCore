@@ -11,9 +11,9 @@ public class StringToBooleanParser implements StringParser.Suggestible<Boolean> 
 
     @Override
     public Optional<Boolean> parse(String original) {
-        if(original.equalsIgnoreCase("true")){
+        if (original.equalsIgnoreCase("true")) {
             return Optional.of(true);
-        }else if(original.equalsIgnoreCase("false")) {
+        } else if (original.equalsIgnoreCase("false")) {
             return Optional.of(false);
         }
         return Optional.empty();
@@ -27,10 +27,10 @@ public class StringToBooleanParser implements StringParser.Suggestible<Boolean> 
     @Override
     public List<Boolean> getSuggestions(String peek) {
         List<Boolean> suggestions = new ArrayList<>();
-        if("false".startsWith(peek.toLowerCase())){
+        if ("false".startsWith(peek.toLowerCase())) {
             suggestions.add(false);
         }
-        if("true".startsWith(peek.toLowerCase())){
+        if ("true".startsWith(peek.toLowerCase())) {
             suggestions.add(true);
         }
         return suggestions;

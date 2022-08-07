@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 public class StringToMinecraftTimeUnitParser implements StringParser.Suggestible<TimeUnit> {
 
     @Override
-    public Optional<TimeUnit> parse(String original){
-        for(TimeUnit unit : TimeUnit.values()){
-            if(unit.name().equalsIgnoreCase(original)){
+    public Optional<TimeUnit> parse(String original) {
+        for (TimeUnit unit : TimeUnit.values()) {
+            if (unit.name().equalsIgnoreCase(original)) {
                 return Optional.of(unit);
             }
         }
@@ -22,7 +22,7 @@ public class StringToMinecraftTimeUnitParser implements StringParser.Suggestible
     }
 
     @Override
-    public String unparse(TimeUnit unit){
+    public String unparse(TimeUnit unit) {
         return unit.name();
     }
 

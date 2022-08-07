@@ -24,9 +24,11 @@ public class FloatArgument implements CommandArgument<Float> {
     }
 
     @Override
-    public CommandArgumentResult<Float> parse(CommandContext context, CommandArgumentContext<Float> argument) throws IOException {
+    public CommandArgumentResult<Float> parse(CommandContext context, CommandArgumentContext<Float> argument) throws
+            IOException {
         try {
-            return CommandArgumentResult.from(argument, Float.parseFloat(context.getCommand()[argument.getFirstArgument()]));
+            return CommandArgumentResult.from(argument,
+                    Float.parseFloat(context.getCommand()[argument.getFirstArgument()]));
         } catch (NumberFormatException e) {
             throw new IOException("'" + context.getCommand()[argument.getFirstArgument()] + "' is not a number");
         }

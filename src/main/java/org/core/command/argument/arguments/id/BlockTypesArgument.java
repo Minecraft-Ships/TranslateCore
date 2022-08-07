@@ -8,7 +8,8 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * Gets a list of blocks from the remaining string arguments. This can accept either {@link BlockTypeArgument} or {@link BlockGroupArgument}
+ * Gets a list of blocks from the remaining string arguments. This can accept either {@link BlockTypeArgument} or
+ * {@link BlockGroupArgument}
  */
 public class BlockTypesArgument extends FlatRemainingArgument<BlockType> {
 

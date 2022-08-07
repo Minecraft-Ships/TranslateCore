@@ -10,13 +10,14 @@ import java.util.Optional;
 public interface UnspecificParser<T> extends Identifiable {
 
     void set(ConfigurationStream file, T value, ConfigurationNode node);
+
     Optional<T> parse(ConfigurationStream file, ConfigurationNode node);
 
-    default Optional<T> parse(ConfigurationStream file, String... node){
+    default Optional<T> parse(ConfigurationStream file, String... node) {
         return this.parse(file, new ConfigurationNode(node));
     }
 
-    default void set(ConfigurationStream file, T value, String... node){
+    default void set(ConfigurationStream file, T value, String... node) {
         this.set(file, value, new ConfigurationNode(node));
     }
 }

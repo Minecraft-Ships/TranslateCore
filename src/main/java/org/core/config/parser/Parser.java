@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface Parser <O, T> {
+public interface Parser<O, T> {
 
     StringToDoubleParser STRING_TO_DOUBLE = new StringToDoubleParser();
     StringToBooleanParser STRING_TO_BOOLEAN = new StringToBooleanParser();
@@ -25,23 +25,24 @@ public interface Parser <O, T> {
     StringToTimeParser STRING_TO_TIME = new StringToTimeParser();
     StringToTimeRangeParser STRING_TO_TIME_RANGE = new StringToTimeRangeParser();
 
-    Optional<T> parse(O original);
-    O unparse(T value);
-
-    static <E extends Enum<E>> StringToEnumParser<E> getEnumParser(Class<E> clazz){
+    static <E extends Enum<E>> StringToEnumParser<E> getEnumParser(Class<E> clazz) {
         return new StringToEnumParser<>(clazz);
     }
 
-    static <O, T> List<T> parseList(Parser<? super O, ? extends T> parser, Collection<O> collection){
+    static <O, T> List<T> parseList(Parser<? super O, ? extends T> parser, Collection<O> collection) {
         List<T> list = new ArrayList<>();
         collection.forEach(v -> parser.parse(v).ifPresent(list::add));
         return list;
     }
 
-    static <O, T> List<O> unparseList(Parser<? extends O, ? super T> parser, Collection<T> collection){
+    static <O, T> List<O> unparseList(Parser<? extends O, ? super T> parser, Collection<T> collection) {
         List<O> list = new ArrayList<>();
         collection.forEach(v -> list.add(parser.unparse(v)));
         return list;
     }
+
+    Optional<T> parse(O original);
+
+    O unparse(T value);
 
 }

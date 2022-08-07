@@ -31,7 +31,8 @@ public class WorldArgument implements CommandArgument<WorldExtent> {
     }
 
     @Override
-    public CommandArgumentResult<WorldExtent> parse(CommandContext context, CommandArgumentContext<WorldExtent> argument) throws IOException {
+    public CommandArgumentResult<WorldExtent> parse(CommandContext context,
+            CommandArgumentContext<WorldExtent> argument) throws IOException {
         String worldName = context.getCommand()[argument.getFirstArgument()];
         Optional<WorldExtent> opWorld = TranslateCore.getServer().getWorld(worldName, true);
         if (opWorld.isPresent()) {
@@ -47,6 +48,12 @@ public class WorldArgument implements CommandArgument<WorldExtent> {
     @Override
     public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<WorldExtent> argument) {
         String worldPeek = commandContext.getCommand()[argument.getFirstArgument()];
-        return TranslateCore.getServer().getWorlds().stream().map(WorldExtent::getName).filter(n -> n.toLowerCase().startsWith(worldPeek)).collect(Collectors.toSet());
+        return TranslateCore
+                .getServer()
+                .getWorlds()
+                .stream()
+                .map(WorldExtent::getName)
+                .filter(n -> n.toLowerCase().startsWith(worldPeek))
+                .collect(Collectors.toSet());
     }
 }

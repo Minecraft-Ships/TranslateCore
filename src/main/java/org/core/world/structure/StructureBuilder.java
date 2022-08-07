@@ -58,12 +58,6 @@ public class StructureBuilder {
         return this.min;
     }
 
-    public StructureBuilder setBounds(Bounds<Integer> bounds) {
-        this.max = bounds.getIntMax();
-        this.min = bounds.getIntMin();
-        return this;
-    }
-
     public StructureBuilder setMin(Vector3<Integer> min) {
         this.min = min;
         return this;
@@ -72,6 +66,12 @@ public class StructureBuilder {
     public StructureBuilder setMin(Position<Integer> position) {
         this.world = position.getWorld();
         this.min = position.getPosition();
+        return this;
+    }
+
+    public StructureBuilder setBounds(Bounds<Integer> bounds) {
+        this.max = bounds.getIntMax();
+        this.min = bounds.getIntMin();
         return this;
     }
 

@@ -16,13 +16,14 @@ import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-@SuppressWarnings({"HardCodedStringLiteral", "UseOfSystemOutOrSystemErr", "CallToSystemExit", "ResultOfMethodCallIgnored", "HardcodedFileSeparator"})
+@SuppressWarnings({"HardCodedStringLiteral", "UseOfSystemOutOrSystemErr", "CallToSystemExit",
+        "ResultOfMethodCallIgnored", "HardcodedFileSeparator"})
 public final class Terminal {
 
+    private static final String TEMP = "Temporary";
     private static File PATH_TO_CORE;
     private static String PATH_TO_MAIN;
     private static File OUTPUT;
-    private static final String TEMP = "Temporary";
 
     private Terminal() {
         throw new RuntimeException("Should not be init");
@@ -36,7 +37,7 @@ public final class Terminal {
                 case "plugin":
                 case "core":
                     PATH_TO_CORE = new File(args[A + 1]);
-                    if (OUTPUT==null) {
+                    if (OUTPUT == null) {
                         String[] folders = args[A + 1].split("/");
                         String fileName = folders[folders.length - 1];
                         //noinspection NonThreadSafeLazyInitialization
@@ -54,12 +55,12 @@ public final class Terminal {
             }
         }
 
-        if (PATH_TO_MAIN==null) {
+        if (PATH_TO_MAIN == null) {
             System.err.println("Main needs to be stated");
             System.exit(1);
             return;
         }
-        if (PATH_TO_CORE==null) {
+        if (PATH_TO_CORE == null) {
             System.err.println("Jar needs to be stated");
             System.exit(1);
             return;
@@ -70,7 +71,7 @@ public final class Terminal {
             return;
         }
 
-        if (OUTPUT==null) {
+        if (OUTPUT == null) {
             System.err.println("Cannot find specified output");
             System.exit(1);
             return;
@@ -113,16 +114,19 @@ public final class Terminal {
 
         CorePlugin plugin;
         try {
-            URLClassLoader classLoader = new URLClassLoader(new URL[]{Terminal.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL(), PATH_TO_CORE.toURI().toURL()});
+            URLClassLoader classLoader = new URLClassLoader(
+                    new URL[]{Terminal.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL(),
+                            PATH_TO_CORE.toURI().toURL()});
             Class<?> clazz = classLoader.loadClass(PATH_TO_MAIN);
             plugin = (CorePlugin) clazz.getConstructor().newInstance();
-        } catch (IOException | ClassNotFoundException | URISyntaxException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
+        } catch (IOException | ClassNotFoundException | URISyntaxException | NoSuchMethodException |
+                 InvocationTargetException | IllegalAccessException | InstantiationException e) {
             System.err.println("Could not load");
             e.printStackTrace();
             return;
         }
 
-        if (OUTPUT.getParentFile()!=null) {
+        if (OUTPUT.getParentFile() != null) {
             OUTPUT.getParentFile().mkdirs();
         }
         try {

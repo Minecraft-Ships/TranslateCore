@@ -10,7 +10,7 @@ public class CoreBlockGroup extends BlockGroup {
         super("core:" + name.toLowerCase().replace(" ", "_"), name, types);
     }
 
-    CoreBlockGroup(String name, BlockType[]... types){
+    CoreBlockGroup(String name, BlockType[]... types) {
         this(name, ArrayUtils.join(BlockType.class, types));
     }
 }

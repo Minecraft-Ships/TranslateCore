@@ -7,12 +7,16 @@ import org.core.world.position.impl.sync.SyncExactPosition;
 
 import java.util.Optional;
 
-public interface LiveEntityInventory<E extends LiveEntity> extends BasicEntityInventory<E>, PositionableInventory.ExactPositionableInventory {
+public interface LiveEntityInventory<E extends LiveEntity>
+        extends BasicEntityInventory<E>, PositionableInventory.ExactPositionableInventory {
 
     Optional<E> getAttachedEntity();
 
     @Override
     default SyncExactPosition getPosition() {
-        return this.getAttachedEntity().orElseThrow(() -> new IllegalStateException("Cannot get attached entity")).getPosition();
+        return this
+                .getAttachedEntity()
+                .orElseThrow(() -> new IllegalStateException("Cannot get attached entity"))
+                .getPosition();
     }
 }

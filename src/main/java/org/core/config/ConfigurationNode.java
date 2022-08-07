@@ -10,6 +10,23 @@ import java.util.function.Supplier;
 
 public class ConfigurationNode {
 
+    private final String[] path;
+
+    public ConfigurationNode(String... path) {
+        if (path.length == 0) {
+            throw new IllegalArgumentException("Node must have a path specified");
+        }
+        this.path = path;
+    }
+
+    public String[] getPath() {
+        return this.path;
+    }
+
+    public Object[] getObjectPath() {
+        return this.path;
+    }
+
     public static class GroupKnown<T> extends ConfigurationNode {
 
         private final Supplier<? extends Map<String, Parser<String, T>>> values;
@@ -35,6 +52,17 @@ public class ConfigurationNode {
     }
 
     public static class KnownParser<P, T> extends ConfigurationNode {
+
+        protected final Parser<P, T> parser;
+
+        protected KnownParser(Parser<P, T> parser, String... path) {
+            super(path);
+            this.parser = parser;
+        }
+
+        public Parser<P, T> getParser() {
+            return this.parser;
+        }
 
         public static class ChildKnown<T> extends KnownParser<Map<String, String>, T> {
 
@@ -73,34 +101,6 @@ public class ConfigurationNode {
                 return (StringParser<T>) super.getParser();
             }
         }
-
-        protected final Parser<P, T> parser;
-
-        protected KnownParser(Parser<P, T> parser, String... path) {
-            super(path);
-            this.parser = parser;
-        }
-
-        public Parser<P, T> getParser() {
-            return this.parser;
-        }
-    }
-
-    private final String[] path;
-
-    public ConfigurationNode(String... path) {
-        if (path.length==0) {
-            throw new IllegalArgumentException("Node must have a path specified");
-        }
-        this.path = path;
-    }
-
-    public String[] getPath() {
-        return this.path;
-    }
-
-    public Object[] getObjectPath() {
-        return this.path;
     }
 
 }

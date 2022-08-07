@@ -12,8 +12,11 @@ import org.core.world.direction.Direction;
 public interface ItemFrame<E extends Entity<?>> extends AttachableEntity<E>, ItemHoldingEntity<E> {
 
     void setItem(ItemStack stack);
+
     Direction getItemRotation();
+
     boolean getItemRotationFlip();
+
     ItemFrame<E> setItemRotation(Direction direction, boolean flip) throws DirectionNotSupported;
 
     @SuppressWarnings("unchecked")

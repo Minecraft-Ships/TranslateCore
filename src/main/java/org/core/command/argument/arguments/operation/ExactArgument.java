@@ -22,7 +22,7 @@ public class ExactArgument implements CommandArgument<String> {
     }
 
     public ExactArgument(String id, boolean caseSens, String... lookup) {
-        if (lookup.length==0) {
+        if (lookup.length == 0) {
             throw new IllegalArgumentException("Lookup cannot be []");
         }
         this.id = id;
@@ -49,7 +49,8 @@ public class ExactArgument implements CommandArgument<String> {
     }
 
     @Override
-    public CommandArgumentResult<String> parse(CommandContext context, CommandArgumentContext<String> argument) throws IOException {
+    public CommandArgumentResult<String> parse(CommandContext context, CommandArgumentContext<String> argument) throws
+            IOException {
         String arg = context.getCommand()[argument.getFirstArgument()];
         if (this.anyMatch(arg)) {
             return CommandArgumentResult.from(argument, arg);

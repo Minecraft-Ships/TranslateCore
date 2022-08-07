@@ -27,7 +27,8 @@ public class LivePlayerArgument implements CommandArgument<LivePlayer> {
     }
 
     @Override
-    public CommandArgumentResult<LivePlayer> parse(CommandContext context, CommandArgumentContext<LivePlayer> argument) throws IOException {
+    public CommandArgumentResult<LivePlayer> parse(CommandContext context,
+            CommandArgumentContext<LivePlayer> argument) throws IOException {
         String command = context.getCommand()[argument.getFirstArgument()];
         Optional<LivePlayer> opPlayer = TranslateCore.getServer()
                 .getOnlinePlayers()

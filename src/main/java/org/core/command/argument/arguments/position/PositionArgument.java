@@ -29,13 +29,18 @@ public abstract class PositionArgument<N extends Number, P extends Position<N>> 
     }
 
     @Override
-    public CommandArgumentResult<P> parse(CommandContext context, CommandArgumentContext<P> argument) throws IOException {
+    public CommandArgumentResult<P> parse(CommandContext context, CommandArgumentContext<P> argument) throws
+            IOException {
         int firstPosition = argument.getFirstArgument();
         WorldArgument worldArg = new WorldArgument("");
-        CommandArgumentResult<WorldExtent> extent = worldArg.parse(context, new CommandArgumentContext<>(worldArg, firstPosition, context.getCommand()));
-        CommandArgumentResult<N> x = this.positionArgument.parse(context, new CommandArgumentContext<>(this.positionArgument, extent.getPosition() + 1, context.getCommand()));
-        CommandArgumentResult<N> y = this.positionArgument.parse(context, new CommandArgumentContext<>(this.positionArgument, x.getPosition(), context.getCommand()));
-        CommandArgumentResult<N> z = this.positionArgument.parse(context, new CommandArgumentContext<>(this.positionArgument, y.getPosition(), context.getCommand()));
+        CommandArgumentResult<WorldExtent> extent = worldArg.parse(context,
+                new CommandArgumentContext<>(worldArg, firstPosition, context.getCommand()));
+        CommandArgumentResult<N> x = this.positionArgument.parse(context,
+                new CommandArgumentContext<>(this.positionArgument, extent.getPosition() + 1, context.getCommand()));
+        CommandArgumentResult<N> y = this.positionArgument.parse(context,
+                new CommandArgumentContext<>(this.positionArgument, x.getPosition(), context.getCommand()));
+        CommandArgumentResult<N> z = this.positionArgument.parse(context,
+                new CommandArgumentContext<>(this.positionArgument, y.getPosition(), context.getCommand()));
         P pos = this.build(extent.getValue(), x.getValue(), y.getValue(), z.getValue());
         return new CommandArgumentResult<>(z.getPosition(), pos);
     }

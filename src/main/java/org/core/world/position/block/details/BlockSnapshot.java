@@ -7,6 +7,9 @@ import org.core.world.position.impl.sync.SyncBlockPosition;
 
 public interface BlockSnapshot<P extends BlockPosition> extends BlockDetails, Positionable<P> {
 
+    @Override
+    BlockSnapshot<P> createCopyOf();
+
     interface SyncBlockSnapshot extends BlockSnapshot<SyncBlockPosition> {
 
         AsyncBlockSnapshot asAsynced();
@@ -24,7 +27,4 @@ public interface BlockSnapshot<P extends BlockPosition> extends BlockDetails, Po
         @Override
         BlockSnapshot.AsyncBlockSnapshot createCopyOf();
     }
-
-    @Override
-    BlockSnapshot<P> createCopyOf();
 }

@@ -8,7 +8,7 @@ public interface HumanSnapshot extends Human<EntitySnapshot<? extends LiveEntity
 
     @SuppressWarnings("unchecked")
     @Override
-    default EntityType<LiveHuman, HumanSnapshot> getType(){
+    default EntityType<LiveHuman, HumanSnapshot> getType() {
         return Human.super.getType();
     }
 

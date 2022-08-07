@@ -21,19 +21,20 @@ public class InventoryParser implements UnspecificParser<InventorySnapshot> {
     public void set(ConfigurationStream file, InventorySnapshot value, ConfigurationNode node) {
         int slotCount = value.getSlotCount();
         Set<Slot> slots = value.getSlots();
-        for(int A = 0; A < slotCount; A++){
+        for (int A = 0; A < slotCount; A++) {
             final int B = A;
             Slot slot =
                     slots
                             .stream()
                             .filter(s -> s.getPosition().isPresent())
-                            .filter(s -> s.getPosition().orElseThrow(() -> new IllegalStateException("You broke logic")) == B)
+                            .filter(s ->
+                                    s.getPosition().orElseThrow(() -> new IllegalStateException("You broke logic")) ==
+                                            B)
                             .findAny()
-                            .orElseThrow(() -> new IllegalStateException("Cannot find slot with index of " + B))
-                            ;
+                            .orElseThrow(() -> new IllegalStateException("Cannot find slot with index of " + B));
             slot.getItem().ifPresent(i -> {
                 String[] path = new String[node.getPath().length + 1];
-                for(int C = 0; C < node.getPath().length; C++){
+                for (int C = 0; C < node.getPath().length; C++) {
                     path[C] = node.getPath()[C];
                 }
                 path[node.getPath().length] = B + "";
@@ -47,18 +48,18 @@ public class InventoryParser implements UnspecificParser<InventorySnapshot> {
         InventorySnapshot inv = new UnknownInventorySnapshot();
         file.getChildren(node).forEach(i -> {
             String[] totalPath = i.getPath();
-            try{
+            try {
                 int slotIndex = Integer.parseInt(totalPath[totalPath.length - 1]);
                 Optional<ItemStack> opStack = UnspecificParsers.ITEM_STACK.parse(file, i);
-                if(!opStack.isPresent()){
+                if (!opStack.isPresent()) {
                     return;
                 }
                 Slot snapshot = new SlotSnapshot(slotIndex, opStack.get());
                 inv.getSlots().add(snapshot);
-            }catch (NumberFormatException ignore){
+            } catch (NumberFormatException ignore) {
             }
         });
-        if(inv.getSlots().isEmpty()){
+        if (inv.getSlots().isEmpty()) {
             return Optional.empty();
         }
         return Optional.of(inv);

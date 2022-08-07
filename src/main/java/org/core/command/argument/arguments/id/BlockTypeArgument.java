@@ -8,7 +8,7 @@ import java.util.Collection;
 /**
  * Gets a single BlockType from a single string argument
  */
-public class BlockTypeArgument extends IdentifiableArgument<BlockType>{
+public class BlockTypeArgument extends IdentifiableArgument<BlockType> {
 
     public BlockTypeArgument(String id) {
         super(id);

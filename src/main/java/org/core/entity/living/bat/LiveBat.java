@@ -7,7 +7,7 @@ import org.core.entity.LiveEntity;
 public interface LiveBat extends Bat<LiveEntity>, LiveEntity {
 
     @Override
-    default EntityType<LiveBat, BatSnapshot> getType(){
+    default EntityType<LiveBat, BatSnapshot> getType() {
         return Bat.super.getType();
     }
 }

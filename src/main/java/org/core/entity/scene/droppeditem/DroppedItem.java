@@ -10,7 +10,9 @@ import java.util.concurrent.TimeUnit;
 public interface DroppedItem<E extends Entity<?>> extends ItemHoldingEntity<E> {
 
     int getPickupDelayTicks();
+
     DroppedItem<E> setPickupDelay(int ticks);
+
     DroppedItem<E> setPickupDelay(int time, TimeUnit unit);
 
     @Override

@@ -4,7 +4,7 @@ import org.core.entity.LiveEntity;
 import org.core.inventory.InventorySnapshot;
 import org.core.inventory.inventories.BasicEntityInventory;
 
-public interface EntityInventorySnapshot <E extends LiveEntity> extends InventorySnapshot, BasicEntityInventory<E> {
+public interface EntityInventorySnapshot<E extends LiveEntity> extends InventorySnapshot, BasicEntityInventory<E> {
 
     void apply(E entity);
 

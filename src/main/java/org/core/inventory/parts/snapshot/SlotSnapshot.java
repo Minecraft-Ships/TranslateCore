@@ -11,13 +11,13 @@ public class SlotSnapshot implements InventoryPartSnapshot, Slot {
     protected final Integer slotPos;
     protected ItemStackSnapshot itemstack;
 
-    public SlotSnapshot(Slot slot){
+    public SlotSnapshot(Slot slot) {
         this(slot.getPosition().orElse(null), slot.getItem().orElse(null));
     }
 
-    public SlotSnapshot(Integer slotPos, ItemStack stack){
+    public SlotSnapshot(Integer slotPos, ItemStack stack) {
         this.slotPos = slotPos;
-        if(stack != null) {
+        if (stack != null) {
             this.itemstack = stack.createSnapshot();
         }
     }

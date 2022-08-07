@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface ProjectileEntity<E extends Entity<?>> extends Entity<E> {
 
     Optional<ProjectileSource> getSource();
+
     ProjectileEntity<E> setSource(ProjectileSource source);
 
 }

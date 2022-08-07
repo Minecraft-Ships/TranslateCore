@@ -27,11 +27,13 @@ public class PermissionOrArgument<T> implements CommandArgument<T> {
 
     /**
      * @param id         The id of the command argument
-     * @param permission the check for if the provided command source has permission. If needed this can be checked for other boolean values such as if a player is part of a town
+     * @param permission the check for if the provided command source has permission. If needed this can be checked
+     *                   for other boolean values such as if a player is part of a town
      * @param with       The command argument to use if the user has permission
      * @param or         The command argument to use if the user doesn't have permission
      */
-    public PermissionOrArgument(String id, Predicate<? super CommandSource> permission, ParseCommandArgument<T> with, ParseCommandArgument<T> or) {
+    public PermissionOrArgument(String id, Predicate<? super CommandSource> permission, ParseCommandArgument<T> with,
+            ParseCommandArgument<T> or) {
         this.id = id;
         this.permission = permission;
         this.with = with;
@@ -44,7 +46,8 @@ public class PermissionOrArgument<T> implements CommandArgument<T> {
     }
 
     @Override
-    public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) throws IOException {
+    public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) throws
+            IOException {
         if (this.permission.test(context.getSource())) {
             return this.with.parse(context, argument);
         }

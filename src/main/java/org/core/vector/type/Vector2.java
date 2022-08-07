@@ -6,7 +6,7 @@ import org.core.vector.VectorConverter;
 import java.math.BigDecimal;
 import java.util.function.Function;
 
-public class Vector2 <N extends Number> extends Vector<N, Vector2<N>> {
+public class Vector2<N extends Number> extends Vector<N, Vector2<N>> {
 
     public static final VectorConverter GENERAL_CONVERTER = new VectorConverter() {
 
@@ -16,20 +16,33 @@ public class Vector2 <N extends Number> extends Vector<N, Vector2<N>> {
         }
 
         @Override
-        public <Num extends Number> Vector<Num, ?> createInstance(Function<BigDecimal, Num> function, BigDecimal... decimals) {
+        public <Num extends Number> Vector<Num, ?> createInstance(Function<BigDecimal, Num> function,
+                BigDecimal... decimals) {
             return new Vector2<>(function, decimals);
         }
     };
 
-    public static final VectorConverter.Specific<Integer, Vector2<Integer>> INT_CONVERTER = new VectorConverter.Specific.AbstractSpecificWrapper<>(GENERAL_CONVERTER, BigDecimal::intValue);
-    public static final VectorConverter.Specific<Double, Vector2<Double>> DOUBLE_CONVERTER = new VectorConverter.Specific.AbstractSpecificWrapper<>(GENERAL_CONVERTER, BigDecimal::doubleValue);
+    public static final VectorConverter.Specific<Integer, Vector2<Integer>> INT_CONVERTER =
+            new VectorConverter.Specific.AbstractSpecificWrapper<>(
+            GENERAL_CONVERTER, BigDecimal::intValue);
+    public static final VectorConverter.Specific<Double, Vector2<Double>> DOUBLE_CONVERTER =
+            new VectorConverter.Specific.AbstractSpecificWrapper<>(
+            GENERAL_CONVERTER, BigDecimal::doubleValue);
 
     private Vector2(Function<BigDecimal, N> function, BigDecimal... points) {
         super(function, points);
     }
 
-    public Vector2(Function<BigDecimal, N> function, BigDecimal x, BigDecimal z){
+    public Vector2(Function<BigDecimal, N> function, BigDecimal x, BigDecimal z) {
         super(function, x, z);
+    }
+
+    public static Vector2<Double> valueOf(double x, double z) {
+        return new Vector2<>(BigDecimal::doubleValue, BigDecimal.valueOf(x), BigDecimal.valueOf(z));
+    }
+
+    public static Vector2<Integer> valueOf(int x, int z) {
+        return new Vector2<>(BigDecimal::intValue, BigDecimal.valueOf(x), BigDecimal.valueOf(z));
     }
 
     @Override
@@ -42,48 +55,40 @@ public class Vector2 <N extends Number> extends Vector<N, Vector2<N>> {
         return new Vector2<>(function, this.points);
     }
 
-    public N getX(){
+    public N getX() {
         return this.getPoint(0);
     }
 
-    public N getZ(){
+    public N getZ() {
         return this.getPoint(1);
     }
 
-    public BigDecimal getRawX(){
+    public BigDecimal getRawX() {
         return this.getRawPoint(0);
     }
 
-    public BigDecimal getRawZ(){
+    public BigDecimal getRawZ() {
         return this.getRawPoint(1);
     }
 
-    public Vector2<N> plus(N x, N z){
+    public Vector2<N> plus(N x, N z) {
         return this.plus(this.createNew(BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(z.doubleValue())));
     }
 
-    public Vector2<N> plus(Vector2<Integer> vector){
+    public Vector2<N> plus(Vector2<Integer> vector) {
         return this.plus(this.toNumber.apply(vector.getRawPoint(0)), this.toNumber.apply(vector.getRawPoint(1)));
     }
 
-    public Vector2<N> minus(N x, N z){
+    public Vector2<N> minus(N x, N z) {
         return this.minus(this.createNew(BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(z.doubleValue())));
     }
 
-    public Vector2<N> minus(Vector2<Integer> vector){
+    public Vector2<N> minus(Vector2<Integer> vector) {
         return this.minus(this.toNumber.apply(vector.getRawPoint(0)), this.toNumber.apply(vector.getRawPoint(1)));
     }
 
     @Override
     public String toString() {
         return "Vector3{X: " + this.getRawX().toPlainString() + ", Z: " + this.getRawZ().toPlainString() + "}";
-    }
-
-    public static Vector2<Double> valueOf(double x, double z){
-        return new Vector2<>(BigDecimal::doubleValue, BigDecimal.valueOf(x), BigDecimal.valueOf(z));
-    }
-
-    public static Vector2<Integer> valueOf(int x, int z){
-        return new Vector2<>(BigDecimal::intValue, BigDecimal.valueOf(x), BigDecimal.valueOf(z));
     }
 }

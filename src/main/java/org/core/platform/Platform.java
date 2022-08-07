@@ -61,7 +61,8 @@ public interface Platform {
 
     @NotNull Singleton<PatternLayerType> get(PatternLayerTypes id);
 
-    @NotNull <E extends LiveEntity, S extends EntitySnapshot<E>> Singleton<EntityType<E, S>> get(EntityTypes<E, S> entityId);
+    @NotNull <E extends LiveEntity, S extends EntitySnapshot<E>> Singleton<EntityType<E, S>> get(
+            EntityTypes<E, S> entityId);
 
     <E extends LiveEntity> Optional<EntityType<E, ? extends EntitySnapshot<E>>> getEntityType(String id);
 
@@ -155,6 +156,10 @@ public interface Platform {
     }
 
     default Optional<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntity(@NotNull BlockType type) {
-        return this.getDefaultTileEntities().stream().filter(t -> t.getSupportedBlocks().stream().anyMatch(ty -> ty.equals(type))).findFirst();
+        return this
+                .getDefaultTileEntities()
+                .stream()
+                .filter(t -> t.getSupportedBlocks().stream().anyMatch(ty -> ty.equals(type)))
+                .findFirst();
     }
 }

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public interface SyncBlockPosition extends SyncPosition<Integer>, BlockPosition {
 
     @Override
-    default SyncBlockPosition getRelative(Vector3<?> vector){
+    default SyncBlockPosition getRelative(Vector3<?> vector) {
         Vector3<Integer> vector3i = this.getPosition().plus(vector.toVector(BigDecimal::intValue));
         return this.getWorld().getPosition(vector3i.getX(), vector3i.getY(), vector3i.getZ());
     }
@@ -20,7 +20,9 @@ public interface SyncBlockPosition extends SyncPosition<Integer>, BlockPosition 
     }
 
     @Override
-    default SyncExactPosition toExactPosition(){
-        return this.getWorld().getPosition(this.getX().doubleValue(), this.getY().doubleValue(), this.getZ().doubleValue());
+    default SyncExactPosition toExactPosition() {
+        return this
+                .getWorld()
+                .getPosition(this.getX().doubleValue(), this.getY().doubleValue(), this.getZ().doubleValue());
     }
 }

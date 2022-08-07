@@ -11,6 +11,10 @@ import java.util.stream.Collectors;
 
 public interface Explosion extends Positionable<SyncExactPosition> {
 
+    Collection<SyncBlockPosition> getAffectedPositions();
+
+    Object getSource();
+
     interface EntityExplosion extends Explosion {
 
         @Override
@@ -35,8 +39,4 @@ public interface Explosion extends Positionable<SyncExactPosition> {
         }
 
     }
-
-    Collection<SyncBlockPosition> getAffectedPositions();
-
-    Object getSource();
 }

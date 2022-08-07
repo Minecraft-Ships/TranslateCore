@@ -7,7 +7,7 @@ import org.core.entity.LiveEntity;
 public interface LiveItemFrame extends ItemFrame<LiveEntity>, LiveEntity {
 
     @Override
-    default EntityType<LiveItemFrame, ItemFrameSnapshot> getType(){
+    default EntityType<LiveItemFrame, ItemFrameSnapshot> getType() {
         return ItemFrame.super.getType();
     }
 

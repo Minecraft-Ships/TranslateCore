@@ -7,7 +7,7 @@ public interface LiveSnowballEntity extends SnowballEntity<LiveEntity>, LiveEnti
 
     @SuppressWarnings("unchecked")
     @Override
-    default EntityType<LiveSnowballEntity, SnowballEntitySnapshot> getType(){
+    default EntityType<LiveSnowballEntity, SnowballEntitySnapshot> getType() {
         return SnowballEntity.super.getType();
     }
 }

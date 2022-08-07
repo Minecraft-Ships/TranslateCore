@@ -53,7 +53,10 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
         }
         if (!opCommand.get().hasPermission(source)) {
             if (source instanceof CommandViewer) {
-                ((CommandViewer) source).sendMessage(AText.ofPlain("You do not have permission for that command. You require " + opCommand.get().getPermissionNode()).withColour(NamedTextColours.RED));
+                ((CommandViewer) source).sendMessage(AText
+                        .ofPlain("You do not have permission for that command. You require " +
+                                opCommand.get().getPermissionNode())
+                        .withColour(NamedTextColours.RED));
                 return true;
             }
             return false;

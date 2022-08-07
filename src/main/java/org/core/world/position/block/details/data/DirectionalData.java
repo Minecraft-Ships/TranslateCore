@@ -6,6 +6,8 @@ import org.core.world.direction.Direction;
 public interface DirectionalData {
 
     Direction getDirection();
-    Direction[] getSupportedDirections();
+
     DirectionalData setDirection(Direction direction) throws DirectionNotSupported;
+
+    Direction[] getSupportedDirections();
 }

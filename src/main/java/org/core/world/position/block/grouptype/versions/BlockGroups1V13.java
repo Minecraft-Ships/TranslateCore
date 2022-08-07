@@ -6,7 +6,8 @@ import org.core.world.position.block.blocktypes.post.BlockTypes1V13;
 @SuppressWarnings("unused")
 public interface BlockGroups1V13 {
 
-    CoreBlockGroup AIR = new CoreBlockGroup("Air", BlockTypes1V13.AIR, BlockTypes1V13.CAVE_AIR, BlockTypes1V13.VOID_AIR);
+    CoreBlockGroup AIR = new CoreBlockGroup("Air", BlockTypes1V13.AIR, BlockTypes1V13.CAVE_AIR,
+            BlockTypes1V13.VOID_AIR);
     CoreBlockGroup TRAP_WOOD_DOOR = new CoreBlockGroup("Trap Wood Door",
             BlockTypes1V13.ACACIA_TRAPDOOR,
             CommonBlockTypes.OAK_TRAPDOOR,

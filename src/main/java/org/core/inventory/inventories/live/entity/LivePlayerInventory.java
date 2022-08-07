@@ -7,7 +7,7 @@ import org.core.world.position.impl.sync.SyncExactPosition;
 public interface LivePlayerInventory extends PlayerInventory, LiveEntityInventory<LivePlayer> {
 
     @Override
-    default SyncExactPosition getPosition(){
+    default SyncExactPosition getPosition() {
         return LiveEntityInventory.super.getPosition();
     }
 }

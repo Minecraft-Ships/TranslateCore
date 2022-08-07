@@ -20,7 +20,12 @@ public interface LiveItemStack extends ItemStack {
                     continue;
                 }
                 ContainerTileEntity cTile = (ContainerTileEntity) tile;
-                if (cTile.getInventory().getSlots().stream().filter(i -> i.getItem().isPresent()).anyMatch(i -> i.getItem().get().equals(this))) {
+                if (cTile
+                        .getInventory()
+                        .getSlots()
+                        .stream()
+                        .filter(i -> i.getItem().isPresent())
+                        .anyMatch(i -> i.getItem().get().equals(this))) {
                     return Optional.of(tile.getPosition().toExactPosition());
                 }
             }
@@ -37,7 +42,12 @@ public interface LiveItemStack extends ItemStack {
                 }
                 if (entity instanceof InventoryHoldingEntity) {
                     InventoryHoldingEntity<?> ihEntity = (InventoryHoldingEntity<?>) entity;
-                    if (ihEntity.getInventory().getSlots().stream().filter(slot -> slot.getItem().isPresent()).anyMatch(slot -> slot.getItem().get().equals(this))) {
+                    if (ihEntity
+                            .getInventory()
+                            .getSlots()
+                            .stream()
+                            .filter(slot -> slot.getItem().isPresent())
+                            .anyMatch(slot -> slot.getItem().get().equals(this))) {
                         return Optional.of(entity.getPosition());
                     }
                 }

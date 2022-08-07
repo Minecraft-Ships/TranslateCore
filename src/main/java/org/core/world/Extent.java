@@ -37,24 +37,40 @@ public interface Extent {
 
     default <N extends Number> SyncPosition<N> getPosition(Vector3<N> vector) {
         if (vector.getX() instanceof Integer) {
-            return (SyncPosition<N>) this.getPosition(vector.getX().intValue(), vector.getY().intValue(), vector.getZ().intValue());
+            return (SyncPosition<N>) this.getPosition(vector.getX().intValue(), vector.getY().intValue(),
+                    vector.getZ().intValue());
         }
         if (vector.getX() instanceof Double) {
-            return (SyncPosition<N>) this.getPosition(vector.getX().doubleValue(), vector.getY().doubleValue(), vector.getZ().doubleValue());
+            return (SyncPosition<N>) this.getPosition(vector.getX().doubleValue(), vector.getY().doubleValue(),
+                    vector.getZ().doubleValue());
         }
-        TranslateCore.getConsole().sendMessage(AText.ofPlain("Extent.getPosition(Vector3<" + vector.getX().getClass().getSimpleName() + ") is not supported. Defaulting to ExactPosition").withColour(NamedTextColours.RED));
-        return (SyncPosition<N>) this.getPosition(vector.getX().doubleValue(), vector.getY().doubleValue(), vector.getZ().doubleValue());
+        TranslateCore
+                .getConsole()
+                .sendMessage(AText
+                        .ofPlain("Extent.getPosition(Vector3<" + vector.getX().getClass().getSimpleName() +
+                                ") is not supported. Defaulting to ExactPosition")
+                        .withColour(NamedTextColours.RED));
+        return (SyncPosition<N>) this.getPosition(vector.getX().doubleValue(), vector.getY().doubleValue(),
+                vector.getZ().doubleValue());
     }
 
     default <N extends Number> ASyncPosition<N> getAsyncPosition(Vector3<N> vector) {
         if (vector.getX() instanceof Integer) {
-            return (ASyncPosition<N>) this.getAsyncPosition(vector.getX().intValue(), vector.getY().intValue(), vector.getZ().intValue());
+            return (ASyncPosition<N>) this.getAsyncPosition(vector.getX().intValue(), vector.getY().intValue(),
+                    vector.getZ().intValue());
         }
         if (vector.getX() instanceof Double) {
-            return (ASyncPosition<N>) this.getAsyncPosition(vector.getX().doubleValue(), vector.getY().doubleValue(), vector.getZ().doubleValue());
+            return (ASyncPosition<N>) this.getAsyncPosition(vector.getX().doubleValue(), vector.getY().doubleValue(),
+                    vector.getZ().doubleValue());
         }
 
-        TranslateCore.getConsole().sendMessage(AText.ofPlain("Extent.getPosition(Vector3<" + vector.getX().getClass().getSimpleName() + ") is not supported. Defaulting to ExactPosition").withColour(NamedTextColours.RED));
-        return (ASyncPosition<N>) this.getAsyncPosition(vector.getX().doubleValue(), vector.getY().doubleValue(), vector.getZ().doubleValue());
+        TranslateCore
+                .getConsole()
+                .sendMessage(AText
+                        .ofPlain("Extent.getPosition(Vector3<" + vector.getX().getClass().getSimpleName() +
+                                ") is not supported. Defaulting to ExactPosition")
+                        .withColour(NamedTextColours.RED));
+        return (ASyncPosition<N>) this.getAsyncPosition(vector.getX().doubleValue(), vector.getY().doubleValue(),
+                vector.getZ().doubleValue());
     }
 }

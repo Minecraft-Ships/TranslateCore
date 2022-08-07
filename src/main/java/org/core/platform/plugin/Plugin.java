@@ -70,7 +70,8 @@ public interface Plugin {
     }
 
     /**
-     * Gets the native boot plugin object. Depending on implementation, this maybe a wrapper or the TranslateCore boot plugin object
+     * Gets the native boot plugin object. Depending on implementation, this maybe a wrapper or the TranslateCore
+     * boot plugin object
      *
      * @return The native plugin
      */
@@ -85,8 +86,12 @@ public interface Plugin {
      */
     default @NotNull Optional<ConfigurationStream.ConfigurationFile> createConfig(String configName, File file) {
         InputStream stream = this.getClass().getClassLoader().getResourceAsStream(configName);
-        if (stream==null) {
-            TranslateCore.getConsole().sendMessage(AText.ofPlain("Reqest for '" + configName + "' could not be found").withColour(NamedTextColours.RED));
+        if (stream == null) {
+            TranslateCore
+                    .getConsole()
+                    .sendMessage(AText
+                            .ofPlain("Reqest for '" + configName + "' could not be found")
+                            .withColour(NamedTextColours.RED));
             return Optional.empty();
         }
         try {

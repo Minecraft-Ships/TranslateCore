@@ -17,9 +17,12 @@ public class StringToExactPosition implements StringParser<SyncExactPosition> {
             double y = Double.parseDouble(split[1]);
             double z = Double.parseDouble(split[2]);
             WorldExtent world =
-                    TranslateCore.getServer().getWorldByPlatformSpecific(split[3]).orElseThrow(() -> new IllegalStateException("Cannot find world by " + split[3]));
+                    TranslateCore
+                            .getServer()
+                            .getWorldByPlatformSpecific(split[3])
+                            .orElseThrow(() -> new IllegalStateException("Cannot find world by " + split[3]));
             return Optional.of(world.getPosition(x, y, z));
-        }catch (Throwable e) {
+        } catch (Throwable e) {
             return Optional.empty();
         }
     }

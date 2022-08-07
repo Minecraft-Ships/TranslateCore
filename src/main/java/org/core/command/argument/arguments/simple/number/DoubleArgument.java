@@ -23,9 +23,11 @@ public class DoubleArgument implements CommandArgument<Double> {
     }
 
     @Override
-    public CommandArgumentResult<Double> parse(CommandContext context, CommandArgumentContext<Double> argument) throws IOException {
+    public CommandArgumentResult<Double> parse(CommandContext context, CommandArgumentContext<Double> argument) throws
+            IOException {
         try {
-            return CommandArgumentResult.from(argument, Double.parseDouble(context.getCommand()[argument.getFirstArgument()]));
+            return CommandArgumentResult.from(argument,
+                    Double.parseDouble(context.getCommand()[argument.getFirstArgument()]));
         } catch (NumberFormatException e) {
             throw new IOException("'" + context.getCommand()[argument.getFirstArgument()] + "' is not a number");
         }

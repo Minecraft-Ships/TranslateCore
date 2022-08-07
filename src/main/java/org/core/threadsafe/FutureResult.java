@@ -18,7 +18,7 @@ public class FutureResult<T> {
 
     public void run(T value) {
         this.value = value;
-        if (this.run==null) {
+        if (this.run == null) {
             return;
         }
         this.run.accept(value);

@@ -16,13 +16,21 @@ public class BlockGroups {
     static {
         IMPLEMENTATION = new BlockGroups().registerFields(CommonBlockGroups.class);
         CorePluginVersion version = TranslateCore.getPlatform().getMinecraftVersion();
-        if (version.getMajor()==1) {
+        if (version.getMajor() == 1) {
             IMPLEMENTATION.registerFields(BlockGroups1V13.class);
 
         }
     }
 
     private final Collection<BlockGroup> groups = new HashSet<>();
+
+    public static Optional<BlockGroup> getFromId(String id) {
+        return values().stream().filter(v -> v.getId().equals(id)).findAny();
+    }
+
+    public static Collection<BlockGroup> values() {
+        return Collections.unmodifiableCollection(IMPLEMENTATION.groups);
+    }
 
     public BlockGroups register(BlockGroup... groups) {
         this.groups.addAll(Arrays.asList(groups));
@@ -49,13 +57,5 @@ public class BlockGroups {
             }
         }
         return this;
-    }
-
-    public static Optional<BlockGroup> getFromId(String id) {
-        return values().stream().filter(v -> v.getId().equals(id)).findAny();
-    }
-
-    public static Collection<BlockGroup> values() {
-        return Collections.unmodifiableCollection(IMPLEMENTATION.groups);
     }
 }

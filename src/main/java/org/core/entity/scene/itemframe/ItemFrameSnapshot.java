@@ -5,10 +5,11 @@ import org.core.entity.EntityType;
 import org.core.entity.LiveEntity;
 
 @SuppressWarnings("unchecked")
-public interface ItemFrameSnapshot extends ItemFrame<EntitySnapshot<? extends LiveEntity>>, EntitySnapshot<LiveItemFrame> {
+public interface ItemFrameSnapshot
+        extends ItemFrame<EntitySnapshot<? extends LiveEntity>>, EntitySnapshot<LiveItemFrame> {
 
     @Override
-    default EntityType<LiveItemFrame, ItemFrameSnapshot> getType(){
+    default EntityType<LiveItemFrame, ItemFrameSnapshot> getType() {
         return ItemFrame.super.getType();
     }
 }

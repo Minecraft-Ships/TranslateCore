@@ -9,7 +9,7 @@ public interface BannerTileEntitySnapshot extends BannerTileEntity, TileEntitySn
     PatternLayersSnapshot getLayers();
 
     @Override
-    default Class<LiveBannerTileEntity> getDeclaredClass(){
+    default Class<LiveBannerTileEntity> getDeclaredClass() {
         return LiveBannerTileEntity.class;
     }
 }

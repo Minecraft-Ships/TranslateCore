@@ -21,15 +21,19 @@ public class AnyArgument<A> implements CommandArgument<A> {
     private final BiFunction<? super CommandContext, ? super CommandArgumentContext<A>, ? extends Collection<A>> supply;
 
     @SafeVarargs
-    public AnyArgument(String id, Function<? super A, String> toString, BiFunction<? super Collection<A>, ? super String, ? extends A> fromString, A... array) {
+    public AnyArgument(String id, Function<? super A, String> toString,
+            BiFunction<? super Collection<A>, ? super String, ? extends A> fromString, A... array) {
         this(id, toString, fromString, Arrays.asList(array));
     }
 
-    public AnyArgument(String id, Function<? super A, String> toString, BiFunction<? super Collection<A>, ? super String, ? extends A> fromString, Collection<A> collection) {
+    public AnyArgument(String id, Function<? super A, String> toString,
+            BiFunction<? super Collection<A>, ? super String, ? extends A> fromString, Collection<A> collection) {
         this(id, toString, fromString, (c, a) -> collection);
     }
 
-    public AnyArgument(String id, Function<? super A, String> toString, BiFunction<? super Collection<A>, ? super String, ? extends A> fromString, BiFunction<? super CommandContext, ? super CommandArgumentContext<A>, ? extends Collection<A>> supply) {
+    public AnyArgument(String id, Function<? super A, String> toString,
+            BiFunction<? super Collection<A>, ? super String, ? extends A> fromString,
+            BiFunction<? super CommandContext, ? super CommandArgumentContext<A>, ? extends Collection<A>> supply) {
         this.id = id;
         this.toString = toString;
         this.fromString = fromString;
@@ -42,10 +46,11 @@ public class AnyArgument<A> implements CommandArgument<A> {
     }
 
     @Override
-    public CommandArgumentResult<A> parse(CommandContext context, CommandArgumentContext<A> argument) throws IOException {
+    public CommandArgumentResult<A> parse(CommandContext context, CommandArgumentContext<A> argument) throws
+            IOException {
         String arg = context.getCommand()[argument.getFirstArgument()];
         A result = this.fromString.apply(this.supply.apply(context, argument), arg);
-        if (result==null) {
+        if (result == null) {
             throw new IOException("Unknown value of " + arg);
         }
         return CommandArgumentResult.from(argument, 0, result);
@@ -54,6 +59,11 @@ public class AnyArgument<A> implements CommandArgument<A> {
     @Override
     public Set<String> suggest(CommandContext context, CommandArgumentContext<A> argument) {
         String arg = context.getCommand()[argument.getFirstArgument()];
-        return this.supply.apply(context, argument).stream().map(this.toString).filter(v -> v.toLowerCase().startsWith(arg)).collect(Collectors.toSet());
+        return this.supply
+                .apply(context, argument)
+                .stream()
+                .map(this.toString)
+                .filter(v -> v.toLowerCase().startsWith(arg))
+                .collect(Collectors.toSet());
     }
 }

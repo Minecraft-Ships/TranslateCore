@@ -14,9 +14,9 @@ public class Singleton<T> implements Supplier<T> {
 
     @Override
     public T get() {
-        if (this.value==null) {
+        if (this.value == null) {
             synchronized (this) {
-                if (this.value==null) {
+                if (this.value == null) {
                     this.value = this.getter.get();
                 }
             }

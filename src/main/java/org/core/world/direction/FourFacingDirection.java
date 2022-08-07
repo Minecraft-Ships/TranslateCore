@@ -17,11 +17,11 @@ public class FourFacingDirection extends Direction {
         super(name, asVector, opposite, left);
     }
 
-    protected FourFacingDirection(String name, int x, int y, int z, String opposite, String left){
+    protected FourFacingDirection(String name, int x, int y, int z, String opposite, String left) {
         super(name, x, y, z, opposite, left);
     }
 
-    public static Direction[] getFourFacingDirections(){
-        return new Direction[] {NORTH, EAST, SOUTH, WEST};
+    public static Direction[] getFourFacingDirections() {
+        return new Direction[]{NORTH, EAST, SOUTH, WEST};
     }
 }

@@ -12,10 +12,7 @@ public interface KeyedData<T> {
     Class<TileEntityKeyedData> TILED_ENTITY = TileEntityKeyedData.class;
     Class<MultiDirectionalKeyedData> MULTI_DIRECTIONAL = MultiDirectionalKeyedData.class;
 
-    Optional<T> getData();
-    void setData(T value);
-
-    static Map<String, Class<? extends KeyedData<?>>> getDefaultKeys(){
+    static Map<String, Class<? extends KeyedData<?>>> getDefaultKeys() {
         Map<String, Class<? extends KeyedData<?>>> map = new HashMap<>();
         map.put("Attachable", ATTACHABLE);
         map.put("Openable", OPENABLE);
@@ -24,4 +21,8 @@ public interface KeyedData<T> {
         map.put("MultiDirectional", MULTI_DIRECTIONAL);
         return map;
     }
+
+    Optional<T> getData();
+
+    void setData(T value);
 }

@@ -28,7 +28,8 @@ public class UserArgument implements CommandArgument<User> {
     }
 
     @Override
-    public CommandArgumentResult<User> parse(CommandContext context, CommandArgumentContext<User> argument) throws IOException {
+    public CommandArgumentResult<User> parse(CommandContext context, CommandArgumentContext<User> argument) throws
+            IOException {
         String command = context.getCommand()[argument.getFirstArgument()];
         try {
             return TranslateCore

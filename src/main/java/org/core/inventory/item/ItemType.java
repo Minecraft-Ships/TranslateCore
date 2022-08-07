@@ -9,5 +9,6 @@ import java.util.Optional;
 public interface ItemType extends Identifiable {
 
     ItemStackSnapshot getDefaultItemStack();
+
     Optional<BlockType> getBlockType();
 }

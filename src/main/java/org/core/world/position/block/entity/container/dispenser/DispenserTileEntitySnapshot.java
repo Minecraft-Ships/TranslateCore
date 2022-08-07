@@ -5,7 +5,7 @@ import org.core.world.position.block.entity.TileEntitySnapshot;
 public interface DispenserTileEntitySnapshot extends DispenserTileEntity, TileEntitySnapshot<LiveDispenserTileEntity> {
 
     @Override
-    default Class<LiveDispenserTileEntity> getDeclaredClass(){
+    default Class<LiveDispenserTileEntity> getDeclaredClass() {
         return LiveDispenserTileEntity.class;
     }
 }

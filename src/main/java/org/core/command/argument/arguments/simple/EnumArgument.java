@@ -36,7 +36,8 @@ public class EnumArgument<E extends Enum<?>> implements CommandArgument<E> {
     }
 
     @Override
-    public CommandArgumentResult<E> parse(CommandContext context, CommandArgumentContext<E> argument) throws IOException {
+    public CommandArgumentResult<E> parse(CommandContext context, CommandArgumentContext<E> argument) throws
+            IOException {
         String next = context.getCommand()[argument.getFirstArgument()];
         try {
             Optional<E> opValue = Stream.of(this.getValues()).filter(n -> n.name().equalsIgnoreCase(next)).findFirst();
@@ -53,7 +54,11 @@ public class EnumArgument<E extends Enum<?>> implements CommandArgument<E> {
     public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<E> argument) {
         String peek = commandContext.getCommand()[argument.getFirstArgument()];
         try {
-            return Stream.of(this.getValues()).map(e -> e.name()).filter(n -> n.startsWith(peek.toUpperCase())).collect(Collectors.toSet());
+            return Stream
+                    .of(this.getValues())
+                    .map(e -> e.name())
+                    .filter(n -> n.startsWith(peek.toUpperCase()))
+                    .collect(Collectors.toSet());
         } catch (NoSuchFieldException | IllegalAccessException e) {
             return Collections.emptySet();
         }

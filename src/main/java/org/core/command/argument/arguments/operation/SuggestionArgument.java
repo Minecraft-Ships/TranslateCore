@@ -13,7 +13,7 @@ public abstract class SuggestionArgument<A> implements CommandArgument<A> {
     protected final ParseCommandArgument<A> argument;
     protected final String id;
 
-    public SuggestionArgument(CommandArgument<A> argument){
+    public SuggestionArgument(CommandArgument<A> argument) {
         this(argument.getId(), argument);
     }
 
@@ -28,7 +28,8 @@ public abstract class SuggestionArgument<A> implements CommandArgument<A> {
     }
 
     @Override
-    public CommandArgumentResult<A> parse(CommandContext context, CommandArgumentContext<A> argument) throws IOException {
+    public CommandArgumentResult<A> parse(CommandContext context, CommandArgumentContext<A> argument) throws
+            IOException {
         return this.argument.parse(context, argument);
     }
 }

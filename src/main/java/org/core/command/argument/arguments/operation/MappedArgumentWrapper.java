@@ -25,15 +25,18 @@ public class MappedArgumentWrapper<T, J> implements CommandArgument<T> {
     }
 
     @Override
-    public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) throws IOException {
-        CommandArgumentContext<J> argContext = new CommandArgumentContext<>(this.commandArgument, argument.getFirstArgument(), context.getCommand());
+    public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) throws
+            IOException {
+        CommandArgumentContext<J> argContext = new CommandArgumentContext<>(this.commandArgument,
+                argument.getFirstArgument(), context.getCommand());
         CommandArgumentResult<J> entry = this.commandArgument.parse(context, argContext);
         return new CommandArgumentResult<>(entry.getPosition(), this.convert.apply(entry.getValue()));
     }
 
     @Override
     public Collection<String> suggest(CommandContext context, CommandArgumentContext<T> argument) {
-        CommandArgumentContext<J> argContext = new CommandArgumentContext<>(this.commandArgument, argument.getFirstArgument(), context.getCommand());
+        CommandArgumentContext<J> argContext = new CommandArgumentContext<>(this.commandArgument,
+                argument.getFirstArgument(), context.getCommand());
         return this.commandArgument.suggest(context, argContext);
     }
 }

@@ -38,7 +38,11 @@ public class UnknownInventorySnapshot implements InventorySnapshot {
 
     @Override
     public Optional<Slot> getSlot(int slotPos) {
-        return this.slots.stream().filter(s -> s.getPosition().isPresent()).filter(s -> s.getPosition().get()==slotPos).findAny();
+        return this.slots
+                .stream()
+                .filter(s -> s.getPosition().isPresent())
+                .filter(s -> s.getPosition().get() == slotPos)
+                .findAny();
     }
 
     @Override

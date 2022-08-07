@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class DirectionNotSupported extends IOException {
 
-    public DirectionNotSupported(Direction direction, String type){
+    public DirectionNotSupported(Direction direction, String type) {
         super("Direction " + direction.getName() + " is not supported by " + type);
     }
 }

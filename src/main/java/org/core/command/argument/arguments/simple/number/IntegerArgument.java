@@ -23,9 +23,11 @@ public class IntegerArgument implements CommandArgument<Integer> {
     }
 
     @Override
-    public CommandArgumentResult<Integer> parse(CommandContext context, CommandArgumentContext<Integer> argument) throws IOException {
+    public CommandArgumentResult<Integer> parse(CommandContext context, CommandArgumentContext<Integer> argument) throws
+            IOException {
         try {
-            return CommandArgumentResult.from(argument, Integer.parseInt(context.getCommand()[argument.getFirstArgument()]));
+            return CommandArgumentResult.from(argument,
+                    Integer.parseInt(context.getCommand()[argument.getFirstArgument()]));
         } catch (NumberFormatException e) {
             throw new IOException("'" + context.getCommand()[argument.getFirstArgument()] + "' is not a number");
         }
