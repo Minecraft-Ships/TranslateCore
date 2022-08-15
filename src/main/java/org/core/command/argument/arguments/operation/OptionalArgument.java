@@ -13,6 +13,7 @@ public class OptionalArgument<T> implements CommandArgument<T> {
 
     private final CommandArgument<T> arg;
     private final ParseCommandArgument<T> value;
+
     public OptionalArgument(CommandArgument<T> arg, T value) {
         this(arg, new WrappedParser<>(value));
     }
@@ -46,7 +47,12 @@ public class OptionalArgument<T> implements CommandArgument<T> {
             if (this.value == null) {
                 return CommandArgumentResult.from(argument, 0, null);
             }
-            return CommandArgumentResult.from(argument, 0, this.value.parse(context, argument).getValue());
+            CommandArgumentResult<T> parsed = this.value.parse(context, argument);
+            if (parsed == null) {
+                throw new NullPointerException("The parser from " + this.value.getClass().getName() + " returned null");
+            }
+
+            return CommandArgumentResult.from(argument, 0, parsed.getValue());
         }
     }
 
