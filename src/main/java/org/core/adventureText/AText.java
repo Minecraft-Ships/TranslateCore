@@ -62,8 +62,7 @@ public interface AText {
      * @param aText The text to add to the end
      * @return The modified text
      */
-    @NotNull
-    AText append(@NotNull AText aText);
+    @NotNull AText append(@NotNull AText aText);
 
     /**
      * Checks if the provided text is included in this text
@@ -75,14 +74,24 @@ public interface AText {
     boolean contains(@NotNull AText aText);
 
     /**
+     * Checks if the provided string is included in this text
+     * Node, that the colours, styles, etc don't need to match
+     *
+     * @param s The string to check for
+     * @return If the provided text is contained
+     */
+    default boolean contains(@NotNull String s) {
+        return this.toPlain().contains(s);
+    }
+
+    /**
      * Replace all the matching with the provided AText
      *
      * @param containing The text to look for
      * @param aText      The text to replace with
      * @return The modified text
      */
-    @NotNull
-    AText withAllAs(@NotNull String containing, @Nullable AText aText);
+    @NotNull AText withAllAs(@NotNull String containing, @Nullable AText aText);
 
     /**
      * Gets the text colour of this text
@@ -100,32 +109,28 @@ public interface AText {
      * @param colour The colour to change to
      * @return The modified text
      */
-    @NotNull
-    AText withColour(@Nullable TextColour colour);
+    @NotNull AText withColour(@Nullable TextColour colour);
 
     /**
      * Gets the children of the AText
      *
      * @return The children of the AText
      */
-    @NotNull
-    List<AText> getChildren();
+    @NotNull List<AText> getChildren();
 
     /**
      * Gets the text within this text
      *
      * @return the text in String form
      */
-    @NotNull
-    String toPlain();
+    @NotNull String toPlain();
 
     /**
      * Gets the text in legacy form
      *
      * @return the legacy text in String form
      */
-    @NotNull
-    String toLegacy();
+    @NotNull String toLegacy();
 
     /**
      * Removes the colour. See {@link #withColour(TextColour)} for more info

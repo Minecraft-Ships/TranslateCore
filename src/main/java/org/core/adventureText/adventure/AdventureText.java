@@ -55,12 +55,11 @@ public class AdventureText implements AText {
 
     @Override
     public @NotNull AText withAllAs(@NotNull String containing, AText aText) {
-        return new AdventureText(this.component.replaceText(
-                TextReplacementConfig
-                        .builder()
-                        .matchLiteral(containing)
-                        .replacement(this.toAdventure(aText).component)
-                        .build()));
+        return new AdventureText(this.component.replaceText(TextReplacementConfig
+                                                                    .builder()
+                                                                    .matchLiteral(containing)
+                                                                    .replacement(this.toAdventure(aText).component)
+                                                                    .build()));
     }
 
     @Override

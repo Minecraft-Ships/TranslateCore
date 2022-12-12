@@ -14,8 +14,8 @@ public class TimeRange {
         this(LocalTime.now(), ticks);
     }
 
-    public TimeRange(int duration, TimeUnit convert) {
-        this(convert.fromTicks(duration));
+    public TimeRange(double duration, TimeUnit convert) {
+        this(convert.toTicks(duration));
     }
 
     public TimeRange(LocalTime time, int ticks) {

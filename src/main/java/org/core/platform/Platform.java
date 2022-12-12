@@ -19,6 +19,7 @@ import org.core.permission.CorePermission;
 import org.core.permission.Permission;
 import org.core.platform.plugin.Plugin;
 import org.core.platform.plugin.details.CorePluginVersion;
+import org.core.platform.update.PlatformUpdate;
 import org.core.utils.Singleton;
 import org.core.world.boss.colour.BossColour;
 import org.core.world.boss.colour.BossColours;
@@ -46,6 +47,8 @@ import java.util.Set;
  */
 public interface Platform {
 
+    @NotNull Collection<PlatformUpdate> getUpdateCheckers();
+
     @NotNull Singleton<BossColour> get(BossColours colours);
 
     @NotNull Singleton<ApplyPhysicsFlag> get(ApplyPhysicsFlags flags);
@@ -61,8 +64,7 @@ public interface Platform {
 
     @NotNull Singleton<PatternLayerType> get(PatternLayerTypes id);
 
-    @NotNull <E extends LiveEntity, S extends EntitySnapshot<E>> Singleton<EntityType<E, S>> get(
-            EntityTypes<E, S> entityId);
+    @NotNull <E extends LiveEntity, S extends EntitySnapshot<E>> Singleton<EntityType<E, S>> get(EntityTypes<E, S> entityId);
 
     <E extends LiveEntity> Optional<EntityType<E, ? extends EntitySnapshot<E>>> getEntityType(String id);
 
@@ -161,5 +163,9 @@ public interface Platform {
                 .stream()
                 .filter(t -> t.getSupportedBlocks().stream().anyMatch(ty -> ty.equals(type)))
                 .findFirst();
+    }
+
+    default Optional<PlatformUpdate> getUpdateChecker(@NotNull String idName) {
+        return this.getUpdateCheckers().parallelStream().filter(u -> u.getIdName().equals(idName)).findAny();
     }
 }

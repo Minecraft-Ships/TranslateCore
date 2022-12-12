@@ -4,17 +4,17 @@ import java.util.function.Function;
 
 public enum TimeUnit {
 
-    MINECRAFT_TICKS(i -> i, Integer::doubleValue),
-    SECONDS(i -> i * 20, i -> i / 20.0),
-    MINUTES(i -> (i * 20) * 100, i -> (i / 100.0) / 20);
+    MINECRAFT_TICKS(Double::intValue, Integer::doubleValue),
+    SECONDS(i -> (int) (i * 20), i -> i / 20.0),
+    MINUTES(i -> (int) ((i * 20.0) * 100), i -> (i / 100.0) / 20);
 
-    private final Function<? super Integer, Integer> convertFrom;
-    private final Function<? super Integer, Double> convertTo;
+    private final Function<? super Double, Integer> toTicks;
+    private final Function<? super Integer, Double> toUnit;
 
 
-    TimeUnit(Function<? super Integer, Integer> function, Function<? super Integer, Double> from) {
-        this.convertFrom = function;
-        this.convertTo = from;
+    TimeUnit(Function<? super Double, Integer> toTicks, Function<? super Integer, Double> toUnit) {
+        this.toUnit = toUnit;
+        this.toTicks = toTicks;
     }
 
     /**
@@ -26,17 +26,17 @@ public enum TimeUnit {
      */
     @Deprecated(forRemoval = true)
     public int getTicks(int time) {
-        return this.fromTicks(time);
+        return (int) this.fromTicks(time);
     }
 
     /**
      * Gets the ticks from the provided value
      *
-     * @param time the value of time in this TimeUnit
+     * @param ticks the value of time in this TimeUnit
      * @return ticks that result in the same value as your provided value
      */
-    public int fromTicks(int time) {
-        return this.convertFrom.apply(time);
+    public double fromTicks(int ticks) {
+        return this.toUnit.apply(ticks);
     }
 
     /**
@@ -45,8 +45,8 @@ public enum TimeUnit {
      * @param from the value of time in ticks
      * @return time that result in the same value as your provided tick value
      */
-    public double toTicks(int from) {
-        return this.convertTo.apply(from);
+    public int toTicks(double from) {
+        return this.toTicks.apply(from);
     }
 
 }
