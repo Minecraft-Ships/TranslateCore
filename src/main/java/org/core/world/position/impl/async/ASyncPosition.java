@@ -15,7 +15,7 @@ import org.core.world.position.flags.PositionFlag;
 import org.core.world.position.impl.Position;
 import org.core.world.position.impl.sync.SyncPosition;
 
-@ThreadSafe(impl = {PlatformDetails.BUKKIT_ID})
+@ThreadSafe(impl = PlatformDetails.BUKKIT_ID)
 public interface ASyncPosition<N extends Number> extends Position<N> {
 
     FutureResult<SyncPosition<N>> scheduleBlock(Plugin plugin, BlockDetails details, PositionFlag.SetFlag... flags);

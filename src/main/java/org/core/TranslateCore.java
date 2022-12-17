@@ -28,11 +28,6 @@ public interface TranslateCore {
         return TranslateCore.CoreImplementation.getImplementation().getRawConsole();
     }
 
-    @Deprecated(forRemoval = true)
-    static SchedulerBuilder createSchedulerBuilder() {
-        return TranslateCore.CoreImplementation.getImplementation().createRawSchedulerBuilder();
-    }
-
     static PlatformServer getServer() {
         return TranslateCore.CoreImplementation.getImplementation().getRawServer();
     }
@@ -85,11 +80,6 @@ public interface TranslateCore {
     EventManager getRawEventManager();
 
     ConsoleSource getRawConsole();
-
-    @Deprecated(forRemoval = true)
-    default SchedulerBuilder createRawSchedulerBuilder() {
-        return this.getRawScheduleManager().schedule();
-    }
 
     ConfigurationStream.ConfigurationFile createRawConfigurationFile(File file, ConfigurationFormat type);
 

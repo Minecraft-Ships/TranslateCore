@@ -10,16 +10,12 @@ import java.util.Optional;
 
 public interface LivePlayer extends Player<LiveEntity>, LiveEntity, CommandViewer {
 
-    @Deprecated(forRemoval = true)
-    boolean hasPermission(String permission);
-
     Optional<BlockPosition> getBlockLookingAt(int scanLength);
 
     default Optional<BlockPosition> getBlockLookingAt() {
         return this.getBlockLookingAt(7);
     }
 
-    @SuppressWarnings("unchecked")
     default EntityType<LivePlayer, PlayerSnapshot> getType() {
         return Player.super.getType();
     }

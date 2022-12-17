@@ -24,17 +24,6 @@ public interface SchedulerBuilder {
 
     SchedulerBuilder setIterationUnit(TimeUnit unit);
 
-    @Deprecated
-    default Runnable getExecutor() {
-        return () -> this.getRunner().accept(null);
-    }
-
-    @Deprecated
-    default SchedulerBuilder setExecutor(Runnable runnable) {
-        this.setRunner((r) -> runnable.run());
-        return this;
-    }
-
     Consumer<Scheduler> getRunner();
 
     SchedulerBuilder setRunner(Consumer<Scheduler> runner);

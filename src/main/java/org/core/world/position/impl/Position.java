@@ -12,7 +12,7 @@ import org.core.world.position.impl.async.ASyncExactPosition;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
 
-@ThreadSafe(impl = {PlatformDetails.BUKKIT_ID})
+@ThreadSafe(impl = PlatformDetails.BUKKIT_ID)
 public interface Position<N extends Number> {
 
     static BlockPosition toBlock(Position<? extends Number> position) {

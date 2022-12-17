@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 public interface WrappedCollection<E> extends Collection<E> {
 
-    Collection<E> getWrappedCollection();
+    @NotNull Collection<E> getWrappedCollection();
 
     @Deprecated
     default boolean addAll() {
@@ -42,13 +42,15 @@ public interface WrappedCollection<E> extends Collection<E> {
     }
 
     default <T, A, C extends Collection<T>, R extends Collector<? super T, A, C>> C map(boolean parallel,
-            Function<? super E, T> function, R collector) {
+                                                                                        Function<? super E, T> function,
+                                                                                        R collector) {
         Stream<E> stream = parallel ? this.parallelStream() : this.stream();
         return stream.map(function).collect(collector);
     }
 
     default <T, A, C extends Collection<T>, R extends Collector<? super T, A, C>> C cast(boolean parallel,
-            Class<T> clazz, R collector) {
+                                                                                         Class<T> clazz,
+                                                                                         R collector) {
         Stream<E> stream = parallel ? this.parallelStream() : this.stream();
         return stream.filter(clazz::isInstance).map(r -> (T) r).collect(collector);
     }
@@ -83,11 +85,11 @@ public interface WrappedCollection<E> extends Collection<E> {
         return this.getWrappedCollection().toArray();
     }
 
-    @SuppressWarnings({"NullableProblems", "unchecked", "SuspiciousToArrayCall"})
+    @SuppressWarnings({"NullableProblems", "unchecked"})
     @NotNull
     @Override
-    default <T> T[] toArray(@NotNull T... a) {
-        return this.getWrappedCollection().toArray(a);
+    default <T> T[] toArray(@NotNull T... ts) {
+        return this.getWrappedCollection().toArray(ts);
     }
 
     @Override

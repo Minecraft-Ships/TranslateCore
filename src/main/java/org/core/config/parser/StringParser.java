@@ -5,24 +5,6 @@ import java.util.List;
 
 public interface StringParser<T> extends Parser<String, T> {
 
-    /*interface SpecialParser<T> extends StringParser<T> {
-
-        Optional<T> get(ConfigurationStream file, ConfigurationNode node);
-
-        default void set(T value, ConfigurationStream file, ConfigurationNode node){
-            file.set(node, value);
-        }
-
-        default void set(T value, ConfigurationStream file, String... node){
-            set(value, file, new ConfigurationNode(node));
-        }
-
-        default Optional<T> get(ConfigurationStream file, String... node){
-            return get(file, new ConfigurationNode(node));
-        }
-
-    }*/
-
     interface Suggestible<T> extends StringParser<T> {
 
         List<T> getSuggestions(String peek);

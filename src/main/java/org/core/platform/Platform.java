@@ -20,6 +20,7 @@ import org.core.permission.Permission;
 import org.core.platform.plugin.Plugin;
 import org.core.platform.plugin.details.CorePluginVersion;
 import org.core.platform.update.PlatformUpdate;
+import org.core.platform.update.UpdateOption;
 import org.core.utils.Singleton;
 import org.core.world.boss.colour.BossColour;
 import org.core.world.boss.colour.BossColours;
@@ -47,7 +48,7 @@ import java.util.Set;
  */
 public interface Platform {
 
-    @NotNull Collection<PlatformUpdate> getUpdateCheckers();
+    @NotNull Collection<PlatformUpdate<?>> getUpdateCheckers();
 
     @NotNull Singleton<BossColour> get(BossColours colours);
 
@@ -165,7 +166,12 @@ public interface Platform {
                 .findFirst();
     }
 
-    default Optional<PlatformUpdate> getUpdateChecker(@NotNull String idName) {
-        return this.getUpdateCheckers().parallelStream().filter(u -> u.getIdName().equals(idName)).findAny();
+    default <O extends UpdateOption> Optional<PlatformUpdate<O>> getUpdateChecker(@NotNull String idName) {
+        return this
+                .getUpdateCheckers()
+                .parallelStream()
+                .filter(u -> u.getIdName().equals(idName))
+                .findAny()
+                .map(v -> (PlatformUpdate<O>) v);
     }
 }

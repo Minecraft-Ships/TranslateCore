@@ -27,11 +27,6 @@ public interface Scheduler {
 
     Consumer<Scheduler> getRunner();
 
-    @Deprecated(forRemoval = true)
-    default Runnable getExecutor() {
-        return () -> this.getRunner().accept(this);
-    }
-
     interface Threaded extends Scheduler {
 
         Optional<Thread> getRunning();

@@ -20,18 +20,6 @@ public enum TimeUnit {
     /**
      * Gets the ticks from the provided value
      *
-     * @param time the value of time in this TimeUnit
-     * @return ticks that result in the same value as your provided value
-     * @deprecated Use {@link #fromTicks}
-     */
-    @Deprecated(forRemoval = true)
-    public int getTicks(int time) {
-        return (int) this.fromTicks(time);
-    }
-
-    /**
-     * Gets the ticks from the provided value
-     *
      * @param ticks the value of time in this TimeUnit
      * @return ticks that result in the same value as your provided value
      */

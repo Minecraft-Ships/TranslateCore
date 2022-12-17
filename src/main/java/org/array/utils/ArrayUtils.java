@@ -9,25 +9,6 @@ import java.util.stream.Collectors;
 @SuppressWarnings("BoundedWildcard")
 public interface ArrayUtils {
 
-    @Deprecated(forRemoval = true)
-    static <T, F> T collect(Function<? super F, ? extends T> function,
-            BiFunction<? super T, ? super F, ? extends T> biFunction, Iterable<? extends F> iterable) {
-        T result = null;
-        for (F obj : iterable) {
-            if (result == null) {
-                result = function.apply(obj);
-                continue;
-            }
-            result = biFunction.apply(result, obj);
-        }
-        return result;
-    }
-
-    @Deprecated(forRemoval = true)
-    static String collect(String split, Iterable<String> iterable) {
-        return collect(t -> t, (old, t) -> old + split + t, iterable);
-    }
-
     @SafeVarargs
     static <T> Set<T> ofSet(T... values) {
         return new HashSet<>(Arrays.asList(values));
@@ -67,55 +48,6 @@ public interface ArrayUtils {
             return new HashSet<>();
         }
         return convert(Collectors.toSet(), v -> v.getValue().getKey(), best);
-    }
-
-    /**
-     * Counts all int numbers within the array
-     *
-     * @param start      the number to start with
-     * @param function   convert element to number
-     * @param collection the array
-     * @param <T>        the element type
-     * @return the total
-     */
-    @Deprecated(forRemoval = true)
-    static <T> int countInt(int start, Function<T, Integer> function, Iterable<T> collection) {
-        return count(start, function, Integer::sum, collection);
-    }
-
-    /**
-     * Counts all double numbers within the array
-     *
-     * @param start      the number to start with
-     * @param function   convert element to number
-     * @param collection the array
-     * @param <T>        the element type
-     * @return the total
-     */
-    @Deprecated(forRemoval = true)
-    static <T> double countDouble(double start, Function<T, Double> function, Iterable<T> collection) {
-        return count(start, function, Double::sum, collection);
-    }
-
-    /**
-     * Count all values that match within an array
-     *
-     * @param start      the start value
-     * @param function   convert element to number
-     * @param add        add the number to the current total
-     * @param collection the array
-     * @param <T>        the type within the array
-     * @param <N>        the type of number
-     * @return the total.
-     */
-    @Deprecated(forRemoval = true)
-    static <T, N extends Number> N count(N start, Function<T, N> function, BiFunction<N, N, N> add,
-            Iterable<T> collection) {
-        N num = start;
-        for (T value : collection) {
-            num = add.apply(function.apply(value), num);
-        }
-        return num;
     }
 
     static <E, I, T extends Collection<I>> T build(T array, BiConsumer<T, E> consumer, Iterable<E> collection) {
@@ -196,35 +128,6 @@ public interface ArrayUtils {
 
     static <K, V> Map<K, V> toMappedKeys(Function<K, V> toKey, Collection<K> keys) {
         return keys.parallelStream().collect(Collectors.toMap(k -> k, toKey));
-    }
-
-    /**
-     * Converts a specified array into a String.
-     *
-     * @param split    The divide between every instance
-     * @param toString Converts the specified type into String
-     * @param array    The array to be converted
-     * @param <T>      The class type of the array
-     * @return A string output
-     */
-    @SafeVarargs
-    @Deprecated(forRemoval = true)
-    static <T> String toString(String split, Function<T, String> toString, T... array) {
-        return toString(split, toString, Arrays.asList(array));
-    }
-
-    /**
-     * Converts a specified array into a String.
-     *
-     * @param split    The divide between every instance
-     * @param toString Converts the specified type into String
-     * @param array    The array to be converted
-     * @param <T>      The class type of the array
-     * @return A string output
-     */
-    @Deprecated(forRemoval = true)
-    static <T> String toString(String split, Function<T, String> toString, Iterable<T> array) {
-        return collect(toString, (old, obj) -> old + split + toString.apply(obj), array);
     }
 
     @Deprecated
