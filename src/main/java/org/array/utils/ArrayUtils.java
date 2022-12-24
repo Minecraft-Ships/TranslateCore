@@ -2,7 +2,10 @@ package org.array.utils;
 
 import java.lang.reflect.Array;
 import java.util.*;
-import java.util.function.*;
+import java.util.function.BiConsumer;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -43,7 +46,7 @@ public interface ArrayUtils {
             map.put(id, new AbstractMap.SimpleEntry<>(value, 1));
         });
         Set<Map.Entry<String, Map.Entry<T, Integer>>> best = getBests(e -> e.getValue().getValue(), (c, b) -> c > b,
-                Integer::equals, map.entrySet());
+                                                                      Integer::equals, map.entrySet());
         if (best.isEmpty()) {
             return new HashSet<>();
         }
@@ -67,8 +70,9 @@ public interface ArrayUtils {
      * @param <T>        The supplier
      * @return The new array
      */
-    static <A, E, I, T extends Collection<E>> T convert(Collector<E, I, T> collector, Function<A, E> consumer,
-            Iterable<A> collection) {
+    static <A, E, I, T extends Collection<E>> T convert(Collector<E, I, T> collector,
+                                                        Function<A, E> consumer,
+                                                        Iterable<A> collection) {
         I supplier = collector.supplier().get();
         collection.forEach(e -> collector.accumulator().accept(supplier, consumer.apply(e)));
         return collector.finisher().apply(supplier);
@@ -158,16 +162,17 @@ public interface ArrayUtils {
      * @param <T>        element type
      * @return the "best" element - optional if no best can be found
      */
-    static <T> Optional<T> getBest(Function<T, Integer> function, BiPredicate<Integer, Integer> compare,
-            Iterable<T> collection) {
+    static <T, N extends Number> Optional<T> getBest(Function<T, N> function,
+                                                     BiPredicate<N, N> compare,
+                                                     Iterable<T> collection) {
         T value = null;
-        Integer best = null;
+        N best = null;
         for (T value1 : collection) {
             if (value == null) {
                 value = value1;
                 best = function.apply(value1);
             }
-            int current = function.apply(value1);
+            N current = function.apply(value1);
             if (compare.test(current, best)) {
                 value = value1;
                 best = function.apply(value1);
@@ -188,8 +193,10 @@ public interface ArrayUtils {
      * @return the best elements
      */
     @SafeVarargs
-    static <T, N extends Number> Set<T> getBests(Function<T, N> function, BiPredicate<N, N> compare,
-            BiPredicate<N, N> equal, T... array) {
+    static <T, N extends Number> Set<T> getBests(Function<T, N> function,
+                                                 BiPredicate<N, N> compare,
+                                                 BiPredicate<N, N> equal,
+                                                 T... array) {
         return getBests(function, compare, equal, Arrays.asList(array));
     }
 
@@ -204,8 +211,10 @@ public interface ArrayUtils {
      * @param <N>        The value to compare
      * @return the best elements
      */
-    static <T, N extends Number> Set<T> getBests(Function<T, N> function, BiPredicate<N, N> compare,
-            BiPredicate<N, N> equal, Iterable<T> collection) {
+    static <T, N extends Number> Set<T> getBests(Function<T, N> function,
+                                                 BiPredicate<N, N> compare,
+                                                 BiPredicate<N, N> equal,
+                                                 Iterable<T> collection) {
         Set<T> value = new HashSet<>();
         N best = null;
         for (T value1 : collection) {
@@ -291,8 +300,10 @@ public interface ArrayUtils {
         return array;
     }
 
-    static String[] splitBy(String toSplit, int startWith, boolean combineStartWith,
-            Predicate<? super Character> splitBy) {
+    static String[] splitBy(String toSplit,
+                            int startWith,
+                            boolean combineStartWith,
+                            Predicate<? super Character> splitBy) {
         String[] split = new String[0];
         int previousSplit = startWith;
         for (int A = startWith; A < toSplit.length(); A++) {

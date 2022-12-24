@@ -1,6 +1,7 @@
 package org.core.platform.plugin;
 
 import org.core.command.CommandRegister;
+import org.core.logger.Logger;
 import org.core.platform.plugin.details.CorePluginVersion;
 import org.core.platform.plugin.details.LoadOnlyOn;
 import org.core.platform.plugin.details.LoadOnlyOnPlatform;
@@ -18,7 +19,14 @@ public interface CorePlugin extends Plugin, Comparable<CorePlugin> {
      * @param pluginLauncher The plugin launcher is its native launcher, this should be the same as what is returned
      *                       in {@link Plugin#getPlatformLauncher()}
      */
-    void onConstruct(@NotNull Object pluginLauncher);
+    @Deprecated
+    default void onConstruct(@NotNull Object pluginLauncher) {
+
+    }
+
+    default void onConstruct(@NotNull Object pluginLauncher, @NotNull Logger logger) {
+        this.onConstruct(pluginLauncher);
+    }
 
     /**
      * Runs when commands should be registered
@@ -35,8 +43,7 @@ public interface CorePlugin extends Plugin, Comparable<CorePlugin> {
     @NotNull String getLicence();
 
     @Override
-    @NotNull
-    CorePluginVersion getPluginVersion();
+    @NotNull CorePluginVersion getPluginVersion();
 
     default void onShutdown() {
 
