@@ -54,7 +54,12 @@ public class AdventureText implements AText {
     }
 
     @Override
-    public @NotNull AText withAllAs(@NotNull String containing, AText aText) {
+    public boolean containsIgnoreCase(@NotNull String s) {
+        return this.toPlain().toLowerCase().contains(s.toLowerCase());
+    }
+
+    @Override
+    public @NotNull AText withAllAs(@NotNull String containing, @Nullable AText aText) {
         return new AdventureText(this.component.replaceText(TextReplacementConfig
                                                                     .builder()
                                                                     .matchLiteral(containing)
@@ -63,13 +68,36 @@ public class AdventureText implements AText {
     }
 
     @Override
+    public @NotNull AText withAllAsIgnoreCase(@NotNull String containing, @Nullable AText aText) {
+        String asPlain = PlainComponentSerializer.plain().serialize(this.component);
+        Component component = this.component;
+
+        int containingLength = containing.length();
+
+        for (int plain = 0; plain < asPlain.length(); plain++) {
+            if (asPlain.length() > (plain + containingLength)) {
+                continue;
+            }
+            String contains = asPlain.substring(plain, plain + containingLength);
+            if (!contains.equalsIgnoreCase(containing)) {
+                continue;
+            }
+            component = component.replaceText(TextReplacementConfig
+                                                      .builder()
+                                                      .matchLiteral(contains)
+                                                      .replacement(this.toAdventure(aText).component)
+                                                      .build());
+        }
+        return new AdventureText(component);
+    }
+
+    @Override
     public Optional<TextColour> getColour() {
         TextColor colour = this.component.color();
         if (colour == null) {
             return Optional.empty();
         }
-        if (colour instanceof NamedTextColor) {
-            NamedTextColor namedTextColor = ((NamedTextColor) colour);
+        if (colour instanceof NamedTextColor namedTextColor) {
             Optional<TextColour> opText = NamedTextColours
                     .colours()
                     .parallelStream()

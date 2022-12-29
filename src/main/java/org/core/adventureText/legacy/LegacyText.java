@@ -43,7 +43,17 @@ public class LegacyText implements AText {
                 return true;
             }
         }
-        return this.children.stream().anyMatch(t -> t.contains(t));
+        return this.children.stream().anyMatch(t -> t.contains(aText));
+    }
+
+    @Override
+    public boolean containsIgnoreCase(@NotNull String s) {
+        if (this.text != null) {
+            if (this.text.toLowerCase().contains(s.toLowerCase())) {
+                return true;
+            }
+        }
+        return this.children.parallelStream().anyMatch(t -> t.containsIgnoreCase(s));
     }
 
     @Override
@@ -62,6 +72,19 @@ public class LegacyText implements AText {
                 .stream()
                 .map(lt -> lt.withAllAs(containing, finalText))
                 .collect(Collectors.toList());
+        return new LegacyText(this.colour, text, children);
+    }
+
+    @Override
+    public @NotNull AText withAllAsIgnoreCase(@NotNull String containing, @Nullable AText aText) {
+        String text = this.text;
+        if (this.text != null && this.text.toLowerCase().contains(containing.toLowerCase())) {
+            text = this.text.replaceAll("(?i)" + containing, aText == null ? "" : aText.toLegacy());
+        }
+        List<LegacyText> children = this.children
+                .parallelStream()
+                .map(lt -> (LegacyText) lt.withAllAsIgnoreCase(containing, aText))
+                .toList();
         return new LegacyText(this.colour, text, children);
     }
 

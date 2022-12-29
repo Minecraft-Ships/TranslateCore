@@ -85,6 +85,23 @@ public interface AText {
     }
 
     /**
+     * Checks if the provided string is included in this text
+     * Node, that the colours, styles, etc don't need to match
+     *
+     * @param s          The string to check for
+     * @param ignoreCase true if the s should be ignored on case
+     * @return If the provided text is contained
+     */
+    default boolean contains(@NotNull String s, boolean ignoreCase) {
+        if (ignoreCase) {
+            return this.containsIgnoreCase(s);
+        }
+        return this.toPlain().contains(s);
+    }
+
+    boolean containsIgnoreCase(@NotNull String s);
+
+    /**
      * Replace all the matching with the provided AText
      *
      * @param containing The text to look for
@@ -92,6 +109,8 @@ public interface AText {
      * @return The modified text
      */
     @NotNull AText withAllAs(@NotNull String containing, @Nullable AText aText);
+
+    @NotNull AText withAllAsIgnoreCase(@NotNull String containing, @Nullable AText aText);
 
     /**
      * Gets the text colour of this text
