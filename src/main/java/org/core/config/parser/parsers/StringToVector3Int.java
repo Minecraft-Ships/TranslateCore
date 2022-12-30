@@ -10,7 +10,7 @@ public class StringToVector3Int implements StringParser<Vector3<Integer>> {
 
     @Override
     public Optional<Vector3<Integer>> parse(String original) {
-        Parser<String, Integer> stip = new StringToIntegerParser();
+        Parser<String, Integer> stip = new StringToIntegerParser("0", false);
         String[] split = original.split(",");
         if (split.length != 3) {
             return Optional.empty();

@@ -11,7 +11,9 @@ public interface Parser<O, T> {
 
     StringToDoubleParser STRING_TO_DOUBLE = new StringToDoubleParser();
     StringToBooleanParser STRING_TO_BOOLEAN = new StringToBooleanParser();
-    StringToIntegerParser STRING_TO_INTEGER = new StringToIntegerParser();
+    StringToIntegerParser STRING_TO_INTEGER = new StringToIntegerParser("0", false);
+    StringToIntegerParser STRING_TO_POSITIVE_INTEGER = new StringToIntegerParser("0", true);
+
     StringToBlockTypeParser STRING_TO_BLOCK_TYPE = new StringToBlockTypeParser();
     StringToItemTypeParser STRING_TO_ITEM_TYPE = new StringToItemTypeParser();
     StringToWorldParser STRING_TO_WORLD = new StringToWorldParser();
