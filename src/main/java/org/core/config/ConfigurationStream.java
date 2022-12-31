@@ -7,6 +7,8 @@ import org.core.adventureText.format.NamedTextColours;
 import org.core.config.parser.Parser;
 import org.core.config.parser.StringMapParser;
 import org.core.config.parser.StringParser;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.*;
@@ -25,8 +27,16 @@ public interface ConfigurationStream {
 
     Optional<String> getString(ConfigurationNode node);
 
-    <T, C extends Collection<T>> C parseCollection(ConfigurationNode node, Parser<? super String, T> parser,
-            C collection);
+    <T, C extends Collection<T>> C parseCollection(@NotNull ConfigurationNode node,
+                                                   @NotNull Parser<? super String, T> parser,
+                                                   @NotNull C collection,
+                                                   @Nullable C defaultValue);
+
+    default <T, C extends Collection<T>> C parseCollection(@NotNull ConfigurationNode node,
+                                                           @NotNull Parser<? super String, T> parser,
+                                                           @NotNull C collection) {
+        return this.parseCollection(node, parser, collection, collection);
+    }
 
     void set(ConfigurationNode node, int value);
 
@@ -77,13 +87,13 @@ public interface ConfigurationStream {
             TranslateCore
                     .getConsole()
                     .sendMessage(AText
-                            .ofPlain("Path: " + String.join(".", node.getPath()))
-                            .withColour(NamedTextColours.RED));
+                                         .ofPlain("Path: " + String.join(".", node.getPath()))
+                                         .withColour(NamedTextColours.RED));
             TranslateCore
                     .getConsole()
                     .sendMessage(AText
-                            .ofPlain("Value: (" + value.getClass().getName() + ") '" + value + "'")
-                            .withColour(NamedTextColours.RED));
+                                         .ofPlain("Value: (" + value.getClass().getName() + ") '" + value + "'")
+                                         .withColour(NamedTextColours.RED));
             e.printStackTrace();
         }
     }
@@ -106,17 +116,12 @@ public interface ConfigurationStream {
             String key = node.toKey(v);
             Parser<String, T> mappedValue = node.getValueParsers().get(key);
             if (mappedValue == null) {
-                throw new IllegalStateException(
-                        "Can not save GroupKnown. Unknown Key of '"
-                                + key
-                                + "' from '"
-                                + node
-                                .getValueParsers()
-                                .keySet()
-                                .stream()
-                                .map(t -> "\"" + t + "\t")
-                                .collect(Collectors.joining(", "))
-                                + "' which was created from GroupKnown.toKey(T)");
+                throw new IllegalStateException("Can not save GroupKnown. Unknown Key of '" + key + "' from '" + node
+                        .getValueParsers()
+                        .keySet()
+                        .stream()
+                        .map(t -> "\"" + t + "\t")
+                        .collect(Collectors.joining(", ")) + "' which was created from GroupKnown.toKey(T)");
             }
             String value = mappedValue.unparse(v);
             map.put(key, value);
@@ -146,9 +151,9 @@ public interface ConfigurationStream {
         } else if (node.getParser() instanceof StringMapParser) {
             return this.parse(node, (StringMapParser<T>) node.getParser());
         } else {
-            throw new IllegalArgumentException("Unknown type of parser of '" + node.getParser().getClass().getName() +
-                    "', ConfigurationStream.parse(ConfigurationNode.KnownParser) only accepts StringParser and " +
-                    "StringMapParser");
+            throw new IllegalArgumentException("Unknown type of parser of '" + node.getParser().getClass().getName()
+                                                       + "', ConfigurationStream.parse(ConfigurationNode.KnownParser) only accepts StringParser and "
+                                                       + "StringMapParser");
         }
     }
 
@@ -196,8 +201,14 @@ public interface ConfigurationStream {
     }
 
     default <T, C extends Collection<T>> C parseCollection(ConfigurationNode.KnownParser<? super String, T> node,
-            C collection) {
+                                                           C collection) {
         return this.parseCollection(node, node.getParser(), collection);
+    }
+
+    default <T, C extends Collection<T>> C parseCollection(ConfigurationNode.KnownParser<? super String, T> node,
+                                                           C collection,
+                                                           C defaultValue) {
+        return this.parseCollection(node, node.getParser(), collection, defaultValue);
     }
 
     default boolean getBoolean(ConfigurationNode node, boolean value) {

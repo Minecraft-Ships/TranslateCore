@@ -36,7 +36,9 @@ public class AdventureText implements AText {
         if (aText instanceof AdventureText) {
             return (AdventureText) aText;
         }
-        throw new IllegalStateException("text needs to be adventureText to interact with adventureText");
+        throw new IllegalStateException("text needs to be adventureText to interact with adventureText, found " + aText
+                .getClass()
+                .getSimpleName());
     }
 
     public @NotNull Component getComponent() {
@@ -73,20 +75,24 @@ public class AdventureText implements AText {
         Component component = this.component;
 
         int containingLength = containing.length();
+        int plainLength = asPlain.length();
 
         for (int plain = 0; plain < asPlain.length(); plain++) {
-            if (asPlain.length() > (plain + containingLength)) {
-                continue;
+            int testingLength = (plain + containingLength);
+            if (plainLength < testingLength) {
+                break;
             }
             String contains = asPlain.substring(plain, plain + containingLength);
             if (!contains.equalsIgnoreCase(containing)) {
                 continue;
             }
-            component = component.replaceText(TextReplacementConfig
-                                                      .builder()
-                                                      .matchLiteral(contains)
-                                                      .replacement(this.toAdventure(aText).component)
-                                                      .build());
+            Component replacement = Component.empty();
+            if (aText != null) {
+                replacement = this.toAdventure(aText).component;
+            }
+
+            component = component.replaceText(
+                    TextReplacementConfig.builder().matchLiteral(contains).replacement(replacement).build());
         }
         return new AdventureText(component);
     }

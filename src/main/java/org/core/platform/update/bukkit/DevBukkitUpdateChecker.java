@@ -55,7 +55,8 @@ public class DevBukkitUpdateChecker implements PlatformUpdate<DevBukkitUpdateOpt
                 JsonElement element = JsonParser.parseString(line);
                 JsonArray array = element.getAsJsonArray();
                 if (array.isEmpty()) {
-                    future.complete(new FailedResult("Incorrect id of '" + devOptions.numberId() + "'"));
+                    future.complete(new FailedResult(
+                            "No versions found, probably incorrect id of '" + devOptions.numberId() + "'"));
                     return;
                 }
                 JsonObject latestElement = array.get(array.size() - 1).getAsJsonObject();
