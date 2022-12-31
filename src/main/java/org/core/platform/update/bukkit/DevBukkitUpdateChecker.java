@@ -27,7 +27,7 @@ public class DevBukkitUpdateChecker implements PlatformUpdate<DevBukkitUpdateOpt
     @Override
     public URI getUpdateSite() {
         try {
-            return new URI(curseForge);
+            return new URI(this.curseForge);
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }

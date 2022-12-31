@@ -8,7 +8,7 @@ public class BlockTypes1V15 {
             .getPlatform()
             .getBlockType("minecraft:beehive")
             .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    ;
+
     public static final BlockType BEE_NEST = TranslateCore
             .getPlatform()
             .getBlockType("minecraft:bee_nest")

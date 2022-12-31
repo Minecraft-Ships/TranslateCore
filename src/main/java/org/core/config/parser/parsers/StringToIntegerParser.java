@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public class StringToIntegerParser implements StringParser<Integer> {
 
-    private boolean positiveOnly;
-    private @NotNull String defaultValue;
+    private final boolean positiveOnly;
+    private final @NotNull String defaultValue;
 
     public StringToIntegerParser(@NotNull String defaultValue, boolean positiveOnly) {
         this.positiveOnly = positiveOnly;
