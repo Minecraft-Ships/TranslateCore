@@ -34,6 +34,10 @@ public class SlotSnapshot implements InventoryPartSnapshot, Slot {
 
     @Override
     public SlotSnapshot setItem(ItemStack stack) {
+        if (stack == null) {
+            this.itemstack = null;
+            return this;
+        }
         this.itemstack = stack.createSnapshot();
         return this;
     }

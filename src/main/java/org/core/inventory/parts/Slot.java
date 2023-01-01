@@ -2,6 +2,7 @@ package org.core.inventory.parts;
 
 import org.core.inventory.item.stack.ItemStack;
 import org.core.inventory.parts.snapshot.SlotSnapshot;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,7 +15,11 @@ public interface Slot extends InventoryPart {
 
     Optional<ItemStack> getItem();
 
-    Slot setItem(ItemStack stack);
+    Slot setItem(@Nullable ItemStack stack);
+
+    default Slot removeItem() {
+        return this.setItem(null);
+    }
 
     @Override
     default SlotSnapshot createSnapshot() {
