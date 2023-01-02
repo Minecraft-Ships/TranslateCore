@@ -103,21 +103,22 @@ public class Bounds<N extends Number> {
     public boolean contains(int x, int y, int z) {
         Vector3<Integer> min = this.getIntMin();
         Vector3<Integer> max = this.getIntMax();
-        if (min.getX() < x) {
+
+        if (min.getX() > x) {
             return false;
         }
-        if (min.getY() < y) {
+        if (min.getY() > y) {
             return false;
         }
-        if (min.getZ() < z) {
+        if (min.getZ() > z) {
             return false;
         }
-        if (max.getX() > x) {
+        if (max.getX() < x) {
             return false;
         }
-        if (max.getY() > y) {
+        if (max.getY() < y) {
             return false;
         }
-        return max.getZ() <= z;
+        return max.getZ() > z;
     }
 }

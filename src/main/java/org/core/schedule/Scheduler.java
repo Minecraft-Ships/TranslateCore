@@ -22,9 +22,6 @@ public interface Scheduler {
 
     void run();
 
-    @Deprecated
-    void cancel();
-
     Consumer<Scheduler> getRunner();
 
     interface Threaded extends Scheduler {
