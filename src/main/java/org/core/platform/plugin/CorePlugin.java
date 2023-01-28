@@ -72,7 +72,7 @@ public interface CorePlugin extends Plugin, Comparable<CorePlugin> {
         return 0;
     }
 
-    default LoadOnlyOnPlatform[] getDependingOn() {
+    default @NotNull LoadOnlyOnPlatform[] getDependingOn() {
         LoadOnlyOn loadOnlyOn = this.getClass().getAnnotation(LoadOnlyOn.class);
         if (loadOnlyOn == null) {
             return new LoadOnlyOnPlatform[0];

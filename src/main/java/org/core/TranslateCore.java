@@ -7,7 +7,6 @@ import org.core.platform.Platform;
 import org.core.platform.PlatformServer;
 import org.core.platform.plugin.CorePlugin;
 import org.core.schedule.ScheduleManager;
-import org.core.schedule.SchedulerBuilder;
 import org.core.source.command.ConsoleSource;
 import org.core.world.boss.ServerBossBar;
 
@@ -92,7 +91,14 @@ public interface TranslateCore {
         protected static CoreImplementation IMPLEMENTATION;
 
         public static CoreImplementation getImplementation() {
+            if(!hasStarted()){
+                throw new RuntimeException("Has not started TranslateCore");
+            }
             return IMPLEMENTATION;
+        }
+
+        public static boolean hasStarted() {
+            return IMPLEMENTATION != null;
         }
 
     }

@@ -55,7 +55,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      */
     default Entity<T> setPosition(Vector3<? extends Number> vector) {
         return this.setPosition(vector.getRawX().doubleValue(), vector.getRawY().doubleValue(),
-                vector.getRawZ().doubleValue());
+                                vector.getRawZ().doubleValue());
     }
 
     /**
@@ -360,5 +360,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
         }
         return Optional.of(block);
     }
+
+    boolean isRemoved();
 
 }

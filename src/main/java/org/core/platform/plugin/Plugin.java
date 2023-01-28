@@ -84,7 +84,7 @@ public interface Plugin {
      * @param file       The location to copy to
      * @return the ConfigurationFile for the copied file
      */
-    default @NotNull Optional<ConfigurationStream.ConfigurationFile> createConfig(String configName, File file) {
+    default @NotNull Optional<ConfigurationStream.ConfigurationFile> createConfig(@NotNull String configName, @NotNull File file) {
         InputStream stream = this.getClass().getClassLoader().getResourceAsStream(configName);
         if (stream == null) {
             TranslateCore

@@ -1,15 +1,16 @@
 package org.core.platform;
 
 import org.core.platform.plugin.details.CorePluginVersion;
+import org.jetbrains.annotations.NotNull;
 
 public interface PlatformDetails {
 
     String BUKKIT_ID = "bukkit";
     String SPONGE_ID = "sponge";
 
-    String getName();
+    @NotNull String getName();
 
-    String getIdName();
+    @NotNull String getIdName();
 
-    CorePluginVersion getVersion();
+    @NotNull CorePluginVersion getVersion();
 }

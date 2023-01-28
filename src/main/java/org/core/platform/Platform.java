@@ -48,6 +48,8 @@ import java.util.Set;
  */
 public interface Platform {
 
+    @NotNull PlatformDetails getImplementationDetails();
+
     @NotNull Collection<PlatformUpdate<?>> getUpdateCheckers();
 
     @NotNull Singleton<BossColour> get(BossColours colours);
@@ -67,46 +69,46 @@ public interface Platform {
 
     @NotNull <E extends LiveEntity, S extends EntitySnapshot<E>> Singleton<EntityType<E, S>> get(EntityTypes<E, S> entityId);
 
-    <E extends LiveEntity> Optional<EntityType<E, ? extends EntitySnapshot<E>>> getEntityType(String id);
+    <E extends LiveEntity> @NotNull Optional<EntityType<E, ? extends EntitySnapshot<E>>> getEntityType(String id);
 
-    Optional<BlockType> getBlockType(String id);
+    @NotNull Optional<BlockType> getBlockType(String id);
 
-    Optional<ItemType> getItemType(String id);
+    @NotNull Optional<ItemType> getItemType(String id);
 
-    Optional<DyeType> getDyeType(String id);
+    @NotNull Optional<DyeType> getDyeType(String id);
 
-    Optional<PatternLayerType> getPatternLayerType(String id);
+    @NotNull Optional<PatternLayerType> getPatternLayerType(String id);
 
-    Optional<BossColour> getBossColour(String id);
+    @NotNull Optional<BossColour> getBossColour(String id);
 
-    Optional<ParrotType> getParrotType(String id);
+    @NotNull Optional<ParrotType> getParrotType(String id);
 
-    Optional<ApplyPhysicsFlag> getApplyPhysics(String id);
+    @NotNull Optional<ApplyPhysicsFlag> getApplyPhysics(String id);
 
     @Deprecated
-    Optional<UnspecificParser<?>> getUnspecifiedParser(String id);
+    @NotNull Optional<UnspecificParser<?>> getUnspecifiedParser(String id);
 
-    Collection<EntityType<? extends LiveEntity, ? extends EntitySnapshot<? extends LiveEntity>>> getEntityTypes();
+    @NotNull Collection<EntityType<? extends LiveEntity, ? extends EntitySnapshot<? extends LiveEntity>>> getEntityTypes();
 
-    Collection<BlockType> getBlockTypes();
+    @NotNull Collection<BlockType> getBlockTypes();
 
-    Collection<ItemType> getItemTypes();
+    @NotNull Collection<ItemType> getItemTypes();
 
-    Collection<DyeType> getDyeTypes();
+    @NotNull Collection<DyeType> getDyeTypes();
 
-    Collection<PatternLayerType> getPatternLayerTypes();
+    @NotNull Collection<PatternLayerType> getPatternLayerTypes();
 
-    Collection<BlockGroup> getBlockGroups();
+    @NotNull Collection<BlockGroup> getBlockGroups();
 
-    Collection<BossColour> getBossColours();
+    @NotNull Collection<BossColour> getBossColours();
 
-    Collection<ParrotType> getParrotType();
+    @NotNull Collection<ParrotType> getParrotType();
 
-    Collection<ApplyPhysicsFlag> getApplyPhysics();
+    @NotNull Collection<ApplyPhysicsFlag> getApplyPhysics();
 
-    Collection<Permission> getPermissions();
+    @NotNull Collection<Permission> getPermissions();
 
-    Collection<Structure> getStructures();
+    @NotNull Collection<Structure> getStructures();
 
     @NotNull Structure register(StructureBuilder builder);
 
@@ -118,47 +120,47 @@ public interface Platform {
     @NotNull CorePermission register(CorePermission permissionNode);
 
     @Deprecated
-    Collection<UnspecificParser<?>> getUnspecifiedParsers();
+    @NotNull Collection<UnspecificParser<?>> getUnspecifiedParsers();
 
-    Collection<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntities();
+    @NotNull Collection<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntities();
 
-    CorePluginVersion getMinecraftVersion();
+    @NotNull CorePluginVersion getMinecraftVersion();
 
     @NotNull PlatformDetails getDetails();
 
     @NotNull ConfigurationFormat getConfigFormat();
 
-    Set<Plugin> getPlugins();
+    @NotNull Set<Plugin> getPlugins();
 
-    File getPlatformPluginsFolder();
+    @NotNull File getPlatformPluginsFolder();
 
-    File getPlatformConfigFolder();
+    @NotNull File getPlatformConfigFolder();
 
-    default File getTranslatePluginsFolder() {
+    default @NotNull File getTranslatePluginsFolder() {
         if (TranslateCore.getStandAloneLauncher().isPresent()) {
             return this.getPlatformPluginsFolder();
         }
         return new File("translate/plugins");
     }
 
-    default File getTranslateConfigFolder() {
+    default @NotNull File getTranslateConfigFolder() {
         if (TranslateCore.getStandAloneLauncher().isPresent()) {
             return this.getPlatformConfigFolder();
         }
         return new File("translate/configs");
     }
 
-    <E extends CustomEvent> E callEvent(E event);
+    @NotNull <E extends CustomEvent> E callEvent(E event);
 
-    default Optional<BlockGroup> getBlockGroup(@NotNull String id) {
+    default @NotNull Optional<BlockGroup> getBlockGroup(@NotNull String id) {
         return this.getBlockGroups().stream().filter(g -> g.getId().equals(id)).findFirst();
     }
 
-    default Optional<Plugin> getPlugin(@NotNull String name) {
+    default @NotNull Optional<Plugin> getPlugin(@NotNull String name) {
         return this.getPlugins().stream().filter(p -> p.getPluginName().equals(name)).findAny();
     }
 
-    default Optional<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntity(@NotNull BlockType type) {
+    default @NotNull Optional<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntity(@NotNull BlockType type) {
         return this
                 .getDefaultTileEntities()
                 .stream()
@@ -166,12 +168,16 @@ public interface Platform {
                 .findFirst();
     }
 
-    default <O extends UpdateOption> Optional<PlatformUpdate<O>> getUpdateChecker(@NotNull String idName) {
+    default <O extends UpdateOption> @NotNull Optional<PlatformUpdate<O>> getUpdateChecker(@NotNull String idName) {
         return this
                 .getUpdateCheckers()
                 .parallelStream()
                 .filter(u -> u.getIdName().equals(idName))
                 .findAny()
                 .map(v -> (PlatformUpdate<O>) v);
+    }
+
+    default @NotNull TranslateCorePlatformDetails getTranslateCoreDetails() {
+        return new TranslateCorePlatformDetails();
     }
 }

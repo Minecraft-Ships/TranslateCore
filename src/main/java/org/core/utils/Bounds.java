@@ -20,8 +20,18 @@ public class Bounds<N extends Number> {
         return this.max;
     }
 
+    public void add(Vector3<Integer> vector) {
+        this.add(vector.getX(), vector.getY(), vector.getZ());
+    }
+
+    public void add(int x, int y, int z) {
+        this.addX(x);
+        this.addY(y);
+        this.addZ(z);
+    }
+
     public void addX(int x) {
-        if (this.min.getX().doubleValue() > this.max.getX().doubleValue()) {
+        if (this.min.getX().doubleValue() < 0) {
             this.min = this.min.plus(x, 0, 0);
             return;
         }
@@ -29,7 +39,7 @@ public class Bounds<N extends Number> {
     }
 
     public void addY(int y) {
-        if (this.min.getY().doubleValue() > this.max.getY().doubleValue()) {
+        if (this.min.getY().doubleValue() < 0) {
             this.min = this.min.plus(0, y, 0);
             return;
         }
@@ -37,7 +47,7 @@ public class Bounds<N extends Number> {
     }
 
     public void addZ(int z) {
-        if (this.min.getZ().doubleValue() > this.max.getZ().doubleValue()) {
+        if (this.min.getZ().doubleValue() < 0) {
             this.min = this.min.plus(0, 0, z);
             return;
         }

@@ -5,6 +5,7 @@ import org.core.entity.living.human.player.User;
 import org.core.platform.plugin.Plugin;
 import org.core.world.WorldExtent;
 import org.core.world.position.block.details.BlockSnapshot;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -14,33 +15,34 @@ import java.util.concurrent.CompletableFuture;
 
 public interface PlatformServer {
 
-    Set<WorldExtent> getWorlds();
+    @NotNull Set<WorldExtent> getWorlds();
 
-    Optional<WorldExtent> getWorldByPlatformSpecific(String name);
+    @NotNull Optional<WorldExtent> getWorldByPlatformSpecific(String name);
 
-    Collection<LivePlayer> getOnlinePlayers();
+    @NotNull Collection<LivePlayer> getOnlinePlayers();
 
-    void applyBlockSnapshots(Collection<? extends BlockSnapshot.AsyncBlockSnapshot> collection, Plugin plugin,
-            Runnable onComplete);
+    void applyBlockSnapshots(@NotNull Collection<? extends BlockSnapshot.AsyncBlockSnapshot> collection,
+                             @NotNull Plugin plugin,
+                             @NotNull Runnable onComplete);
 
-    default void applyBlockSnapshots(Collection<? extends BlockSnapshot.SyncBlockSnapshot> collection) {
+    default void applyBlockSnapshots(@NotNull Collection<? extends BlockSnapshot.SyncBlockSnapshot> collection) {
         collection.forEach(bs -> bs.getPosition().setBlock(bs));
     }
 
-    CompletableFuture<Optional<User>> getOfflineUser(UUID uuid);
+    @NotNull CompletableFuture<Optional<User>> getOfflineUser(@NotNull UUID uuid);
 
-    CompletableFuture<Optional<User>> getOfflineUser(String lastName);
+    @NotNull CompletableFuture<Optional<User>> getOfflineUser(@NotNull String lastName);
 
-    Collection<CompletableFuture<User>> getOfflineUsers();
+    @NotNull Collection<CompletableFuture<User>> getOfflineUsers();
 
-    default Optional<WorldExtent> getWorld(String name, boolean justName) {
+    default @NotNull Optional<WorldExtent> getWorld(@NotNull String name, boolean justName) {
         if (justName) {
             return this.getWorlds().stream().filter(w -> w.getName().equals(name)).findAny();
         }
         return this.getWorldByPlatformSpecific(name);
     }
 
-    default Optional<WorldExtent> getWorld(UUID uuid) {
+    default @NotNull Optional<WorldExtent> getWorld(@NotNull UUID uuid) {
         return this.getWorlds().stream().filter(w -> w.getUniqueId().equals(uuid)).findAny();
     }
 }
