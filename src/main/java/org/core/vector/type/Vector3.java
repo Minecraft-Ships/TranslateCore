@@ -105,6 +105,10 @@ public class Vector3<N extends Number> extends Vector<N, Vector3<N>> {
                 BigDecimal.valueOf(y.doubleValue()), BigDecimal.valueOf(z.doubleValue())));
     }
 
+    public Vector3<N> copyWith(N x, N y, N z){
+        return new Vector3<>(this.toNumber, BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(y.doubleValue()), BigDecimal.valueOf(z.doubleValue()));
+    }
+
     @Override
     public String toString() {
         return "Vector3{X: " + this.getRawX().toPlainString() + ", Y: " + this.getRawY().toPlainString() + ", Z: " +

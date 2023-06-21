@@ -7,9 +7,36 @@ public class Bounds<N extends Number> {
     private Vector3<? extends N> min;
     private Vector3<? extends N> max;
 
-    public Bounds(Vector3<? extends N> min, Vector3<? extends N> max) {
-        this.max = max;
-        this.min = min;
+    public Bounds(Vector3<N> min, Vector3<N> max) {
+        N xMin = min.getX();
+        N yMin = min.getY();
+        N zMin = min.getZ();
+
+        N xMax = max.getX();
+        ;
+        N yMax = max.getY();
+        N zMax = max.getZ();
+
+        if (xMax.doubleValue() < xMin.doubleValue()) {
+            N temp = xMin;
+            xMin = xMax;
+            xMax = temp;
+        }
+
+        if (yMax.doubleValue() < yMin.doubleValue()) {
+            N temp = yMin;
+            yMin = yMax;
+            yMax = temp;
+        }
+
+        if (zMax.doubleValue() < zMin.doubleValue()) {
+            N temp = zMin;
+            zMin = zMax;
+            zMax = temp;
+        }
+
+        this.max = max.copyWith(xMax, yMax, zMax);
+        this.min = min.copyWith(xMin, yMin, zMin);
     }
 
     public Vector3<? extends N> first() {
