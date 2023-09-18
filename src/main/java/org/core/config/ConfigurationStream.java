@@ -58,6 +58,12 @@ public interface ConfigurationStream {
         return this.getChildren(new ConfigurationNode());
     }
 
+    Optional<Object> get(ConfigurationNode node);
+    boolean isList(ConfigurationNode node);
+    boolean isMap(ConfigurationNode node);
+
+    Map<Object, Object> getMap(ConfigurationNode node);
+
     default void set(ConfigurationNode node, Map<String, String> value) {
         value.forEach((key, value1) -> {
             String[] args = key.split(Pattern.quote("."));

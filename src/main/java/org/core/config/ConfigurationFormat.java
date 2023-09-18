@@ -1,5 +1,10 @@
 package org.core.config;
 
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Stream;
+
 @SuppressWarnings("unused")
 public class ConfigurationFormat {
 
@@ -30,5 +35,18 @@ public class ConfigurationFormat {
 
     public String[] getFileType() {
         return this.types;
+    }
+
+    public static Stream<ConfigurationFormat> values(){
+        return Arrays
+                .stream(ConfigurationFormat.class.getDeclaredFields()).filter(field -> Modifier.isFinal(field.getModifiers())).filter(field -> Modifier.isPublic(field.getModifiers())).filter(field -> Modifier.isStatic(field.getModifiers())).filter(field -> field.getType().isAssignableFrom(ConfigurationFormat.class)).map(field -> {
+                    try{
+                        return (ConfigurationFormat)field.get(null);
+                    }catch (Throwable e){
+                        //should never hit
+                        e.printStackTrace();
+                        return null;
+                    }
+                }).filter(Objects::nonNull);
     }
 }
