@@ -64,13 +64,25 @@ public interface ConfigurationStream {
 
     Map<Object, Object> getMap(ConfigurationNode node);
 
-    default void set(ConfigurationNode node, Map<String, String> value) {
+    /*default void set(ConfigurationNode node, Map<String, ?> value) {
         value.forEach((key, value1) -> {
             String[] args = key.split(Pattern.quote("."));
             String[] fullArgs = ArrayUtils.join(String.class, node.getPath(), args);
-            this.set(new ConfigurationNode(fullArgs), value1);
+            ConfigurationNode settingNode = new ConfigurationNode(fullArgs);
+            if(value1 instanceof Map){
+                set(settingNode, (Map<String, ?>)value1);
+                return;
+            }
+            if(value1 instanceof Collection){
+
+            }
+
+
+            this.set(settingNode, value1);
         });
-    }
+    }*/
+
+    void set(ConfigurationNode node, Map<String, ?> value);
 
     default <T> void set(ConfigurationNode node, StringMapParser<T> parser, T value) {
         this.set(node, parser.unparse(value));
