@@ -7,7 +7,10 @@ import org.core.world.direction.FourFacingDirection;
 import org.core.world.position.block.BlockTypes;
 import org.core.world.position.block.details.BlockDetails;
 import org.core.world.position.block.details.BlockSnapshot;
+import org.core.world.position.impl.async.ASyncBlockPosition;
+import org.core.world.position.impl.async.ASyncPosition;
 import org.core.world.position.impl.sync.SyncBlockPosition;
+import org.core.world.position.impl.sync.SyncPosition;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,7 +20,11 @@ import java.util.stream.Collectors;
 
 public interface BlockPosition extends Position<Integer> {
 
-    ExactPosition toExactPosition();
+    @Override
+    SyncBlockPosition toSyncPosition();
+
+    @Override
+    ASyncBlockPosition toAsyncPosition();
 
     @Override
     BlockPosition getRelative(Vector3<?> vector);
@@ -49,43 +56,51 @@ public interface BlockPosition extends Position<Integer> {
 
     default boolean isInLineOfSight(final Vector3<Integer> vector, FourFacingDirection direction) {
         return this.isInLineOfSight(vector, direction, BlockTypes.AIR.getDefaultBlockDetails(),
-                BlockTypes.CAVE_AIR.getDefaultBlockDetails(), BlockTypes.VOID_AIR.getDefaultBlockDetails());
+                                    BlockTypes.CAVE_AIR.getDefaultBlockDetails(),
+                                    BlockTypes.VOID_AIR.getDefaultBlockDetails());
     }
 
-    default boolean isInLineOfSight(final Vector3<Integer> vector, FourFacingDirection direction,
-            BlockDetails... details) {
+    default boolean isInLineOfSight(final Vector3<Integer> vector,
+                                    FourFacingDirection direction,
+                                    BlockDetails... details) {
         return this.isInLineOfSight(vector, direction, Arrays.asList(details));
     }
 
-    default boolean isInLineOfSight(final Vector3<Integer> vector, FourFacingDirection direction,
-            final Collection<BlockDetails> ignored) {
+    default boolean isInLineOfSight(final Vector3<Integer> vector,
+                                    FourFacingDirection direction,
+                                    final Collection<BlockDetails> ignored) {
         return this.isInLineOfSight(vector.getX(), vector.getY(), vector.getZ(), direction, ignored);
     }
 
     default boolean isInLineOfSight(final int x, final int y, final int z, FourFacingDirection direction) {
         return this.isInLineOfSight(x, y, z, direction, BlockTypes.AIR.getDefaultBlockDetails(),
-                BlockTypes.CAVE_AIR.getDefaultBlockDetails(), BlockTypes.VOID_AIR.getDefaultBlockDetails());
+                                    BlockTypes.CAVE_AIR.getDefaultBlockDetails(),
+                                    BlockTypes.VOID_AIR.getDefaultBlockDetails());
     }
 
-    default boolean isInLineOfSight(final int x, final int y, final int z, FourFacingDirection direction,
-            BlockDetails... details) {
+    default boolean isInLineOfSight(final int x,
+                                    final int y,
+                                    final int z,
+                                    FourFacingDirection direction,
+                                    BlockDetails... details) {
         return this.isInLineOfSight(x, y, z, direction, Arrays.asList(details));
     }
 
-    default boolean isInLineOfSight(final int x, final int y, final int z, FourFacingDirection direction,
-            final Collection<BlockDetails> ignored) {
+    default boolean isInLineOfSight(final int x,
+                                    final int y,
+                                    final int z,
+                                    FourFacingDirection direction,
+                                    final Collection<BlockDetails> ignored) {
         if (x == this.getX() && y == this.getY() && z == this.getZ()) {
             return true;
         }
         int diffX = this.getX() - x;
         int diffY = this.getY() - y;
         int diffZ = this.getZ() - z;
-        if (!((diffX == 0 && diffY == 0 &&
-                (direction.equals(FourFacingDirection.EAST) || direction.equals(FourFacingDirection.WEST))) ||
-                (diffX == 0 && diffZ == 0 &&
-                        (direction.equals(FourFacingDirection.UP) || direction.equals(FourFacingDirection.DOWN))) ||
-                (diffY == 0 && diffZ == 0 && (direction.equals(FourFacingDirection.NORTH) ||
-                        direction.equals(FourFacingDirection.SOUTH))))) {
+        if (!((diffX == 0 && diffY == 0 && (direction.equals(FourFacingDirection.EAST) || direction.equals(
+                FourFacingDirection.WEST))) || (diffX == 0 && diffZ == 0 && (direction.equals(FourFacingDirection.UP)
+                || direction.equals(FourFacingDirection.DOWN))) || (diffY == 0 && diffZ == 0 && (
+                direction.equals(FourFacingDirection.NORTH) || direction.equals(FourFacingDirection.SOUTH))))) {
             return false;
         }
         int startX = this.getX();

@@ -9,58 +9,51 @@ import org.core.world.position.block.BlockType;
 import org.core.world.position.block.details.BlockSnapshot;
 import org.core.world.position.impl.async.ASyncBlockPosition;
 import org.core.world.position.impl.async.ASyncExactPosition;
+import org.core.world.position.impl.async.ASyncPosition;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
+import org.core.world.position.impl.sync.SyncPosition;
 
 @ThreadSafe(impl = PlatformDetails.BUKKIT_ID)
 public interface Position<N extends Number> {
 
+    BlockPosition toBlockPosition();
+
+    ExactPosition toExactPosition();
+
+    SyncPosition<N> toSyncPosition();
+
+    ASyncPosition<N> toAsyncPosition();
+
+
+    @Deprecated
     static BlockPosition toBlock(Position<? extends Number> position) {
-        if (position instanceof BlockPosition) {
-            return (BlockPosition) position;
-        }
-        if (position instanceof ExactPosition) {
-            return ((ExactPosition) position).toBlockPosition();
-        }
-        throw new IllegalStateException("Unknown Position implementation");
+        return position.toBlockPosition();
     }
 
+    @Deprecated
     static ExactPosition toExact(Position<? extends Number> position) {
-        if (position instanceof ExactPosition) {
-            return (ExactPosition) position;
-        }
-        if (position instanceof BlockPosition) {
-            return ((BlockPosition) position).toExactPosition();
-        }
-        throw new IllegalStateException("Unknown Position implementation");
+        return position.toExactPosition();
     }
 
+    @Deprecated
     static SyncBlockPosition toSync(BlockPosition position) {
-        if (position instanceof SyncBlockPosition) {
-            return (SyncBlockPosition) position;
-        }
-        return position.getWorld().getPosition(position.getX(), position.getY(), position.getZ());
+        return position.toSyncPosition();
     }
 
+    @Deprecated
     static ASyncBlockPosition toASync(BlockPosition position) {
-        if (position instanceof ASyncBlockPosition) {
-            return (ASyncBlockPosition) position;
-        }
-        return position.getWorld().getAsyncPosition(position.getX(), position.getY(), position.getZ());
+        return position.toAsyncPosition();
     }
 
+    @Deprecated
     static SyncExactPosition toSync(ExactPosition position) {
-        if (position instanceof SyncExactPosition) {
-            return (SyncExactPosition) position;
-        }
-        return position.getWorld().getPosition(position.getX(), position.getY(), position.getZ());
+        return position.toSyncPosition();
     }
 
+    @Deprecated
     static ASyncExactPosition toASync(ExactPosition position) {
-        if (position instanceof SyncExactPosition) {
-            return (ASyncExactPosition) position;
-        }
-        return position.getWorld().getAsyncPosition(position.getX(), position.getY(), position.getZ());
+        return position.toAsyncPosition();
     }
 
     Vector3<Integer> getChunkPosition();

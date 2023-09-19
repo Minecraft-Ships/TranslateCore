@@ -3,10 +3,28 @@ package org.core.world.position.impl.async;
 import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
 import org.core.world.position.impl.BlockPosition;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 
 import java.math.BigDecimal;
 
 public interface ASyncBlockPosition extends ASyncPosition<Integer>, BlockPosition {
+
+    @Override
+    @Deprecated
+    default ASyncBlockPosition toBlockPosition() {
+        return this;
+    }
+
+    @Override
+    @Deprecated
+    default ASyncBlockPosition toAsyncPosition() {
+        return this;
+    }
+
+    @Override
+    default SyncBlockPosition toSyncPosition() {
+        return this.getWorld().getPosition(this.getX(), this.getY(), this.getZ());
+    }
 
     @Override
     ASyncExactPosition toExactPosition();

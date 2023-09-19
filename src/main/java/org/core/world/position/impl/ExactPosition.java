@@ -2,10 +2,18 @@ package org.core.world.position.impl;
 
 import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
+import org.core.world.position.impl.async.ASyncBlockPosition;
+import org.core.world.position.impl.async.ASyncExactPosition;
+import org.core.world.position.impl.sync.SyncBlockPosition;
+import org.core.world.position.impl.sync.SyncExactPosition;
 
 public interface ExactPosition extends Position<Double> {
 
-    BlockPosition toBlockPosition();
+    @Override
+    SyncExactPosition toSyncPosition();
+
+    @Override
+    ASyncExactPosition toAsyncPosition();
 
     @Override
     ExactPosition getRelative(Direction direction);
