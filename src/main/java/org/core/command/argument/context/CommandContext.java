@@ -84,10 +84,10 @@ public class CommandContext {
                 return this.suggest(arg, commandArgument);
             }
         }
-        if (optionalArguments.isEmpty()) {
-            return Collections.emptySet();
-        }
         Collection<String> ret = new HashSet<>();
+        if(commandArgument == arguments.size()){
+            ret.addAll(this.suggest(arguments.get(arguments.size() - 1), commandArgument));
+        }
         for (OptionalArgument<?> argument : optionalArguments) {
             ret.addAll(this.suggest(argument, commandArgument));
         }
