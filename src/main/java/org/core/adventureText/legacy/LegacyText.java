@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Deprecated(forRemoval = true)
 public class LegacyText implements AText {
 
     private final @Nullable String text;

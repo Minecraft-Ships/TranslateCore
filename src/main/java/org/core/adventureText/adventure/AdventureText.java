@@ -16,20 +16,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Deprecated(forRemoval = true)
 public class AdventureText implements AText {
 
     private final Component component;
 
     public AdventureText(Component component) {
         this.component = component;
-    }
-
-    public static AdventureText plain(@NotNull String text) {
-        return new AdventureText(PlainComponentSerializer.plain().deserialize(text));
-    }
-
-    public static AdventureText legacy(@NotNull String text) {
-        return new AdventureText(LegacyComponentSerializer.legacySection().deserialize(text));
     }
 
     private AdventureText toAdventure(AText aText) {
@@ -148,5 +141,13 @@ public class AdventureText implements AText {
             return false;
         }
         return this.toPlain().equals(((AText) obj).toPlain());
+    }
+
+    public static AdventureText plain(@NotNull String text) {
+        return new AdventureText(PlainComponentSerializer.plain().deserialize(text));
+    }
+
+    public static AdventureText legacy(@NotNull String text) {
+        return new AdventureText(LegacyComponentSerializer.legacySection().deserialize(text));
     }
 }

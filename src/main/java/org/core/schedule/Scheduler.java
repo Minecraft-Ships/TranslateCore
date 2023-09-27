@@ -8,6 +8,12 @@ import java.util.function.Consumer;
 
 public interface Scheduler {
 
+    @Deprecated
+    interface Native extends Scheduler {
+
+
+    }
+
     Optional<LocalTime> getStartScheduleTime();
 
     Optional<LocalTime> getStartRunnerTime();
@@ -24,16 +30,5 @@ public interface Scheduler {
 
     Consumer<Scheduler> getRunner();
 
-    interface Threaded extends Scheduler {
-
-        Optional<Thread> getRunning();
-
-    }
-
-
-    interface Native extends Scheduler {
-
-        void cancel();
-
-    }
+    void cancel();
 }

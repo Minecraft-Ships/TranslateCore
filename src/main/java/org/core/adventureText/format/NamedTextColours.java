@@ -7,6 +7,7 @@ import java.util.Set;
 /**
  * A list of known legacy colours that can be used with {@link org.core.adventureText.AText}
  */
+@Deprecated(forRemoval = true)
 public interface NamedTextColours {
 
     TextColour AQUA = new TextColour("AQUA", 'b', 85, 255, 255);

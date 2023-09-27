@@ -1,7 +1,9 @@
 package org.core;
 
+import org.core.config.ConfigManager;
 import org.core.config.ConfigurationFormat;
 import org.core.config.ConfigurationStream;
+import org.core.eco.CurrencyManager;
 import org.core.event.EventManager;
 import org.core.platform.Platform;
 import org.core.platform.PlatformServer;
@@ -15,8 +17,45 @@ import java.util.Optional;
 
 public interface TranslateCore {
 
+    abstract class CoreImplementation implements TranslateCore {
+
+        protected static CoreImplementation IMPLEMENTATION;
+
+        public static CoreImplementation getImplementation() {
+            if (!hasStarted()) {
+                throw new RuntimeException("Has not started TranslateCore");
+            }
+            return IMPLEMENTATION;
+        }
+
+        public static boolean hasStarted() {
+            return IMPLEMENTATION != null;
+        }
+
+    }
+
+    Platform getRawPlatform();
+
+    ScheduleManager getRawScheduleManager();
+
+    EventManager getRawEventManager();
+
+    ConsoleSource getRawConsole();
+
+    PlatformServer getRawServer();
+
+    ServerBossBar bossBuilder();
+
+    ConfigManager getRawConfigManager();
+
+    CurrencyManager getRawCurrencyManager();
+
     static ScheduleManager getScheduleManager() {
         return TranslateCore.CoreImplementation.getImplementation().getRawScheduleManager();
+    }
+
+    static CurrencyManager getCurrencyManager() {
+        return TranslateCore.CoreImplementation.getImplementation().getRawCurrencyManager();
     }
 
     static Platform getPlatform() {
@@ -35,8 +74,13 @@ public interface TranslateCore {
         return TranslateCore.CoreImplementation.getImplementation().getRawEventManager();
     }
 
+    static ConfigManager getConfigManager() {
+        return TranslateCore.CoreImplementation.getImplementation().getRawConfigManager();
+    }
+
+    @Deprecated
     static ConfigurationStream.ConfigurationFile createConfigurationFile(File file, ConfigurationFormat type) {
-        return TranslateCore.CoreImplementation.getImplementation().createRawConfigurationFile(file, type);
+        return getConfigManager().read(file, type);
     }
 
     static ServerBossBar createBossBar() {
@@ -69,37 +113,6 @@ public interface TranslateCore {
             return Optional.of((Class<? extends CorePlugin>) clazz);
         }
         return Optional.empty();
-
-    }
-
-    Platform getRawPlatform();
-
-    ScheduleManager getRawScheduleManager();
-
-    EventManager getRawEventManager();
-
-    ConsoleSource getRawConsole();
-
-    ConfigurationStream.ConfigurationFile createRawConfigurationFile(File file, ConfigurationFormat type);
-
-    PlatformServer getRawServer();
-
-    ServerBossBar bossBuilder();
-
-    abstract class CoreImplementation implements TranslateCore {
-
-        protected static CoreImplementation IMPLEMENTATION;
-
-        public static CoreImplementation getImplementation() {
-            if(!hasStarted()){
-                throw new RuntimeException("Has not started TranslateCore");
-            }
-            return IMPLEMENTATION;
-        }
-
-        public static boolean hasStarted() {
-            return IMPLEMENTATION != null;
-        }
 
     }
 }

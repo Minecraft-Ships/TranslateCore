@@ -1,11 +1,15 @@
 package org.core.utils;
 
+import org.core.utils.lamda.single.ThrowableConsumer;
+
 import java.util.function.Function;
 
 public interface Else {
 
-    static <O, E extends O, F> F canCast(O obj, Class<E> castTo, Function<? super E, F> casted,
-            Function<O, ? extends F> fail) {
+    static <O, E extends O, F> F canCast(O obj,
+                                         Class<E> castTo,
+                                         Function<? super E, F> casted,
+                                         Function<O, ? extends F> fail) {
         if (castTo.isInstance(obj)) {
             return casted.apply((E) obj);
         }
@@ -21,11 +25,5 @@ public interface Else {
             }
             throw new RuntimeException(e);
         }
-    }
-
-    interface ThrowableConsumer<F, E extends Throwable> {
-
-        F run() throws E;
-
     }
 }

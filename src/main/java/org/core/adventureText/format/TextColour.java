@@ -7,6 +7,7 @@ import java.util.Optional;
 /**
  * A text colour with RGB ability
  */
+@Deprecated(forRemoval = true)
 public class TextColour {
 
     public static final char SYMBOL = '§';

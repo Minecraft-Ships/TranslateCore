@@ -2,6 +2,7 @@ package org.core.schedule;
 
 import org.core.platform.plugin.Plugin;
 import org.core.schedule.unit.TimeUnit;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -40,7 +41,17 @@ public interface SchedulerBuilder {
 
     SchedulerBuilder setAsync(boolean check);
 
-    Scheduler build(Plugin plugin);
+    @Deprecated
+    default Scheduler build(Plugin plugin) {
+        if (this.getIteration().isPresent()) {
+            return this.buildRepeating(plugin);
+        }
+        return this.buildDelayed(plugin);
+    }
+
+    Scheduler buildDelayed(@NotNull Plugin plugin);
+
+    Scheduler buildRepeating(@NotNull Plugin plugin);
 
     default SchedulerBuilder useTicksForDelay() {
         return this.setDelayUnit(null);
