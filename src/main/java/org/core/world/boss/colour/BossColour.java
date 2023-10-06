@@ -2,5 +2,5 @@ package org.core.world.boss.colour;
 
 import org.core.utils.Identifiable;
 
-public interface BossColour extends Identifiable {
-}
+@Deprecated(forRemoval = true)
+public interface BossColour extends Identifiable {}

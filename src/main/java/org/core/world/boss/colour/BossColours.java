@@ -4,6 +4,7 @@ import org.core.TranslateCore;
 import org.core.utils.Guaranteed;
 import org.core.utils.Singleton;
 
+@Deprecated(forRemoval = true)
 @SuppressWarnings("unused")
 public class BossColours implements Guaranteed<BossColour> {
 

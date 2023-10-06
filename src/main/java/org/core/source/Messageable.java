@@ -1,6 +1,7 @@
 package org.core.source;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.JoinConfiguration;
 import org.core.adventureText.AText;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,14 +16,17 @@ public interface Messageable {
     @Deprecated(forRemoval = true)
     Messageable sendMessage(AText message);
 
-    Messageable sendMessage(@NotNull Component message, @Nullable UUID uuid);
+    void sendMessage(@NotNull Component message, @Nullable UUID uuid);
 
-    default Messageable sendMessage(@NotNull Component message) {
-        return this.sendMessage(message, null);
+    default void sendMessage(@NotNull Component message) {
+        this.sendMessage(message, null);
     }
 
-    default Messageable sendPlainMessage(@NotNull String message, @Nullable UUID uuid) {
+    default void sendMessage(@NotNull Component... messageToJoin) {
+        this.sendMessage(Component.join(JoinConfiguration.noSeparators(), messageToJoin));
+    }
+
+    default void sendPlainMessage(@NotNull String message, @Nullable UUID uuid) {
         this.sendMessage(Component.text(message), uuid);
-        return this;
     }
 }

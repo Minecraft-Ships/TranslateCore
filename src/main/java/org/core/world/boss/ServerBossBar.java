@@ -6,6 +6,7 @@ import org.core.world.boss.colour.BossColour;
 
 import java.util.Set;
 
+@Deprecated(forRemoval = true)
 public interface ServerBossBar {
 
     AText getTitle();
