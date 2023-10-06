@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public interface LivePlayer extends Player<LiveEntity>, LiveEntity, CommandViewer, Audience {
+public interface LivePlayer extends Player<LiveEntity>, LiveEntity, Audience, CommandViewer {
 
     Optional<BlockPosition> getBlockLookingAt(int scanLength);
 
