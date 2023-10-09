@@ -146,7 +146,7 @@ public final class Terminal {
                     if (Files.isDirectory(path)) {
                         return;
                     }
-                    if (pathStr.endsWith("plugin.yml")) {
+                    if (pathStr.endsWith("paper-plugin.yml")) {
                         String lines = Files.lines(path).collect(Collectors.joining("\n"));
                         lines = lines.replaceAll("name: TranslateCore", "name: " + plugin.getPluginName());
                         lines = lines.replaceAll("version: 1.0.0", "version: " + plugin.getPluginVersion().asString());
