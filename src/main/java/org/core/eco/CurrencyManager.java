@@ -26,4 +26,8 @@ public interface CurrencyManager {
 
     @NotNull CompletableFuture<Optional<PlayerAccount>> getSourceFor(@NotNull UUID uuid);
 
+    default @NotNull CompletableFuture<Optional<PlayerAccount>> getSourceFor(@NotNull User user) {
+        return this.getSourceFor(user.getUniqueId());
+    }
+
 }
