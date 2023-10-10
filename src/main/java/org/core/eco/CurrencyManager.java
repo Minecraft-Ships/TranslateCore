@@ -1,7 +1,10 @@
 package org.core.eco;
 
-import org.core.entity.living.human.player.Player;
-import org.core.source.eco.EcoSource;
+import org.core.TranslateCore;
+import org.core.entity.living.human.player.User;
+import org.core.source.eco.Account;
+import org.core.source.eco.NamedAccount;
+import org.core.source.eco.PlayerAccount;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -19,10 +22,8 @@ public interface CurrencyManager {
 
     @NotNull Collection<Currency> getCurrencies();
 
-    CompletableFuture<Optional<EcoSource>> getSourceFor(@NotNull UUID uuid);
+    @NotNull CompletableFuture<Optional<NamedAccount>> getSourceFor(@NotNull String accountName);
 
-    default CompletableFuture<Optional<EcoSource>> getSourceFor(Player<?> player) {
-        return this.getSourceFor(player.getUniqueId());
-    }
+    @NotNull CompletableFuture<Optional<PlayerAccount>> getSourceFor(@NotNull UUID uuid);
 
 }
