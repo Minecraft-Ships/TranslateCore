@@ -1,10 +1,8 @@
 package org.core.eco;
 
-import org.core.TranslateCore;
 import org.core.entity.living.human.player.User;
-import org.core.source.eco.Account;
-import org.core.source.eco.NamedAccount;
-import org.core.source.eco.PlayerAccount;
+import org.core.eco.account.NamedAccount;
+import org.core.eco.account.PlayerAccount;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;

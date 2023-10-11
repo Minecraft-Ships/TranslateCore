@@ -1,4 +1,4 @@
-package org.core.source.eco;
+package org.core.eco.account;
 
 public interface NamedAccount extends Account {
 
