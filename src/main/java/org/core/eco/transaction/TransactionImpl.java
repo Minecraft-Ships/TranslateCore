@@ -5,14 +5,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 
-class AbstractTransaction implements Transaction {
+public class TransactionImpl implements Transaction {
 
     private final Currency currency;
     private final BigDecimal amount;
+    private final TransactionType type;
 
-    AbstractTransaction(Currency currency, BigDecimal amount) {
+    public TransactionImpl(Currency currency, BigDecimal amount, TransactionType type) {
         this.amount = amount;
         this.currency = currency;
+        this.type = type;
     }
 
     @Override
@@ -23,5 +25,10 @@ class AbstractTransaction implements Transaction {
     @Override
     public @NotNull BigDecimal getAmount() {
         return this.amount;
+    }
+
+    @Override
+    public @NotNull TransactionType getType() {
+        return this.type;
     }
 }

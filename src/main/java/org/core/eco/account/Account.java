@@ -8,7 +8,9 @@ import org.core.source.Source;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiFunction;
 
 public interface Account extends Source {
@@ -17,8 +19,8 @@ public interface Account extends Source {
 
     @NotNull PendingTransaction transact(@NotNull Transaction transaction);
 
-    default @NotNull PendingTransaction transact(@NotNull Account other,
-                                                 BiFunction<AccountSnapshot, AccountSnapshot, List<Transaction>> transactions) {
+    default @NotNull CompletableFuture<PendingTransaction> transact(@NotNull Account other,
+                                                                   BiFunction<Account, Account, Collection<PendingTransaction>> transactions) {
         return new SecureTransaction(this, other, transactions).run();
     }
 
@@ -28,21 +30,23 @@ public interface Account extends Source {
         return this.getBalance(TranslateCore.getCurrencyManager().getDefaultCurrency());
     }
 
+    default PendingTransaction transact(@NotNull TransactionType type,
+                                        @NotNull Currency currency,
+                                        @NotNull Number amount) {
+        return this.transact(new TransactionImpl(currency,
+                                                 amount instanceof BigDecimal ? (BigDecimal) amount : BigDecimal.valueOf(
+                                                         amount.doubleValue()), type));
+    }
+
     default PendingTransaction deposit(@NotNull Currency currency, @NotNull Number amount) {
-        return this.transact(new DepositTransaction(this, currency,
-                                                    amount instanceof BigDecimal ? (BigDecimal) amount : BigDecimal.valueOf(
-                                                            amount.doubleValue())));
+        return this.transact(TransactionType.DEPOSIT, currency, amount);
     }
 
     default PendingTransaction withdraw(@NotNull Currency currency, @NotNull Number amount) {
-        return this.transact(new WithdrawTransaction(this, currency,
-                                                     amount instanceof BigDecimal ? (BigDecimal) amount : BigDecimal.valueOf(
-                                                             amount.doubleValue())));
+        return this.transact(TransactionType.WITHDRAW, currency, amount);
     }
 
     default PendingTransaction setBalance(@NotNull Currency currency, @NotNull Number amount) {
-        return this.transact(new SetTransaction(this, currency,
-                                                amount instanceof BigDecimal ? (BigDecimal) amount : BigDecimal.valueOf(
-                                                        amount.doubleValue())));
+        return this.transact(TransactionType.SET, currency, amount);
     }
 }
