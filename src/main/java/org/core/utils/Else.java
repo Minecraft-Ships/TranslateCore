@@ -26,4 +26,24 @@ public interface Else {
             throw new RuntimeException(e);
         }
     }
+
+    static <F, E extends Throwable> F throwMultiple(Class<E> clazz, ThrowableConsumer<? extends F, E>... attempt)
+            throws E {
+        E lastThrown = null;
+        for (ThrowableConsumer<? extends F, E> current : attempt) {
+            try {
+                return current.run();
+            } catch (Throwable e) {
+                if (clazz.isInstance(e)) {
+                    lastThrown = (E) e;
+                    continue;
+                }
+                throw new RuntimeException(e);
+            }
+        }
+        if (lastThrown == null) {
+            throw new RuntimeException("No exceptions nor values found");
+        }
+        throw lastThrown;
+    }
 }

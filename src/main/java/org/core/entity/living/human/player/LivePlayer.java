@@ -1,6 +1,7 @@
 package org.core.entity.living.human.player;
 
 import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.audience.ForwardingAudience;
 import net.kyori.adventure.text.Component;
 import org.core.entity.EntityType;
 import org.core.entity.LiveEntity;
@@ -9,6 +10,7 @@ import org.core.source.viewer.CommandViewer;
 import org.core.world.position.impl.BlockPosition;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.Optional;
 
 public interface LivePlayer extends Player<LiveEntity>, LiveEntity, Audience, CommandViewer {
