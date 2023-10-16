@@ -1,25 +1,68 @@
 package org.core.world.boss;
 
+import net.kyori.adventure.bossbar.BossBar;
 import org.core.adventureText.AText;
+import org.core.adventureText.adventure.AdventureText;
 import org.core.entity.living.human.player.LivePlayer;
 import org.core.world.boss.colour.BossColour;
+import org.core.world.boss.colour.BossColours;
 
 import java.util.Set;
 
 @Deprecated(forRemoval = true)
 public interface ServerBossBar {
 
-    AText getTitle();
+    BossBar bossBar();
 
-    ServerBossBar setTitle(AText text);
+    default AText getTitle() {
+        return new AdventureText(bossBar().name());
+    }
 
-    BossColour getColour();
+    default ServerBossBar setTitle(AText text) {
+        bossBar().name(text);
+        return this;
+    }
 
-    ServerBossBar setColour(BossColour colour);
+    default BossColour getColour() {
+        switch (bossBar().color()) {
+            case PINK -> {
+                return BossColours.PINK.get();
+            }
+            case BLUE -> {
+                return BossColours.BLUE.get();
+            }
+            case RED -> {
+                return BossColours.RED.get();
+            }
+            case GREEN -> {
+                return BossColours.GREEN.get();
+            }
+            case YELLOW -> {
+                return BossColours.YELLOW.get();
+            }
+            case PURPLE -> {
+                return BossColours.PURPLE.get();
+            }
+            case WHITE -> {
+                return BossColours.WHITE.get();
+            }
+        }
+        throw new RuntimeException("legacy colour not accepted");
+    }
 
-    int getValue();
+    default ServerBossBar setColour(BossColour colour) {
+        BossBar.Color.valueOf(colour.getName().toUpperCase());
+        return this;
+    }
 
-    ServerBossBar setValue(int value);
+    default int getValue() {
+        return (int) (this.bossBar().progress() * 100);
+    }
+
+    default ServerBossBar setValue(int value) {
+        this.bossBar().progress(value / 100);
+        return this;
+    }
 
     Set<LivePlayer> getPlayers();
 

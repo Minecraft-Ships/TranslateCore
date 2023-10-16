@@ -1,8 +1,11 @@
 package org.core.adventureText;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.ComponentLike;
 import org.core.adventureText.adventure.AdventureText;
 import org.core.adventureText.format.TextColour;
 import org.core.adventureText.legacy.LegacyText;
+import org.core.utils.ComponentUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,11 +23,19 @@ import java.util.Optional;
  * @deprecated Removed as component is now supported by all platforms (except spigot). Using Component
  */
 @Deprecated(forRemoval = true)
-public interface AText {
+public interface AText extends ComponentLike {
 
     String COMPONENT_CLASS_PATH = "net.kyori.adventure.text.Component";
     String PLAIN_COMPONENT_CLASS_PATH = "net.kyori.adventure.text.serializer.plain.PlainComponentSerializer";
     String LEGACY_COMPONENT_CLASS_PATH = "net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer";
+
+    @Override
+    default @NotNull Component asComponent() {
+        if (this instanceof AdventureText adventureText) {
+            return adventureText.getComponent();
+        }
+        return ComponentUtils.fromLegacy(this.toLegacy());
+    }
 
     /**
      * Adds the provided text to the end of this text

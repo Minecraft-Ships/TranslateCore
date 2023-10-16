@@ -1,5 +1,7 @@
 package org.core.command;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.core.adventureText.AText;
 import org.core.adventureText.format.NamedTextColours;
 import org.core.command.argument.ArgumentCommand;
@@ -28,38 +30,31 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
     default boolean run(CommandSource source, String... args) throws NotEnoughArguments {
         CommandContext commandContext = new CommandContext(source, this.getCommands(), args);
         Optional<ArgumentCommand> opCommand = commandContext.getCompleteCommand();
-        if (!opCommand.isPresent()) {
-            if (source instanceof CommandViewer) {
-                CommandViewer viewer = (CommandViewer) source;
-                Set<ErrorContext> errors = commandContext.getErrors();
-                if (!errors.isEmpty()) {
-                    ErrorContext error = errors.iterator().next();
-                    viewer.sendMessage(AText.ofPlain(error.getError()).withColour(NamedTextColours.RED));
-                    if (errors.size() > 8) {
-                        return false;
-                    }
-
-                    errors
-                            .parallelStream()
-                            .map(e -> e.getArgument().getUsage())
-                            .collect(Collectors.toSet())
-                            .forEach(e -> viewer.sendMessage(AText.ofPlain(e).withColour(NamedTextColours.RED)));
-                } else {
-                    viewer.sendMessage(AText.ofPlain("Unknown error").withColour(NamedTextColours.RED));
-                }
+        if (opCommand.isEmpty()) {
+            Set<ErrorContext> errors = commandContext.getErrors();
+            if (errors.isEmpty()) {
+                source.sendMessage(Component.text("Unknown error").color(TextColor.color(255, 0, 0)));
                 return true;
             }
-            return false;
+            ErrorContext error = errors.iterator().next();
+            source.sendMessage(Component.text(error.getError()).color(TextColor.color(255, 0, 0)));
+            if (errors.size() > 8) {
+                return false;
+            }
+            errors
+                    .parallelStream()
+                    .map(e -> e.getArgument().getUsage())
+                    .collect(Collectors.toSet())
+                    .forEach(e -> source.sendMessage(Component.text(e).color(TextColor.color(255, 0, 0))));
+            return true;
         }
         if (!opCommand.get().hasPermission(source)) {
-            if (source instanceof CommandViewer) {
-                ((CommandViewer) source).sendMessage(AText
-                        .ofPlain("You do not have permission for that command. You require " +
-                                opCommand.get().getPermissionNode())
-                        .withColour(NamedTextColours.RED));
-                return true;
-            }
-            return false;
+            source.sendMessage(AText
+                                       .ofPlain("You do not have permission for that command. You require " + opCommand
+                                               .get()
+                                               .getPermissionNode())
+                                       .withColour(NamedTextColours.RED));
+            return true;
         }
         return opCommand.get().run(commandContext, args);
     }
