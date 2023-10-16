@@ -9,6 +9,10 @@ public interface BaseCommandLauncher {
 
     String getName();
 
+    default String[] getAliases() {
+        return new String[0];
+    }
+
     String getDescription();
 
     boolean hasPermission(CommandSource source);
