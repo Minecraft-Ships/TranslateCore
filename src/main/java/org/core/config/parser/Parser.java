@@ -24,6 +24,8 @@ public interface Parser<O, T> {
     StringToBlockPosition STRING_TO_BLOCK_POSITION = new StringToBlockPosition();
     StringToExactPosition STRING_TO_EXACT_POSITION = new StringToExactPosition();
     StringToATextLegacyParser STRING_TO_TEXT = new StringToATextLegacyParser();
+    StringToComponentGsonParser STRING_TO_COMPONENT = new StringToComponentGsonParser();
+
     StringToTimeParser STRING_TO_TIME = new StringToTimeParser();
     StringToTimeRangeParser STRING_TO_TIME_RANGE = new StringToTimeRangeParser();
 

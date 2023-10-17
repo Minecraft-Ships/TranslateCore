@@ -7,7 +7,10 @@ public interface Logger {
 
     void log(@NotNull String log);
 
-    void log(@NotNull AText log);
+    @Deprecated(forRemoval = true)
+    default void log(@NotNull AText log) {
+        log(log.toLegacy());
+    }
 
     void warning(@NotNull String log);
 

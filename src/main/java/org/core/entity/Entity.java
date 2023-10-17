@@ -1,6 +1,9 @@
 package org.core.entity;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.ComponentLike;
 import org.core.adventureText.AText;
+import org.core.adventureText.adventure.AdventureText;
 import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
 import org.core.world.direction.EightFacingDirection;
@@ -158,7 +161,10 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      *
      * @return Optional of the custom name, if the custom name has not been set it will return a Optional.empty
      */
-    Optional<AText> getCustomName();
+    @Deprecated(forRemoval = true)
+    default Optional<AText> getCustomName() {
+        return this.getCustomNameComponent().map(AdventureText::new);
+    }
 
     /**
      * Sets the custom name of the entity.
@@ -167,7 +173,21 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
      * @param text the name to be
      * @return itself for chaining
      */
-    Entity<T> setCustomName(@Nullable AText text);
+    @Deprecated(forRemoval = true)
+    default Entity<T> setCustomName(@Nullable AText text) {
+        return setCustomName((ComponentLike) text);
+    }
+
+    Optional<Component> getCustomNameComponent();
+
+    Entity<T> setCustomName(@Nullable Component component);
+
+    default Entity<T> setCustomName(@Nullable ComponentLike like) {
+        if (like == null) {
+            return this.setCustomName((Component) null);
+        }
+        return this.setCustomName(like.asComponent());
+    }
 
     /**
      * Checks if the custom name should be visible

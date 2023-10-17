@@ -1,8 +1,8 @@
 package org.core.world;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.core.TranslateCore;
-import org.core.adventureText.AText;
-import org.core.adventureText.format.NamedTextColours;
 import org.core.entity.LiveEntity;
 import org.core.platform.PlatformDetails;
 import org.core.threadsafe.ThreadSafe;
@@ -46,10 +46,10 @@ public interface Extent {
         }
         TranslateCore
                 .getConsole()
-                .sendMessage(AText
-                                     .ofPlain("Extent.getPosition(Vector3<" + vector.getX().getClass().getSimpleName()
-                                                      + ") is not supported. Defaulting to ExactPosition")
-                                     .withColour(NamedTextColours.RED));
+                .sendMessage(Component
+                                     .text("Extent.getPosition(Vector3<" + vector.getX().getClass().getSimpleName()
+                                                   + ") is not supported. Defaulting to ExactPosition")
+                                     .color(NamedTextColor.RED));
         return (SyncPosition<N>) this.getPosition(vector.getX().doubleValue(), vector.getY().doubleValue(),
                                                   vector.getZ().doubleValue());
     }
@@ -66,10 +66,10 @@ public interface Extent {
 
         TranslateCore
                 .getConsole()
-                .sendMessage(AText
-                                     .ofPlain("Extent.getPosition(Vector3<" + vector.getX().getClass().getSimpleName()
-                                                      + ") is not supported. Defaulting to ExactPosition")
-                                     .withColour(NamedTextColours.RED));
+                .sendMessage(Component
+                                     .text("Extent.getPosition(Vector3<" + vector.getX().getClass().getSimpleName()
+                                                   + ") is not supported. Defaulting to ExactPosition")
+                                     .color(NamedTextColor.RED));
         return (ASyncPosition<N>) this.getAsyncPosition(vector.getX().doubleValue(), vector.getY().doubleValue(),
                                                         vector.getZ().doubleValue());
     }

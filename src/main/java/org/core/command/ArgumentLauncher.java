@@ -49,11 +49,13 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
             return true;
         }
         if (!opCommand.get().hasPermission(source)) {
-            source.sendMessage(AText
-                                       .ofPlain("You do not have permission for that command. You require " + opCommand
-                                               .get()
-                                               .getPermissionNode())
-                                       .withColour(NamedTextColours.RED));
+            Component component = Component
+                    .text("You do not have permission for that command. " + opCommand
+                            .flatMap(ArgumentCommand::getPermissionNode)
+                            .map(perm -> "You require " + perm.getPermissionValue())
+                            .orElse(""))
+                    .color(TextColor.color(255, 0, 0));
+            source.sendMessage(component);
             return true;
         }
         return opCommand.get().run(commandContext, args);

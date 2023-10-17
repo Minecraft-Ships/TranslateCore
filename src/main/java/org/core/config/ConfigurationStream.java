@@ -1,9 +1,9 @@
 package org.core.config;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.array.utils.ArrayUtils;
 import org.core.TranslateCore;
-import org.core.adventureText.AText;
-import org.core.adventureText.format.NamedTextColours;
 import org.core.config.parser.Parser;
 import org.core.config.parser.StringMapParser;
 import org.core.config.parser.StringParser;
@@ -59,7 +59,9 @@ public interface ConfigurationStream {
     }
 
     Optional<Object> get(ConfigurationNode node);
+
     boolean isList(ConfigurationNode node);
+
     boolean isMap(ConfigurationNode node);
 
     Map<Object, Object> getMap(ConfigurationNode node);
@@ -104,14 +106,12 @@ public interface ConfigurationStream {
         } catch (ClassCastException e) {
             TranslateCore
                     .getConsole()
-                    .sendMessage(AText
-                                         .ofPlain("Path: " + String.join(".", node.getPath()))
-                                         .withColour(NamedTextColours.RED));
+                    .sendMessage(Component.text("Path: " + String.join(".", node.getPath())).color(NamedTextColor.RED));
             TranslateCore
                     .getConsole()
-                    .sendMessage(AText
-                                         .ofPlain("Value: (" + value.getClass().getName() + ") '" + value + "'")
-                                         .withColour(NamedTextColours.RED));
+                    .sendMessage(Component
+                                         .text("Value: (" + value.getClass().getName() + ") '" + value + "'")
+                                         .color(NamedTextColor.RED));
             e.printStackTrace();
         }
     }
