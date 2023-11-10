@@ -2,14 +2,11 @@ package org.core.command;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
-import org.core.adventureText.AText;
-import org.core.adventureText.format.NamedTextColours;
 import org.core.command.argument.ArgumentCommand;
 import org.core.command.argument.context.CommandContext;
 import org.core.command.argument.context.ErrorContext;
 import org.core.exceptions.NotEnoughArguments;
 import org.core.source.command.CommandSource;
-import org.core.source.viewer.CommandViewer;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -70,7 +67,11 @@ public interface ArgumentLauncher extends BaseCommandLauncher {
             if (!c.hasPermission(source)) {
                 return;
             }
-            tab.addAll(commandContext.getSuggestions(c));
+            try {
+                tab.addAll(commandContext.getSuggestions(c));
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
         });
         return new ArrayList<>(tab);
     }

@@ -1,6 +1,7 @@
 package org.core.command.argument;
 
 import org.core.command.argument.context.CommandContext;
+import org.core.exceptions.NotEnoughArguments;
 import org.core.permission.Permission;
 
 import java.util.Collections;
@@ -32,7 +33,7 @@ public class SingleArgumentCommand<N> implements ArgumentCommand {
     }
 
     @Override
-    public boolean run(CommandContext commandContext, String... args) {
+    public boolean run(CommandContext commandContext, String... args) throws NotEnoughArguments {
         N result = commandContext.getArgument(this, this.numberArgument);
         return result.equals(this.value);
     }

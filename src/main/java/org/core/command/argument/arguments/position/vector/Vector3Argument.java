@@ -4,6 +4,7 @@ import org.core.command.argument.CommandArgument;
 import org.core.command.argument.CommandArgumentResult;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
+import org.core.exceptions.NotEnoughArguments;
 import org.core.vector.type.Vector3;
 
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class Vector3Argument<N extends Number> implements CommandArgument<Vector
     }
 
     @Override
-    public Collection<String> suggest(CommandContext context, CommandArgumentContext<Vector3<N>> argument) {
+    public Collection<String> suggest(CommandContext context, CommandArgumentContext<Vector3<N>> argument) throws NotEnoughArguments {
         String[] cmd = context.getCommand();
         int min = Math.min(3, cmd.length - argument.getFirstArgument());
         for (int A = 0; A < min; A++) {

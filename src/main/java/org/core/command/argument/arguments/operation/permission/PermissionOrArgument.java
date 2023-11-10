@@ -6,6 +6,7 @@ import org.core.command.argument.ParseCommandArgument;
 import org.core.command.argument.SuggestCommandArgument;
 import org.core.command.argument.context.CommandArgumentContext;
 import org.core.command.argument.context.CommandContext;
+import org.core.exceptions.NotEnoughArguments;
 import org.core.source.command.CommandSource;
 
 import java.io.IOException;
@@ -32,8 +33,7 @@ public class PermissionOrArgument<T> implements CommandArgument<T> {
      * @param with       The command argument to use if the user has permission
      * @param or         The command argument to use if the user doesn't have permission
      */
-    public PermissionOrArgument(String id, Predicate<? super CommandSource> permission, ParseCommandArgument<T> with,
-            ParseCommandArgument<T> or) {
+    public PermissionOrArgument(String id, Predicate<? super CommandSource> permission, ParseCommandArgument<T> with, ParseCommandArgument<T> or) {
         this.id = id;
         this.permission = permission;
         this.with = with;
@@ -46,8 +46,7 @@ public class PermissionOrArgument<T> implements CommandArgument<T> {
     }
 
     @Override
-    public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) throws
-            IOException {
+    public CommandArgumentResult<T> parse(CommandContext context, CommandArgumentContext<T> argument) throws IOException {
         if (this.permission.test(context.getSource())) {
             return this.with.parse(context, argument);
         }
@@ -55,7 +54,7 @@ public class PermissionOrArgument<T> implements CommandArgument<T> {
     }
 
     @Override
-    public Collection<String> suggest(CommandContext context, CommandArgumentContext<T> argument) {
+    public Collection<String> suggest(CommandContext context, CommandArgumentContext<T> argument) throws NotEnoughArguments {
         if (this.permission.test(context.getSource())) {
             if (this.with instanceof SuggestCommandArgument) {
                 return ((SuggestCommandArgument<T>) this.with).suggest(context, argument);

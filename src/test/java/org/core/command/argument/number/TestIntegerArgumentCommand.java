@@ -3,6 +3,7 @@ package org.core.command.argument.number;
 import org.core.command.argument.SingleArgumentCommand;
 import org.core.command.argument.arguments.simple.number.IntegerArgument;
 import org.core.command.argument.context.CommandContext;
+import org.core.exceptions.NotEnoughArguments;
 import org.core.source.command.ConsoleSource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,19 +20,7 @@ public class TestIntegerArgumentCommand {
     ConsoleSource consoleSource;
 
     @Test
-    public void testValidIntegerArgument() {
-        SingleArgumentCommand<Integer> command = new SingleArgumentCommand<>(5, new IntegerArgument("test"));
-        CommandContext context = new CommandContext(this.consoleSource, Collections.singletonList(command), "5");
-
-        // Act
-        boolean result = command.run(context, "5");
-
-        // Assert
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    public void testInvalidIntegerArgument() {
+    public void testInvalidIntegerArgument() throws NotEnoughArguments {
         SingleArgumentCommand<Integer> command = new SingleArgumentCommand<>(5, new IntegerArgument("test"));
         CommandContext context = new CommandContext(this.consoleSource, Collections.singletonList(command), "6");
 
@@ -56,6 +45,18 @@ public class TestIntegerArgumentCommand {
         } catch (Exception e) {
 
         }
+    }
+
+    @Test
+    public void testValidIntegerArgument() throws NotEnoughArguments {
+        SingleArgumentCommand<Integer> command = new SingleArgumentCommand<>(5, new IntegerArgument("test"));
+        CommandContext context = new CommandContext(this.consoleSource, Collections.singletonList(command), "5");
+
+        // Act
+        boolean result = command.run(context, "5");
+
+        // Assert
+        Assertions.assertTrue(result);
     }
 
 }
