@@ -29,24 +29,34 @@ public abstract class PositionArgument<N extends Number, P extends Position<N>> 
     }
 
     @Override
-    public CommandArgumentResult<P> parse(CommandContext context, CommandArgumentContext<P> argument) throws
-            IOException {
+    public CommandArgumentResult<P> parse(CommandContext context, CommandArgumentContext<P> argument) throws IOException {
         int firstPosition = argument.getFirstArgument();
         WorldArgument worldArg = new WorldArgument("");
-        CommandArgumentResult<WorldExtent> extent = worldArg.parse(context,
-                new CommandArgumentContext<>(worldArg, firstPosition, context.getCommand()));
-        CommandArgumentResult<N> x = this.positionArgument.parse(context,
-                new CommandArgumentContext<>(this.positionArgument, extent.getPosition() + 1, context.getCommand()));
+
+        CommandArgumentResult<WorldExtent> extent = worldArg.parse(context, new CommandArgumentContext<>(worldArg, firstPosition, context.getCommand()));
+        if ((extent.getPosition() + 1) >= context.getCommand().length) {
+            throw new IOException("Missing X");
+        }
+        CommandArgumentResult<N> x = this.positionArgument.parse(context, new CommandArgumentContext<>(this.positionArgument, extent.getPosition() + 1,
+                                                                                                       context.getCommand()));
+        if ((x.getPosition()) >= context.getCommand().length) {
+            throw new IOException("Missing Y");
+        }
         CommandArgumentResult<N> y = this.positionArgument.parse(context,
-                new CommandArgumentContext<>(this.positionArgument, x.getPosition(), context.getCommand()));
+                                                                 new CommandArgumentContext<>(this.positionArgument, x.getPosition(), context.getCommand()));
+        if ((y.getPosition()) >= context.getCommand().length) {
+            throw new IOException("Missing Z");
+        }
         CommandArgumentResult<N> z = this.positionArgument.parse(context,
-                new CommandArgumentContext<>(this.positionArgument, y.getPosition(), context.getCommand()));
+                                                                 new CommandArgumentContext<>(this.positionArgument, y.getPosition(), context.getCommand()));
         P pos = this.build(extent.getValue(), x.getValue(), y.getValue(), z.getValue());
         return new CommandArgumentResult<>(z.getPosition(), pos);
     }
 
     @Override
     public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<P> argument) {
-        return Collections.emptySet();
+        String command = commandContext.getCommand()[argument.getFirstArgument()];
+
+        return Collections.singleton(command);
     }
 }
