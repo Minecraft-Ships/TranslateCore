@@ -14,6 +14,7 @@ import org.core.world.position.block.BlockTypes;
 import org.core.world.position.impl.Position;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -28,46 +29,38 @@ import java.util.Optional;
 public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosition> {
 
     /**
-     * Gets the position the entity is.
+     * Adds passengers to the current entity.
+     * The passengers must be of the same type
+     * (as in LiveEntity or EntitySnapshot)
+     * of this entity.
      *
-     * @return The Exact Position the entity is
-     */
-    @Override
-    SyncExactPosition getPosition();
-
-    /**
-     * Sets the position for the entity to be in.
-     * <p>
-     * Note that platforms that hold more then position information
-     * in the Position class will be applied to the entity too. Such
-     * as, Bukkits Location holds rotation data, therefore this should
-     * be set first and then the rotation data.
-     *
-     * @param position The position for the entity to be in
+     * @param entities Collection of entities to add
      * @return itself for chaining
      */
-    Entity<T> setPosition(Position<? extends Number> position);
+    Entity<T> addPassengers(Collection<? extends T> entities);
 
     /**
-     * Sets the position of the entity without
-     * the need of a Position, this maintains
-     * the world that the entity is in
+     * Adds passengers to the current entity.
+     * The passengers must be of the same type
+     * (as in LiveEntity or EntitySnapshot)
+     * of this entity.
      *
-     * @param vector the new position
+     * @param entities Collection of entities to add
      * @return itself for chaining
      */
-    default Entity<T> setPosition(Vector3<? extends Number> vector) {
-        return this.setPosition(vector.getRawX().doubleValue(), vector.getRawY().doubleValue(),
-                                vector.getRawZ().doubleValue());
+    @SuppressWarnings("unchecked")
+    default Entity<T> addPassengers(T... entities) {
+        return this.addPassengers(Arrays.asList(entities));
     }
 
     /**
-     * Gets the type of the entity
+     * Removes all passengers from the entity
      *
-     * @param <E> Itself as a LiveEntity
-     * @return The Entity Type
+     * @return itself for chaining
      */
-    <E extends LiveEntity> EntityType<E, ? extends EntitySnapshot<E>> getType();
+    default Entity<T> clearPassengers() {
+        return this.removePassengers(this.getPassengers());
+    }
 
     /**
      * Create a snapshot of this instance of the entity
@@ -77,83 +70,18 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
     EntitySnapshot<? extends LiveEntity> createSnapshot();
 
     /**
-     * Sets if the entity has gravity or not
+     * Gets the block that the entity is attached to, this could be
+     * the block that the entity is standing on
      *
-     * @param check If the entity should have gravity
-     * @return itself for chaining
+     * @return The attached block if present
      */
-    Entity<T> setGravity(boolean check);
-
-    /**
-     * Gets the current pitch of the entity
-     *
-     * @return the current pitch of the entity
-     */
-    double getPitch();
-
-    /**
-     * Sets the pitch of the entities rotation
-     *
-     * @param value The pitch to be
-     * @return Itself for chaining
-     */
-    Entity<T> setPitch(double value);
-
-    /**
-     * Gets the yaw of the current entity
-     *
-     * @return the current yaw of the entity
-     */
-    double getYaw();
-
-    /**
-     * Sets the Yaw of the entities rotation
-     *
-     * @param value The yaw to be
-     * @return Itself for chaining
-     */
-    Entity<T> setYaw(double value);
-
-    /**
-     * Gets the roll of the entity,
-     * note that as Bukkit does not support
-     * roll, then the result will be 0
-     *
-     * @return The roll of the entity
-     */
-    double getRoll();
-
-    /**
-     * Sets the Roll of the entities rotation.
-     * Note that bukkit does not support roll,
-     * therefore there will be no result in Bukkit
-     *
-     * @param value the roll to be
-     * @return Itself for chaining
-     */
-    Entity<T> setRoll(double value);
-
-    /**
-     * Checks if the entity has gravity
-     *
-     * @return if the entity has gravity
-     */
-    boolean hasGravity();
-
-    /**
-     * Gets the current velocity of the entity
-     *
-     * @return The current velocity
-     */
-    Vector3<Double> getVelocity();
-
-    /**
-     * Sets the velocity of the entity
-     *
-     * @param velocity the velocity to be
-     * @return itself for chaining
-     */
-    Entity<T> setVelocity(Vector3<Double> velocity);
+    default Optional<SyncBlockPosition> getAttachedTo() {
+        SyncBlockPosition block = this.getPosition().getRelative(Vector3.valueOf(0, -0.1, 0)).toBlockPosition();
+        if (block.getBlockType().equals(BlockTypes.AIR)) {
+            return Optional.empty();
+        }
+        return Optional.of(block);
+    }
 
     /**
      * Gets the custom name of the entity, even
@@ -178,8 +106,6 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
         return setCustomName((ComponentLike) text);
     }
 
-    Optional<Component> getCustomNameComponent();
-
     Entity<T> setCustomName(@Nullable Component component);
 
     default Entity<T> setCustomName(@Nullable ComponentLike like) {
@@ -189,135 +115,7 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
         return this.setCustomName(like.asComponent());
     }
 
-    /**
-     * Checks if the custom name should be visible
-     *
-     * @return if the custom name is visible
-     */
-    boolean isCustomNameVisible();
-
-    /**
-     * Sets if the custom name should be visible
-     *
-     * @param visible if the name should be visible
-     * @return itself for chaining
-     */
-    Entity<T> setCustomNameVisible(boolean visible);
-
-    /**
-     * Gets the passengers of the entity.
-     * The passengers must be of the same type
-     * (as in LiveEntity or EntitySnapshot)
-     * of the entity, if a snapshot is created of
-     * a live entity then the passengers will be
-     * stored with the created snapshot. And restored
-     * as different instances when the snapshot is restored
-     *
-     * @return A collection of all passengers
-     */
-    Collection<T> getPassengers();
-
-    /**
-     * Adds passengers to the current entity.
-     * The passengers must be of the same type
-     * (as in LiveEntity or EntitySnapshot)
-     * of this entity.
-     *
-     * @param entities Collection of entities to add
-     * @return itself for chaining
-     */
-    Entity<T> addPassengers(Collection<? extends T> entities);
-
-    /**
-     * Removes passengers to the current entity.
-     * The passengers must be of the same type
-     * (as in LiveEntity or EntitySnapshot)
-     * of this entity.
-     *
-     * @param entities Collection of entities to remove
-     * @return itself for chaining
-     */
-    Entity<T> removePassengers(Collection<T> entities);
-
-    /**
-     * Checks if the entity is on ground
-     *
-     * @return If the entity is on the ground
-     */
-    boolean isOnGround();
-
-    /**
-     * Sets the velocity of the entity without the need
-     * of a Vector
-     *
-     * @param x the X speed
-     * @param y the Y speed
-     * @param z the Z speed
-     * @return itself for chaining
-     */
-    default Entity<T> setVelocity(double x, double y, double z) {
-        return this.setVelocity(Vector3.valueOf(x, y, z));
-    }
-
-    /**
-     * Checks if this entity has any passengers
-     *
-     * @return if this has passengers
-     */
-    default boolean hasPassengers() {
-        return !this.getPassengers().isEmpty();
-    }
-
-    /**
-     * Adds passengers to the current entity.
-     * The passengers must be of the same type
-     * (as in LiveEntity or EntitySnapshot)
-     * of this entity.
-     *
-     * @param entities Collection of entities to add
-     * @return itself for chaining
-     */
-    @SuppressWarnings("unchecked")
-    default Entity<T> addPassengers(T... entities) {
-        return this.addPassengers(Arrays.asList(entities));
-    }
-
-    /**
-     * Removes passengers to the current entity.
-     * The passengers must be of the same type
-     * (as in LiveEntity or EntitySnapshot)
-     * of this entity.
-     *
-     * @param entities Collection of entities to remove
-     * @return itself for chaining
-     */
-    @SuppressWarnings("unchecked")
-    default Entity<T> removePassengers(T... entities) {
-        return this.removePassengers(Arrays.asList(entities));
-    }
-
-    /**
-     * Removes all passengers from the entity
-     *
-     * @return itself for chaining
-     */
-    default Entity<T> clearPassengers() {
-        return this.removePassengers(this.getPassengers());
-    }
-
-    /**
-     * Sets the position of the entity without
-     * the need of a Position, this maintains
-     * the world that the entity is in
-     *
-     * @param x The X position of the world
-     * @param y The Y position of the world
-     * @param z The Z position of the world
-     * @return itself for chaining
-     */
-    default Entity<T> setPosition(double x, double y, double z) {
-        return this.setPosition(this.getPosition().getWorld().getPosition(x, y, z));
-    }
+    Optional<Component> getCustomNameComponent();
 
     /**
      * Gets the position the entity is facing in as a Direction
@@ -368,19 +166,226 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
     }
 
     /**
-     * Gets the block that the entity is attached to, this could be
-     * the block that the entity is standing on
+     * Gets the passengers of the entity.
+     * The passengers must be of the same type
+     * (as in LiveEntity or EntitySnapshot)
+     * of the entity, if a snapshot is created of
+     * a live entity then the passengers will be
+     * stored with the created snapshot. And restored
+     * as different instances when the snapshot is restored
      *
-     * @return The attached block if present
+     * @return A collection of all passengers
      */
-    default Optional<SyncBlockPosition> getAttachedTo() {
-        SyncBlockPosition block = this.getPosition().getRelative(Vector3.valueOf(0, -0.1, 0)).toBlockPosition();
-        if (block.getBlockType().equals(BlockTypes.AIR)) {
-            return Optional.empty();
-        }
-        return Optional.of(block);
+    Collection<T> getPassengers();
+
+    /**
+     * Gets the current pitch of the entity
+     *
+     * @return the current pitch of the entity
+     */
+    double getPitch();
+
+    /**
+     * Sets the pitch of the entities rotation
+     *
+     * @param value The pitch to be
+     * @return Itself for chaining
+     */
+    Entity<T> setPitch(double value);
+
+    /**
+     * Gets the position the entity is.
+     *
+     * @return The Exact Position the entity is
+     */
+    @Override
+    SyncExactPosition getPosition();
+
+    /**
+     * Gets the roll of the entity,
+     * note that as Bukkit does not support
+     * roll, then the result will be 0
+     *
+     * @return The roll of the entity
+     */
+    double getRoll();
+
+    /**
+     * Sets the Roll of the entities rotation.
+     * Note that bukkit does not support roll,
+     * therefore there will be no result in Bukkit
+     *
+     * @param value the roll to be
+     * @return Itself for chaining
+     */
+    Entity<T> setRoll(double value);
+
+    /**
+     * Gets the type of the entity
+     *
+     * @param <E> Itself as a LiveEntity
+     * @return The Entity Type
+     */
+    <E extends LiveEntity> EntityType<E, ? extends EntitySnapshot<E>> getType();
+
+    /**
+     * Gets the current velocity of the entity
+     *
+     * @return The current velocity
+     */
+    Vector3<Double> getVelocity();
+
+    /**
+     * Sets the velocity of the entity
+     *
+     * @param velocity the velocity to be
+     * @return itself for chaining
+     */
+    Entity<T> setVelocity(Vector3<Double> velocity);
+
+    /**
+     * Gets the yaw of the current entity
+     *
+     * @return the current yaw of the entity
+     */
+    double getYaw();
+
+    /**
+     * Sets the Yaw of the entities rotation
+     *
+     * @param value The yaw to be
+     * @return Itself for chaining
+     */
+    Entity<T> setYaw(double value);
+
+    /**
+     * Checks if the entity has gravity
+     *
+     * @return if the entity has gravity
+     */
+    boolean hasGravity();
+
+    /**
+     * Checks if this entity has any passengers
+     *
+     * @return if this has passengers
+     */
+    default boolean hasPassengers() {
+        return !this.getPassengers().isEmpty();
     }
 
+    /**
+     * Checks if the custom name should be visible
+     *
+     * @return if the custom name is visible
+     */
+    boolean isCustomNameVisible();
+
+    /**
+     * Sets if the custom name should be visible
+     *
+     * @param visible if the name should be visible
+     * @return itself for chaining
+     */
+    Entity<T> setCustomNameVisible(boolean visible);
+
+    /**
+     * Checks if the entity is on ground
+     *
+     * @return If the entity is on the ground
+     */
+    boolean isOnGround();
+
     boolean isRemoved();
+
+    /**
+     * Removes passengers to the current entity.
+     * The passengers must be of the same type
+     * (as in LiveEntity or EntitySnapshot)
+     * of this entity.
+     *
+     * @param entities Collection of entities to remove
+     * @return itself for chaining
+     */
+    Entity<T> removePassengers(Collection<T> entities);
+
+    /**
+     * Removes passengers to the current entity.
+     * The passengers must be of the same type
+     * (as in LiveEntity or EntitySnapshot)
+     * of this entity.
+     *
+     * @param entities Collection of entities to remove
+     * @return itself for chaining
+     */
+    @SuppressWarnings("unchecked")
+    default Entity<T> removePassengers(T... entities) {
+        return this.removePassengers(Arrays.asList(entities));
+    }
+
+    /**
+     * Sets if the entity has gravity or not
+     *
+     * @param check If the entity should have gravity
+     * @return itself for chaining
+     */
+    Entity<T> setGravity(boolean check);
+
+    /**
+     * Sets the position for the entity to be in.
+     * <p>
+     * Note that platforms that hold more then position information
+     * in the Position class will be applied to the entity too. Such
+     * as, Bukkits Location holds rotation data, therefore this should
+     * be set first and then the rotation data.
+     *
+     * @param position The position for the entity to be in
+     * @return was successful
+     */
+    boolean setPosition(@NotNull Position<? extends Number> position);
+
+    /**
+     * Sets the position of the entity without
+     * the need of a Position, this maintains
+     * the world that the entity is in
+     *
+     * @param vector the new position
+     * @return was successful
+     */
+    default boolean setPosition(@NotNull Vector3<? extends Number> vector) {
+        return this.setPosition(vector.getRawX().doubleValue(), vector.getRawY().doubleValue(),
+                                vector.getRawZ().doubleValue());
+    }
+
+    default boolean setPosition(@NotNull Positionable<? extends Position<? extends Number>> positionable) {
+        return this.setPosition(positionable.getPosition());
+    }
+
+    /**
+     * Sets the position of the entity without
+     * the need of a Position, this maintains
+     * the world that the entity is in
+     *
+     * @param x The X position of the world
+     * @param y The Y position of the world
+     * @param z The Z position of the world
+     * @return info about the teleport
+     */
+    default boolean setPosition(double x, double y, double z) {
+        return this.setPosition(this.getPosition().getWorld().getPosition(x, y, z));
+    }
+
+    /**
+     * Sets the velocity of the entity without the need
+     * of a Vector
+     *
+     * @param x the X speed
+     * @param y the Y speed
+     * @param z the Z speed
+     * @return itself for chaining
+     */
+    default Entity<T> setVelocity(double x, double y, double z) {
+        return this.setVelocity(Vector3.valueOf(x, y, z));
+    }
 
 }
