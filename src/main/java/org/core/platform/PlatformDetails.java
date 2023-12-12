@@ -13,4 +13,6 @@ public interface PlatformDetails {
     @NotNull String getIdName();
 
     @NotNull CorePluginVersion getVersion();
+
+    char getTagChar();
 }
