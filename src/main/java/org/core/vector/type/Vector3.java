@@ -5,6 +5,7 @@ import org.core.vector.VectorConverter;
 
 import java.math.BigDecimal;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 
 public class Vector3<N extends Number> extends Vector<N, Vector3<N>> {
 
@@ -17,16 +18,14 @@ public class Vector3<N extends Number> extends Vector<N, Vector3<N>> {
 
         @Override
         public <Num extends Number> Vector<Num, ?> createInstance(Function<BigDecimal, Num> function,
-                BigDecimal... decimals) {
+                                                                  BigDecimal... decimals) {
             return new Vector3<>(function, decimals);
         }
     };
 
-    public static final VectorConverter.Specific<Integer, Vector3<Integer>> INT_CONVERTER =
-            new VectorConverter.Specific.AbstractSpecificWrapper<>(
+    public static final VectorConverter.Specific<Integer, Vector3<Integer>> INT_CONVERTER = new VectorConverter.Specific.AbstractSpecificWrapper<>(
             GENERAL_CONVERTER, BigDecimal::intValue);
-    public static final VectorConverter.Specific<Double, Vector3<Double>> DOUBLE_CONVERTER =
-            new VectorConverter.Specific.AbstractSpecificWrapper<>(
+    public static final VectorConverter.Specific<Double, Vector3<Double>> DOUBLE_CONVERTER = new VectorConverter.Specific.AbstractSpecificWrapper<>(
             GENERAL_CONVERTER, BigDecimal::doubleValue);
 
 
@@ -38,15 +37,6 @@ public class Vector3<N extends Number> extends Vector<N, Vector3<N>> {
         super(function, x, y, z);
     }
 
-    public static Vector3<Double> valueOf(double x, double y, double z) {
-        return new Vector3<>(BigDecimal::doubleValue, BigDecimal.valueOf(x), BigDecimal.valueOf(y),
-                BigDecimal.valueOf(z));
-    }
-
-    public static Vector3<Integer> valueOf(int x, int y, int z) {
-        return new Vector3<>(BigDecimal::intValue, BigDecimal.valueOf(x), BigDecimal.valueOf(y), BigDecimal.valueOf(z));
-    }
-
     @Override
     protected Vector3<N> createNew(BigDecimal... values) {
         return new Vector3<>(this.toNumber, values[0], values[1], values[2]);
@@ -55,6 +45,12 @@ public class Vector3<N extends Number> extends Vector<N, Vector3<N>> {
     @Override
     public <Num extends Number> Vector3<Num> toVector(Function<BigDecimal, Num> function) {
         return new Vector3<>(function, this.points);
+    }
+
+    @Override
+    public String toString() {
+        return "Vector3{X: " + this.getRawX().toPlainString() + ", Y: " + this.getRawY().toPlainString() + ", Z: "
+                + this.getRawZ().toPlainString() + "}";
     }
 
     public N getX() {
@@ -81,14 +77,22 @@ public class Vector3<N extends Number> extends Vector<N, Vector3<N>> {
         return this.getRawPoint(2);
     }
 
+    public N[] toArray(IntFunction<N[]> collector) {
+        N[] array = collector.apply(3);
+        array[0] = getX();
+        array[1] = getY();
+        array[2] = getZ();
+        return array;
+    }
+
     public Vector3<N> plus(Number x, Number y, Number z) {
         return this.plus(this.createNew(BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(y.doubleValue()),
-                BigDecimal.valueOf(z.doubleValue())));
+                                        BigDecimal.valueOf(z.doubleValue())));
     }
 
     public Vector3<N> minus(Number x, Number y, Number z) {
         return this.minus(this.createNew(BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(y.doubleValue()),
-                BigDecimal.valueOf(z.doubleValue())));
+                                         BigDecimal.valueOf(z.doubleValue())));
     }
 
     public double distanceSquared(Vector3<?> vector) {
@@ -96,23 +100,28 @@ public class Vector3<N extends Number> extends Vector<N, Vector3<N>> {
         final BigDecimal dy = this.getRawY().subtract(vector.getRawY());
         final BigDecimal dz = this.getRawZ().subtract(vector.getRawZ());
 
-        return dx.doubleValue() * dx.doubleValue() + dy.doubleValue() * dy.doubleValue() +
-                dz.doubleValue() * dz.doubleValue();
+        return dx.doubleValue() * dx.doubleValue() + dy.doubleValue() * dy.doubleValue()
+                + dz.doubleValue() * dz.doubleValue();
     }
 
     public double distanceSquared(Number x, Number y, Number z) {
-        return this.distanceSquared(this.createNew(BigDecimal.valueOf(x.doubleValue()),
-                BigDecimal.valueOf(y.doubleValue()), BigDecimal.valueOf(z.doubleValue())));
+        return this.distanceSquared(
+                this.createNew(BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(y.doubleValue()),
+                               BigDecimal.valueOf(z.doubleValue())));
     }
 
-    public Vector3<N> copyWith(N x, N y, N z){
-        return new Vector3<>(this.toNumber, BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(y.doubleValue()), BigDecimal.valueOf(z.doubleValue()));
+    public Vector3<N> copyWith(N x, N y, N z) {
+        return new Vector3<>(this.toNumber, BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(y.doubleValue()),
+                             BigDecimal.valueOf(z.doubleValue()));
     }
 
-    @Override
-    public String toString() {
-        return "Vector3{X: " + this.getRawX().toPlainString() + ", Y: " + this.getRawY().toPlainString() + ", Z: " +
-                this.getRawZ().toPlainString() + "}";
+    public static Vector3<Double> valueOf(double x, double y, double z) {
+        return new Vector3<>(BigDecimal::doubleValue, BigDecimal.valueOf(x), BigDecimal.valueOf(y),
+                             BigDecimal.valueOf(z));
+    }
+
+    public static Vector3<Integer> valueOf(int x, int y, int z) {
+        return new Vector3<>(BigDecimal::intValue, BigDecimal.valueOf(x), BigDecimal.valueOf(y), BigDecimal.valueOf(z));
     }
 
 

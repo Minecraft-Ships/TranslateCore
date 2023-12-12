@@ -2,6 +2,8 @@ package org.core.utils;
 
 import org.core.vector.type.Vector3;
 
+import java.util.stream.Stream;
+
 public class Bounds<N extends Number> {
 
     private Vector3<? extends N> min;
@@ -45,6 +47,30 @@ public class Bounds<N extends Number> {
 
     public Vector3<? extends N> last() {
         return this.max;
+    }
+
+    public Stream<Vector3<Integer>> frame() {
+        Stream.Builder<Vector3<Integer>> stream = Stream.builder();
+        Vector3<Integer> min = this.getIntMin();
+        Vector3<Integer> max = this.getIntMax();
+        for (int x = min.getX(); x <= max.getX(); x++) {
+            boolean matchX = min.getX() == x || max.getX() == x;
+            for (int y = min.getY(); y <= max.getY(); y++) {
+                boolean matchY = min.getY() == y || max.getY() == y;
+                if (!matchX && !matchY) {
+                    continue;
+                }
+                for (int z = min.getZ(); z <= max.getZ(); z++) {
+                    Vector3<Integer> vector = Vector3.valueOf(x, y, z);
+                    boolean matchZ = min.getZ() == z || max.getZ() == z;
+                    if (!((matchX && matchY) || matchZ)) {
+                        continue;
+                    }
+                    stream.add(vector);
+                }
+            }
+        }
+        return stream.build();
     }
 
     public void add(Vector3<Integer> vector) {
