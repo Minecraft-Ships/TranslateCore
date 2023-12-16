@@ -1,2351 +1,613 @@
 package org.core.world.position.block.blocktypes.post;
 
 import org.core.TranslateCore;
+import org.core.platform.plugin.details.CorePluginVersion;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.blocktypes.CommonBlockTypes;
+
+import java.util.function.Function;
 
 /**
  * <p>All BlockTypes new to Minecraft 1.13</p>
  */
-@SuppressWarnings({"unused", "DuplicateStringLiteralInspection", "ExtendsUtilityClass"})
+@SuppressWarnings({"unused", "ExtendsUtilityClass"})
 public class BlockTypes1V13 extends CommonBlockTypes {
 
-    public static final BlockType ACACIA_TRAPDOOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:acacia_trapdoor")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_TRAPDOOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_trapdoor")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_TRAPDOOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_trapdoor")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_TRAPDOOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_trapdoor")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_TRAPDOOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_trapdoor")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
+    public static final BlockType ACACIA_TRAPDOOR = get("minecraft:acacia_trapdoor");
+    public static final BlockType BIRCH_TRAPDOOR = get("minecraft:birch_trapdoor");
+    public static final BlockType DARK_OAK_TRAPDOOR = get("minecraft:dark_oak_trapdoor");
+    public static final BlockType JUNGLE_TRAPDOOR = get("minecraft:jungle_trapdoor");
+    public static final BlockType SPRUCE_TRAPDOOR = get("minecraft:spruce_trapdoor");
+    public static final BlockType ACACIA_BUTTON = get("minecraft:acacia_button");
+    public static final BlockType ACACIA_LEAVES = get("minecraft:acacia_leaves");
+    public static final BlockType ACACIA_LOG = get("minecraft:acacia_log");
+    public static final BlockType ACACIA_PLANKS = get("minecraft:acacia_planks");
+    public static final BlockType ACACIA_PRESSURE_PLATE = get("minecraft:acacia_pressure_plate");
+    public static final BlockType ACACIA_SAPLING = get("minecraft:acacia_sapling");
+    public static final BlockType ACACIA_SLAB = get("minecraft:acacia_slab");
+    public static final BlockType ACACIA_WOOD = get("minecraft:acacia_wood");
+    public static final BlockType ALLIUM = get("minecraft:allium");
+    public static final BlockType ANDESITE = get("minecraft:andesite");
+    public static final BlockType ANVIL = get("minecraft:anvil");
+    public static final BlockType ATTACHED_MELON_STEM = get("minecraft:attached_melon_stem");
+    public static final BlockType ATTACHED_PUMPKIN_STEM = get("minecraft:attached_pumpkin_stem");
+    public static final BlockType AZURE_BLUET = get("minecraft:azure_bluet");
+    public static final BlockType BARRIER = get("minecraft:barrier");
+    public static final BlockType BEACON = get("minecraft:beacon");
+    public static final BlockType BEDROCK = get("minecraft:bedrock");
+    public static final BlockType BEETROOTS = get("minecraft:beetroots");
+    public static final BlockType BIRCH_BUTTON = get("minecraft:birch_button");
+    public static final BlockType BIRCH_DOOR = get("minecraft:birch_door");
+    public static final BlockType BIRCH_FENCE = get("minecraft:birch_fence");
+    public static final BlockType BIRCH_FENCE_GATE = get("minecraft:birch_fence_gate");
+    public static final BlockType BIRCH_LEAVES = get("minecraft:birch_leaves");
+    public static final BlockType BIRCH_LOG = get("minecraft:birch_log");
+    public static final BlockType BIRCH_PLANKS = get("minecraft:birch_planks");
+    public static final BlockType BIRCH_PRESSURE_PLATE = get("minecraft:birch_pressure_plate");
+    public static final BlockType BIRCH_SAPLING = get("minecraft:birch_sapling");
+    public static final BlockType BIRCH_SLAB = get("minecraft:birch_slab");
+    public static final BlockType BIRCH_STAIRS = get("minecraft:birch_stairs");
+    public static final BlockType BIRCH_WOOD = get("minecraft:birch_wood");
+    public static final BlockType BLACK_BANNER = get("minecraft:black_banner");
+    public static final BlockType BLACK_BED = get("minecraft:black_bed");
+    public static final BlockType BLACK_CARPET = get("minecraft:black_carpet");
+    public static final BlockType BLACK_CONCRETE = get("minecraft:black_concrete");
+    public static final BlockType BLACK_CONCRETE_POWDER = get("minecraft:black_concrete_powder");
+    public static final BlockType BLACK_GLAZED_TERRACOTTA = get("minecraft:black_glazed_terracotta");
+    public static final BlockType BLACK_SHULKER_BOX = get("minecraft:black_shulker_box");
+    public static final BlockType BLACK_STAINED_GLASS = get("minecraft:black_stained_glass");
+    public static final BlockType BLACK_STAINED_GLASS_PANE = get("minecraft:black_stained_glass_pane");
+    public static final BlockType BLACK_TERRACOTTA = get("minecraft:black_terracotta");
+    public static final BlockType BLACK_WALL_BANNER = get("minecraft:black_wall_banner");
+    public static final BlockType BLACK_WOOL = get("minecraft:black_wool");
+    public static final BlockType BLUE_BANNER = get("minecraft:blue_banner");
+    public static final BlockType BLUE_BED = get("minecraft:blue_bed");
+    public static final BlockType BLUE_CARPET = get("minecraft:blue_carpet");
+    public static final BlockType BLUE_CONCRETE = get("minecraft:blue_concrete");
+    public static final BlockType BLUE_CONCRETE_POWDER = get("minecraft:blue_concrete_powder");
+    public static final BlockType BLUE_GLAZED_TERRACOTTA = get("minecraft:blue_glazed_terracotta");
+    public static final BlockType BLUE_ICE = get("minecraft:blue_ice");
+    public static final BlockType BLUE_ORCHID = get("minecraft:blue_orchid");
+    public static final BlockType BLUE_SHULKER_BOX = get("minecraft:blue_shulker_box");
+    public static final BlockType BLUE_STAINED_GLASS = get("minecraft:blue_stained_glass");
+    public static final BlockType BLUE_STAINED_GLASS_PANE = get("minecraft:blue_stained_glass_pane");
+    public static final BlockType BLUE_TERRACOTTA = get("minecraft:blue_terracotta");
+    public static final BlockType BLUE_WALL_BANNER = get("minecraft:blue_wall_banner");
+    public static final BlockType BLUE_WOOL = get("minecraft:blue_wool");
+    public static final BlockType BONE_BLOCK = get("minecraft:bone_block");
+    public static final BlockType BOOKSHELF = get("minecraft:bookshelf");
+    public static final BlockType BRAIN_CORAL = get("minecraft:brain_coral");
+    public static final BlockType BRAIN_CORAL_BLOCK = get("minecraft:brain_coral_block");
+    public static final BlockType BRAIN_CORAL_FAN = get("minecraft:brain_coral_fan");
+    public static final BlockType BRAIN_CORAL_WALL_FAN = get("minecraft:brain_coral_wall_fan");
+    public static final BlockType BREWING_STAND = get("minecraft:brewing_stand");
+    public static final BlockType BRICKS = get("minecraft:bricks");
+    public static final BlockType BRICK_SLAB = get("minecraft:brick_slab");
+    public static final BlockType BRICK_STAIRS = get("minecraft:brick_stairs");
+    public static final BlockType BROWN_BANNER = get("minecraft:brown_banner");
+    public static final BlockType BROWN_BED = get("minecraft:brown_bed");
+    public static final BlockType BROWN_CARPET = get("minecraft:brown_carpet");
+    public static final BlockType BROWN_CONCRETE = get("minecraft:brown_concrete");
+    public static final BlockType BROWN_CONCRETE_POWDER = get("minecraft:brown_concrete_powder");
+    public static final BlockType BROWN_GLAZED_TERRACOTTA = get("minecraft:brown_glazed_terracotta");
+    public static final BlockType BROWN_MUSHROOM = get("minecraft:brown_mushroom");
+    public static final BlockType BROWN_MUSHROOM_BLOCK = get("minecraft:brown_mushroom_block");
+    public static final BlockType BROWN_SHULKER_BOX = get("minecraft:brown_shulker_box");
+    public static final BlockType BROWN_STAINED_GLASS = get("minecraft:brown_stained_glass");
+    public static final BlockType BROWN_STAINED_GLASS_PANE = get("minecraft:brown_stained_glass_pane");
+    public static final BlockType BROWN_TERRACOTTA = get("minecraft:brown_terracotta");
+    public static final BlockType BROWN_WALL_BANNER = get("minecraft:brown_wall_banner");
+    public static final BlockType BROWN_WOOL = get("minecraft:brown_wool");
+    public static final BlockType BUBBLE_COLUMN = get("minecraft:bubble_column");
+    public static final BlockType BUBBLE_CORAL = get("minecraft:bubble_coral");
+    public static final BlockType BUBBLE_CORAL_BLOCK = get("minecraft:bubble_coral_block");
+    public static final BlockType BUBBLE_CORAL_FAN = get("minecraft:bubble_coral_fan");
+    public static final BlockType BUBBLE_CORAL_WALL_FAN = get("minecraft:bubble_coral_wall_fan");
+    public static final BlockType CACTUS = get("minecraft:cactus");
+    public static final BlockType CAKE = get("minecraft:cake");
+    public static final BlockType CARROTS = get("minecraft:carrots");
+    public static final BlockType CARVED_PUMPKIN = get("minecraft:carved_pumpkin");
+    public static final BlockType CAULDRON = get("minecraft:cauldron");
+    public static final BlockType CAVE_AIR = get("minecraft:cave_air");
+    public static final BlockType CHAIN_COMMAND_BLOCK = get("minecraft:chain_command_block");
+    public static final BlockType CHEST = get("minecraft:chest");
+    public static final BlockType CHIPPED_ANVIL = get("minecraft:chipped_anvil");
+    public static final BlockType CHISELED_QUARTZ_BLOCK = get("minecraft:chiseled_quartz_block");
+    public static final BlockType CHISELED_RED_SANDSTONE = get("minecraft:chiseled_red_sandstone");
+    public static final BlockType CHISELED_SANDSTONE = get("minecraft:chiseled_sandstone");
+    public static final BlockType CHISELED_STONE_BRICKS = get("minecraft:chiseled_stone_bricks");
+    public static final BlockType CHORUS_FLOWER = get("minecraft:chorus_flower");
+    public static final BlockType CHORUS_PLANT = get("minecraft:chorus_plant");
+    public static final BlockType CLAY = get("minecraft:clay");
+    public static final BlockType COAL_BLOCK = get("minecraft:coal_block");
+    public static final BlockType COAL_ORE = get("minecraft:coal_ore");
+    public static final BlockType COARSE_DIRT = get("minecraft:coarse_dirt");
+    public static final BlockType COBBLESTONE = get("minecraft:cobblestone");
+    public static final BlockType COBBLESTONE_SLAB = get("minecraft:cobblestone_slab");
+    public static final BlockType COBBLESTONE_STAIRS = get("minecraft:cobblestone_stairs");
+    public static final BlockType COBBLESTONE_WALL = get("minecraft:cobblestone_wall");
+    public static final BlockType COBWEB = get("minecraft:cobweb");
+    public static final BlockType COCOA = get("minecraft:cocoa");
+    public static final BlockType COMMAND_BLOCK = get("minecraft:command_block");
+    public static final BlockType COMPARATOR = get("minecraft:comparator");
+    public static final BlockType CONDUIT = get("minecraft:conduit");
+    public static final BlockType CRACKED_STONE_BRICKS = get("minecraft:cracked_stone_bricks");
+    public static final BlockType CRAFTING_TABLE = get("minecraft:crafting_table");
+    public static final BlockType CREEPER_HEAD = get("minecraft:creeper_head");
+    public static final BlockType CREEPER_WALL_HEAD = get("minecraft:creeper_wall_head");
+    public static final BlockType CUT_RED_SANDSTONE = get("minecraft:cut_red_sandstone");
+    public static final BlockType CUT_SANDSTONE = get("minecraft:cut_sandstone");
+    public static final BlockType CYAN_BANNER = get("minecraft:cyan_banner");
+    public static final BlockType CYAN_BED = get("minecraft:cyan_bed");
+    public static final BlockType CYAN_CARPET = get("minecraft:cyan_carpet");
+    public static final BlockType CYAN_CONCRETE = get("minecraft:cyan_concrete");
+    public static final BlockType CYAN_CONCRETE_POWDER = get("minecraft:cyan_concrete_powder");
+    public static final BlockType CYAN_GLAZED_TERRACOTTA = get("minecraft:cyan_glazed_terracotta");
+    public static final BlockType CYAN_SHULKER_BOX = get("minecraft:cyan_shulker_box");
+    public static final BlockType CYAN_STAINED_GLASS = get("minecraft:cyan_stained_glass");
+    public static final BlockType CYAN_STAINED_GLASS_PANE = get("minecraft:cyan_stained_glass_pane");
+    public static final BlockType CYAN_TERRACOTTA = get("minecraft:cyan_terracotta");
+    public static final BlockType CYAN_WALL_BANNER = get("minecraft:cyan_wall_banner");
+    public static final BlockType CYAN_WOOL = get("minecraft:cyan_wool");
+    public static final BlockType DAMAGED_ANVIL = get("minecraft:damaged_anvil");
+    public static final BlockType DANDELION = get("minecraft:dandelion");
+    public static final BlockType DARK_OAK_BUTTON = get("minecraft:dark_oak_button");
+    public static final BlockType DARK_OAK_DOOR = get("minecraft:dark_oak_door");
+    public static final BlockType DARK_OAK_FENCE = get("minecraft:dark_oak_fence");
+    public static final BlockType DARK_OAK_FENCE_GATE = get("minecraft:dark_oak_fence_gate");
+    public static final BlockType DARK_OAK_LEAVES = get("minecraft:dark_oak_leaves");
+    public static final BlockType DARK_OAK_LOG = get("minecraft:dark_oak_log");
+    public static final BlockType DARK_OAK_PLANKS = get("minecraft:dark_oak_planks");
+    public static final BlockType DARK_OAK_PRESSURE_PLATE = get("minecraft:dark_oak_pressure_plate");
+    public static final BlockType DARK_OAK_SAPLING = get("minecraft:dark_oak_sapling");
+    public static final BlockType DARK_OAK_SLAB = get("minecraft:dark_oak_slab");
+    public static final BlockType DARK_OAK_STAIRS = get("minecraft:dark_oak_stairs");
+    public static final BlockType DARK_OAK_WOOD = get("minecraft:dark_oak_wood");
+    public static final BlockType DARK_PRISMARINE = get("minecraft:dark_prismarine");
+    public static final BlockType DARK_PRISMARINE_SLAB = get("minecraft:dark_prismarine_slab");
+    public static final BlockType DARK_PRISMARINE_STAIRS = get("minecraft:dark_prismarine_stairs");
+    public static final BlockType DAYLIGHT_DETECTOR = get("minecraft:daylight_detector");
+    public static final BlockType DEAD_BRAIN_CORAL = get("minecraft:dead_brain_coral");
+    public static final BlockType DEAD_BRAIN_CORAL_BLOCK = get("minecraft:dead_brain_coral_block");
+    public static final BlockType DEAD_BRAIN_CORAL_FAN = get("minecraft:dead_brain_coral_fan");
+    public static final BlockType DEAD_BRAIN_CORAL_WALL_FAN = get("minecraft:dead_brain_coral_wall_fan");
+    public static final BlockType DEAD_BUBBLE_CORAL = get("minecraft:dead_bubble_coral");
+    public static final BlockType DEAD_BUBBLE_CORAL_BLOCK = get("minecraft:dead_bubble_coral_block");
+    public static final BlockType DEAD_BUBBLE_CORAL_FAN = get("minecraft:dead_bubble_coral_fan");
+    public static final BlockType DEAD_BUBBLE_CORAL_WALL_FAN = get("minecraft:dead_bubble_coral_wall_fan");
+    public static final BlockType DEAD_BUSH = get("minecraft:dead_bush");
+    public static final BlockType DEAD_FIRE_CORAL = get("minecraft:dead_fire_coral");
+    public static final BlockType DEAD_FIRE_CORAL_BLOCK = get("minecraft:dead_fire_coral_block");
+    public static final BlockType DEAD_FIRE_CORAL_FAN = get("minecraft:dead_fire_coral_fan");
+    public static final BlockType DEAD_FIRE_CORAL_WALL_FAN = get("minecraft:dead_fire_coral_wall_fan");
+    public static final BlockType DEAD_HORN_CORAL = get("minecraft:dead_horn_coral");
+    public static final BlockType DEAD_HORN_CORAL_BLOCK = get("minecraft:dead_horn_coral_block");
+    public static final BlockType DEAD_HORN_CORAL_FAN = get("minecraft:dead_horn_coral_fan");
+    public static final BlockType DEAD_HORN_CORAL_WALL_FAN = get("minecraft:dead_horn_coral_wall_fan");
+    public static final BlockType DEAD_TUBE_CORAL = get("minecraft:dead_tube_coral");
+    public static final BlockType DEAD_TUBE_CORAL_BLOCK = get("minecraft:dead_tube_coral_block");
+    public static final BlockType DEAD_TUBE_CORAL_FAN = get("minecraft:dead_tube_coral_fan");
+    public static final BlockType DEAD_TUBE_CORAL_WALL_FAN = get("minecraft:dead_tube_coral_wall_fan");
+    public static final BlockType DETECTOR_RAIL = get("minecraft:detector_rail");
+    public static final BlockType DIAMOND_BLOCK = get("minecraft:diamond_block");
+    public static final BlockType DIAMOND_ORE = get("minecraft:diamond_ore");
+    public static final BlockType DIORITE = get("minecraft:diorite");
+    public static final BlockType DIRT = get("minecraft:dirt");
+    public static final BlockType DISPENSER = get("minecraft:dispenser");
+    public static final BlockType DRAGON_EGG = get("minecraft:dragon_egg");
+    public static final BlockType DRAGON_HEAD = get("minecraft:dragon_head");
+    public static final BlockType DRAGON_WALL_HEAD = get("minecraft:dragon_wall_head");
+    public static final BlockType DRIED_KELP_BLOCK = get("minecraft:dried_kelp_block");
+    public static final BlockType DROPPER = get("minecraft:dropper");
+    public static final BlockType EMERALD_BLOCK = get("minecraft:emerald_block");
+    public static final BlockType EMERALD_ORE = get("minecraft:emerald_ore");
+    public static final BlockType ENCHANTING_TABLE = get("minecraft:enchanting_table");
+    public static final BlockType ENDER_CHEST = get("minecraft:ender_chest");
+    public static final BlockType END_GATEWAY = get("minecraft:end_gateway");
+    public static final BlockType END_PORTAL = get("minecraft:end_portal");
+    public static final BlockType END_PORTAL_FRAME = get("minecraft:end_portal_frame");
+    public static final BlockType END_ROD = get("minecraft:end_rod");
+    public static final BlockType END_STONE = get("minecraft:end_stone");
+    public static final BlockType END_STONE_BRICKS = get("minecraft:end_stone_bricks");
+    public static final BlockType FARMLAND = get("minecraft:farmland");
+    public static final BlockType FERN = get("minecraft:fern");
+    public static final BlockType FIRE = get("minecraft:fire");
+    public static final BlockType FIRE_CORAL = get("minecraft:fire_coral");
+    public static final BlockType FIRE_CORAL_BLOCK = get("minecraft:fire_coral_block");
+    public static final BlockType FIRE_CORAL_FAN = get("minecraft:fire_coral_fan");
+    public static final BlockType FIRE_CORAL_WALL_FAN = get("minecraft:fire_coral_wall_fan");
+    public static final BlockType FLOWER_POT = get("minecraft:flower_pot");
+    public static final BlockType FROSTED_ICE = get("minecraft:frosted_ice");
+    public static final BlockType FURNACE = get("minecraft:furnace");
+    public static final BlockType GLASS = get("minecraft:glass");
+    public static final BlockType GLASS_PANE = get("minecraft:glass_pane");
+    public static final BlockType GLOWSTONE = get("minecraft:glowstone");
+    public static final BlockType GOLD_BLOCK = get("minecraft:gold_block");
+    public static final BlockType GOLD_ORE = get("minecraft:gold_ore");
+    public static final BlockType GRANITE = get("minecraft:granite");
+    public static final BlockType GRASS_BLOCK = get("minecraft:grass_block");
+    public static final BlockType GRAVEL = get("minecraft:gravel");
+    public static final BlockType GRAY_BANNER = get("minecraft:gray_banner");
+    public static final BlockType GRAY_BED = get("minecraft:gray_bed");
+    public static final BlockType GRAY_CARPET = get("minecraft:gray_carpet");
+    public static final BlockType GRAY_CONCRETE = get("minecraft:gray_concrete");
+    public static final BlockType GRAY_CONCRETE_POWDER = get("minecraft:gray_concrete_powder");
+    public static final BlockType GRAY_GLAZED_TERRACOTTA = get("minecraft:gray_glazed_terracotta");
+    public static final BlockType GRAY_SHULKER_BOX = get("minecraft:gray_shulker_box");
+    public static final BlockType GRAY_STAINED_GLASS = get("minecraft:gray_stained_glass");
+    public static final BlockType GRAY_STAINED_GLASS_PANE = get("minecraft:gray_stained_glass_pane");
+    public static final BlockType GRAY_TERRACOTTA = get("minecraft:gray_terracotta");
+    public static final BlockType GRAY_WALL_BANNER = get("minecraft:gray_wall_banner");
+    public static final BlockType GRAY_WOOL = get("minecraft:gray_wool");
+    public static final BlockType GREEN_BANNER = get("minecraft:green_banner");
+    public static final BlockType GREEN_BED = get("minecraft:green_bed");
+    public static final BlockType GREEN_CARPET = get("minecraft:green_carpet");
+    public static final BlockType GREEN_CONCRETE = get("minecraft:green_concrete");
+    public static final BlockType GREEN_CONCRETE_POWDER = get("minecraft:green_concrete_powder");
+    public static final BlockType GREEN_GLAZED_TERRACOTTA = get("minecraft:green_glazed_terracotta");
+    public static final BlockType GREEN_SHULKER_BOX = get("minecraft:green_shulker_box");
+    public static final BlockType GREEN_STAINED_GLASS = get("minecraft:green_stained_glass");
+    public static final BlockType GREEN_STAINED_GLASS_PANE = get("minecraft:green_stained_glass_pane");
+    public static final BlockType GREEN_TERRACOTTA = get("minecraft:green_terracotta");
+    public static final BlockType GREEN_WALL_BANNER = get("minecraft:green_wall_banner");
+    public static final BlockType GREEN_WOOL = get("minecraft:green_wool");
+    public static final BlockType HAY_BLOCK = get("minecraft:hay_block");
+    public static final BlockType HEAVY_WEIGHTED_PRESSURE_PLATE = get("minecraft:heavy_weighted_pressure_plate");
+    public static final BlockType HOPPER = get("minecraft:hopper");
+    public static final BlockType HORN_CORAL = get("minecraft:horn_coral");
+    public static final BlockType HORN_CORAL_BLOCK = get("minecraft:horn_coral_block");
+    public static final BlockType HORN_CORAL_FAN = get("minecraft:horn_coral_fan");
+    public static final BlockType HORN_CORAL_WALL_FAN = get("minecraft:horn_coral_wall_fan");
+    public static final BlockType ICE = get("minecraft:ice");
+    public static final BlockType INFESTED_CHISELED_STONE_BRICKS = get("minecraft:infested_chiseled_stone_bricks");
+    public static final BlockType INFESTED_COBBLESTONE = get("minecraft:infested_cobblestone");
+    public static final BlockType INFESTED_CRACKED_STONE_BRICKS = get("minecraft:infested_cracked_stone_bricks");
+    public static final BlockType INFESTED_MOSSY_STONE_BRICKS = get("minecraft:infested_mossy_stone_bricks");
+    public static final BlockType INFESTED_STONE = get("minecraft:infested_stone");
+    public static final BlockType INFESTED_STONE_BRICKS = get("minecraft:infested_stone_bricks");
+    public static final BlockType IRON_BARS = get("minecraft:iron_bars");
+    public static final BlockType IRON_BLOCK = get("minecraft:iron_block");
+    public static final BlockType IRON_DOOR = get("minecraft:iron_door");
+    public static final BlockType IRON_ORE = get("minecraft:iron_ore");
+    public static final BlockType JACK_O_LANTERN = get("minecraft:jack_o_lantern");
+    public static final BlockType JUKEBOX = get("minecraft:jukebox");
+    public static final BlockType JUNGLE_BUTTON = get("minecraft:jungle_button");
+    public static final BlockType JUNGLE_DOOR = get("minecraft:jungle_door");
+    public static final BlockType JUNGLE_FENCE = get("minecraft:jungle_fence");
+    public static final BlockType JUNGLE_FENCE_GATE = get("minecraft:jungle_fence_gate");
+    public static final BlockType JUNGLE_LEAVES = get("minecraft:jungle_leaves");
+    public static final BlockType JUNGLE_LOG = get("minecraft:jungle_log");
+    public static final BlockType JUNGLE_PLANKS = get("minecraft:jungle_planks");
+    public static final BlockType JUNGLE_PRESSURE_PLATE = get("minecraft:jungle_pressure_plate");
+    public static final BlockType JUNGLE_SAPLING = get("minecraft:jungle_sapling");
+    public static final BlockType JUNGLE_SLAB = get("minecraft:jungle_slab");
+    public static final BlockType JUNGLE_STAIRS = get("minecraft:jungle_stairs");
+    public static final BlockType JUNGLE_WOOD = get("minecraft:jungle_wood");
+    public static final BlockType KELP = get("minecraft:kelp");
+    public static final BlockType KELP_PLANT = get("minecraft:kelp_plant");
+    public static final BlockType LADDER = get("minecraft:ladder");
+    public static final BlockType LAPIS_BLOCK = get("minecraft:lapis_block");
+    public static final BlockType LAPIS_ORE = get("minecraft:lapis_ore");
+    public static final BlockType LARGE_FERN = get("minecraft:large_fern");
+    public static final BlockType LAVA = get("minecraft:lava");
+    public static final BlockType LEVER = get("minecraft:lever");
+    public static final BlockType LIGHT_BLUE_BANNER = get("minecraft:light_blue_banner");
+    public static final BlockType LIGHT_BLUE_BED = get("minecraft:light_blue_bed");
+    public static final BlockType LIGHT_BLUE_CARPET = get("minecraft:light_blue_carpet");
+    public static final BlockType LIGHT_BLUE_CONCRETE = get("minecraft:light_blue_concrete");
+    public static final BlockType LIGHT_BLUE_CONCRETE_POWDER = get("minecraft:light_blue_concrete_powder");
+    public static final BlockType LIGHT_BLUE_GLAZED_TERRACOTTA = get("minecraft:light_blue_glazed_terracotta");
+    public static final BlockType LIGHT_BLUE_SHULKER_BOX = get("minecraft:light_blue_shulker_box");
+    public static final BlockType LIGHT_BLUE_STAINED_GLASS = get("minecraft:light_blue_stained_glass");
+    public static final BlockType LIGHT_BLUE_STAINED_GLASS_PANE = get("minecraft:light_blue_stained_glass_pane");
+    public static final BlockType LIGHT_BLUE_TERRACOTTA = get("minecraft:light_blue_terracotta");
+    public static final BlockType LIGHT_BLUE_WALL_BANNER = get("minecraft:light_blue_wall_banner");
+    public static final BlockType LIGHT_BLUE_WOOL = get("minecraft:light_blue_wool");
+    public static final BlockType LIGHT_GRAY_BANNER = get("minecraft:light_gray_banner");
+    public static final BlockType LIGHT_GRAY_BED = get("minecraft:light_gray_bed");
+    public static final BlockType LIGHT_GRAY_CARPET = get("minecraft:light_gray_carpet");
+    public static final BlockType LIGHT_GRAY_CONCRETE = get("minecraft:light_gray_concrete");
+    public static final BlockType LIGHT_GRAY_CONCRETE_POWDER = get("minecraft:light_gray_concrete_powder");
+    public static final BlockType LIGHT_GRAY_GLAZED_TERRACOTTA = get("minecraft:light_gray_glazed_terracotta");
+    public static final BlockType LIGHT_GRAY_SHULKER_BOX = get("minecraft:light_gray_shulker_box");
+    public static final BlockType LIGHT_GRAY_STAINED_GLASS = get("minecraft:light_gray_stained_glass");
+    public static final BlockType LIGHT_GRAY_STAINED_GLASS_PANE = get("minecraft:light_gray_stained_glass_pane");
+    public static final BlockType LIGHT_GRAY_TERRACOTTA = get("minecraft:light_gray_terracotta");
+    public static final BlockType LIGHT_GRAY_WALL_BANNER = get("minecraft:light_gray_wall_banner");
+    public static final BlockType LIGHT_GRAY_WOOL = get("minecraft:light_gray_wool");
+    public static final BlockType LIGHT_WEIGHTED_PRESSURE_PLATE = get("minecraft:light_weighted_pressure_plate");
+    public static final BlockType LILAC = get("minecraft:lilac");
+    public static final BlockType LILY_PAD = get("minecraft:lily_pad");
+    public static final BlockType LIME_BANNER = get("minecraft:lime_banner");
+    public static final BlockType LIME_BED = get("minecraft:lime_bed");
+    public static final BlockType LIME_CARPET = get("minecraft:lime_carpet");
+    public static final BlockType LIME_CONCRETE = get("minecraft:lime_concrete");
+    public static final BlockType LIME_CONCRETE_POWDER = get("minecraft:lime_concrete_powder");
+    public static final BlockType LIME_GLAZED_TERRACOTTA = get("minecraft:lime_glazed_terracotta");
+    public static final BlockType LIME_SHULKER_BOX = get("minecraft:lime_shulker_box");
+    public static final BlockType LIME_STAINED_GLASS = get("minecraft:lime_stained_glass");
+    public static final BlockType LIME_STAINED_GLASS_PANE = get("minecraft:lime_stained_glass_pane");
+    public static final BlockType LIME_TERRACOTTA = get("minecraft:lime_terracotta");
+    public static final BlockType LIME_WALL_BANNER = get("minecraft:lime_wall_banner");
+    public static final BlockType LIME_WOOL = get("minecraft:lime_wool");
+    public static final BlockType MAGENTA_BANNER = get("minecraft:magenta_banner");
+    public static final BlockType MAGENTA_BED = get("minecraft:magenta_bed");
+    public static final BlockType MAGENTA_CARPET = get("minecraft:magenta_carpet");
+    public static final BlockType MAGENTA_CONCRETE = get("minecraft:magenta_concrete");
+    public static final BlockType MAGENTA_CONCRETE_POWDER = get("minecraft:magenta_concrete_powder");
+    public static final BlockType MAGENTA_GLAZED_TERRACOTTA = get("minecraft:magenta_glazed_terracotta");
+    public static final BlockType MAGENTA_SHULKER_BOX = get("minecraft:magenta_shulker_box");
+    public static final BlockType MAGENTA_STAINED_GLASS = get("minecraft:magenta_stained_glass");
+    public static final BlockType MAGENTA_STAINED_GLASS_PANE = get("minecraft:magenta_stained_glass_pane");
+    public static final BlockType MAGENTA_TERRACOTTA = get("minecraft:magenta_terracotta");
+    public static final BlockType MAGENTA_WALL_BANNER = get("minecraft:magenta_wall_banner");
+    public static final BlockType MAGENTA_WOOL = get("minecraft:magenta_wool");
+    public static final BlockType MAGMA_BLOCK = get("minecraft:magma_block");
+    public static final BlockType MELON = get("minecraft:melon");
+    public static final BlockType MELON_STEM = get("minecraft:melon_stem");
+    public static final BlockType MOSSY_COBBLESTONE = get("minecraft:mossy_cobblestone");
+    public static final BlockType MOSSY_COBBLESTONE_WALL = get("minecraft:mossy_cobblestone_wall");
+    public static final BlockType MOSSY_STONE_BRICKS = get("minecraft:mossy_stone_bricks");
+    public static final BlockType MUSHROOM_STEM = get("minecraft:mushroom_stem");
+    public static final BlockType MYCELIUM = get("minecraft:mycelium");
+    public static final BlockType NETHERRACK = get("minecraft:netherrack");
+    public static final BlockType NETHER_BRICKS = get("minecraft:nether_bricks");
+    public static final BlockType NETHER_BRICK_FENCE = get("minecraft:nether_brick_fence");
+    public static final BlockType NETHER_BRICK_SLAB = get("minecraft:nether_brick_slab");
+    public static final BlockType NETHER_BRICK_STAIRS = get("minecraft:nether_brick_stairs");
+    public static final BlockType NETHER_PORTAL = get("minecraft:nether_portal");
+    public static final BlockType NETHER_QUARTZ_ORE = get("minecraft:nether_quartz_ore");
+    public static final BlockType NETHER_WART = get("minecraft:nether_wart");
+    public static final BlockType NETHER_WART_BLOCK = get("minecraft:nether_wart_block");
+    public static final BlockType OAK_BUTTON = get("minecraft:oak_button");
+    public static final BlockType OAK_DOOR = get("minecraft:oak_door");
+    public static final BlockType OAK_FENCE = get("minecraft:oak_fence");
+    public static final BlockType OAK_FENCE_GATE = get("minecraft:oak_fence_gate");
+    public static final BlockType OAK_LEAVES = get("minecraft:oak_leaves");
+    public static final BlockType OAK_LOG = get("minecraft:oak_log");
+    public static final BlockType OAK_PLANKS = get("minecraft:oak_planks");
+    public static final BlockType OAK_PRESSURE_PLATE = get("minecraft:oak_pressure_plate");
+    public static final BlockType OAK_SAPLING = get("minecraft:oak_sapling");
+    public static final BlockType OAK_SLAB = get("minecraft:oak_slab");
+    public static final BlockType OAK_WOOD = get("minecraft:oak_wood");
+    public static final BlockType OBSERVER = get("minecraft:observer");
+    public static final BlockType OBSIDIAN = get("minecraft:obsidian");
+    public static final BlockType ORANGE_BANNER = get("minecraft:orange_banner");
+    public static final BlockType ORANGE_BED = get("minecraft:orange_bed");
+    public static final BlockType ORANGE_CARPET = get("minecraft:orange_carpet");
+    public static final BlockType ORANGE_CONCRETE = get("minecraft:orange_concrete");
+    public static final BlockType ORANGE_CONCRETE_POWDER = get("minecraft:orange_concrete_powder");
+    public static final BlockType ORANGE_GLAZED_TERRACOTTA = get("minecraft:orange_glazed_terracotta");
+    public static final BlockType ORANGE_SHULKER_BOX = get("minecraft:orange_shulker_box");
+    public static final BlockType ORANGE_STAINED_GLASS = get("minecraft:orange_stained_glass");
+    public static final BlockType ORANGE_STAINED_GLASS_PANE = get("minecraft:orange_stained_glass_pane");
+    public static final BlockType ORANGE_TERRACOTTA = get("minecraft:orange_terracotta");
+    public static final BlockType ORANGE_TULIP = get("minecraft:orange_tulip");
+    public static final BlockType ORANGE_WALL_BANNER = get("minecraft:orange_wall_banner");
+    public static final BlockType ORANGE_WOOL = get("minecraft:orange_wool");
+    public static final BlockType OXEYE_DAISY = get("minecraft:oxeye_daisy");
+    public static final BlockType PACKED_ICE = get("minecraft:packed_ice");
+    public static final BlockType PEONY = get("minecraft:peony");
+    public static final BlockType PETRIFIED_OAK_SLAB = get("minecraft:petrified_oak_slab");
+    public static final BlockType PINK_BANNER = get("minecraft:pink_banner");
+    public static final BlockType PINK_BED = get("minecraft:pink_bed");
+    public static final BlockType PINK_CARPET = get("minecraft:pink_carpet");
+    public static final BlockType PINK_CONCRETE = get("minecraft:pink_concrete");
+    public static final BlockType PINK_CONCRETE_POWDER = get("minecraft:pink_concrete_powder");
+    public static final BlockType PINK_GLAZED_TERRACOTTA = get("minecraft:pink_glazed_terracotta");
+    public static final BlockType PINK_SHULKER_BOX = get("minecraft:pink_shulker_box");
+    public static final BlockType PINK_STAINED_GLASS = get("minecraft:pink_stained_glass");
+    public static final BlockType PINK_STAINED_GLASS_PANE = get("minecraft:pink_stained_glass_pane");
+    public static final BlockType PINK_TERRACOTTA = get("minecraft:pink_terracotta");
+    public static final BlockType PINK_TULIP = get("minecraft:pink_tulip");
+    public static final BlockType PINK_WALL_BANNER = get("minecraft:pink_wall_banner");
+    public static final BlockType PINK_WOOL = get("minecraft:pink_wool");
+    public static final BlockType PISTON = get("minecraft:piston");
+    public static final BlockType PISTON_HEAD = get("minecraft:piston_head");
+    public static final BlockType PLAYER_HEAD = get("minecraft:player_head");
+    public static final BlockType PLAYER_WALL_HEAD = get("minecraft:player_wall_head");
+    public static final BlockType PODZOL = get("minecraft:podzol");
+    public static final BlockType POLISHED_ANDESITE = get("minecraft:polished_andesite");
+    public static final BlockType POLISHED_DIORITE = get("minecraft:polished_diorite");
+    public static final BlockType POLISHED_GRANITE = get("minecraft:polished_granite");
+    public static final BlockType POPPY = get("minecraft:poppy");
+    public static final BlockType POTATOES = get("minecraft:potatoes");
+    public static final BlockType POTTED_ACACIA_SAPLING = get("minecraft:potted_acacia_sapling");
+    public static final BlockType POTTED_ALLIUM = get("minecraft:potted_allium");
+    public static final BlockType POTTED_AZURE_BLUET = get("minecraft:potted_azure_bluet");
+    public static final BlockType POTTED_BIRCH_SAPLING = get("minecraft:potted_birch_sapling");
+    public static final BlockType POTTED_BLUE_ORCHID = get("minecraft:potted_blue_orchid");
+    public static final BlockType POTTED_BROWN_MUSHROOM = get("minecraft:potted_brown_mushroom");
+    public static final BlockType POTTED_CACTUS = get("minecraft:potted_cactus");
+    public static final BlockType POTTED_DANDELION = get("minecraft:potted_dandelion");
+    public static final BlockType POTTED_DARK_OAK_SAPLING = get("minecraft:potted_dark_oak_sapling");
+    public static final BlockType POTTED_DEAD_BUSH = get("minecraft:potted_dead_bush");
+    public static final BlockType POTTED_FERN = get("minecraft:potted_fern");
+    public static final BlockType POTTED_JUNGLE_SAPLING = get("minecraft:potted_jungle_sapling");
+    public static final BlockType POTTED_OAK_SAPLING = get("minecraft:potted_oak_sapling");
+    public static final BlockType POTTED_ORANGE_TULIP = get("minecraft:potted_orange_tulip");
+    public static final BlockType POTTED_OXEYE_DAISY = get("minecraft:potted_oxeye_daisy");
+    public static final BlockType POTTED_PINK_TULIP = get("minecraft:potted_pink_tulip");
+    public static final BlockType POTTED_POPPY = get("minecraft:potted_poppy");
+    public static final BlockType POTTED_RED_MUSHROOM = get("minecraft:potted_red_mushroom");
+    public static final BlockType POTTED_RED_TULIP = get("minecraft:potted_red_tulip");
+    public static final BlockType POTTED_SPRUCE_SAPLING = get("minecraft:potted_spruce_sapling");
+    public static final BlockType POTTED_WHITE_TULIP = get("minecraft:potted_white_tulip");
+    public static final BlockType POWERED_RAIL = get("minecraft:powered_rail");
+    public static final BlockType PRISMARINE = get("minecraft:prismarine");
+    public static final BlockType PRISMARINE_BRICKS = get("minecraft:prismarine_bricks");
+    public static final BlockType PRISMARINE_BRICK_SLAB = get("minecraft:prismarine_brick_slab");
+    public static final BlockType PRISMARINE_BRICK_STAIRS = get("minecraft:prismarine_brick_stairs");
+    public static final BlockType PRISMARINE_SLAB = get("minecraft:prismarine_slab");
+    public static final BlockType PRISMARINE_STAIRS = get("minecraft:prismarine_stairs");
+    public static final BlockType PUMPKIN = get("minecraft:pumpkin");
+    public static final BlockType PUMPKIN_STEM = get("minecraft:pumpkin_stem");
+    public static final BlockType PURPLE_BANNER = get("minecraft:purple_banner");
+    public static final BlockType PURPLE_BED = get("minecraft:purple_bed");
+    public static final BlockType PURPLE_CARPET = get("minecraft:purple_carpet");
+    public static final BlockType PURPLE_CONCRETE = get("minecraft:purple_concrete");
+    public static final BlockType PURPLE_CONCRETE_POWDER = get("minecraft:purple_concrete_powder");
+    public static final BlockType PURPLE_GLAZED_TERRACOTTA = get("minecraft:purple_glazed_terracotta");
+    public static final BlockType PURPLE_SHULKER_BOX = get("minecraft:purple_shulker_box");
+    public static final BlockType PURPLE_STAINED_GLASS = get("minecraft:purple_stained_glass");
+    public static final BlockType PURPLE_STAINED_GLASS_PANE = get("minecraft:purple_stained_glass_pane");
+    public static final BlockType PURPLE_TERRACOTTA = get("minecraft:purple_terracotta");
+    public static final BlockType PURPLE_WALL_BANNER = get("minecraft:purple_wall_banner");
+    public static final BlockType PURPLE_WOOL = get("minecraft:purple_wool");
+    public static final BlockType PURPUR_BLOCK = get("minecraft:purpur_block");
+    public static final BlockType PURPUR_PILLAR = get("minecraft:purpur_pillar");
+    public static final BlockType PURPUR_SLAB = get("minecraft:purpur_slab");
+    public static final BlockType PURPUR_STAIRS = get("minecraft:purpur_stairs");
+    public static final BlockType QUARTZ_BLOCK = get("minecraft:quartz_block");
+    public static final BlockType QUARTZ_PILLAR = get("minecraft:quartz_pillar");
+    public static final BlockType QUARTZ_SLAB = get("minecraft:quartz_slab");
+    public static final BlockType QUARTZ_STAIRS = get("minecraft:quartz_stairs");
+    public static final BlockType RAIL = get("minecraft:rail");
+    public static final BlockType REDSTONE_BLOCK = get("minecraft:redstone_block");
+    public static final BlockType REDSTONE_LAMP = get("minecraft:redstone_lamp");
+    public static final BlockType REDSTONE_ORE = get("minecraft:redstone_ore");
+    public static final BlockType REDSTONE_TORCH = get("minecraft:redstone_torch");
+    public static final BlockType REDSTONE_WALL_TORCH = get("minecraft:redstone_wall_torch");
+    public static final BlockType REDSTONE_WIRE = get("minecraft:redstone_wire");
+    public static final BlockType RED_BANNER = get("minecraft:red_banner");
+    public static final BlockType RED_BED = get("minecraft:red_bed");
+    public static final BlockType RED_CARPET = get("minecraft:red_carpet");
+    public static final BlockType RED_CONCRETE = get("minecraft:red_concrete");
+    public static final BlockType RED_CONCRETE_POWDER = get("minecraft:red_concrete_powder");
+    public static final BlockType RED_GLAZED_TERRACOTTA = get("minecraft:red_glazed_terracotta");
+    public static final BlockType RED_MUSHROOM = get("minecraft:red_mushroom");
+    public static final BlockType RED_MUSHROOM_BLOCK = get("minecraft:red_mushroom_block");
+    public static final BlockType RED_NETHER_BRICKS = get("minecraft:red_nether_bricks");
+    public static final BlockType RED_SAND = get("minecraft:red_sand");
+    public static final BlockType RED_SANDSTONE = get("minecraft:red_sandstone");
+    public static final BlockType RED_SANDSTONE_SLAB = get("minecraft:red_sandstone_slab");
+    public static final BlockType RED_SANDSTONE_STAIRS = get("minecraft:red_sandstone_stairs");
+    public static final BlockType RED_SHULKER_BOX = get("minecraft:red_shulker_box");
+    public static final BlockType RED_STAINED_GLASS = get("minecraft:red_stained_glass");
+    public static final BlockType RED_STAINED_GLASS_PANE = get("minecraft:red_stained_glass_pane");
+    public static final BlockType RED_TERRACOTTA = get("minecraft:red_terracotta");
+    public static final BlockType RED_TULIP = get("minecraft:red_tulip");
+    public static final BlockType RED_WALL_BANNER = get("minecraft:red_wall_banner");
+    public static final BlockType RED_WOOL = get("minecraft:red_wool");
+    public static final BlockType REPEATER = get("minecraft:repeater");
+    public static final BlockType REPEATING_COMMAND_BLOCK = get("minecraft:repeating_command_block");
+    public static final BlockType ROSE_BUSH = get("minecraft:rose_bush");
+    public static final BlockType SAND = get("minecraft:sand");
+    public static final BlockType SANDSTONE = get("minecraft:sandstone");
+    public static final BlockType SANDSTONE_SLAB = get("minecraft:sandstone_slab");
+    public static final BlockType SANDSTONE_STAIRS = get("minecraft:sandstone_stairs");
+    public static final BlockType SEAGRASS = get("minecraft:seagrass");
+    public static final BlockType SEA_LANTERN = get("minecraft:sea_lantern");
+    public static final BlockType SEA_PICKLE = get("minecraft:sea_pickle");
+    public static final BlockType SHULKER_BOX = get("minecraft:shulker_box");
+    public static final BlockType SKELETON_SKULL = get("minecraft:skeleton_skull");
+    public static final BlockType SKELETON_WALL_SKULL = get("minecraft:skeleton_wall_skull");
+    public static final BlockType SLIME_BLOCK = get("minecraft:slime_block");
+    public static final BlockType SMOOTH_QUARTZ = get("minecraft:smooth_quartz");
+    public static final BlockType SMOOTH_RED_SANDSTONE = get("minecraft:smooth_red_sandstone");
+    public static final BlockType SMOOTH_SANDSTONE = get("minecraft:smooth_sandstone");
+    public static final BlockType SMOOTH_STONE = get("minecraft:smooth_stone");
+    public static final BlockType SNOW = get("minecraft:snow");
+    public static final BlockType SNOW_BLOCK = get("minecraft:snow_block");
+    public static final BlockType SOUL_SAND = get("minecraft:soul_sand");
+    public static final BlockType SPAWNER = get("minecraft:spawner");
+    public static final BlockType SPONGE = get("minecraft:sponge");
+    public static final BlockType SPRUCE_BUTTON = get("minecraft:spruce_button");
+    public static final BlockType SPRUCE_DOOR = get("minecraft:spruce_door");
+    public static final BlockType SPRUCE_FENCE = get("minecraft:spruce_fence");
+    public static final BlockType SPRUCE_FENCE_GATE = get("minecraft:spruce_fence_gate");
+    public static final BlockType SPRUCE_LEAVES = get("minecraft:spruce_leaves");
+    public static final BlockType SPRUCE_LOG = get("minecraft:spruce_log");
+    public static final BlockType SPRUCE_PLANKS = get("minecraft:spruce_planks");
+    public static final BlockType SPRUCE_PRESSURE_PLATE = get("minecraft:spruce_pressure_plate");
+    public static final BlockType SPRUCE_SAPLING = get("minecraft:spruce_sapling");
+    public static final BlockType SPRUCE_SLAB = get("minecraft:spruce_slab");
+    public static final BlockType SPRUCE_STAIRS = get("minecraft:spruce_stairs");
+    public static final BlockType SPRUCE_WOOD = get("minecraft:spruce_wood");
+    public static final BlockType STICKY_PISTON = get("minecraft:sticky_piston");
+    public static final BlockType STONE = get("minecraft:stone");
+    public static final BlockType STONE_BRICKS = get("minecraft:stone_bricks");
+    public static final BlockType STONE_BRICK_SLAB = get("minecraft:stone_brick_slab");
+    public static final BlockType STONE_BRICK_STAIRS = get("minecraft:stone_brick_stairs");
+    public static final BlockType STONE_BUTTON = get("minecraft:stone_button");
+    public static final BlockType STONE_PRESSURE_PLATE = get("minecraft:stone_pressure_plate");
+    public static final BlockType STONE_SLAB = get("minecraft:stone_slab");
+    public static final BlockType STRIPPED_ACACIA_LOG = get("minecraft:stripped_acacia_log");
+    public static final BlockType STRIPPED_ACACIA_WOOD = get("minecraft:stripped_acacia_wood");
+    public static final BlockType STRIPPED_BIRCH_LOG = get("minecraft:stripped_birch_log");
+    public static final BlockType STRIPPED_BIRCH_WOOD = get("minecraft:stripped_birch_wood");
+    public static final BlockType STRIPPED_DARK_OAK_LOG = get("minecraft:stripped_dark_oak_log");
+    public static final BlockType STRIPPED_DARK_OAK_WOOD = get("minecraft:stripped_dark_oak_wood");
+    public static final BlockType STRIPPED_JUNGLE_LOG = get("minecraft:stripped_jungle_log");
+    public static final BlockType STRIPPED_JUNGLE_WOOD = get("minecraft:stripped_jungle_wood");
+    public static final BlockType STRIPPED_OAK_LOG = get("minecraft:stripped_oak_log");
+    public static final BlockType STRIPPED_OAK_WOOD = get("minecraft:stripped_oak_wood");
+    public static final BlockType STRIPPED_SPRUCE_LOG = get("minecraft:stripped_spruce_log");
+    public static final BlockType STRIPPED_SPRUCE_WOOD = get("minecraft:stripped_spruce_wood");
+    public static final BlockType STRUCTURE_BLOCK = get("minecraft:structure_block");
+    public static final BlockType STRUCTURE_VOID = get("minecraft:structure_void");
+    public static final BlockType SUGAR_CANE = get("minecraft:sugar_cane");
+    public static final BlockType SUNFLOWER = get("minecraft:sunflower");
+    public static final BlockType TALL_GRASS = get("minecraft:tall_grass");
+    public static final BlockType TALL_SEAGRASS = get("minecraft:tall_seagrass");
+    public static final BlockType TERRACOTTA = get("minecraft:terracotta");
+    public static final BlockType TNT = get("minecraft:tnt");
+    public static final BlockType TORCH = get("minecraft:torch");
+    public static final BlockType TRAPPED_CHEST = get("minecraft:trapped_chest");
+    public static final BlockType TRIPWIRE = get("minecraft:tripwire");
+    public static final BlockType TRIPWIRE_HOOK = get("minecraft:tripwire_hook");
+    public static final BlockType TUBE_CORAL = get("minecraft:tube_coral");
+    public static final BlockType TUBE_CORAL_BLOCK = get("minecraft:tube_coral_block");
+    public static final BlockType TUBE_CORAL_FAN = get("minecraft:tube_coral_fan");
+    public static final BlockType TUBE_CORAL_WALL_FAN = get("minecraft:tube_coral_wall_fan");
+    public static final BlockType TURTLE_EGG = get("minecraft:turtle_egg");
+    public static final BlockType VINE = get("minecraft:vine");
+    public static final BlockType VOID_AIR = get("minecraft:void_air");
+    public static final BlockType WALL_TORCH = get("minecraft:wall_torch");
+    public static final BlockType WATER = get("minecraft:water");
+    public static final BlockType WET_SPONGE = get("minecraft:wet_sponge");
+    public static final BlockType WHEAT = get("minecraft:wheat");
+    public static final BlockType WHITE_BANNER = get("minecraft:white_banner");
+    public static final BlockType WHITE_BED = get("minecraft:white_bed");
+    public static final BlockType WHITE_CARPET = get("minecraft:white_carpet");
+    public static final BlockType WHITE_CONCRETE = get("minecraft:white_concrete");
+    public static final BlockType WHITE_CONCRETE_POWDER = get("minecraft:white_concrete_powder");
+    public static final BlockType WHITE_GLAZED_TERRACOTTA = get("minecraft:white_glazed_terracotta");
+    public static final BlockType WHITE_SHULKER_BOX = get("minecraft:white_shulker_box");
+    public static final BlockType WHITE_STAINED_GLASS = get("minecraft:white_stained_glass");
+    public static final BlockType WHITE_STAINED_GLASS_PANE = get("minecraft:white_stained_glass_pane");
+    public static final BlockType WHITE_TERRACOTTA = get("minecraft:white_terracotta");
+    public static final BlockType WHITE_TULIP = get("minecraft:white_tulip");
+    public static final BlockType WHITE_WALL_BANNER = get("minecraft:white_wall_banner");
+    public static final BlockType WHITE_WOOL = get("minecraft:white_wool");
+    public static final BlockType WITHER_SKELETON_SKULL = get("minecraft:wither_skeleton_skull");
+    public static final BlockType WITHER_SKELETON_WALL_SKULL = get("minecraft:wither_skeleton_wall_skull");
+    public static final BlockType YELLOW_BANNER = get("minecraft:yellow_banner");
+    public static final BlockType YELLOW_BED = get("minecraft:yellow_bed");
+    public static final BlockType YELLOW_CARPET = get("minecraft:yellow_carpet");
+    public static final BlockType YELLOW_CONCRETE = get("minecraft:yellow_concrete");
+    public static final BlockType YELLOW_CONCRETE_POWDER = get("minecraft:yellow_concrete_powder");
+    public static final BlockType YELLOW_GLAZED_TERRACOTTA = get("minecraft:yellow_glazed_terracotta");
+    public static final BlockType YELLOW_SHULKER_BOX = get("minecraft:yellow_shulker_box");
+    public static final BlockType YELLOW_STAINED_GLASS = get("minecraft:yellow_stained_glass");
+    public static final BlockType YELLOW_STAINED_GLASS_PANE = get("minecraft:yellow_stained_glass_pane");
+    public static final BlockType YELLOW_TERRACOTTA = get("minecraft:yellow_terracotta");
+    public static final BlockType YELLOW_WALL_BANNER = get("minecraft:yellow_wall_banner");
+    public static final BlockType YELLOW_WOOL = get("minecraft:yellow_wool");
+    public static final BlockType ZOMBIE_HEAD = get("minecraft:zombie_head");
+    public static final BlockType ZOMBIE_WALL_HEAD = get("minecraft:zombie_wall_head");
 
-    public static final BlockType ACACIA_BUTTON = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:acacia_button")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ACACIA_LEAVES = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:acacia_leaves")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ACACIA_LOG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:acacia_log")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ACACIA_PLANKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:acacia_planks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ACACIA_PRESSURE_PLATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:acacia_pressure_plate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ACACIA_SAPLING = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:acacia_sapling")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ACACIA_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:acacia_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ACACIA_WOOD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:acacia_wood")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ALLIUM = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:allium")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ANDESITE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:andesite")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ANVIL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:anvil")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ATTACHED_MELON_STEM = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:attached_melon_stem")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ATTACHED_PUMPKIN_STEM = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:attached_pumpkin_stem")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType AZURE_BLUET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:azure_bluet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BARRIER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:barrier")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BEACON = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:beacon")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BEDROCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:bedrock")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BEETROOTS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:beetroots")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_BUTTON = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_button")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_DOOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_door")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_FENCE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_fence")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_FENCE_GATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_fence_gate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_LEAVES = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_leaves")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_LOG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_log")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_PLANKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_planks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_PRESSURE_PLATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_pressure_plate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_SAPLING = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_sapling")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BIRCH_WOOD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:birch_wood")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLACK_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:black_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLACK_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:black_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLACK_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:black_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLACK_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:black_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLACK_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:black_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLACK_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:black_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLACK_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:black_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLACK_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:black_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLACK_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:black_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLACK_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:black_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLACK_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:black_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLACK_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:black_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_ICE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_ice")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_ORCHID = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_orchid")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BLUE_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:blue_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BONE_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:bone_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BOOKSHELF = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:bookshelf")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BRAIN_CORAL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brain_coral")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BRAIN_CORAL_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brain_coral_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BRAIN_CORAL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brain_coral_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BRAIN_CORAL_WALL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brain_coral_wall_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BREWING_STAND = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brewing_stand")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BRICK_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brick_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BRICK_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brick_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_MUSHROOM = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_mushroom")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_MUSHROOM_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_mushroom_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BROWN_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:brown_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BUBBLE_COLUMN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:bubble_column")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BUBBLE_CORAL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:bubble_coral")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BUBBLE_CORAL_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:bubble_coral_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BUBBLE_CORAL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:bubble_coral_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType BUBBLE_CORAL_WALL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:bubble_coral_wall_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CACTUS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cactus")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CAKE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cake")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CARROTS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:carrots")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CARVED_PUMPKIN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:carved_pumpkin")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CAULDRON = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cauldron")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CAVE_AIR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cave_air")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CHAIN_COMMAND_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:chain_command_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CHEST = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:chest")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CHIPPED_ANVIL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:chipped_anvil")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CHISELED_QUARTZ_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:chiseled_quartz_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CHISELED_RED_SANDSTONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:chiseled_red_sandstone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CHISELED_SANDSTONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:chiseled_sandstone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CHISELED_STONE_BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:chiseled_stone_bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CHORUS_FLOWER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:chorus_flower")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CHORUS_PLANT = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:chorus_plant")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CLAY = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:clay")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType COAL_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:coal_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType COAL_ORE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:coal_ore")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType COARSE_DIRT = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:coarse_dirt")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType COBBLESTONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cobblestone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType COBBLESTONE_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cobblestone_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType COBBLESTONE_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cobblestone_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType COBBLESTONE_WALL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cobblestone_wall")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType COBWEB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cobweb")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType COCOA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cocoa")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType COMMAND_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:command_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType COMPARATOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:comparator")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CONDUIT = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:conduit")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CRACKED_STONE_BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cracked_stone_bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CRAFTING_TABLE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:crafting_table")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CREEPER_HEAD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:creeper_head")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CREEPER_WALL_HEAD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:creeper_wall_head")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CUT_RED_SANDSTONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cut_red_sandstone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CUT_SANDSTONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cut_sandstone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CYAN_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cyan_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CYAN_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cyan_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CYAN_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cyan_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CYAN_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cyan_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CYAN_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cyan_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CYAN_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cyan_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CYAN_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cyan_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CYAN_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cyan_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CYAN_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cyan_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CYAN_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cyan_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CYAN_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cyan_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType CYAN_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:cyan_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DAMAGED_ANVIL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:damaged_anvil")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DANDELION = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dandelion")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_BUTTON = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_button")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_DOOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_door")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_FENCE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_fence")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_FENCE_GATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_fence_gate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_LEAVES = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_leaves")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_LOG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_log")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_PLANKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_planks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_PRESSURE_PLATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_pressure_plate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_SAPLING = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_sapling")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_OAK_WOOD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_oak_wood")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_PRISMARINE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_prismarine")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_PRISMARINE_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_prismarine_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DARK_PRISMARINE_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dark_prismarine_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DAYLIGHT_DETECTOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:daylight_detector")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_BRAIN_CORAL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_brain_coral")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_BRAIN_CORAL_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_brain_coral_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_BRAIN_CORAL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_brain_coral_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_BRAIN_CORAL_WALL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_brain_coral_wall_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_BUBBLE_CORAL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_bubble_coral")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_BUBBLE_CORAL_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_bubble_coral_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_BUBBLE_CORAL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_bubble_coral_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_BUBBLE_CORAL_WALL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_bubble_coral_wall_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_BUSH = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_bush")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_FIRE_CORAL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_fire_coral")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_FIRE_CORAL_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_fire_coral_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_FIRE_CORAL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_fire_coral_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_FIRE_CORAL_WALL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_fire_coral_wall_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_HORN_CORAL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_horn_coral")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_HORN_CORAL_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_horn_coral_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_HORN_CORAL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_horn_coral_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_HORN_CORAL_WALL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_horn_coral_wall_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_TUBE_CORAL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_tube_coral")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_TUBE_CORAL_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_tube_coral_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_TUBE_CORAL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_tube_coral_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DEAD_TUBE_CORAL_WALL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dead_tube_coral_wall_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DETECTOR_RAIL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:detector_rail")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DIAMOND_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:diamond_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DIAMOND_ORE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:diamond_ore")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DIORITE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:diorite")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DIRT = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dirt")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DISPENSER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dispenser")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DRAGON_EGG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dragon_egg")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DRAGON_HEAD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dragon_head")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DRAGON_WALL_HEAD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dragon_wall_head")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DRIED_KELP_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dried_kelp_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType DROPPER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:dropper")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType EMERALD_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:emerald_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType EMERALD_ORE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:emerald_ore")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ENCHANTING_TABLE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:enchanting_table")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ENDER_CHEST = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:ender_chest")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType END_GATEWAY = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:end_gateway")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType END_PORTAL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:end_portal")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType END_PORTAL_FRAME = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:end_portal_frame")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType END_ROD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:end_rod")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType END_STONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:end_stone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType END_STONE_BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:end_stone_bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType FARMLAND = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:farmland")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType FERN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:fern")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType FIRE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:fire")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType FIRE_CORAL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:fire_coral")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType FIRE_CORAL_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:fire_coral_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType FIRE_CORAL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:fire_coral_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType FIRE_CORAL_WALL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:fire_coral_wall_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType FLOWER_POT = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:flower_pot")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType FROSTED_ICE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:frosted_ice")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType FURNACE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:furnace")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GLOWSTONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:glowstone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GOLD_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gold_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GOLD_ORE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gold_ore")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRANITE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:granite")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:grass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRASS_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:grass_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAVEL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gravel")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAY_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gray_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAY_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gray_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAY_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gray_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAY_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gray_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAY_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gray_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAY_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gray_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAY_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gray_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAY_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gray_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAY_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gray_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAY_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gray_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAY_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gray_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GRAY_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:gray_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GREEN_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:green_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GREEN_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:green_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GREEN_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:green_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GREEN_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:green_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GREEN_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:green_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GREEN_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:green_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GREEN_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:green_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GREEN_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:green_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GREEN_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:green_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GREEN_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:green_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GREEN_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:green_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType GREEN_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:green_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType HAY_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:hay_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType HEAVY_WEIGHTED_PRESSURE_PLATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:heavy_weighted_pressure_plate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType HOPPER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:hopper")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType HORN_CORAL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:horn_coral")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType HORN_CORAL_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:horn_coral_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType HORN_CORAL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:horn_coral_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType HORN_CORAL_WALL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:horn_coral_wall_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ICE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:ice")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType INFESTED_CHISELED_STONE_BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:infested_chiseled_stone_bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType INFESTED_COBBLESTONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:infested_cobblestone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType INFESTED_CRACKED_STONE_BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:infested_cracked_stone_bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType INFESTED_MOSSY_STONE_BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:infested_mossy_stone_bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType INFESTED_STONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:infested_stone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType INFESTED_STONE_BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:infested_stone_bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType IRON_BARS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:iron_bars")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType IRON_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:iron_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType IRON_DOOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:iron_door")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType IRON_ORE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:iron_ore")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JACK_O_LANTERN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jack_o_lantern")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUKEBOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jukebox")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_BUTTON = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_button")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_DOOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_door")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_FENCE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_fence")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_FENCE_GATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_fence_gate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_LEAVES = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_leaves")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_LOG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_log")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_PLANKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_planks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_PRESSURE_PLATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_pressure_plate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_SAPLING = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_sapling")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType JUNGLE_WOOD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:jungle_wood")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType KELP = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:kelp")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType KELP_PLANT = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:kelp_plant")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LADDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:ladder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LAPIS_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lapis_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LAPIS_ORE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lapis_ore")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LARGE_FERN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:large_fern")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LAVA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lava")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LEVER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lever")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_BLUE_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_blue_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_BLUE_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_blue_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_BLUE_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_blue_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_BLUE_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_blue_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_BLUE_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_blue_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_BLUE_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_blue_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_BLUE_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_blue_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_BLUE_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_blue_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_BLUE_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_blue_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_BLUE_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_blue_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_BLUE_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_blue_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_BLUE_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_blue_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_GRAY_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_gray_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_GRAY_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_gray_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_GRAY_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_gray_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_GRAY_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_gray_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_GRAY_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_gray_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_GRAY_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_gray_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_GRAY_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_gray_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_GRAY_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_gray_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_GRAY_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_gray_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_GRAY_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_gray_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_GRAY_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_gray_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_GRAY_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_gray_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIGHT_WEIGHTED_PRESSURE_PLATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:light_weighted_pressure_plate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LILAC = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lilac")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LILY_PAD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lily_pad")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIME_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lime_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIME_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lime_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIME_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lime_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIME_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lime_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIME_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lime_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIME_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lime_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIME_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lime_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIME_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lime_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIME_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lime_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIME_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lime_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIME_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lime_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType LIME_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:lime_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGENTA_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magenta_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGENTA_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magenta_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGENTA_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magenta_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGENTA_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magenta_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGENTA_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magenta_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGENTA_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magenta_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGENTA_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magenta_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGENTA_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magenta_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGENTA_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magenta_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGENTA_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magenta_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGENTA_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magenta_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGENTA_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magenta_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MAGMA_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:magma_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MELON = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:melon")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MELON_STEM = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:melon_stem")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MOSSY_COBBLESTONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:mossy_cobblestone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MOSSY_COBBLESTONE_WALL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:mossy_cobblestone_wall")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MOSSY_STONE_BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:mossy_stone_bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MUSHROOM_STEM = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:mushroom_stem")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType MYCELIUM = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:mycelium")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType NETHERRACK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:netherrack")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType NETHER_BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:nether_bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType NETHER_BRICK_FENCE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:nether_brick_fence")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType NETHER_BRICK_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:nether_brick_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType NETHER_BRICK_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:nether_brick_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType NETHER_PORTAL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:nether_portal")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType NETHER_QUARTZ_ORE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:nether_quartz_ore")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType NETHER_WART = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:nether_wart")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType NETHER_WART_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:nether_wart_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_BUTTON = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:oak_button")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_DOOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:oak_door")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_FENCE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:oak_fence")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_FENCE_GATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:oak_fence_gate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_LEAVES = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:oak_leaves")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_LOG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:oak_log")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_PLANKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:oak_planks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_PRESSURE_PLATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:oak_pressure_plate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_SAPLING = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:oak_sapling")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:oak_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OAK_WOOD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:oak_wood")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OBSERVER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:observer")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OBSIDIAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:obsidian")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_TULIP = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_tulip")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ORANGE_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:orange_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType OXEYE_DAISY = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:oxeye_daisy")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PACKED_ICE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:packed_ice")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PEONY = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:peony")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PETRIFIED_OAK_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:petrified_oak_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_TULIP = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_tulip")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PINK_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pink_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PISTON = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:piston")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PISTON_HEAD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:piston_head")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PLAYER_HEAD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:player_head")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PLAYER_WALL_HEAD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:player_wall_head")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PODZOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:podzol")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POLISHED_ANDESITE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:polished_andesite")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POLISHED_DIORITE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:polished_diorite")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POLISHED_GRANITE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:polished_granite")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POPPY = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:poppy")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTATOES = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potatoes")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_ACACIA_SAPLING = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_acacia_sapling")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_ALLIUM = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_allium")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_AZURE_BLUET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_azure_bluet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_BIRCH_SAPLING = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_birch_sapling")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_BLUE_ORCHID = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_blue_orchid")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_BROWN_MUSHROOM = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_brown_mushroom")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_CACTUS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_cactus")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_DANDELION = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_dandelion")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_DARK_OAK_SAPLING = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_dark_oak_sapling")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_DEAD_BUSH = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_dead_bush")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_FERN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_fern")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_JUNGLE_SAPLING = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_jungle_sapling")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_OAK_SAPLING = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_oak_sapling")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_ORANGE_TULIP = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_orange_tulip")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_OXEYE_DAISY = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_oxeye_daisy")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_PINK_TULIP = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_pink_tulip")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_POPPY = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_poppy")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_RED_MUSHROOM = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_red_mushroom")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_RED_TULIP = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_red_tulip")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_SPRUCE_SAPLING = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_spruce_sapling")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POTTED_WHITE_TULIP = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:potted_white_tulip")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType POWERED_RAIL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:powered_rail")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PRISMARINE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:prismarine")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PRISMARINE_BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:prismarine_bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PRISMARINE_BRICK_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:prismarine_brick_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PRISMARINE_BRICK_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:prismarine_brick_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PRISMARINE_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:prismarine_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PRISMARINE_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:prismarine_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PUMPKIN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pumpkin")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PUMPKIN_STEM = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:pumpkin_stem")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPLE_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purple_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPLE_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purple_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPLE_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purple_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPLE_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purple_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPLE_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purple_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPLE_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purple_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPLE_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purple_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPLE_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purple_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPLE_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purple_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPLE_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purple_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPLE_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purple_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPLE_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purple_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPUR_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purpur_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPUR_PILLAR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purpur_pillar")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPUR_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purpur_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType PURPUR_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:purpur_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType QUARTZ_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:quartz_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType QUARTZ_PILLAR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:quartz_pillar")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType QUARTZ_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:quartz_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType QUARTZ_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:quartz_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RAIL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:rail")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType REDSTONE_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:redstone_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType REDSTONE_LAMP = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:redstone_lamp")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType REDSTONE_ORE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:redstone_ore")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType REDSTONE_TORCH = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:redstone_torch")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType REDSTONE_WALL_TORCH = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:redstone_wall_torch")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType REDSTONE_WIRE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:redstone_wire")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_MUSHROOM = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_mushroom")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_MUSHROOM_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_mushroom_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_NETHER_BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_nether_bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_SAND = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_sand")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_SANDSTONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_sandstone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_SANDSTONE_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_sandstone_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_SANDSTONE_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_sandstone_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_TULIP = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_tulip")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType RED_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:red_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType REPEATER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:repeater")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType REPEATING_COMMAND_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:repeating_command_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ROSE_BUSH = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:rose_bush")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SAND = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:sand")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SANDSTONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:sandstone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SANDSTONE_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:sandstone_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SANDSTONE_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:sandstone_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SEAGRASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:seagrass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SEA_LANTERN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:sea_lantern")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SEA_PICKLE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:sea_pickle")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SKELETON_SKULL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:skeleton_skull")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SKELETON_WALL_SKULL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:skeleton_wall_skull")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SLIME_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:slime_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SMOOTH_QUARTZ = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:smooth_quartz")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SMOOTH_RED_SANDSTONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:smooth_red_sandstone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SMOOTH_SANDSTONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:smooth_sandstone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SMOOTH_STONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:smooth_stone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SNOW = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:snow")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SNOW_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:snow_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SOUL_SAND = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:soul_sand")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPAWNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spawner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPONGE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:sponge")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_BUTTON = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_button")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_DOOR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_door")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_FENCE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_fence")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_FENCE_GATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_fence_gate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_LEAVES = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_leaves")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_LOG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_log")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_PLANKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_planks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_PRESSURE_PLATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_pressure_plate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_SAPLING = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_sapling")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SPRUCE_WOOD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:spruce_wood")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STICKY_PISTON = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:sticky_piston")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STONE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stone")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STONE_BRICKS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stone_bricks")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STONE_BRICK_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stone_brick_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STONE_BRICK_STAIRS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stone_brick_stairs")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STONE_BUTTON = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stone_button")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STONE_PRESSURE_PLATE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stone_pressure_plate")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STONE_SLAB = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stone_slab")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRIPPED_ACACIA_LOG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stripped_acacia_log")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRIPPED_ACACIA_WOOD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stripped_acacia_wood")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRIPPED_BIRCH_LOG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stripped_birch_log")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRIPPED_BIRCH_WOOD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stripped_birch_wood")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRIPPED_DARK_OAK_LOG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stripped_dark_oak_log")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRIPPED_DARK_OAK_WOOD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stripped_dark_oak_wood")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRIPPED_JUNGLE_LOG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stripped_jungle_log")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRIPPED_JUNGLE_WOOD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stripped_jungle_wood")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRIPPED_OAK_LOG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stripped_oak_log")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRIPPED_OAK_WOOD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stripped_oak_wood")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRIPPED_SPRUCE_LOG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stripped_spruce_log")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRIPPED_SPRUCE_WOOD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:stripped_spruce_wood")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRUCTURE_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:structure_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType STRUCTURE_VOID = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:structure_void")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SUGAR_CANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:sugar_cane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType SUNFLOWER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:sunflower")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TALL_GRASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:tall_grass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TALL_SEAGRASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:tall_seagrass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TNT = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:tnt")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TORCH = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:torch")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TRAPPED_CHEST = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:trapped_chest")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TRIPWIRE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:tripwire")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TRIPWIRE_HOOK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:tripwire_hook")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TUBE_CORAL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:tube_coral")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TUBE_CORAL_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:tube_coral_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TUBE_CORAL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:tube_coral_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TUBE_CORAL_WALL_FAN = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:tube_coral_wall_fan")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType TURTLE_EGG = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:turtle_egg")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType VINE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:vine")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType VOID_AIR = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:void_air")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WALL_TORCH = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:wall_torch")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WATER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:water")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WET_SPONGE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:wet_sponge")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHEAT = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:wheat")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_TULIP = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_tulip")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WHITE_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:white_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WITHER_SKELETON_SKULL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:wither_skeleton_skull")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType WITHER_SKELETON_WALL_SKULL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:wither_skeleton_wall_skull")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType YELLOW_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:yellow_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType YELLOW_BED = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:yellow_bed")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType YELLOW_CARPET = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:yellow_carpet")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType YELLOW_CONCRETE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:yellow_concrete")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType YELLOW_CONCRETE_POWDER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:yellow_concrete_powder")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType YELLOW_GLAZED_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:yellow_glazed_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType YELLOW_SHULKER_BOX = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:yellow_shulker_box")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType YELLOW_STAINED_GLASS = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:yellow_stained_glass")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType YELLOW_STAINED_GLASS_PANE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:yellow_stained_glass_pane")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType YELLOW_TERRACOTTA = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:yellow_terracotta")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType YELLOW_WALL_BANNER = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:yellow_wall_banner")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType YELLOW_WOOL = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:yellow_wool")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ZOMBIE_HEAD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:zombie_head")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType ZOMBIE_WALL_HEAD = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:zombie_wall_head")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
+    private static BlockType get(String idString) {
+        return get(version -> idString);
+    }
+
+    private static BlockType get(Function<CorePluginVersion, String> id) {
+        CorePluginVersion mcVersion = TranslateCore.getPlatform().getMinecraftVersion();
+        String idString = id.apply(mcVersion);
+        return TranslateCore
+                .getPlatform()
+                .getBlockType(idString)
+                .orElseThrow(() -> new IllegalStateException("Failed to find blocktype '" + idString + "'"));
+    }
 
 }

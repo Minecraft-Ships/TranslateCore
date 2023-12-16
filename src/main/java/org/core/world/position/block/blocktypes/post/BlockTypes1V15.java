@@ -1,26 +1,30 @@
 package org.core.world.position.block.blocktypes.post;
 
 import org.core.TranslateCore;
+import org.core.platform.plugin.details.CorePluginVersion;
 import org.core.world.position.block.BlockType;
 
+import java.util.function.Function;
+
 public class BlockTypes1V15 {
-    public static final BlockType BEEHIVE = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:beehive")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
+    public static final BlockType BEEHIVE = get("minecraft:beehive");
 
-    public static final BlockType BEE_NEST = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:bee_nest")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
-    public static final BlockType HONEY = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:honey_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
+    public static final BlockType BEE_NEST = get("minecraft:bee_nest");
+    public static final BlockType HONEY = get("minecraft:honey_block");
 
-    public static final BlockType HONEYCOMB_BLOCK = TranslateCore
-            .getPlatform()
-            .getBlockType("minecraft:honeycomb_block")
-            .orElseThrow(() -> new IllegalStateException("Failed to find blocktype"));
+    public static final BlockType HONEYCOMB_BLOCK = get("minecraft:honeycomb_block");
+
+    private static BlockType get(String idString) {
+        return get(version -> idString);
+    }
+
+    private static BlockType get(Function<CorePluginVersion, String> id) {
+        CorePluginVersion mcVersion = TranslateCore.getPlatform().getMinecraftVersion();
+        String idString = id.apply(mcVersion);
+        return TranslateCore
+                .getPlatform()
+                .getBlockType(idString)
+                .orElseThrow(() -> new IllegalStateException("Failed to find blocktype '" + idString + "'"));
+    }
 
 }
