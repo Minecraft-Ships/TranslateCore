@@ -10,7 +10,7 @@ public interface PatternLayers {
 
     PatternLayers addLayers(Collection<? extends PatternLayer> layers);
 
-    PatternLayers addLayer(int A, PatternLayer layer);
+    PatternLayers addLayer(int layerIndex, PatternLayer layer);
 
     PatternLayers removeLayer(int layer);
 

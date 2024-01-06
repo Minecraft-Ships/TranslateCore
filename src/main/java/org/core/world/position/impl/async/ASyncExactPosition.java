@@ -3,22 +3,18 @@ package org.core.world.position.impl.async;
 import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
 import org.core.world.position.impl.ExactPosition;
-import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
 
 import java.math.BigDecimal;
 
 public interface ASyncExactPosition extends ASyncPosition<Double>, ExactPosition {
 
-    @Deprecated
     @Override
-    default ASyncExactPosition toExactPosition() {
-        return this;
-    }
+    ASyncBlockPosition toBlockPosition();
 
     @Deprecated
     @Override
-    default ASyncExactPosition toAsyncPosition() {
+    default ASyncExactPosition toExactPosition() {
         return this;
     }
 
@@ -27,8 +23,11 @@ public interface ASyncExactPosition extends ASyncPosition<Double>, ExactPosition
         return this.getWorld().getPosition(this.getX(), this.getY(), this.getZ());
     }
 
+    @Deprecated
     @Override
-    ASyncBlockPosition toBlockPosition();
+    default ASyncExactPosition toAsyncPosition() {
+        return this;
+    }
 
     @Override
     default ASyncExactPosition getRelative(Vector3<?> vector) {

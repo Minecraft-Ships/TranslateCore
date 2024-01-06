@@ -23,7 +23,7 @@ public abstract class ChestInventorySnapshot implements ChestInventory, Inventor
     @Override
     public void apply() {
         Optional<LiveTileEntity> opTile = this.position.getTileEntity();
-        if (!opTile.isPresent()) {
+        if (opTile.isEmpty()) {
             return;
         }
         if (!(opTile.get() instanceof LiveChestTileEntity)) {
@@ -39,9 +39,8 @@ public abstract class ChestInventorySnapshot implements ChestInventory, Inventor
                     .getItem()
                     .ifPresent(f -> inv
                             .getSlot(slot
-                                    .getPosition()
-                                    .orElseThrow(() -> new IllegalStateException(
-                                            "Unknown slot position")))
+                                             .getPosition()
+                                             .orElseThrow(() -> new IllegalStateException("Unknown slot position")))
                             .orElseThrow(() -> new IllegalStateException("Unknown slot position"))
                             .setItem(f));
         }

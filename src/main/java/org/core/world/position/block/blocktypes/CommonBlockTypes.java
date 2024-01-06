@@ -9,7 +9,7 @@ import java.util.function.Function;
 /**
  * <p>All Blocks found between legacy blocks and after Minecraft 1.13</p>
  */
-@SuppressWarnings({"unused", "HardCodedStringLiteral", "DuplicateStringLiteralInspection", "NonFinalUtilityClass"})
+@SuppressWarnings({"unused", "HardCodedStringLiteral", "DuplicateStringLiteralInspection"})
 public class CommonBlockTypes {
 
     public static final BlockType ACACIA_DOOR = get("minecraft:acacia_door");

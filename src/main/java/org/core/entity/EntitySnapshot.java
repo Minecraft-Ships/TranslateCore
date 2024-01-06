@@ -10,29 +10,6 @@ import java.util.Optional;
  */
 public interface EntitySnapshot<E extends LiveEntity> extends Entity<EntitySnapshot<? extends LiveEntity>> {
 
-    /**
-     * Spawn the entity in the current condition of the snapshot
-     *
-     * @return Spawns the entity
-     */
-    E spawnEntity();
-
-    /**
-     * Creates a new instance of this snapshot with all values
-     * copied over as new instances
-     *
-     * @return A new snapshot
-     */
-    EntitySnapshot<E> createSnapshot();
-
-    /**
-     * If the entity is based on a LiveEntity then this will be
-     * returnable.
-     *
-     * @return Optional of the original entity
-     */
-    Optional<E> getCreatedFrom();
-
     interface NoneDestructibleSnapshot<E extends LiveEntity> extends EntitySnapshot<E> {
 
         /**
@@ -49,9 +26,35 @@ public interface EntitySnapshot<E extends LiveEntity> extends Entity<EntitySnaps
          * @return The entity of the snapshot
          */
         default E getEntity() {
-            return this.getCreatedFrom().orElseThrow(() -> new IllegalStateException("Cannot get entity, is the " +
-                    "implementation correct?"));
+            return this
+                    .getCreatedFrom()
+                    .orElseThrow(
+                            () -> new IllegalStateException("Cannot get entity, is the " + "implementation correct?"));
         }
 
     }
+
+    /**
+     * Spawn the entity in the current condition of the snapshot
+     *
+     * @return Spawns the entity
+     */
+    E spawnEntity();
+
+    /**
+     * Creates a new instance of this snapshot with all values
+     * copied over as new instances
+     *
+     * @return A new snapshot
+     */
+    @Override
+    EntitySnapshot<E> createSnapshot();
+
+    /**
+     * If the entity is based on a LiveEntity then this will be
+     * returnable.
+     *
+     * @return Optional of the original entity
+     */
+    Optional<E> getCreatedFrom();
 }

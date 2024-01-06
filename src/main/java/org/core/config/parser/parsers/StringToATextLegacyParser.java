@@ -6,6 +6,7 @@ import org.core.config.parser.StringParser;
 
 import java.util.Optional;
 
+@Deprecated(forRemoval = true)
 public class StringToATextLegacyParser implements StringParser<AText> {
     @Override
     public Optional<AText> parse(String original) {

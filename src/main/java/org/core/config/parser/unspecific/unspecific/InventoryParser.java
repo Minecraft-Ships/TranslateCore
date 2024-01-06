@@ -21,23 +21,21 @@ public class InventoryParser implements UnspecificParser<InventorySnapshot> {
     public void set(ConfigurationStream file, InventorySnapshot value, ConfigurationNode node) {
         int slotCount = value.getSlotCount();
         Set<Slot> slots = value.getSlots();
-        for (int A = 0; A < slotCount; A++) {
-            final int B = A;
-            Slot slot =
-                    slots
-                            .stream()
-                            .filter(s -> s.getPosition().isPresent())
-                            .filter(s ->
-                                    s.getPosition().orElseThrow(() -> new IllegalStateException("You broke logic")) ==
-                                            B)
-                            .findAny()
-                            .orElseThrow(() -> new IllegalStateException("Cannot find slot with index of " + B));
+        for (int index = 0; index < slotCount; index++) {
+            final int finalIndex = index;
+            Slot slot = slots
+                    .stream()
+                    .filter(s -> s.getPosition().isPresent())
+                    .filter(s -> s.getPosition().orElseThrow(() -> new IllegalStateException("You broke logic"))
+                            == finalIndex)
+                    .findAny()
+                    .orElseThrow(() -> new IllegalStateException("Cannot find slot with index of " + finalIndex));
             slot.getItem().ifPresent(i -> {
                 String[] path = new String[node.getPath().length + 1];
-                for (int C = 0; C < node.getPath().length; C++) {
-                    path[C] = node.getPath()[C];
+                for (int pathIndex = 0; pathIndex < node.getPath().length; pathIndex++) {
+                    path[pathIndex] = node.getPath()[pathIndex];
                 }
-                path[node.getPath().length] = B + "";
+                path[node.getPath().length] = finalIndex + "";
                 UnspecificParsers.ITEM_STACK.set(file, i, path);
             });
         }
@@ -51,7 +49,7 @@ public class InventoryParser implements UnspecificParser<InventorySnapshot> {
             try {
                 int slotIndex = Integer.parseInt(totalPath[totalPath.length - 1]);
                 Optional<ItemStack> opStack = UnspecificParsers.ITEM_STACK.parse(file, i);
-                if (!opStack.isPresent()) {
+                if (opStack.isEmpty()) {
                     return;
                 }
                 Slot snapshot = new SlotSnapshot(slotIndex, opStack.get());

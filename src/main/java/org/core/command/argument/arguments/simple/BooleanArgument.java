@@ -28,7 +28,7 @@ public class BooleanArgument implements CommandArgument<Boolean> {
     }
 
     @Override
-    public String getId() {
+    public @NotNull String getId() {
         return this.id;
     }
 

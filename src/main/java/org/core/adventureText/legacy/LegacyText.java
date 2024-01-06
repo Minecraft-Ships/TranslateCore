@@ -110,7 +110,7 @@ public class LegacyText implements AText {
             String text = this.text;
 
             for (TextColour colour : NamedTextColours.colours()) {
-                if (!colour.getLegacy().isPresent()) {
+                if (colour.getLegacy().isEmpty()) {
                     continue;
                 }
                 text = text.replaceAll(TextColour.SYMBOL + "" + colour.getLegacy().get(), "");
@@ -135,17 +135,17 @@ public class LegacyText implements AText {
         return builder.toString();
     }
 
-    public LegacyText plain(@NotNull String text) {
+    public LegacyText plain(@NotNull CharSequence text) {
         StringBuilder builder = new StringBuilder();
         int previous = 0;
-        for (int A = 0; A < text.length(); A++) {
-            char at = text.charAt(A);
+        for (int index = 0; index < text.length(); index++) {
+            char at = text.charAt(index);
             if (at != TextColour.SYMBOL) {
                 continue;
             }
-            builder.append(text, previous, A - 1);
-            A++;
-            previous = A;
+            builder.append(text, previous, index - 1);
+            index++;
+            previous = index;
         }
         return new LegacyText(null, builder.toString(), Collections.emptyList());
     }

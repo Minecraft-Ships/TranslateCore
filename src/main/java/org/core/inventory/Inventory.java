@@ -8,16 +8,6 @@ import java.util.Set;
 
 public interface Inventory {
 
-    Set<Slot> getSlots();
-
-    Optional<Slot> getSlot(int slotPos);
-
-    Inventory createSnapshot();
-
-    default int getSlotCount() {
-        return this.getSlots().size();
-    }
-
     interface Parent extends Inventory {
 
         Set<InventoryPart> getFirstChildren();
@@ -29,11 +19,21 @@ public interface Inventory {
                     .stream()
                     .filter(c -> c.getSlot(slotPos).isPresent())
                     .findFirst();
-            if (!opPart.isPresent()) {
+            if (opPart.isEmpty()) {
                 return Optional.empty();
             }
             return opPart.get().getSlot(slotPos);
         }
 
+    }
+
+    Set<Slot> getSlots();
+
+    Optional<Slot> getSlot(int slotPos);
+
+    Inventory createSnapshot();
+
+    default int getSlotCount() {
+        return this.getSlots().size();
     }
 }

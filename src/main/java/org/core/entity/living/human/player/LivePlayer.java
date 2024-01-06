@@ -1,7 +1,7 @@
 package org.core.entity.living.human.player;
 
 import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.audience.ForwardingAudience;
+import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
 import org.core.entity.EntityType;
 import org.core.entity.LiveEntity;
@@ -9,9 +9,11 @@ import org.core.permission.Permission;
 import org.core.source.viewer.CommandViewer;
 import org.core.world.position.impl.BlockPosition;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.UnmodifiableView;
 
-import java.util.Collections;
 import java.util.Optional;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public interface LivePlayer extends Player<LiveEntity>, LiveEntity, Audience, CommandViewer {
 
@@ -28,8 +30,12 @@ public interface LivePlayer extends Player<LiveEntity>, LiveEntity, Audience, Co
 
     boolean hasPermission(Permission permission);
 
-    @Override
-    default void sendMessage(@NotNull Component message) {
-        Audience.super.sendMessage(message);
+    @NotNull @UnmodifiableView Iterable<? extends BossBar> bossBars();
+
+    default Stream<? extends BossBar> bossBarsStream() {
+        return StreamSupport.stream(this.bossBars().spliterator(), false);
     }
+
+    @Override
+    void sendMessage(@NotNull Component message);
 }

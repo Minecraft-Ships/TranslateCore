@@ -100,6 +100,7 @@ public interface Platform {
 
     @NotNull Collection<BlockGroup> getBlockGroups();
 
+    @Deprecated(forRemoval = true)
     @NotNull Collection<BossColour> getBossColours();
 
     @NotNull Collection<ParrotType> getParrotType();

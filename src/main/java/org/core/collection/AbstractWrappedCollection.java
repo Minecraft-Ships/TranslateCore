@@ -1,5 +1,7 @@
 package org.core.collection;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -28,7 +30,7 @@ public class AbstractWrappedCollection<T> implements WrappedCollection<T> {
     }
 
     @Override
-    public Collection<T> getWrappedCollection() {
+    public @NotNull Collection<T> getWrappedCollection() {
         return this.values;
     }
 }

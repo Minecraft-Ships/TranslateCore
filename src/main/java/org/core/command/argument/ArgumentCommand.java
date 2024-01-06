@@ -57,7 +57,7 @@ public interface ArgumentCommand {
      */
     default boolean hasPermission(CommandSource source) {
         Optional<Permission> opNode = this.getPermissionNode();
-        if (!opNode.isPresent()) {
+        if (opNode.isEmpty()) {
             return true;
         }
         if (source instanceof LivePlayer) {

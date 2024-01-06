@@ -4,13 +4,17 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.jetbrains.annotations.NotNull;
 
-public class ComponentUtils {
+public final class ComponentUtils {
+
+    private ComponentUtils() {
+        throw new RuntimeException("Should not create");
+    }
 
     public static String toPlain(@NotNull Component component) {
-        return PlainComponentSerializer.plain().serialize(component);
+        return PlainTextComponentSerializer.plainText().serialize(component);
     }
 
     public static String toGson(@NotNull Component component) {
@@ -26,7 +30,7 @@ public class ComponentUtils {
     }
 
     public static Component fromPlain(@NotNull String message) {
-        return PlainComponentSerializer.plain().deserialize(message);
+        return PlainTextComponentSerializer.plainText().deserialize(message);
     }
 
     public static TextComponent fromLegacy(@NotNull String message) {

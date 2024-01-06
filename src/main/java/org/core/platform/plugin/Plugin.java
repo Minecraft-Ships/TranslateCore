@@ -1,8 +1,8 @@
 package org.core.platform.plugin;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.core.TranslateCore;
-import org.core.adventureText.AText;
-import org.core.adventureText.format.NamedTextColours;
 import org.core.config.ConfigurationFormat;
 import org.core.config.ConfigurationStream;
 import org.core.platform.plugin.details.PluginVersion;
@@ -84,14 +84,15 @@ public interface Plugin {
      * @param file       The location to copy to
      * @return the ConfigurationFile for the copied file
      */
-    default @NotNull Optional<ConfigurationStream.ConfigurationFile> createConfig(@NotNull String configName, @NotNull File file) {
+    default @NotNull Optional<ConfigurationStream.ConfigurationFile> createConfig(@NotNull String configName,
+                                                                                  @NotNull File file) {
         InputStream stream = this.getClass().getClassLoader().getResourceAsStream(configName);
         if (stream == null) {
             TranslateCore
                     .getConsole()
-                    .sendMessage(AText
-                            .ofPlain("Reqest for '" + configName + "' could not be found")
-                            .withColour(NamedTextColours.RED));
+                    .sendMessage(Component
+                                         .text("Request for '" + configName + "' could not be found")
+                                         .color(NamedTextColor.RED));
             return Optional.empty();
         }
         try {
@@ -103,7 +104,7 @@ public interface Plugin {
             return Optional.empty();
         }
 
-        return Optional.of(TranslateCore.createConfigurationFile(file, ConfigurationFormat.FORMAT_YAML));
+        return Optional.of(TranslateCore.getConfigManager().read(file, ConfigurationFormat.FORMAT_YAML));
     }
 
     /**

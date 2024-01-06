@@ -5,6 +5,7 @@ import org.core.config.parser.StringParser;
 import org.core.vector.type.Vector3;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class StringToVector3Int implements StringParser<Vector3<Integer>> {
 
@@ -18,7 +19,7 @@ public class StringToVector3Int implements StringParser<Vector3<Integer>> {
         Optional<Integer> opX = stip.parse(split[0]);
         Optional<Integer> opY = stip.parse(split[1]);
         Optional<Integer> opZ = stip.parse(split[2]);
-        if (!opX.isPresent() || !opY.isPresent() || !opZ.isPresent()) {
+        if (Stream.of(opX, opY, opZ).anyMatch(Optional::isEmpty)) {
             return Optional.empty();
         }
         return Optional.of(Vector3.valueOf(opX.get(), opY.get(), opZ.get()));

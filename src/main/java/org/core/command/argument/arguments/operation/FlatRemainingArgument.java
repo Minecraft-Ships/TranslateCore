@@ -43,30 +43,33 @@ public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
         return this.id;
     }
 
-    private <R extends Collection<T>> CommandArgumentResult<R> parse(CommandContext context, int B, CommandArgument<R> argument) throws IOException {
-        CommandArgumentContext<R> argumentContext = new CommandArgumentContext<>(argument, B, context.getCommand());
+    private <R extends Collection<T>> CommandArgumentResult<R> parse(CommandContext context,
+                                                                     int commandIndex,
+                                                                     CommandArgument<R> argument) throws IOException {
+        CommandArgumentContext<R> argumentContext = new CommandArgumentContext<>(argument, commandIndex, context.getCommand());
         return argument.parse(context, argumentContext);
     }
 
     @Override
-    public CommandArgumentResult<List<T>> parse(CommandContext context, CommandArgumentContext<List<T>> argument) throws IOException {
-        int A = argument.getFirstArgument();
+    public CommandArgumentResult<List<T>> parse(CommandContext context, CommandArgumentContext<List<T>> argument)
+            throws IOException {
+        int index = argument.getFirstArgument();
         List<T> list = new ArrayList<>();
-        while (A < context.getCommand().length) {
-            CommandArgumentResult<? extends Collection<T>> entry = this.parseAny(context, A);
-            A = entry.getPosition();
+        while (index < context.getCommand().length) {
+            CommandArgumentResult<? extends Collection<T>> entry = this.parseAny(context, index);
+            index = entry.getPosition();
             list.addAll(entry.getValue());
         }
-        return new CommandArgumentResult<>(A, list);
+        return new CommandArgumentResult<>(index, list);
     }
 
-    private CommandArgumentResult<? extends Collection<T>> parseAny(CommandContext context, int B) throws IOException {
+    private CommandArgumentResult<? extends Collection<T>> parseAny(CommandContext context, int commandIndex) throws IOException {
         IOException e1 = null;
-        for (int A = 0; A < this.argument.size(); A++) {
+        for (int index = 0; index < this.argument.size(); index++) {
             try {
-                return this.parse(context, B, this.argument.get(A));
+                return this.parse(context, commandIndex, this.argument.get(index));
             } catch (IOException e) {
-                if (A == 0) {
+                if (index == 0) {
                     e1 = e;
                 }
             }
@@ -80,28 +83,29 @@ public class FlatRemainingArgument<T> implements CommandArgument<List<T>> {
 
     @Override
     public Set<String> suggest(CommandContext context, CommandArgumentContext<List<T>> argument) {
-        int A = argument.getFirstArgument();
-        while (A < context.getCommand().length) {
-            final int B = A;
+        int index = argument.getFirstArgument();
+        while (index < context.getCommand().length) {
+            final int finalIndex = index;
             CommandArgumentResult<? extends Collection<T>> entry;
             try {
-                entry = this.parseAny(context, A);
+                entry = this.parseAny(context, index);
             } catch (IOException e) {
                 return this.argument.stream().flatMap(a -> {
                     try {
-                        return this.suggest(context, B, a).stream();
+                        return this.suggest(context, finalIndex, a).stream();
                     } catch (NotEnoughArguments ex) {
                         return Stream.empty();
                     }
                 }).collect(Collectors.toSet());
             }
-            A = entry.getPosition();
+            index = entry.getPosition();
         }
         return Collections.emptySet();
     }
 
-    private <R extends Collection<T>> Collection<String> suggest(CommandContext context, int A, CommandArgument<R> arg) throws NotEnoughArguments {
-        CommandArgumentContext<R> argumentContext = new CommandArgumentContext<>(arg, A, context.getCommand());
-        return arg.suggest(context, argumentContext);
+    private <R extends Collection<T>> Collection<String> suggest(CommandContext commandContext, int commandIndex, CommandArgument<R> arg)
+            throws NotEnoughArguments {
+        CommandArgumentContext<R> argumentContext = new CommandArgumentContext<>(arg, commandIndex, commandContext.getCommand());
+        return arg.suggest(commandContext, argumentContext);
     }
 }

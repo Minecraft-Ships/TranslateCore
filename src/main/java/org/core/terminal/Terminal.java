@@ -16,8 +16,11 @@ import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-@SuppressWarnings({"HardCodedStringLiteral", "UseOfSystemOutOrSystemErr", "CallToSystemExit",
-        "ResultOfMethodCallIgnored", "HardcodedFileSeparator"})
+@SuppressWarnings({"HardCodedStringLiteral",
+        "UseOfSystemOutOrSystemErr",
+        "CallToSystemExit",
+        "ResultOfMethodCallIgnored",
+        "HardcodedFileSeparator"})
 public final class Terminal {
 
     private static final String TEMP = "Temporary";
@@ -30,25 +33,25 @@ public final class Terminal {
     }
 
     public static void main(String[] args) {
-        for (int A = 0; A < args.length; A++) {
-            String arg = args[A];
+        for (int index = 0; index < args.length; index++) {
+            String arg = args[index];
             switch (arg.toLowerCase()) {
                 case "jar":
                 case "plugin":
                 case "core":
-                    PATH_TO_CORE = new File(args[A + 1]);
+                    PATH_TO_CORE = new File(args[index + 1]);
                     if (OUTPUT == null) {
-                        String[] folders = args[A + 1].split("/");
+                        String[] folders = args[index + 1].split("/");
                         String fileName = folders[folders.length - 1];
                         //noinspection NonThreadSafeLazyInitialization
                         OUTPUT = new File("Standalone - " + fileName);
                     }
-                    A = A + 1;
+                    index = index + 1;
                     break;
                 case "main":
                 case "boot":
-                    PATH_TO_MAIN = args[A + 1];
-                    A = A + 1;
+                    PATH_TO_MAIN = args[index + 1];
+                    index = index + 1;
                     break;
                 default:
                     System.err.println("Unknown argument of " + arg);
@@ -113,8 +116,9 @@ public final class Terminal {
         copyToTemp(temp, core);
 
         CorePlugin plugin;
+        URLClassLoader classLoader;
         try {
-            URLClassLoader classLoader = new URLClassLoader(
+            classLoader = new URLClassLoader(
                     new URL[]{Terminal.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL(),
                             PATH_TO_CORE.toURI().toURL()});
             Class<?> clazz = classLoader.loadClass(PATH_TO_MAIN);
@@ -176,32 +180,31 @@ public final class Terminal {
     }
 
     private static void copyToTemp(File temp, JarFile thisJar) {
-        thisJar.stream()
-                .forEach(entry -> {
-                    File tempFolder = temp;
-                    if (entry.getName().startsWith(tempFolder.getName() + "\\")) {
-                        tempFolder = temp.getParentFile();
-                    }
-                    if (entry.isDirectory()) {
-                        try {
-                            new File(tempFolder, entry.getName()).mkdirs();
-                        } catch (Exception e) {
-                            System.err.println("Failed to create folder: " + e.getMessage());
-                            System.err.println("Path: " + temp.getAbsolutePath());
-                            System.err.println("Entry: " + entry.getName());
-                        }
-                        return;
-                    }
-                    try {
-                        InputStream stream = thisJar.getInputStream(entry);
-                        File tempFile = new File(tempFolder, entry.getName());
-                        if (tempFile.exists()) {
-                            return;
-                        }
-                        Files.copy(stream, tempFile.toPath());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+        thisJar.stream().forEach(entry -> {
+            File tempFolder = temp;
+            if (entry.getName().startsWith(tempFolder.getName() + "\\")) {
+                tempFolder = temp.getParentFile();
+            }
+            if (entry.isDirectory()) {
+                try {
+                    new File(tempFolder, entry.getName()).mkdirs();
+                } catch (Exception e) {
+                    System.err.println("Failed to create folder: " + e.getMessage());
+                    System.err.println("Path: " + temp.getAbsolutePath());
+                    System.err.println("Entry: " + entry.getName());
+                }
+                return;
+            }
+            try {
+                InputStream stream = thisJar.getInputStream(entry);
+                File tempFile = new File(tempFolder, entry.getName());
+                if (tempFile.exists()) {
+                    return;
+                }
+                Files.copy(stream, tempFile.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

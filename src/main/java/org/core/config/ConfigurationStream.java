@@ -12,10 +12,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.*;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public interface ConfigurationStream {
+
+    interface ConfigurationFile extends ConfigurationStream {
+
+        File getFile();
+
+    }
 
     ConfigurationFormat getFormat();
 
@@ -64,8 +69,6 @@ public interface ConfigurationStream {
 
     boolean isMap(ConfigurationNode node);
 
-    Map<Object, Object> getMap(ConfigurationNode node);
-
     /*default void set(ConfigurationNode node, Map<String, ?> value) {
         value.forEach((key, value1) -> {
             String[] args = key.split(Pattern.quote("."));
@@ -83,6 +86,8 @@ public interface ConfigurationStream {
             this.set(settingNode, value1);
         });
     }*/
+
+    Map<Object, Object> getMap(ConfigurationNode node);
 
     void set(ConfigurationNode node, Map<String, ?> value);
 
@@ -157,7 +162,7 @@ public interface ConfigurationStream {
             return (Optional<T>) this.getBoolean(node);
         }
         Optional<String> opValue = this.getString(node);
-        if (!opValue.isPresent()) {
+        if (opValue.isEmpty()) {
             return Optional.empty();
         }
         return parser.parse(opValue.get());
@@ -181,7 +186,7 @@ public interface ConfigurationStream {
             ConfigurationNode node1 = new ConfigurationNode(
                     ArrayUtils.join(String.class, node.getPath(), k.split("\\.")));
             Optional<String> opString = this.getString(node1);
-            if (!opString.isPresent()) {
+            if (opString.isEmpty()) {
                 return Optional.empty();
             }
             map.put(k, opString.get());
@@ -206,11 +211,11 @@ public interface ConfigurationStream {
             ConfigurationNode directNode = new ConfigurationNode(
                     ArrayUtils.join(String.class, node.getPath(), new String[]{key}));
             Optional<String> opValue = this.getString(directNode);
-            if (!opValue.isPresent()) {
+            if (opValue.isEmpty()) {
                 return;
             }
             Optional<T> opParsed = value.parse(opValue.get());
-            if (!opParsed.isPresent()) {
+            if (opParsed.isEmpty()) {
                 return;
             }
             collection.add(opParsed.get());
@@ -243,12 +248,6 @@ public interface ConfigurationStream {
 
     default String getString(ConfigurationNode node, String value) {
         return this.getString(node).orElse(value);
-    }
-
-    interface ConfigurationFile extends ConfigurationStream {
-
-        File getFile();
-
     }
 
 }

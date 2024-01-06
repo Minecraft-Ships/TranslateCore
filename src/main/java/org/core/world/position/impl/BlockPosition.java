@@ -8,9 +8,7 @@ import org.core.world.position.block.BlockTypes;
 import org.core.world.position.block.details.BlockDetails;
 import org.core.world.position.block.details.BlockSnapshot;
 import org.core.world.position.impl.async.ASyncBlockPosition;
-import org.core.world.position.impl.async.ASyncPosition;
 import org.core.world.position.impl.sync.SyncBlockPosition;
-import org.core.world.position.impl.sync.SyncPosition;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -116,10 +114,10 @@ public interface BlockPosition extends Position<Integer> {
             startZ = z;
             diff = -diff;
         }
-        for (int A = 0; A < diff; A++) {
-            int plusX = direction.getAsVector().getX() * A;
-            int plusY = direction.getAsVector().getY() * A;
-            int plusZ = direction.getAsVector().getZ() * A;
+        for (int index = 0; index < diff; index++) {
+            int plusX = direction.getAsVector().getX() * index;
+            int plusY = direction.getAsVector().getY() * index;
+            int plusZ = direction.getAsVector().getZ() * index;
 
             BlockPosition position = this.getWorld().getPosition(startX + plusX, startY + plusY, startZ + plusZ);
             BlockSnapshot<? extends BlockPosition> snapshot = position.getBlockDetails();

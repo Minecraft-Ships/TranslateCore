@@ -1,5 +1,6 @@
 package org.core;
 
+import net.kyori.adventure.bossbar.BossBar;
 import org.core.config.ConfigManager;
 import org.core.config.ConfigurationFormat;
 import org.core.config.ConfigurationStream;
@@ -11,6 +12,7 @@ import org.core.platform.plugin.CorePlugin;
 import org.core.schedule.ScheduleManager;
 import org.core.source.command.ConsoleSource;
 import org.core.world.boss.ServerBossBar;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.Optional;
@@ -44,7 +46,11 @@ public interface TranslateCore {
 
     PlatformServer getRawServer();
 
+    @Deprecated(forRemoval = true)
     ServerBossBar bossBuilder();
+
+    @Deprecated(forRemoval = true)
+    ServerBossBar bossBuilder(BossBar bar);
 
     ConfigManager getRawConfigManager();
 
@@ -83,8 +89,15 @@ public interface TranslateCore {
         return getConfigManager().read(file, type);
     }
 
+    @Deprecated(forRemoval = true)
     static ServerBossBar createBossBar() {
         return TranslateCore.CoreImplementation.getImplementation().bossBuilder();
+    }
+
+
+    @Deprecated(forRemoval = true)
+    static ServerBossBar createBossBar(@NotNull BossBar bar) {
+        return TranslateCore.CoreImplementation.getImplementation().bossBuilder(bar);
     }
 
     static Optional<Class<? extends CorePlugin>> getStandAloneLauncher() {

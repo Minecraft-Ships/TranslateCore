@@ -45,24 +45,24 @@ public class RemainingArgument<T> implements CommandArgument<List<T>> {
 
     @Override
     public CommandArgumentResult<List<T>> parse(CommandContext context, CommandArgumentContext<List<T>> argument) throws IOException {
-        int A = argument.getFirstArgument();
+        int index = argument.getFirstArgument();
         List<T> list = new ArrayList<>();
-        while (A < context.getCommand().length) {
-            CommandArgumentResult<T> entry = this.parseAny(context, A);
-            A = entry.getPosition();
+        while (index < context.getCommand().length) {
+            CommandArgumentResult<T> entry = this.parseAny(context, index);
+            index = entry.getPosition();
             list.add(entry.getValue());
         }
-        return new CommandArgumentResult<>(A, list);
+        return new CommandArgumentResult<>(index, list);
     }
 
-    private CommandArgumentResult<T> parseAny(CommandContext context, int B) throws IOException {
+    private CommandArgumentResult<T> parseAny(CommandContext context, int commandIndex) throws IOException {
         IOException e1 = null;
-        for (int A = 0; A < this.argument.size(); A++) {
+        for (int index = 0; index < this.argument.size(); index++) {
             try {
-                CommandArgumentContext<T> argumentContext = new CommandArgumentContext<>(this.argument.get(A), B, context.getCommand());
-                return this.argument.get(A).parse(context, argumentContext);
+                CommandArgumentContext<T> argumentContext = new CommandArgumentContext<>(this.argument.get(index), commandIndex, context.getCommand());
+                return this.argument.get(index).parse(context, argumentContext);
             } catch (IOException e) {
-                if (A == 0) {
+                if (index == 0) {
                     e1 = e;
                 }
             }
@@ -76,22 +76,22 @@ public class RemainingArgument<T> implements CommandArgument<List<T>> {
 
     @Override
     public Set<String> suggest(CommandContext context, CommandArgumentContext<List<T>> argument) throws NotEnoughArguments {
-        int A = argument.getFirstArgument();
-        while (A < context.getCommand().length) {
-            final int B = A;
+        int index = argument.getFirstArgument();
+        while (index < context.getCommand().length) {
+            final int finalIndex = index;
             CommandArgumentResult<T> entry;
             try {
-                entry = this.parseAny(context, A);
+                entry = this.parseAny(context, index);
             } catch (IOException e) {
                 return this.argument.stream().flatMap(a -> {
                     try {
-                        return a.suggest(context, new CommandArgumentContext<>(a, B, context.getCommand())).stream();
+                        return a.suggest(context, new CommandArgumentContext<>(a, finalIndex, context.getCommand())).stream();
                     } catch (NotEnoughArguments ex) {
                         return Stream.empty();
                     }
                 }).collect(Collectors.toSet());
             }
-            A = entry.getPosition();
+            index = entry.getPosition();
         }
         return Collections.emptySet();
     }

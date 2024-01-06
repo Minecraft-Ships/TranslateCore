@@ -27,15 +27,16 @@ public class LivePlayerArgument implements CommandArgument<LivePlayer> {
     }
 
     @Override
-    public CommandArgumentResult<LivePlayer> parse(CommandContext context,
-            CommandArgumentContext<LivePlayer> argument) throws IOException {
+    public CommandArgumentResult<LivePlayer> parse(CommandContext context, CommandArgumentContext<LivePlayer> argument)
+            throws IOException {
         String command = context.getCommand()[argument.getFirstArgument()];
-        Optional<LivePlayer> opPlayer = TranslateCore.getServer()
+        Optional<LivePlayer> opPlayer = TranslateCore
+                .getServer()
                 .getOnlinePlayers()
                 .stream()
                 .filter(p -> p.getName().equalsIgnoreCase(command))
                 .findFirst();
-        if (!opPlayer.isPresent()) {
+        if (opPlayer.isEmpty()) {
             throw new IOException("Player is not online");
         }
         return CommandArgumentResult.from(argument, opPlayer.get());
@@ -45,7 +46,8 @@ public class LivePlayerArgument implements CommandArgument<LivePlayer> {
     @Override
     public Set<String> suggest(CommandContext commandContext, CommandArgumentContext<LivePlayer> argument) {
         String command = commandContext.getCommand()[argument.getFirstArgument()];
-        return TranslateCore.getServer()
+        return TranslateCore
+                .getServer()
                 .getOnlinePlayers()
                 .stream()
                 .map(AbstractHuman::getName)

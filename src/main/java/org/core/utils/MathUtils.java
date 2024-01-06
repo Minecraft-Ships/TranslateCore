@@ -20,7 +20,7 @@ public interface MathUtils {
         if (collection.size() == 1) {
             return collection.iterator().next();
         }
-        TreeSet<Map.Entry<N, Integer>> counts = new TreeSet<>(Comparator.comparingInt(Map.Entry::getValue));
+        SortedSet<Map.Entry<N, Integer>> counts = new TreeSet<>(Comparator.comparingInt(Map.Entry::getValue));
         for (N value : collection) {
             Optional<Map.Entry<N, Integer>> opEntry = counts
                     .parallelStream()

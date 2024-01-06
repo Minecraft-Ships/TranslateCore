@@ -10,6 +10,7 @@ public interface RideableMinecart<E extends Entity<?>> extends Minecart<E> {
 
     @SuppressWarnings("DeprecatedIsStillUsed")
     @Deprecated
+    @Override
     Collection<E> getPassengers();
 
     default boolean isEmpty() {

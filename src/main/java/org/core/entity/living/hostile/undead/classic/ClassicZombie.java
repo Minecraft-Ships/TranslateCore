@@ -8,9 +8,9 @@ import org.core.inventory.inventories.general.entity.ZombieInventory;
 
 public interface ClassicZombie<E extends Entity<?>> extends Zombie<E> {
 
+    @Override
     ZombieInventory<LiveClassicZombie> getInventory();
 
-    @SuppressWarnings("unchecked")
     @Override
     default EntityType<LiveClassicZombie, ClassicZombieSnapshot> getType() {
         return EntityTypes.ZOMBIE.get();

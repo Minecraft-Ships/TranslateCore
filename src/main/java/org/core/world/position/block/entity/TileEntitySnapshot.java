@@ -20,7 +20,7 @@ public interface TileEntitySnapshot<E extends LiveTileEntity> extends TileEntity
             throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());
         }
         Optional<LiveTileEntity> opTileEntity = position.getTileEntity();
-        if (!opTileEntity.isPresent()) {
+        if (opTileEntity.isEmpty()) {
             throw new BlockNotSupported(position.getBlockType(), this.getClass().getTypeName());
         }
         if (!this.getDeclaredClass().isAssignableFrom(opTileEntity.get().getClass())) {

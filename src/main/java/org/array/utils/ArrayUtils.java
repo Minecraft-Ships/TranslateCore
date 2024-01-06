@@ -18,8 +18,8 @@ public interface ArrayUtils {
     }
 
     static <A, B> boolean contains(A[] a, B[] b) {
-        for (int A = 0; A < Math.min(a.length, b.length); A++) {
-            if (!a[A].equals(b[A])) {
+        for (int index = 0; index < Math.min(a.length, b.length); index++) {
+            if (!a[index].equals(b[index])) {
                 return false;
             }
         }
@@ -91,8 +91,8 @@ public interface ArrayUtils {
     @SafeVarargs
     static <E, T> T[] convert(Class<T> clazz, Function<E, T> function, E... array) {
         T[] array1 = (T[]) Array.newInstance(clazz, array.length);
-        for (int A = 0; A < array.length; A++) {
-            array1[A] = function.apply(array[A]);
+        for (int index = 0; index < array.length; index++) {
+            array1[index] = function.apply(array[index]);
         }
         return array1;
     }
@@ -255,15 +255,15 @@ public interface ArrayUtils {
 
     static String[] filterOut(int start, int end, String... array) {
         String[] arr = new String[array.length - (end - start)];
-        for (int A = 0; A < array.length; A++) {
-            if (A > start && A < end) {
+        for (int index = 0; index < array.length; index++) {
+            if (index > start && index < end) {
                 continue;
             }
-            if (A >= end) {
-                arr[A - (end - start)] = array[A];
+            if (index >= end) {
+                arr[index - (end - start)] = array[index];
                 continue;
             }
-            arr[A] = array[A];
+            arr[index] = array[index];
         }
         return arr;
     }
@@ -292,11 +292,11 @@ public interface ArrayUtils {
 
     static <T> T[] join(Class<T> clazz, T[] array1, T[] array2) {
         T[] array = (T[]) Array.newInstance(clazz, array1.length + array2.length);
-        int A = 0;
-        for (; A < array1.length; A++) {
-            array[A] = array1[A];
+        int index = 0;
+        for (; index < array1.length; index++) {
+            array[index] = array1[index];
         }
-        System.arraycopy(array2, 0, array, A, array2.length);
+        System.arraycopy(array2, 0, array, index, array2.length);
         return array;
     }
 
@@ -306,13 +306,13 @@ public interface ArrayUtils {
                             Predicate<? super Character> splitBy) {
         String[] split = new String[0];
         int previousSplit = startWith;
-        for (int A = startWith; A < toSplit.length(); A++) {
-            char character = toSplit.charAt(A);
+        for (int index = startWith; index < toSplit.length(); index++) {
+            char character = toSplit.charAt(index);
             if (splitBy.test(character)) {
                 String[] newSplit = new String[split.length + 1];
                 System.arraycopy(split, 0, newSplit, 0, split.length);
-                newSplit[split.length] = toSplit.substring(previousSplit, A);
-                previousSplit = A;
+                newSplit[split.length] = toSplit.substring(previousSplit, index);
+                previousSplit = index;
                 split = newSplit;
             }
         }

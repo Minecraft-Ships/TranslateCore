@@ -11,8 +11,10 @@ import java.util.UUID;
 @Deprecated(forRemoval = true)
 public interface CommandViewer extends CommandSource {
 
+    @Override
     CommandViewer sendMessage(AText message, UUID uuid);
 
+    @Override
     CommandViewer sendMessage(AText message);
 
 }

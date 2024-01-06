@@ -41,14 +41,6 @@ public interface ItemStack {
         return this.getLore().stream().map(AdventureText::new).collect(Collectors.toList());
     }
 
-
-    /**
-     * Gets the lore of the item
-     *
-     * @return The lore of the item
-     */
-    List<Component> getLore();
-
     /**
      * Sets the lore of the item
      *
@@ -58,13 +50,8 @@ public interface ItemStack {
      */
     @Deprecated(forRemoval = true)
     default ItemStack setLoreText(Collection<? extends AText> lore) {
-        return setLore(lore.stream().map(line -> line.asComponent()).collect(Collectors.toList()));
+        return setLore(lore.stream().map(AText::asComponent).collect(Collectors.toList()));
     }
-
-    /**
-     * Sets the lore of the item
-     */
-    ItemStack setLore(Collection<? extends Component> lore);
 
     /**
      * Sets the lore of the item via varargs
@@ -76,6 +63,18 @@ public interface ItemStack {
     default ItemStack setLoreText(AText... text) {
         return this.setLoreText(Arrays.asList(text));
     }
+
+    /**
+     * Gets the lore of the item
+     *
+     * @return The lore of the item
+     */
+    List<Component> getLore();
+
+    /**
+     * Sets the lore of the item
+     */
+    ItemStack setLore(Collection<? extends Component> lore);
 
     default ItemStack setLore(Component... lines) {
         return this.setLore(Arrays.asList(lines));

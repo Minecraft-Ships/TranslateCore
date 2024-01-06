@@ -17,6 +17,7 @@ public interface ArmoredEntity<E extends Entity<?>> extends ItemHoldingEntity<E>
         return this.getInventory().getArmor();
     }
 
+    @Override
     default Slot getHoldingItem() {
         return this.getInventory().getMainHoldingItem();
     }

@@ -18,25 +18,26 @@ public class JarLoader {
     }
 
     public Collection<Class<?>> load(ClassLoader loader) throws IOException {
-        URLClassLoader classLoader = new URLClassLoader(new URL[]{this.file.toURI().toURL()}, loader);
-        JarFile jar = new JarFile(this.file);
-        return jar
-                .stream()
-                .filter(entry -> !entry.isDirectory())
-                .filter(entry -> entry.getName().endsWith(".class"))
-                .map(entry -> {
-                    String name = entry.getName();
-                    name = name.substring(0, name.length() - 6);
-                    name = name.replaceAll("/", ".");
-                    try {
-                        return classLoader.loadClass(name);
-                    } catch (ClassNotFoundException e) {
-                        //noinspection ReturnOfNull
-                        return null;
-                    }
-                })
-                .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
+        try (URLClassLoader classLoader = new URLClassLoader(new URL[]{this.file.toURI().toURL()},
+                                                             loader); JarFile jar = new JarFile(this.file)) {
+            return jar
+                    .stream()
+                    .filter(entry -> !entry.isDirectory())
+                    .filter(entry -> entry.getName().endsWith(".class"))
+                    .map(entry -> {
+                        String name = entry.getName();
+                        name = name.substring(0, name.length() - 6);
+                        name = name.replaceAll("/", ".");
+                        try {
+                            return classLoader.loadClass(name);
+                        } catch (ClassNotFoundException e) {
+                            //noinspection ReturnOfNull
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+        }
 
     }
 }

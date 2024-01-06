@@ -1,6 +1,6 @@
 package org.core.utils;
 
-import org.core.utils.lamda.single.ThrowableConsumer;
+import org.core.utils.lamda.single.ThrowableSupplier;
 
 import java.util.function.Function;
 
@@ -16,7 +16,7 @@ public interface Else {
         return fail.apply(obj);
     }
 
-    static <F, E extends Throwable> F throwOr(Class<E> clazz, ThrowableConsumer<? extends F, E> consumer, F fail) {
+    static <F, E extends Throwable> F throwOr(Class<E> clazz, ThrowableSupplier<? extends F, E> consumer, F fail) {
         try {
             return consumer.run();
         } catch (Throwable e) {
@@ -27,10 +27,10 @@ public interface Else {
         }
     }
 
-    static <F, E extends Throwable> F throwMultiple(Class<E> clazz, ThrowableConsumer<? extends F, E>... attempt)
+    static <F, E extends Throwable> F throwMultiple(Class<E> clazz, ThrowableSupplier<? extends F, E>... attempt)
             throws E {
         E lastThrown = null;
-        for (ThrowableConsumer<? extends F, E> current : attempt) {
+        for (ThrowableSupplier<? extends F, E> current : attempt) {
             try {
                 return current.run();
             } catch (Throwable e) {

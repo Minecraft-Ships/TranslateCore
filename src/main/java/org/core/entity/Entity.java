@@ -129,40 +129,24 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
         }
         yaw = yaw % 360;
         int i = (int) ((yaw + 8) / 22.5);
-        switch (i) {
-            case 1:
-                return SixteenFacingDirection.WEST_NORTH_WEST;
-            case 2:
-                return EightFacingDirection.NORTH_WEST;
-            case 3:
-                return SixteenFacingDirection.NORTH_NORTH_WEST;
-            case 4:
-                return FourFacingDirection.NORTH;
-            case 5:
-                return SixteenFacingDirection.NORTH_NORTH_EAST;
-            case 6:
-                return EightFacingDirection.NORTH_EAST;
-            case 7:
-                return SixteenFacingDirection.EAST_NORTH_EAST;
-            case 8:
-                return FourFacingDirection.EAST;
-            case 9:
-                return SixteenFacingDirection.EAST_SOUTH_EAST;
-            case 10:
-                return EightFacingDirection.SOUTH_EAST;
-            case 11:
-                return SixteenFacingDirection.SOUTH_SOUTH_EAST;
-            case 12:
-                return FourFacingDirection.SOUTH;
-            case 13:
-                return SixteenFacingDirection.SOUTH_SOUTH_WEST;
-            case 14:
-                return EightFacingDirection.SOUTH_WEST;
-            case 15:
-                return SixteenFacingDirection.WEST_SOUTH_WEST;
-            default:
-                return FourFacingDirection.WEST;
-        }
+        return switch (i) {
+            case 1 -> SixteenFacingDirection.WEST_NORTH_WEST;
+            case 2 -> EightFacingDirection.NORTH_WEST;
+            case 3 -> SixteenFacingDirection.NORTH_NORTH_WEST;
+            case 4 -> FourFacingDirection.NORTH;
+            case 5 -> SixteenFacingDirection.NORTH_NORTH_EAST;
+            case 6 -> EightFacingDirection.NORTH_EAST;
+            case 7 -> SixteenFacingDirection.EAST_NORTH_EAST;
+            case 8 -> FourFacingDirection.EAST;
+            case 9 -> SixteenFacingDirection.EAST_SOUTH_EAST;
+            case 10 -> EightFacingDirection.SOUTH_EAST;
+            case 11 -> SixteenFacingDirection.SOUTH_SOUTH_EAST;
+            case 12 -> FourFacingDirection.SOUTH;
+            case 13 -> SixteenFacingDirection.SOUTH_SOUTH_WEST;
+            case 14 -> EightFacingDirection.SOUTH_WEST;
+            case 15 -> SixteenFacingDirection.WEST_SOUTH_WEST;
+            default -> FourFacingDirection.WEST;
+        };
     }
 
     /**

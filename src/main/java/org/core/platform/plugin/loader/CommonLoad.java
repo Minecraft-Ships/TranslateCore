@@ -41,7 +41,7 @@ public final class CommonLoad {
                 .of(on)
                 .filter(loadOnlyOn -> details.getIdName().equals(loadOnlyOn.platform()))
                 .findAny();
-        if (!opPlatform.isPresent()) {
+        if (opPlatform.isEmpty()) {
             return false;
         }
         int[] maxMCVersion = opPlatform.get().maxMCVersion();
@@ -97,20 +97,13 @@ public final class CommonLoad {
     }
 
     public static List<CorePlugin> loadPlugin(ClassLoader loader, File... files) {
-        return Stream.of(files)
-                .parallel()
-                .filter(file -> file.getName().endsWith(".jar"))
-                .flatMap(file -> {
-                    try {
-                        return new JarLoader(file).load(loader).stream();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return Stream.empty();
-                    }
-                })
-                .filter(CommonLoad::canLoad)
-                .map(CommonLoad::newInstance)
-                .sorted()
-                .collect(Collectors.toList());
+        return Stream.of(files).parallel().filter(file -> file.getName().endsWith(".jar")).flatMap(file -> {
+            try {
+                return new JarLoader(file).load(loader).stream();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return Stream.empty();
+            }
+        }).filter(CommonLoad::canLoad).map(CommonLoad::newInstance).sorted().collect(Collectors.toList());
     }
 }

@@ -22,10 +22,10 @@ public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
     public abstract <Num extends Number> Vector<Num, ?> toVector(Function<BigDecimal, Num> function);
 
     private VSelf action(VSelf vector,
-            BiFunction<? super BigDecimal, ? super BigDecimal, ? extends BigDecimal> function) {
+                         BiFunction<? super BigDecimal, ? super BigDecimal, ? extends BigDecimal> function) {
         BigDecimal[] array = new BigDecimal[this.points.length];
-        for (int A = 0; A < this.points.length; A++) {
-            array[A] = function.apply(this.points[A], vector.getRawPoint(A));
+        for (int index = 0; index < this.points.length; index++) {
+            array[index] = function.apply(this.points[index], vector.getRawPoint(index));
         }
         return this.createNew(array);
     }
@@ -44,8 +44,8 @@ public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
 
     public VSelf divide(BigDecimal amount, RoundingMode mode) {
         BigDecimal[] array = new BigDecimal[this.points.length];
-        for (int A = 0; A < this.points.length; A++) {
-            array[A] = this.points[A].divide(amount, mode);
+        for (int index = 0; index < this.points.length; index++) {
+            array[index] = this.points[index].divide(amount, mode);
         }
         return this.createNew(array);
     }
@@ -56,8 +56,8 @@ public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
 
     public VSelf multiply(BigDecimal amount) {
         BigDecimal[] array = new BigDecimal[this.points.length];
-        for (int A = 0; A < this.points.length; A++) {
-            array[A] = this.points[A].multiply(amount);
+        for (int index = 0; index < this.points.length; index++) {
+            array[index] = this.points[index].multiply(amount);
         }
         return this.createNew(array);
     }
@@ -71,16 +71,16 @@ public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
     }
 
     public <Num extends Number, C extends Vector<Num, ?>> C toVector(Function<BigDecimal, Num> function,
-            VectorConverter converter) {
+                                                                     VectorConverter converter) {
         return (C) converter.convert(function, this);
     }
 
-    public N getPoint(int A) {
-        return this.toNumber.apply(this.getRawPoint(A));
+    public N getPoint(int index) {
+        return this.toNumber.apply(this.getRawPoint(index));
     }
 
-    public BigDecimal getRawPoint(int A) {
-        return this.points[A];
+    public BigDecimal getRawPoint(int index) {
+        return this.points[index];
     }
 
     public int getPointCount() {
@@ -98,15 +98,14 @@ public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Vector)) {
+        if (!(obj instanceof Vector<?, ?> vector)) {
             return false;
         }
-        Vector<?, ?> vector = (Vector<?, ?>) obj;
         if (vector.getPointCount() != this.getPointCount()) {
             return false;
         }
-        for (int A = 0; A < this.getPointCount(); A++) {
-            if (this.getRawPoint(A).doubleValue() != vector.getRawPoint(A).doubleValue()) {
+        for (int index = 0; index < this.getPointCount(); index++) {
+            if (this.getRawPoint(index).doubleValue() != vector.getRawPoint(index).doubleValue()) {
                 return false;
             }
         }
@@ -115,14 +114,9 @@ public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
 
     @Override
     public String toString() {
-        return this
-                .getClass()
-                .getSimpleName()
-                + "{"
-                + Arrays
+        return this.getClass().getSimpleName() + "{" + Arrays
                 .stream(this.points)
                 .map(BigDecimal::toPlainString)
-                .collect(Collectors.joining(", "))
-                + "}";
+                .collect(Collectors.joining(", ")) + "}";
     }
 }

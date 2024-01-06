@@ -118,6 +118,11 @@ public interface WrappedCollection<E> extends Collection<E> {
     }
 
     @Override
+    default boolean removeIf(Predicate<? super E> filter) {
+        return this.getWrappedCollection().removeIf(filter);
+    }
+
+    @Override
     default boolean retainAll(@NotNull Collection<?> c) {
         return this.getWrappedCollection().retainAll(c);
     }
@@ -125,11 +130,6 @@ public interface WrappedCollection<E> extends Collection<E> {
     @Override
     default void clear() {
         this.getWrappedCollection().clear();
-    }
-
-    @Override
-    default boolean removeIf(Predicate<? super E> filter) {
-        return this.getWrappedCollection().removeIf(filter);
     }
 
     @Override

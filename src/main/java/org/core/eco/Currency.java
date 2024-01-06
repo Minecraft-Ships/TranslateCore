@@ -1,7 +1,7 @@
 package org.core.eco;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
+import org.core.utils.ComponentUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
@@ -15,7 +15,7 @@ public interface Currency {
     @NotNull Component getSymbol();
 
     default String getUnformattedSymbol() {
-        return PlainComponentSerializer.plain().serialize(this.getSymbol());
+        return ComponentUtils.toPlain(this.getSymbol());
     }
 
     default Component asDisplay(@NotNull BigDecimal amount) {

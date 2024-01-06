@@ -18,9 +18,7 @@ public interface Messageable {
 
     void sendMessage(@NotNull Component message, @Nullable UUID uuid);
 
-    default void sendMessage(@NotNull Component message) {
-        this.sendMessage(message, null);
-    }
+    void sendMessage(@NotNull Component message);
 
     default void sendMessage(@NotNull Component... messageToJoin) {
         this.sendMessage(Component.join(JoinConfiguration.noSeparators(), messageToJoin));

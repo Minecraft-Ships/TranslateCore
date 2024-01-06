@@ -3,12 +3,14 @@ package org.core.world.position.impl.sync;
 import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
 import org.core.world.position.impl.ExactPosition;
-import org.core.world.position.impl.async.ASyncBlockPosition;
 import org.core.world.position.impl.async.ASyncExactPosition;
 
 import java.math.BigDecimal;
 
 public interface SyncExactPosition extends SyncPosition<Double>, ExactPosition {
+
+    @Override
+    SyncBlockPosition toBlockPosition();
 
     @Override
     @Deprecated
@@ -30,9 +32,6 @@ public interface SyncExactPosition extends SyncPosition<Double>, ExactPosition {
 
     @Override
     Vector3<Double> getPosition();
-
-    @Override
-    SyncBlockPosition toBlockPosition();
 
     @Override
     default SyncExactPosition getRelative(Vector3<?> vector) {

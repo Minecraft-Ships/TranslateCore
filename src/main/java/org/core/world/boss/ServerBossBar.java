@@ -1,6 +1,7 @@
 package org.core.world.boss;
 
 import net.kyori.adventure.bossbar.BossBar;
+import org.core.TranslateCore;
 import org.core.adventureText.AText;
 import org.core.adventureText.adventure.AdventureText;
 import org.core.entity.living.human.player.LivePlayer;
@@ -8,6 +9,8 @@ import org.core.world.boss.colour.BossColour;
 import org.core.world.boss.colour.BossColours;
 
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Deprecated(forRemoval = true)
 public interface ServerBossBar {
@@ -60,15 +63,34 @@ public interface ServerBossBar {
     }
 
     default ServerBossBar setValue(int value) {
-        this.bossBar().progress(value / 100);
+        this.bossBar().progress((float) (value / 100.0));
         return this;
     }
 
-    Set<LivePlayer> getPlayers();
+    default Set<LivePlayer> getPlayers() {
+        return TranslateCore
+                .getServer()
+                .getOnlinePlayers()
+                .stream()
+                .filter(player -> StreamSupport
+                        .stream(player.bossBars().spliterator(), true)
+                        .anyMatch(boss -> boss.equals(this.bossBar())))
+                .collect(Collectors.toSet());
+    }
 
-    ServerBossBar register(LivePlayer... players);
+    default ServerBossBar register(LivePlayer... players) {
+        for (LivePlayer player : players) {
+            player.showBossBar(bossBar());
+        }
+        return this;
+    }
 
-    ServerBossBar deregister(LivePlayer... players);
+    default ServerBossBar deregister(LivePlayer... players) {
+        for (LivePlayer player : players) {
+            player.hideBossBar(bossBar());
+        }
+        return this;
+    }
 
     default ServerBossBar setValue(int min, int value, int max) {
         return this.setValue(value - min, value - max);

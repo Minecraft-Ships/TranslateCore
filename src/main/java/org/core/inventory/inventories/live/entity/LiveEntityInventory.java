@@ -10,8 +10,6 @@ import java.util.Optional;
 public interface LiveEntityInventory<E extends LiveEntity>
         extends BasicEntityInventory<E>, PositionableInventory.ExactPositionableInventory {
 
-    Optional<E> getAttachedEntity();
-
     @Override
     default SyncExactPosition getPosition() {
         return this
@@ -19,4 +17,7 @@ public interface LiveEntityInventory<E extends LiveEntity>
                 .orElseThrow(() -> new IllegalStateException("Cannot get attached entity"))
                 .getPosition();
     }
+
+    @Override
+    Optional<E> getAttachedEntity();
 }

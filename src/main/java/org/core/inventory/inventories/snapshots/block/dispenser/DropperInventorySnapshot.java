@@ -14,7 +14,7 @@ public abstract class DropperInventorySnapshot extends DispenserBasedInventorySn
     @Override
     public void apply() {
         Optional<LiveTileEntity> opTile = this.position.getTileEntity();
-        if (!opTile.isPresent()) {
+        if (opTile.isEmpty()) {
             return;
         }
         if (!(opTile.get() instanceof LiveDropperTileEntity)) {
