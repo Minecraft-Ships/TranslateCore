@@ -40,7 +40,7 @@ public class TimingsCommand implements ArgumentCommand {
         CommandSource viewer = commandContext.getSource();
         OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
         viewer.sendMessage(AText.ofPlain("Getting timings"));
-        viewer.sendMessage(AText.ofPlain("CPU usage: " + osBean.getCpuLoad()));
+        viewer.sendMessage(AText.ofPlain("CPU usage: " + osBean.getProcessCpuLoad()));
         viewer.sendMessage(AText.ofPlain("CPU process usage: " + osBean.getProcessCpuLoad()));
 
         new Thread(() -> {

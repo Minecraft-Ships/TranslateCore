@@ -54,7 +54,7 @@ public class PendingTransactionsImpl implements PendingTransaction {
                                                           .getCurrentResult()
                                                           .getTransactions()
                                                           .stream())
-                                                  .toList());
+                                                  .collect(Collectors.toList()));
     }
 
     @Override

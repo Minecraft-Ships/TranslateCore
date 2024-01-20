@@ -85,7 +85,7 @@ public class LegacyText implements AText {
         List<LegacyText> children = this.children
                 .parallelStream()
                 .map(lt -> (LegacyText) lt.withAllAsIgnoreCase(containing, aText))
-                .toList();
+                .collect(Collectors.toList());
         return new LegacyText(this.colour, text, children);
     }
 
