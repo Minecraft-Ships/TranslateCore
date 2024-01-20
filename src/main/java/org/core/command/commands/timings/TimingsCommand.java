@@ -10,7 +10,7 @@ import org.core.exceptions.NotEnoughArguments;
 import org.core.permission.CorePermission;
 import org.core.permission.Permission;
 import org.core.schedule.Scheduler;
-import org.core.source.viewer.CommandViewer;
+import org.core.source.command.CommandSource;
 
 import java.lang.management.ManagementFactory;
 import java.time.LocalTime;
@@ -37,9 +37,7 @@ public class TimingsCommand implements ArgumentCommand {
 
     @Override
     public boolean run(CommandContext commandContext, String... args) throws NotEnoughArguments {
-        if (!(commandContext.getSource() instanceof CommandViewer viewer)) {
-            return false;
-        }
+        CommandSource viewer = commandContext.getSource();
         OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
         viewer.sendMessage(AText.ofPlain("Getting timings"));
         viewer.sendMessage(AText.ofPlain("CPU usage: " + osBean.getCpuLoad()));

@@ -28,27 +28,20 @@ public interface ServerBossBar {
 
     default BossColour getColour() {
         switch (bossBar().color()) {
-            case PINK -> {
+            case PINK:
                 return BossColours.PINK.get();
-            }
-            case BLUE -> {
+            case BLUE:
                 return BossColours.BLUE.get();
-            }
-            case RED -> {
+            case RED:
                 return BossColours.RED.get();
-            }
-            case GREEN -> {
+            case GREEN:
                 return BossColours.GREEN.get();
-            }
-            case YELLOW -> {
+            case YELLOW:
                 return BossColours.YELLOW.get();
-            }
-            case PURPLE -> {
+            case PURPLE:
                 return BossColours.PURPLE.get();
-            }
-            case WHITE -> {
+            case WHITE:
                 return BossColours.WHITE.get();
-            }
         }
         throw new RuntimeException("legacy colour not accepted");
     }

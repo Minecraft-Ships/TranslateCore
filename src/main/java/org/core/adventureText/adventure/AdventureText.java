@@ -6,6 +6,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
+import net.kyori.adventure.util.RGBLike;
 import org.core.adventureText.AText;
 import org.core.adventureText.format.NamedTextColours;
 import org.core.adventureText.format.TextColour;
@@ -96,13 +97,13 @@ public class AdventureText implements AText {
         if (colour == null) {
             return Optional.empty();
         }
-        if (colour instanceof NamedTextColor namedTextColor) {
+        if (colour instanceof NamedTextColor) {
             Optional<TextColour> opText = NamedTextColours
                     .colours()
                     .parallelStream()
-                    .filter(tc -> tc.getBlue() == namedTextColor.blue())
-                    .filter(tc -> tc.getGreen() == namedTextColor.green())
-                    .filter(tc -> tc.getRed() == namedTextColor.red())
+                    .filter(tc -> tc.getBlue() == ((RGBLike) colour).blue())
+                    .filter(tc -> tc.getGreen() == ((RGBLike) colour).green())
+                    .filter(tc -> tc.getRed() == ((RGBLike) colour).red())
                     .findAny();
             if (opText.isPresent()) {
                 return opText;

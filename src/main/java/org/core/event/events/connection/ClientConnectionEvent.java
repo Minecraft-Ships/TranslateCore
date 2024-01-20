@@ -35,8 +35,8 @@ public interface ClientConnectionEvent extends EntityEvent<LivePlayer> {
 
         @Deprecated(forRemoval = true)
         default Leave setLeavingMessage(AText message) {
-            if (message instanceof AdventureText adventureText) {
-                return this.setLeaveMessage(adventureText.getComponent());
+            if (message instanceof AdventureText) {
+                return this.setLeaveMessage(((AdventureText) message).getComponent());
             }
             return this.setLeaveMessage(ComponentUtils.fromLegacy(message.toLegacy()));
         }

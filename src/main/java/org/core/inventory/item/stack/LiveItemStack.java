@@ -16,9 +16,10 @@ public interface LiveItemStack extends ItemStack {
     default Optional<SyncExactPosition> getPosition() {
         for (WorldExtent extent : TranslateCore.getServer().getWorlds()) {
             for (LiveTileEntity tile : extent.getTileEntities()) {
-                if (!(tile instanceof ContainerTileEntity cTile)) {
+                if (!(tile instanceof ContainerTileEntity)) {
                     continue;
                 }
+                ContainerTileEntity cTile = (ContainerTileEntity) tile;
                 if (cTile
                         .getInventory()
                         .getSlots()

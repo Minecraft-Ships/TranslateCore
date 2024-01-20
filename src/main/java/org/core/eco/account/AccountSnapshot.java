@@ -31,18 +31,27 @@ public class AccountSnapshot implements Account {
     @Override
     public @NotNull PendingTransaction transact(@NotNull Transaction transaction) {
         switch (transaction.getType()) {
-            case DEPOSIT -> {
+            case DEPOSIT:
                 return this.transaction(transaction, BigDecimal::add);
-            }
-            case WITHDRAW -> {
+            case WITHDRAW:
                 return this.transaction(transaction, BigDecimal::subtract);
-            }
-            case SET -> {
+            case SET:
                 return this.transaction(transaction, (current, newValue) -> newValue);
-            }
-            default -> throw new IllegalArgumentException(
-                    "Unknown transaction type of '" + transaction.getType().name() + "'");
+            default:
+                throw new IllegalArgumentException(
+                        "Unknown transaction type of '" + transaction.getType().name() + "'");
         }
+    }
+
+    @Override
+    public @NotNull BigDecimal getBalance(@NotNull Currency currency) {
+        BigDecimal amount = this.cachedAmount.get(currency);
+        if (amount != null) {
+            return amount;
+        }
+        amount = this.account.getBalance(currency);
+        this.cachedAmount.put(currency, amount);
+        return amount;
     }
 
     private PendingTransaction transaction(@NotNull Transaction transaction,
@@ -62,16 +71,5 @@ public class AccountSnapshot implements Account {
         TransactionResult transactionResult = new TransactionResultImpl(transaction, current, newValue);
         return new PendingSingleTransactionImpl(this, transaction,
                                                 CompletableFuture.completedFuture(transactionResult));
-    }
-
-    @Override
-    public @NotNull BigDecimal getBalance(@NotNull Currency currency) {
-        BigDecimal amount = this.cachedAmount.get(currency);
-        if (amount != null) {
-            return amount;
-        }
-        amount = this.account.getBalance(currency);
-        this.cachedAmount.put(currency, amount);
-        return amount;
     }
 }

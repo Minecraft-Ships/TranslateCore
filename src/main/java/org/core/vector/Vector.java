@@ -98,9 +98,10 @@ public abstract class Vector<N extends Number, VSelf extends Vector<N, ?>> {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Vector<?, ?> vector)) {
+        if (!(obj instanceof Vector<?, ?>)) {
             return false;
         }
+        Vector<?, ?> vector = (Vector<?, ?>) obj;
         if (vector.getPointCount() != this.getPointCount()) {
             return false;
         }

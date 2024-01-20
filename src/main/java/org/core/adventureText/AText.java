@@ -31,8 +31,8 @@ public interface AText extends ComponentLike {
 
     @Override
     default @NotNull Component asComponent() {
-        if (this instanceof AdventureText adventureText) {
-            return adventureText.getComponent();
+        if (this instanceof AdventureText) {
+            return ((AdventureText) this).getComponent();
         }
         return ComponentUtils.fromLegacy(this.toLegacy());
     }

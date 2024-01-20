@@ -12,7 +12,9 @@ repositories {
 group = 'org.core'
 version = '1.0-SNAPSHOT'
 description = 'TranslateCore'
-java.sourceCompatibility = JavaVersion.VERSION_16
+java {
+    sourceCompatibility = JavaLanguageVersion.of(11);
+}
 
 compileJava.options.encoding = 'UTF-8'
 
