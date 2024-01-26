@@ -182,6 +182,6 @@ public class Bounds<N extends Number> {
         if (max.getY() < y) {
             return false;
         }
-        return max.getZ() > z;
+        return max.getZ() >= z;
     }
 }
