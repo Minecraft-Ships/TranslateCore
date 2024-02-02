@@ -48,7 +48,14 @@ public class SixteenFacingDirection extends EightFacingDirection {
     }
 
     public static Direction[] getSixteenFacingDirections() {
-        return ArrayUtils.join(Direction.class, EightFacingDirection.getEightFacingDirections(),
-                               new Direction[]{NORTH_EAST});
+        return ArrayUtils.join(Direction.class, EightFacingDirection.getEightFacingDirections(), new Direction[]{
+                NORTH_NORTH_EAST,
+                NORTH_NORTH_WEST,
+                SOUTH_SOUTH_EAST,
+                SOUTH_SOUTH_WEST,
+                WEST_SOUTH_WEST,
+                WEST_NORTH_WEST,
+                EAST_NORTH_EAST,
+                EAST_SOUTH_EAST});
     }
 }
