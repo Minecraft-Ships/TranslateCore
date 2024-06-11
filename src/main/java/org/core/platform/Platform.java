@@ -48,6 +48,10 @@ import java.util.Set;
  */
 public interface Platform {
 
+    boolean areDeveloperCommandsEnabled();
+
+    void setDeveloperCommandsEnabled(boolean enabled);
+
     @NotNull PlatformDetails getImplementationDetails();
 
     @NotNull Collection<PlatformUpdate<?>> getUpdateCheckers();

@@ -5,6 +5,7 @@ import org.core.TranslateCore;
 import org.core.adventureText.AText;
 import org.core.command.argument.ArgumentCommand;
 import org.core.command.argument.CommandArgument;
+import org.core.command.argument.arguments.operation.ExactArgument;
 import org.core.command.argument.context.CommandContext;
 import org.core.exceptions.NotEnoughArguments;
 import org.core.permission.CorePermission;
@@ -22,7 +23,7 @@ import java.util.Optional;
 public class TimingsCommand implements ArgumentCommand {
     @Override
     public List<CommandArgument<?>> getArguments() {
-        return Collections.emptyList();
+        return List.of(new ExactArgument("timings"));
     }
 
     @Override

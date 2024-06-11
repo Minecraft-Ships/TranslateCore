@@ -260,7 +260,7 @@ public class CommandContext {
             }
         }
         Collection<String> ret = new HashSet<>();
-        if (commandArgument == arguments.size()) {
+        if (commandArgument == arguments.size() && !arguments.isEmpty()) {
             ret.addAll(this.suggest(arguments.get(arguments.size() - 1), commandArgument));
         }
         for (OptionalArgument<?> argument : optionalArguments) {
