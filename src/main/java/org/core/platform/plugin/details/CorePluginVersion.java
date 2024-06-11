@@ -38,6 +38,38 @@ public class CorePluginVersion implements PluginVersion {
         return this.patch;
     }
 
+    public boolean isGreater(int major) {
+        return this.isGreater(major, null, null);
+    }
+
+    public boolean isGreater(int major, int minor) {
+        return this.isGreater(major, minor, null);
+    }
+
+    public boolean isGreater(int major, @Nullable Integer minor, @Nullable Integer patch) {
+        if (major > this.major) {
+            return true;
+        }
+        if (major < this.major) {
+            return false;
+        }
+        if (minor != null) {
+            if (minor > this.minor) {
+                return true;
+            }
+            if (minor < this.minor) {
+                return false;
+            }
+        }
+        if (patch == null) {
+            return true;
+        }
+        if (patch > this.patch) {
+            return true;
+        }
+        return !(patch < this.patch);
+    }
+
     @Override
     public @NotNull String asString() {
         String versionName = this.versionName;
