@@ -1,61 +1,31 @@
 package org.core.world.position.block.grouptype;
 
 import org.core.TranslateCore;
-import org.core.platform.plugin.details.CorePluginVersion;
-import org.core.world.position.block.grouptype.versions.BlockGroups1V13;
-import org.core.world.position.block.grouptype.versions.CommonBlockGroups;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.function.Supplier;
 
-public class BlockGroups {
+public final class BlockGroups {
 
-    private static final BlockGroups IMPLEMENTATION;
+    public static final Supplier<BlockGroup> CARPET = createGroup("minecraft:carpets");
+    public static final Supplier<BlockGroup> BUTTONS = createGroup("minecraft:buttons");
+    public static final Supplier<BlockGroup> SIGNS = createGroup("minecraft:signs");
+    public static final Supplier<BlockGroup> FENCES = createGroup("minecraft:fences");
+    public static final Supplier<BlockGroup> FENCE_GATES = createGroup("minecraft:fence_gates");
+    public static final Supplier<BlockGroup> DOORS = createGroup("minecraft:doors");
+    public static final Supplier<BlockGroup> SHULKER_BOXES = createGroup("minecraft:shulker_boxes");
+    public static final Supplier<BlockGroup> ANVIL = createGroup("minecraft:anvil");
 
-    static {
-        IMPLEMENTATION = new BlockGroups().registerFields(CommonBlockGroups.class);
-        CorePluginVersion version = TranslateCore.getPlatform().getMinecraftVersion();
-        if (version.getMajor() == 1) {
-            IMPLEMENTATION.registerFields(BlockGroups1V13.class);
-
-        }
+    private BlockGroups() {
+        throw new RuntimeException("Do not create");
     }
 
-    private final Collection<BlockGroup> groups = new HashSet<>();
 
-    public static Optional<BlockGroup> getFromId(String id) {
-        return values().stream().filter(v -> v.getId().equals(id)).findAny();
+    private static Supplier<BlockGroup> createGroup(String id) {
+        return () -> TranslateCore
+                .getPlatform()
+                .getBlockGroup(id)
+                .orElseThrow(() -> new RuntimeException("Cannot find the Block Tag of " + id));
     }
 
-    public static Collection<BlockGroup> values() {
-        return Collections.unmodifiableCollection(IMPLEMENTATION.groups);
-    }
 
-    public BlockGroups register(BlockGroup... groups) {
-        this.groups.addAll(Arrays.asList(groups));
-        return this;
-    }
-
-    public BlockGroups register(Collection<? extends BlockGroup> groups) {
-        this.groups.addAll(groups);
-        return this;
-    }
-
-    public BlockGroups registerFields(Class<?> clazz) {
-        for (Field field : clazz.getDeclaredFields()) {
-            if (!Modifier.isStatic(field.getModifiers())) {
-                continue;
-            }
-            if (!BlockGroup.class.isAssignableFrom(field.getType())) {
-                continue;
-            }
-            try {
-                BlockGroup group = (BlockGroup) field.get(null);
-                this.groups.add(group);
-            } catch (IllegalAccessException ignored) {
-            }
-        }
-        return this;
-    }
 }

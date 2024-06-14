@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface Structure {
 
@@ -21,7 +23,12 @@ public interface Structure {
 
     Set<EntitySnapshot<?>> getEntities();
 
-    Set<BlockSetDetails> getBlocks();
+    @Deprecated(forRemoval = true)
+    default Set<BlockSetDetails> getBlocks() {
+        return getBlockDetails().collect(Collectors.toSet());
+    }
+
+    Stream<BlockSetDetails> getBlockDetails();
 
     Vector3<Integer> getSize();
 

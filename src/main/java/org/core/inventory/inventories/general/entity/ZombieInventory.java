@@ -8,6 +8,7 @@ import org.core.inventory.parts.Slot;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public interface ZombieInventory<Z extends Zombie<LiveEntity> & LiveEntity> extends BasicEntityInventory<Z> {
 
@@ -15,10 +16,8 @@ public interface ZombieInventory<Z extends Zombie<LiveEntity> & LiveEntity> exte
     ZombieInventorySnapshot<Z> createSnapshot();
 
     @Override
-    default Set<Slot> getSlots() {
-        Set<Slot> slots = new HashSet<>(this.getArmor().getSlots());
-        slots.add(this.getMainHoldingItem());
-        slots.add(this.getOffHoldingItem());
-        return slots;
+    default Stream<Slot> getItemSlots() {
+        Stream<Slot> stream = this.getArmor().getItemSlots();
+        return Stream.concat(stream, Stream.of(this.getMainHoldingItem(), this.getOffHoldingItem()));
     }
 }

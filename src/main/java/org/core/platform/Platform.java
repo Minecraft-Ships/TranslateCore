@@ -22,8 +22,6 @@ import org.core.platform.plugin.details.CorePluginVersion;
 import org.core.platform.update.PlatformUpdate;
 import org.core.platform.update.UpdateOption;
 import org.core.utils.Singleton;
-import org.core.world.boss.colour.BossColour;
-import org.core.world.boss.colour.BossColours;
 import org.core.world.position.block.BlockType;
 import org.core.world.position.block.entity.TileEntity;
 import org.core.world.position.block.entity.TileEntitySnapshot;
@@ -42,6 +40,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Info about the platform TranslateCore is running on
@@ -55,8 +55,6 @@ public interface Platform {
     @NotNull PlatformDetails getImplementationDetails();
 
     @NotNull Collection<PlatformUpdate<?>> getUpdateCheckers();
-
-    @NotNull Singleton<BossColour> get(BossColours colours);
 
     @NotNull Singleton<ApplyPhysicsFlag> get(ApplyPhysicsFlags flags);
 
@@ -83,8 +81,6 @@ public interface Platform {
 
     @NotNull Optional<PatternLayerType> getPatternLayerType(String id);
 
-    @NotNull Optional<BossColour> getBossColour(String id);
-
     @NotNull Optional<ParrotType> getParrotType(String id);
 
     @NotNull Optional<ApplyPhysicsFlag> getApplyPhysics(String id);
@@ -92,26 +88,48 @@ public interface Platform {
     @Deprecated
     @NotNull Optional<UnspecificParser<?>> getUnspecifiedParser(String id);
 
-    @NotNull Collection<EntityType<? extends LiveEntity, ? extends EntitySnapshot<? extends LiveEntity>>> getEntityTypes();
+    @Deprecated(forRemoval = true)
+    default @NotNull Collection<EntityType<? extends LiveEntity, ? extends EntitySnapshot<? extends LiveEntity>>> getEntityTypes() {
+        return getAllEntityTypes().collect(Collectors.toSet());
+    }
 
-    @NotNull Collection<BlockType> getBlockTypes();
+    Stream<EntityType<? extends LiveEntity, ? extends EntitySnapshot<? extends LiveEntity>>> getAllEntityTypes();
 
-    @NotNull Collection<ItemType> getItemTypes();
+    @Deprecated(forRemoval = true)
+    default @NotNull Collection<BlockType> getBlockTypes() {
+        return getAllBlockTypes().collect(Collectors.toSet());
+    }
+
+    Stream<BlockType> getAllBlockTypes();
+
+    @Deprecated(forRemoval = true)
+    default @NotNull Collection<ItemType> getItemTypes() {
+        return getAllItemTypes().collect(Collectors.toSet());
+    }
+
+    Stream<ItemType> getAllItemTypes();
 
     @NotNull Collection<DyeType> getDyeTypes();
 
     @NotNull Collection<PatternLayerType> getPatternLayerTypes();
 
-    @NotNull Collection<BlockGroup> getBlockGroups();
-
     @Deprecated(forRemoval = true)
-    @NotNull Collection<BossColour> getBossColours();
+    default @NotNull Collection<BlockGroup> getBlockGroups() {
+        return getAllBlockGroups().collect(Collectors.toSet());
+    }
+
+    Stream<BlockGroup> getAllBlockGroups();
 
     @NotNull Collection<ParrotType> getParrotType();
 
     @NotNull Collection<ApplyPhysicsFlag> getApplyPhysics();
 
-    @NotNull Collection<Permission> getPermissions();
+    @Deprecated(forRemoval = true)
+    default @NotNull Collection<Permission> getPermissions() {
+        return getAllPermissions().collect(Collectors.toSet());
+    }
+
+    Stream<Permission> getAllPermissions();
 
     @NotNull Collection<Structure> getStructures();
 
@@ -135,7 +153,12 @@ public interface Platform {
 
     @NotNull ConfigurationFormat getConfigFormat();
 
-    @NotNull Set<Plugin> getPlugins();
+    @Deprecated(forRemoval = true)
+    default @NotNull Set<Plugin> getPlugins() {
+        return getAllPlugins().collect(Collectors.toSet());
+    }
+
+    Stream<Plugin> getAllPlugins();
 
     @NotNull File getPlatformPluginsFolder();
 
@@ -158,11 +181,11 @@ public interface Platform {
     @NotNull <E extends CustomEvent> E callEvent(E event);
 
     default @NotNull Optional<BlockGroup> getBlockGroup(@NotNull String id) {
-        return this.getBlockGroups().stream().filter(g -> g.getId().equals(id)).findFirst();
+        return this.getAllBlockGroups().filter(g -> g.getId().equals(id)).findFirst();
     }
 
     default @NotNull Optional<Plugin> getPlugin(@NotNull String name) {
-        return this.getPlugins().stream().filter(p -> p.getPluginName().equals(name)).findAny();
+        return this.getAllPlugins().filter(p -> p.getPluginName().equals(name)).findAny();
     }
 
     default @NotNull Optional<TileEntitySnapshot<? extends TileEntity>> getDefaultTileEntity(@NotNull BlockType type) {

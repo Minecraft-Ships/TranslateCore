@@ -1,8 +1,8 @@
 package org.core.command.commands.timings;
 
 import com.sun.management.OperatingSystemMXBean;
+import net.kyori.adventure.text.Component;
 import org.core.TranslateCore;
-import org.core.adventureText.AText;
 import org.core.command.argument.ArgumentCommand;
 import org.core.command.argument.CommandArgument;
 import org.core.command.argument.arguments.operation.ExactArgument;
@@ -40,27 +40,27 @@ public class TimingsCommand implements ArgumentCommand {
     public boolean run(CommandContext commandContext, String... args) throws NotEnoughArguments {
         CommandSource viewer = commandContext.getSource();
         OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
-        viewer.sendMessage(AText.ofPlain("Getting timings"));
-        viewer.sendMessage(AText.ofPlain("CPU usage: " + osBean.getProcessCpuLoad()));
-        viewer.sendMessage(AText.ofPlain("CPU process usage: " + osBean.getProcessCpuLoad()));
+        viewer.sendMessage(Component.text("Getting timings"));
+        viewer.sendMessage(Component.text("CPU usage: " + osBean.getProcessCpuLoad()));
+        viewer.sendMessage(Component.text("CPU process usage: " + osBean.getProcessCpuLoad()));
 
         new Thread(() -> {
             Collection<Scheduler> schedules = TranslateCore.getScheduleManager().getSchedules();
-            viewer.sendMessage(AText.ofPlain("Scheduled tasks: " + schedules.size()));
+            viewer.sendMessage(Component.text("Scheduled tasks: " + schedules.size()));
             for (Scheduler scheduler : schedules) {
-                viewer.sendMessage(AText.ofPlain(
+                viewer.sendMessage(Component.text(
                         "|---|" + scheduler.getDisplayName() + " - " + scheduler.getPlugin().getPluginId() + " |---|"));
-                viewer.sendMessage(AText.ofPlain(" - ASync: " + scheduler.isAsync()));
+                viewer.sendMessage(Component.text(" - ASync: " + scheduler.isAsync()));
 
                 Optional<LocalTime> startRunner = scheduler.getStartRunnerTime();
                 if (startRunner.isEmpty()) {
-                    viewer.sendMessage(AText.ofPlain(" - Run Time: Not started"));
+                    viewer.sendMessage(Component.text(" - Run Time: Not started"));
                 } else {
                     int duration =
                             scheduler.getEndTime().orElseGet(LocalTime::now).getNano() - (startRunner.get().getNano());
-                    viewer.sendMessage(AText.ofPlain(" - Run Time: " + duration));
+                    viewer.sendMessage(Component.text(" - Run Time: " + duration));
                 }
-                viewer.sendMessage(AText.ofPlain(" - Has Ended: " + scheduler.getEndTime().isPresent()));
+                viewer.sendMessage(Component.text(" - Has Ended: " + scheduler.getEndTime().isPresent()));
             }
         }).start();
         return true;

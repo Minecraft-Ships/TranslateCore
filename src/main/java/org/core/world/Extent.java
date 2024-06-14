@@ -14,8 +14,11 @@ import org.core.world.position.impl.async.ASyncPosition;
 import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
 import org.core.world.position.impl.sync.SyncPosition;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface Extent {
 
@@ -31,11 +34,22 @@ public interface Extent {
 
     boolean isLoaded();
 
-    Set<LiveEntity> getEntities();
+    @Deprecated(forRemoval = true)
+    default Set<LiveEntity> getEntities() {
+        return getLiveEntities().collect(Collectors.toSet());
+    }
 
-    Set<LiveTileEntity> getTileEntities();
+    Stream<LiveEntity> getLiveEntities();
 
-    default <N extends Number> SyncPosition<N> getPosition(Vector3<N> vector) {
+    @Deprecated(forRemoval = true)
+    default Set<LiveTileEntity> getTileEntities() {
+        return getLiveTileEntities().collect(Collectors.toSet());
+    }
+
+    Stream<LiveTileEntity> getLiveTileEntities();
+
+    @NotNull
+    default <N extends Number> SyncPosition<N> getPosition(@NotNull Vector3<N> vector) {
         if (vector.getX() instanceof Integer) {
             return (SyncPosition<N>) this.getPosition(vector.getX().intValue(), vector.getY().intValue(),
                                                       vector.getZ().intValue());
@@ -54,7 +68,8 @@ public interface Extent {
                                                   vector.getZ().doubleValue());
     }
 
-    default <N extends Number> ASyncPosition<N> getAsyncPosition(Vector3<N> vector) {
+    @NotNull
+    default <N extends Number> ASyncPosition<N> getAsyncPosition(@NotNull Vector3<N> vector) {
         if (vector.getX() instanceof Integer) {
             return (ASyncPosition<N>) this.getAsyncPosition(vector.getX().intValue(), vector.getY().intValue(),
                                                             vector.getZ().intValue());

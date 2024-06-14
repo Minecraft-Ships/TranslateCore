@@ -2,9 +2,7 @@ package org.core.inventory.parts;
 
 import org.core.inventory.parts.snapshot.ArmorPartSnapshot;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.stream.Stream;
 
 public interface ArmorPart extends InventoryPart {
 
@@ -22,11 +20,12 @@ public interface ArmorPart extends InventoryPart {
     }
 
     @Override
-    default Set<Slot> getSlots() {
-        return new HashSet<>(Arrays.asList(
-                this.getHelmetSlot(),
-                this.getArmorSlot(),
-                this.getLeggingsSlot(),
-                this.getShoesSlot()));
+    default Stream<Slot> getItemSlots() {
+        return Stream.of(this.getHelmetSlot(), this.getArmorSlot(), this.getLeggingsSlot(), this.getShoesSlot());
+    }
+
+    @Override
+    default int getSlotCount() {
+        return 4;
     }
 }

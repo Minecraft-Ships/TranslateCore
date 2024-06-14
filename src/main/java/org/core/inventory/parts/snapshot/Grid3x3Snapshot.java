@@ -9,13 +9,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Grid3x3Snapshot implements Grid3x3, InventoryPartSnapshot {
 
     protected final Set<Slot> slots = new HashSet<>();
 
     public Grid3x3Snapshot(Inventory grid) {
-        this(grid.getSlots());
+        this(grid.getItemSlots().collect(Collectors.toList()));
     }
 
     public Grid3x3Snapshot(Slot... slots) {
@@ -30,12 +31,17 @@ public class Grid3x3Snapshot implements Grid3x3, InventoryPartSnapshot {
     }
 
     @Override
-    public Set<Slot> getSlots() {
-        return this.slots;
+    public Stream<Slot> getItemSlots() {
+        return this.slots.stream();
     }
 
     @Override
     public Grid3x3Snapshot createSnapshot() {
         return new Grid3x3Snapshot(this);
+    }
+
+    @Override
+    public int getSlotCount() {
+        return this.slots.size();
     }
 }

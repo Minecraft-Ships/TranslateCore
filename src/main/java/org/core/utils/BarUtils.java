@@ -16,8 +16,7 @@ public final class BarUtils {
     public static Stream<LivePlayer> getPlayers(@NotNull BossBar bar) {
         return TranslateCore
                 .getServer()
-                .getOnlinePlayers()
-                .stream()
+                .getLivePlayers()
                 .filter(player -> player.bossBarsStream().anyMatch(boss -> boss.equals(bar)));
     }
 

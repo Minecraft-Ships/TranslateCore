@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface BlockPosition extends Position<Integer> {
 
@@ -45,11 +46,16 @@ public interface BlockPosition extends Position<Integer> {
         return (BlockPosition) this.getRelative(vector.getX(), vector.getY(), vector.getZ());
     }
 
+    @Deprecated(forRemoval = true)
     default Set<LiveEntity> getAttachedEntities() {
-        return this.getWorld().getEntities().stream().filter(e -> {
+        return getAttachedLiveEntities().collect(Collectors.toSet());
+    }
+
+    default Stream<LiveEntity> getAttachedLiveEntities() {
+        return this.getWorld().getLiveEntities().filter(e -> {
             Optional<SyncBlockPosition> opAttached = e.getAttachedTo();
             return opAttached.map(syncBlockPosition -> syncBlockPosition.equals(this)).orElse(false);
-        }).collect(Collectors.toSet());
+        });
     }
 
     default boolean isInLineOfSight(final Vector3<Integer> vector, FourFacingDirection direction) {

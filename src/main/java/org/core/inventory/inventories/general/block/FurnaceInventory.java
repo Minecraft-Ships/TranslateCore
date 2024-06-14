@@ -10,6 +10,8 @@ import org.core.world.position.block.BlockTypes;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public interface FurnaceInventory extends BlockAttachedInventory, Inventory.Parent {
 
@@ -25,20 +27,15 @@ public interface FurnaceInventory extends BlockAttachedInventory, Inventory.Pare
     }
 
     @Override
-    default Set<InventoryPart> getFirstChildren() {
-        Set<InventoryPart> set = new HashSet<>();
-        set.add(this.getFuelSlot());
-        set.add(this.getResultsSlot());
-        return set;
+    default Stream<InventoryPart> getParts() {
+        return this.getItemSlots().map(slot -> slot);
     }
 
     @Override
-    default Set<Slot> getSlots() {
-        Set<Slot> slots = new HashSet<>();
-        slots.add(this.getFuelSlot());
-        slots.add(this.getResultsSlot());
-        slots.add(this.getSmeltingSlot());
-        return slots;
+    default Stream<Slot> getItemSlots() {
+        return Stream
+                .<Supplier<Slot>>of(this::getFuelSlot, this::getResultsSlot, this::getSmeltingSlot)
+                .map(Supplier::get);
     }
 
     @Override

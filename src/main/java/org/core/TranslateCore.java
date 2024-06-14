@@ -11,7 +11,6 @@ import org.core.platform.PlatformServer;
 import org.core.platform.plugin.CorePlugin;
 import org.core.schedule.ScheduleManager;
 import org.core.source.command.ConsoleSource;
-import org.core.world.boss.ServerBossBar;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -45,12 +44,6 @@ public interface TranslateCore {
     ConsoleSource getRawConsole();
 
     PlatformServer getRawServer();
-
-    @Deprecated(forRemoval = true)
-    ServerBossBar bossBuilder();
-
-    @Deprecated(forRemoval = true)
-    ServerBossBar bossBuilder(BossBar bar);
 
     ConfigManager getRawConfigManager();
 
@@ -87,17 +80,6 @@ public interface TranslateCore {
     @Deprecated
     static ConfigurationStream.ConfigurationFile createConfigurationFile(File file, ConfigurationFormat type) {
         return getConfigManager().read(file, type);
-    }
-
-    @Deprecated(forRemoval = true)
-    static ServerBossBar createBossBar() {
-        return TranslateCore.CoreImplementation.getImplementation().bossBuilder();
-    }
-
-
-    @Deprecated(forRemoval = true)
-    static ServerBossBar createBossBar(@NotNull BossBar bar) {
-        return TranslateCore.CoreImplementation.getImplementation().bossBuilder(bar);
     }
 
     static Optional<Class<? extends CorePlugin>> getStandAloneLauncher() {

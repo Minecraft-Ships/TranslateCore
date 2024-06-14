@@ -9,13 +9,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Grid2x2Snapshot implements InventoryPartSnapshot, Grid2x2 {
 
     protected final Set<Slot> slots = new HashSet<>();
 
     public Grid2x2Snapshot(Inventory part) {
-        this(part.getSlots());
+        this(part.getItemSlots().collect(Collectors.toSet()));
     }
 
     public Grid2x2Snapshot(Slot... slots) {
@@ -30,12 +31,17 @@ public class Grid2x2Snapshot implements InventoryPartSnapshot, Grid2x2 {
     }
 
     @Override
-    public Set<Slot> getSlots() {
-        return this.slots;
+    public Stream<Slot> getItemSlots() {
+        return this.slots.stream();
     }
 
     @Override
     public Grid2x2Snapshot createSnapshot() {
         return new Grid2x2Snapshot(this);
+    }
+
+    @Override
+    public int getSlotCount() {
+        return this.slots.size();
     }
 }

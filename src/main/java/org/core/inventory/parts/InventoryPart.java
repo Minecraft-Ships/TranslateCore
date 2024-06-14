@@ -9,8 +9,7 @@ public interface InventoryPart extends Inventory {
     @Override
     default Optional<Slot> getSlot(int slotPos) {
         return this
-                .getSlots()
-                .stream()
+                .getItemSlots()
                 .filter(s -> s.getPosition().isPresent())
                 .filter(s -> s.getPosition().get() == slotPos)
                 .findFirst();

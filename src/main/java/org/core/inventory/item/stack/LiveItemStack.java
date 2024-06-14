@@ -1,12 +1,15 @@
 package org.core.inventory.item.stack;
 
 import org.core.TranslateCore;
+import org.core.entity.Entity;
 import org.core.entity.InventoryHoldingEntity;
 import org.core.entity.ItemHoldingEntity;
 import org.core.entity.LiveEntity;
+import org.core.world.Extent;
 import org.core.world.WorldExtent;
 import org.core.world.position.block.entity.LiveTileEntity;
 import org.core.world.position.block.entity.container.ContainerTileEntity;
+import org.core.world.position.impl.sync.SyncBlockPosition;
 import org.core.world.position.impl.sync.SyncExactPosition;
 
 import java.util.Optional;
@@ -14,45 +17,38 @@ import java.util.Optional;
 public interface LiveItemStack extends ItemStack {
 
     default Optional<SyncExactPosition> getPosition() {
-        for (WorldExtent extent : TranslateCore.getServer().getWorlds()) {
-            for (LiveTileEntity tile : extent.getTileEntities()) {
-                if (!(tile instanceof ContainerTileEntity)) {
-                    continue;
-                }
-                ContainerTileEntity cTile = (ContainerTileEntity) tile;
-                if (cTile
+        Optional<SyncExactPosition> opPositionFromTile = TranslateCore
+                .getServer()
+                .getWorldExtent()
+                .flatMap(Extent::getLiveTileEntities)
+                .filter(entity -> entity instanceof ContainerTileEntity)
+                .map(entity -> (ContainerTileEntity) entity)
+                .filter(entity -> entity
                         .getInventory()
-                        .getSlots()
-                        .stream()
-                        .filter(i -> i.getItem().isPresent())
-                        .anyMatch(i -> i.getItem().get().equals(this))) {
-                    return Optional.of(tile.getPosition().toExactPosition());
-                }
-            }
-            for (LiveEntity entity : extent.getEntities()) {
-                if (entity instanceof ItemHoldingEntity) {
-                    ItemHoldingEntity<?> ihEntity = (ItemHoldingEntity<?>) entity;
-                    Optional<ItemStack> opItem = ihEntity.getHoldingItem().getItem();
-                    if (opItem.isEmpty()) {
-                        continue;
-                    }
-                    if (opItem.get().equals(this)) {
-                        return Optional.of(entity.getPosition());
-                    }
-                }
-                if (entity instanceof InventoryHoldingEntity) {
-                    InventoryHoldingEntity<?> ihEntity = (InventoryHoldingEntity<?>) entity;
-                    if (ihEntity
-                            .getInventory()
-                            .getSlots()
-                            .stream()
-                            .filter(slot -> slot.getItem().isPresent())
-                            .anyMatch(slot -> slot.getItem().get().equals(this))) {
-                        return Optional.of(entity.getPosition());
-                    }
-                }
-            }
+                        .getItemSlots()
+                        .anyMatch(slot -> slot.getItem().map(item -> item.equals(this)).orElse(false)))
+                .map(entity -> ((LiveTileEntity) entity).getPosition())
+                .map(SyncBlockPosition::toExactPosition)
+                .findFirst();
+        if (opPositionFromTile.isPresent()) {
+            return opPositionFromTile;
         }
-        return Optional.empty();
+        return TranslateCore.getServer().getWorldExtent().flatMap(Extent::getLiveEntities).filter(entity -> {
+            if (entity instanceof ItemHoldingEntity) {
+                ItemHoldingEntity<?> ihEntity = (ItemHoldingEntity<?>) entity;
+                if (ihEntity.getHoldingItem().getItem().map(item -> item.equals(this)).orElse(false)) {
+                    return true;
+                }
+            }
+            if (entity instanceof InventoryHoldingEntity) {
+                InventoryHoldingEntity<?> ihEntity = (InventoryHoldingEntity<?>) entity;
+                return ihEntity
+                        .getInventory()
+                        .getItemSlots()
+                        .filter(slot -> slot.getItem().isPresent())
+                        .anyMatch(slot -> slot.getItem().get().equals(this));
+            }
+            return false;
+        }).findFirst().map(Entity::getPosition);
     }
 }

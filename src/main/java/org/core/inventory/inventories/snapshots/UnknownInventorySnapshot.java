@@ -9,17 +9,19 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UnknownInventorySnapshot implements InventorySnapshot {
 
-    private final Set<Slot> slots = new HashSet<>();
+    private final Collection<Slot> slots = new HashSet<>();
 
     public UnknownInventorySnapshot() {
 
     }
 
     public UnknownInventorySnapshot(Inventory inventory) {
-        this.slots.addAll(inventory.getSlots());
+        this.slots.addAll(inventory.getItemSlots().collect(Collectors.toList()));
     }
 
     public UnknownInventorySnapshot(Collection<? extends SlotSnapshot> collection) {
@@ -32,8 +34,13 @@ public class UnknownInventorySnapshot implements InventorySnapshot {
     }
 
     @Override
-    public Set<Slot> getSlots() {
-        return this.slots;
+    public Stream<Slot> getItemSlots() {
+        return this.slots.stream();
+    }
+
+    @Override
+    public int getSlotCount() {
+        return this.slots.size();
     }
 
     @Override

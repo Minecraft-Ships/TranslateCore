@@ -4,6 +4,7 @@ import org.core.TranslateCore;
 import org.core.world.position.block.grouptype.BlockGroup;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Gets a block group from a single string argument
@@ -16,6 +17,6 @@ public class BlockGroupArgument extends IdentifiableArgument<BlockGroup> {
 
     @Override
     public Collection<BlockGroup> getAll() {
-        return TranslateCore.getPlatform().getBlockGroups();
+        return TranslateCore.getPlatform().getAllBlockGroups().collect(Collectors.toSet());
     }
 }

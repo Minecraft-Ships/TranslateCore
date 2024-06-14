@@ -8,6 +8,7 @@ import org.core.world.position.impl.sync.SyncExactPosition;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface Explosion extends Positionable<SyncExactPosition> {
 
@@ -27,13 +28,18 @@ public interface Explosion extends Positionable<SyncExactPosition> {
         Collection<BlockSnapshot.SyncBlockSnapshot> getBlocks();
 
         @Override
-        default Collection<SyncBlockPosition> getAffectedPositions() {
-            return this.getBlocks().parallelStream().map(Positionable::getPosition).collect(Collectors.toSet());
+        default Stream<SyncBlockPosition> getAffectedBlockPositions() {
+            return this.getBlocks().parallelStream().map(Positionable::getPosition);
         }
 
     }
 
-    Collection<SyncBlockPosition> getAffectedPositions();
+    @Deprecated(forRemoval = true)
+    default Collection<SyncBlockPosition> getAffectedPositions() {
+        return getAffectedBlockPositions().collect(Collectors.toSet());
+    }
+
+    Stream<SyncBlockPosition> getAffectedBlockPositions();
 
     Object getSource();
 }

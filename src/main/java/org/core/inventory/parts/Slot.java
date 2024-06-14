@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public interface Slot extends InventoryPart {
 
@@ -27,7 +28,7 @@ public interface Slot extends InventoryPart {
     }
 
     @Override
-    default Set<Slot> getSlots() {
-        return new HashSet<>(Collections.singletonList(this));
+    default Stream<Slot> getItemSlots() {
+        return Stream.of(this);
     }
 }

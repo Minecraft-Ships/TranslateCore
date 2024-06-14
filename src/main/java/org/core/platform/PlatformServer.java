@@ -12,14 +12,26 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface PlatformServer {
 
-    @NotNull Set<WorldExtent> getWorlds();
+    @Deprecated(forRemoval = true)
+    default @NotNull Set<WorldExtent> getWorlds() {
+        return getWorldExtent().collect(Collectors.toSet());
+    }
+
+    Stream<WorldExtent> getWorldExtent();
 
     @NotNull Optional<WorldExtent> getWorldByPlatformSpecific(String name);
 
-    @NotNull Collection<LivePlayer> getOnlinePlayers();
+    @Deprecated(forRemoval = true)
+    default @NotNull Collection<LivePlayer> getOnlinePlayers() {
+        return getLivePlayers().collect(Collectors.toSet());
+    }
+
+    Stream<LivePlayer> getLivePlayers();
 
     void applyBlockSnapshots(@NotNull Collection<? extends BlockSnapshot.AsyncBlockSnapshot> collection,
                              @NotNull Plugin plugin,

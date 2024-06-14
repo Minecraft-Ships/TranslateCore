@@ -5,20 +5,23 @@ import org.core.inventory.parts.Slot;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface Inventory {
 
     interface Parent extends Inventory {
 
-        Set<InventoryPart> getFirstChildren();
+        @Deprecated(forRemoval = true)
+        default Set<InventoryPart> getFirstChildren() {
+            return getParts().collect(Collectors.toSet());
+        }
+
+        Stream<InventoryPart> getParts();
 
         @Override
         default Optional<Slot> getSlot(int slotPos) {
-            Optional<InventoryPart> opPart = this
-                    .getFirstChildren()
-                    .stream()
-                    .filter(c -> c.getSlot(slotPos).isPresent())
-                    .findFirst();
+            Optional<InventoryPart> opPart = this.getParts().filter(c -> c.getSlot(slotPos).isPresent()).findFirst();
             if (opPart.isEmpty()) {
                 return Optional.empty();
             }
@@ -27,13 +30,18 @@ public interface Inventory {
 
     }
 
-    Set<Slot> getSlots();
+    @Deprecated(forRemoval = true)
+    default Set<Slot> getSlots() {
+        return getItemSlots().collect(Collectors.toSet());
+    }
+
+    Stream<Slot> getItemSlots();
 
     Optional<Slot> getSlot(int slotPos);
 
     Inventory createSnapshot();
 
     default int getSlotCount() {
-        return this.getSlots().size();
+        return (int) getItemSlots().count();
     }
 }

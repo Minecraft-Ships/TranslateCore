@@ -46,4 +46,9 @@ public class SlotSnapshot implements InventoryPartSnapshot, Slot {
     public SlotSnapshot createSnapshot() {
         return new SlotSnapshot(this);
     }
+
+    @Override
+    public int getSlotCount() {
+        return 1;
+    }
 }

@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public interface BasicEntityInventory<E extends LiveEntity> extends Inventory.Parent {
 
@@ -25,7 +26,7 @@ public interface BasicEntityInventory<E extends LiveEntity> extends Inventory.Pa
     Optional<E> getAttachedEntity();
 
     @Override
-    default Set<InventoryPart> getFirstChildren() {
-        return new HashSet<>(Arrays.asList(this.getArmor(), this.getMainHoldingItem(), this.getOffHoldingItem()));
+    default Stream<InventoryPart> getParts() {
+        return Stream.of(this.getArmor(), this.getMainHoldingItem(), this.getOffHoldingItem());
     }
 }

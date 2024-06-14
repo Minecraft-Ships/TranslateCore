@@ -8,6 +8,7 @@ import org.core.inventory.parts.*;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public interface PlayerInventory extends BasicEntityInventory<LivePlayer> {
 
@@ -18,14 +19,13 @@ public interface PlayerInventory extends BasicEntityInventory<LivePlayer> {
     MainPlayerInventory getMainInventory();
 
     @Override
-    default Set<Slot> getSlots() {
-        Set<Slot> slots = new HashSet<>();
-        slots.addAll(this.getHotbar().getSlots());
-        slots.addAll(this.getMainInventory().getSlots());
-        slots.addAll(this.getArmor().getSlots());
-        slots.add(this.getOffHoldingItem());
-        slots.addAll(this.getCraftingGrid().getSlots());
-        return slots;
+    default Stream<Slot> getItemSlots() {
+        Stream<Slot> stream = this.getHotbar().getItemSlots();
+        stream = Stream.concat(stream, this.getMainInventory().getItemSlots());
+        stream = Stream.concat(stream, this.getArmor().getItemSlots());
+        stream = Stream.concat(stream, Stream.of(this.getOffHoldingItem()));
+        stream = Stream.concat(stream, this.getCraftingGrid().getItemSlots());
+        return stream;
     }
 
     @Override
@@ -37,12 +37,8 @@ public interface PlayerInventory extends BasicEntityInventory<LivePlayer> {
     }
 
     @Override
-    default Set<InventoryPart> getFirstChildren() {
-        return new HashSet<>(Arrays.asList(
-                this.getArmor(),
-                this.getOffHoldingItem(),
-                this.getCraftingGrid(),
-                this.getMainInventory(),
-                this.getHotbar()));
+    default Stream<InventoryPart> getParts() {
+        return Stream.of(this.getArmor(), this.getOffHoldingItem(), this.getCraftingGrid(),
+                                           this.getMainInventory(), this.getHotbar());
     }
 }

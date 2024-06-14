@@ -8,13 +8,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MainPlayerInventorySnapshot implements MainPlayerInventory, InventoryPartSnapshot {
 
     protected final Set<Slot> slots = new HashSet<>();
 
     public MainPlayerInventorySnapshot(Inventory snapshot) {
-        this(snapshot.getSlots());
+        this(snapshot.getItemSlots().collect(Collectors.toList()));
     }
 
     public MainPlayerInventorySnapshot(Collection<? extends Slot> slots) {
@@ -22,12 +23,17 @@ public class MainPlayerInventorySnapshot implements MainPlayerInventory, Invento
     }
 
     @Override
-    public Set<Slot> getSlots() {
-        return this.slots;
+    public Stream<Slot> getItemSlots() {
+        return this.slots.stream();
     }
 
     @Override
     public MainPlayerInventorySnapshot createSnapshot() {
         return new MainPlayerInventorySnapshot(this);
+    }
+
+    @Override
+    public int getSlotCount() {
+        return this.slots.size();
     }
 }

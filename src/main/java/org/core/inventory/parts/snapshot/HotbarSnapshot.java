@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class HotbarSnapshot implements Hotbar, InventoryPartSnapshot {
 
@@ -15,7 +16,7 @@ public class HotbarSnapshot implements Hotbar, InventoryPartSnapshot {
     protected final Set<Slot> slots = new HashSet<>();
 
     public HotbarSnapshot(Hotbar bar) {
-        this(bar.getSelectedSlotPos(), bar.getSlots());
+        this(bar.getSelectedSlotPos(), bar.getItemSlots().collect(Collectors.toList()));
     }
 
     public HotbarSnapshot(int selected, Slot... slots) {
@@ -33,12 +34,17 @@ public class HotbarSnapshot implements Hotbar, InventoryPartSnapshot {
     }
 
     @Override
-    public Set<Slot> getSlots() {
-        return this.slots;
+    public Stream<Slot> getItemSlots() {
+        return this.slots.stream();
     }
 
     @Override
     public HotbarSnapshot createSnapshot() {
         return new HotbarSnapshot(this);
+    }
+
+    @Override
+    public int getSlotCount() {
+        return this.slots.size();
     }
 }

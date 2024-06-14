@@ -5,6 +5,7 @@ import org.core.world.position.block.details.data.DirectionalData;
 import org.core.world.position.block.details.data.keyed.KeyedData;
 import org.core.world.position.impl.async.ASyncBlockPosition;
 import org.core.world.position.impl.sync.SyncBlockPosition;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -22,9 +23,9 @@ public interface BlockDetails {
      */
     BlockType getType();
 
-    BlockSnapshot.AsyncBlockSnapshot createSnapshot(ASyncBlockPosition position);
+    BlockSnapshot.AsyncBlockSnapshot createSnapshot(@NotNull ASyncBlockPosition position);
 
-    BlockSnapshot.SyncBlockSnapshot createSnapshot(SyncBlockPosition position);
+    BlockSnapshot.SyncBlockSnapshot createSnapshot(@NotNull SyncBlockPosition position);
 
     Optional<DirectionalData> getDirectionalData();
 
@@ -35,15 +36,15 @@ public interface BlockDetails {
      */
     BlockDetails createCopyOf();
 
-    <T> Optional<T> get(Class<? extends KeyedData<T>> data);
+    <T> Optional<T> get(@NotNull Class<? extends KeyedData<T>> data);
 
     default <T, C extends Collection<T>> Collection<T> getAll(Class<? extends KeyedData<C>> data) {
         return this.get(data).map(t -> (Collection<T>) t).orElseGet(Collections::emptySet);
     }
 
-    <T> BlockDetails set(Class<? extends KeyedData<T>> data, T value);
+    <T> BlockDetails set(@NotNull Class<? extends KeyedData<T>> data, T value);
 
-    default <T> Optional<T> getUnspecified(Class<? extends KeyedData<?>> dataClass) {
+    default <T> Optional<T> getUnspecified(@NotNull Class<? extends KeyedData<?>> dataClass) {
         return this.get((Class<? extends KeyedData<T>>) dataClass);
     }
 }
