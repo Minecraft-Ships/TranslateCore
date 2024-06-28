@@ -4,7 +4,7 @@ import org.core.TranslateCore;
 import org.core.utils.Guaranteed;
 import org.core.utils.Singleton;
 
-public class ApplyPhysicsFlags implements Guaranteed<ApplyPhysicsFlag> {
+public final class ApplyPhysicsFlags implements Guaranteed<ApplyPhysicsFlag> {
 
     public static final Singleton<ApplyPhysicsFlag> DEFAULT = TranslateCore
             .getPlatform()

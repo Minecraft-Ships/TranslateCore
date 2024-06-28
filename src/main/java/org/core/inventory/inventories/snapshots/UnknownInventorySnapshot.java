@@ -14,14 +14,14 @@ import java.util.stream.Stream;
 
 public class UnknownInventorySnapshot implements InventorySnapshot {
 
-    private final Collection<Slot> slots = new HashSet<>();
+    private final Set<SlotSnapshot> slots = new HashSet<>();
 
     public UnknownInventorySnapshot() {
 
     }
 
     public UnknownInventorySnapshot(Inventory inventory) {
-        this.slots.addAll(inventory.getItemSlots().collect(Collectors.toList()));
+        this.slots.addAll(inventory.getItemSlots().map(Slot::createSnapshot).collect(Collectors.toList()));
     }
 
     public UnknownInventorySnapshot(Collection<? extends SlotSnapshot> collection) {
@@ -33,14 +33,13 @@ public class UnknownInventorySnapshot implements InventorySnapshot {
     public void apply() {
     }
 
-    @Override
-    public Stream<Slot> getItemSlots() {
-        return this.slots.stream();
+    public Collection<SlotSnapshot> getSlotSnapshots() {
+        return this.slots;
     }
 
     @Override
-    public int getSlotCount() {
-        return this.slots.size();
+    public Stream<Slot> getItemSlots() {
+        return this.slots.stream().map(t -> t);
     }
 
     @Override
@@ -49,11 +48,17 @@ public class UnknownInventorySnapshot implements InventorySnapshot {
                 .stream()
                 .filter(s -> s.getPosition().isPresent())
                 .filter(s -> s.getPosition().get() == slotPos)
-                .findAny();
+                .findAny()
+                .map(t -> t);
     }
 
     @Override
     public UnknownInventorySnapshot createSnapshot() {
         return new UnknownInventorySnapshot(this);
+    }
+
+    @Override
+    public int getSlotCount() {
+        return this.slots.size();
     }
 }

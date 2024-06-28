@@ -32,8 +32,7 @@ public class LivePlayerArgument implements CommandArgument<LivePlayer> {
         String command = context.getCommand()[argument.getFirstArgument()];
         Optional<LivePlayer> opPlayer = TranslateCore
                 .getServer()
-                .getOnlinePlayers()
-                .stream()
+                .getLivePlayers()
                 .filter(p -> p.getName().equalsIgnoreCase(command))
                 .findFirst();
         if (opPlayer.isEmpty()) {
@@ -48,8 +47,7 @@ public class LivePlayerArgument implements CommandArgument<LivePlayer> {
         String command = commandContext.getCommand()[argument.getFirstArgument()];
         return TranslateCore
                 .getServer()
-                .getOnlinePlayers()
-                .stream()
+                .getLivePlayers()
                 .map(AbstractHuman::getName)
                 .filter(p -> p.toLowerCase().startsWith(command.toLowerCase()))
                 .collect(Collectors.toSet());

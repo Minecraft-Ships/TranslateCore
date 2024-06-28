@@ -7,6 +7,7 @@ import org.core.world.position.impl.sync.SyncBlockPosition;
 
 import java.math.BigDecimal;
 
+@Deprecated(forRemoval = true)
 public interface ASyncBlockPosition extends ASyncPosition<Integer>, BlockPosition {
 
     @Override

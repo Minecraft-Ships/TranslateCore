@@ -17,7 +17,7 @@ import java.util.function.BiFunction;
 public class AccountSnapshot implements Account {
 
     private final Account account;
-    private Map<Currency, BigDecimal> cachedAmount = new HashMap<>();
+    private final Map<Currency, BigDecimal> cachedAmount = new HashMap<>();
 
     public AccountSnapshot(Account account) {
         this.account = account;
@@ -56,9 +56,9 @@ public class AccountSnapshot implements Account {
 
     private PendingTransaction transaction(@NotNull Transaction transaction,
                                            BiFunction<BigDecimal, BigDecimal, BigDecimal> action) {
-        BigDecimal current = cachedAmount.get(transaction.getCurrency());
+        BigDecimal current = this.cachedAmount.get(transaction.getCurrency());
         if (current == null) {
-            current = account.getBalance(transaction.getCurrency());
+            current = this.account.getBalance(transaction.getCurrency());
         }
         BigDecimal newValue = action.apply(current, transaction.getAmount());
         if (newValue.compareTo(BigDecimal.ZERO) < 0) {
@@ -67,7 +67,7 @@ public class AccountSnapshot implements Account {
             return new PendingSingleTransactionImpl(this, transaction,
                                                     CompletableFuture.completedFuture(transactionResult));
         }
-        cachedAmount.put(transaction.getCurrency(), newValue);
+        this.cachedAmount.put(transaction.getCurrency(), newValue);
         TransactionResult transactionResult = new TransactionResultImpl(transaction, current, newValue);
         return new PendingSingleTransactionImpl(this, transaction,
                                                 CompletableFuture.completedFuture(transactionResult));

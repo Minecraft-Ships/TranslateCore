@@ -14,12 +14,12 @@ public interface SignTileEntity extends TileEntity {
     boolean isMultiSideSupported();
 
     default SignSide getFront() {
-        return getSide(true);
+        return this.getSide(true);
     }
 
     default Optional<SignSide> getBack() {
         if (this.isMultiSideSupported()) {
-            return Optional.of(getSide(false));
+            return Optional.of(this.getSide(false));
         }
         return Optional.empty();
     }

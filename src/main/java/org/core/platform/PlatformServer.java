@@ -19,16 +19,17 @@ public interface PlatformServer {
 
     @Deprecated(forRemoval = true)
     default @NotNull Set<WorldExtent> getWorlds() {
-        return getWorldExtent().collect(Collectors.toSet());
+        return this.getWorldExtents().collect(Collectors.toSet());
     }
 
-    Stream<WorldExtent> getWorldExtent();
+    Stream<WorldExtent> getWorldExtents();
 
-    @NotNull Optional<WorldExtent> getWorldByPlatformSpecific(String name);
+    @NotNull
+    Optional<WorldExtent> getWorldByPlatformSpecific(String name);
 
     @Deprecated(forRemoval = true)
     default @NotNull Collection<LivePlayer> getOnlinePlayers() {
-        return getLivePlayers().collect(Collectors.toSet());
+        return this.getLivePlayers().collect(Collectors.toSet());
     }
 
     Stream<LivePlayer> getLivePlayers();
@@ -41,11 +42,14 @@ public interface PlatformServer {
         collection.forEach(bs -> bs.getPosition().setBlock(bs));
     }
 
-    @NotNull CompletableFuture<Optional<User>> getOfflineUser(@NotNull UUID uuid);
+    @NotNull
+    CompletableFuture<Optional<User>> getOfflineUser(@NotNull UUID uuid);
 
-    @NotNull CompletableFuture<Optional<User>> getOfflineUser(@NotNull String lastName);
+    @NotNull
+    CompletableFuture<Optional<User>> getOfflineUser(@NotNull String lastName);
 
-    @NotNull Collection<CompletableFuture<User>> getOfflineUsers();
+    @NotNull
+    Collection<CompletableFuture<User>> getOfflineUsers();
 
     default @NotNull Optional<WorldExtent> getWorld(@NotNull String name, boolean justName) {
         if (justName) {

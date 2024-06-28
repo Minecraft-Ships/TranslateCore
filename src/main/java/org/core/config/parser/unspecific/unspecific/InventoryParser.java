@@ -13,6 +13,7 @@ import org.core.inventory.parts.snapshot.SlotSnapshot;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Deprecated
 public class InventoryParser implements UnspecificParser<InventorySnapshot> {
@@ -20,7 +21,7 @@ public class InventoryParser implements UnspecificParser<InventorySnapshot> {
     @Override
     public void set(ConfigurationStream file, InventorySnapshot value, ConfigurationNode node) {
         int slotCount = value.getSlotCount();
-        Set<Slot> slots = value.getSlots();
+        Set<Slot> slots = value.getItemSlots().collect(Collectors.toSet());
         for (int index = 0; index < slotCount; index++) {
             final int finalIndex = index;
             Slot slot = slots
@@ -43,7 +44,7 @@ public class InventoryParser implements UnspecificParser<InventorySnapshot> {
 
     @Override
     public Optional<InventorySnapshot> parse(ConfigurationStream file, ConfigurationNode node) {
-        InventorySnapshot inv = new UnknownInventorySnapshot();
+        UnknownInventorySnapshot inv = new UnknownInventorySnapshot();
         file.getChildren(node).forEach(i -> {
             String[] totalPath = i.getPath();
             try {
@@ -52,12 +53,12 @@ public class InventoryParser implements UnspecificParser<InventorySnapshot> {
                 if (opStack.isEmpty()) {
                     return;
                 }
-                Slot snapshot = new SlotSnapshot(slotIndex, opStack.get());
-                inv.getSlots().add(snapshot);
+                SlotSnapshot snapshot = new SlotSnapshot(slotIndex, opStack.get());
+                inv.getSlotSnapshots().add(snapshot);
             } catch (NumberFormatException ignore) {
             }
         });
-        if (inv.getSlots().isEmpty()) {
+        if (inv.getSlotSnapshots().isEmpty()) {
             return Optional.empty();
         }
         return Optional.of(inv);

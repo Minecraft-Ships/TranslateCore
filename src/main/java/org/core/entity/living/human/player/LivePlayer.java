@@ -7,6 +7,8 @@ import org.core.entity.EntityType;
 import org.core.entity.LiveEntity;
 import org.core.permission.Permission;
 import org.core.source.command.CommandSource;
+import org.core.vector.type.Vector3;
+import org.core.world.position.block.details.BlockDetails;
 import org.core.world.position.impl.BlockPosition;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnmodifiableView;
@@ -28,9 +30,13 @@ public interface LivePlayer extends Player<LiveEntity>, LiveEntity, Audience, Co
         return Player.super.getType();
     }
 
+    void setBlock(@NotNull BlockDetails details, @NotNull Vector3<Integer> position);
+
     boolean hasPermission(Permission permission);
 
-    @NotNull @UnmodifiableView Iterable<? extends BossBar> bossBars();
+    @NotNull
+    @UnmodifiableView
+    Iterable<? extends BossBar> bossBars();
 
     default Stream<? extends BossBar> bossBarsStream() {
         return StreamSupport.stream(this.bossBars().spliterator(), false);

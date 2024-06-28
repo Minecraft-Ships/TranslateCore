@@ -34,7 +34,7 @@ import org.core.utils.Singleton;
  * @param <T> The LiveEntity of the EntityType
  * @param <S> The EntitySnapshot of the EntityType
  */
-public class EntityTypes<T extends LiveEntity, S extends EntitySnapshot<T>> implements Guaranteed<EntityType<T, S>> {
+public final class EntityTypes<T extends LiveEntity, S extends EntitySnapshot<T>> implements Guaranteed<EntityType<T, S>> {
 
     public static final Singleton<EntityType<LiveClassicZombie, ClassicZombieSnapshot>> ZOMBIE = TranslateCore
             .getPlatform()

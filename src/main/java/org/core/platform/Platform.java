@@ -90,21 +90,21 @@ public interface Platform {
 
     @Deprecated(forRemoval = true)
     default @NotNull Collection<EntityType<? extends LiveEntity, ? extends EntitySnapshot<? extends LiveEntity>>> getEntityTypes() {
-        return getAllEntityTypes().collect(Collectors.toSet());
+        return this.getAllEntityTypes().collect(Collectors.toSet());
     }
 
     Stream<EntityType<? extends LiveEntity, ? extends EntitySnapshot<? extends LiveEntity>>> getAllEntityTypes();
 
     @Deprecated(forRemoval = true)
     default @NotNull Collection<BlockType> getBlockTypes() {
-        return getAllBlockTypes().collect(Collectors.toSet());
+        return this.getAllBlockTypes().collect(Collectors.toSet());
     }
 
     Stream<BlockType> getAllBlockTypes();
 
     @Deprecated(forRemoval = true)
     default @NotNull Collection<ItemType> getItemTypes() {
-        return getAllItemTypes().collect(Collectors.toSet());
+        return this.getAllItemTypes().collect(Collectors.toSet());
     }
 
     Stream<ItemType> getAllItemTypes();
@@ -115,7 +115,7 @@ public interface Platform {
 
     @Deprecated(forRemoval = true)
     default @NotNull Collection<BlockGroup> getBlockGroups() {
-        return getAllBlockGroups().collect(Collectors.toSet());
+        return this.getAllBlockGroups().collect(Collectors.toSet());
     }
 
     Stream<BlockGroup> getAllBlockGroups();
@@ -126,7 +126,7 @@ public interface Platform {
 
     @Deprecated(forRemoval = true)
     default @NotNull Collection<Permission> getPermissions() {
-        return getAllPermissions().collect(Collectors.toSet());
+        return this.getAllPermissions().collect(Collectors.toSet());
     }
 
     Stream<Permission> getAllPermissions();
@@ -155,7 +155,7 @@ public interface Platform {
 
     @Deprecated(forRemoval = true)
     default @NotNull Set<Plugin> getPlugins() {
-        return getAllPlugins().collect(Collectors.toSet());
+        return this.getAllPlugins().collect(Collectors.toSet());
     }
 
     Stream<Plugin> getAllPlugins();
@@ -192,7 +192,7 @@ public interface Platform {
         return this
                 .getDefaultTileEntities()
                 .stream()
-                .filter(t -> t.getSupportedBlocks().stream().anyMatch(ty -> ty.equals(type)))
+                .filter(t -> t.getApplicableBlocks().anyMatch(ty -> ty.equals(type)))
                 .findFirst();
     }
 

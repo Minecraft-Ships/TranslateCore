@@ -4,7 +4,7 @@ import org.core.TranslateCore;
 import org.core.utils.Guaranteed;
 import org.core.utils.Singleton;
 
-public class PatternLayerTypes implements Guaranteed<PatternLayerType> {
+public final class PatternLayerTypes implements Guaranteed<PatternLayerType> {
 
     public static final Singleton<PatternLayerType> BASE = TranslateCore
             .getPlatform()

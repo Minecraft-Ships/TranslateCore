@@ -6,13 +6,17 @@ import org.core.world.position.block.BlockType;
 
 import java.util.function.Function;
 
-public class BlockTypes1V15 {
+public final class BlockTypes1V15 {
     public static final BlockType BEEHIVE = get("minecraft:beehive");
 
     public static final BlockType BEE_NEST = get("minecraft:bee_nest");
     public static final BlockType HONEY = get("minecraft:honey_block");
 
     public static final BlockType HONEYCOMB_BLOCK = get("minecraft:honeycomb_block");
+
+    private BlockTypes1V15() {
+        throw new RuntimeException("Do not create");
+    }
 
     private static BlockType get(String idString) {
         return get(version -> idString);

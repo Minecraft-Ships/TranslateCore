@@ -11,6 +11,7 @@ public interface ExactPosition extends Position<Double> {
     SyncExactPosition toSyncPosition();
 
     @Override
+    @Deprecated(forRemoval = true)
     ASyncExactPosition toAsyncPosition();
 
     @Override

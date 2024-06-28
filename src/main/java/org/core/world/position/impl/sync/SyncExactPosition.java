@@ -24,7 +24,7 @@ public interface SyncExactPosition extends SyncPosition<Double>, ExactPosition {
         return this;
     }
 
-    @Deprecated
+    @Deprecated(forRemoval = true)
     @Override
     default ASyncExactPosition toAsyncPosition() {
         return this.getWorld().getAsyncPosition(this.getX(), this.getY(), this.getZ());

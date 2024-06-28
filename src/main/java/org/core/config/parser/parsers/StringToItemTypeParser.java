@@ -5,7 +5,6 @@ import org.core.config.parser.StringParser;
 import org.core.inventory.item.ItemType;
 import org.core.platform.Platform;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,14 +25,13 @@ public class StringToItemTypeParser implements StringParser.Suggestible<ItemType
     public List<ItemType> getSuggestions(String peek) {
         return TranslateCore
                 .getPlatform()
-                .getItemTypes()
-                .stream()
+                .getAllItemTypes()
                 .filter(it -> it.getId().toLowerCase().startsWith(peek.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<ItemType> getSuggestions() {
-        return new ArrayList<>(TranslateCore.getPlatform().getItemTypes());
+        return TranslateCore.getPlatform().getAllItemTypes().collect(Collectors.toList());
     }
 }

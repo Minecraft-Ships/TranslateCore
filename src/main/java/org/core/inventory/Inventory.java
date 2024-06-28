@@ -14,7 +14,7 @@ public interface Inventory {
 
         @Deprecated(forRemoval = true)
         default Set<InventoryPart> getFirstChildren() {
-            return getParts().collect(Collectors.toSet());
+            return this.getParts().collect(Collectors.toSet());
         }
 
         Stream<InventoryPart> getParts();
@@ -32,7 +32,7 @@ public interface Inventory {
 
     @Deprecated(forRemoval = true)
     default Set<Slot> getSlots() {
-        return getItemSlots().collect(Collectors.toSet());
+        return this.getItemSlots().collect(Collectors.toSet());
     }
 
     Stream<Slot> getItemSlots();
@@ -42,6 +42,6 @@ public interface Inventory {
     Inventory createSnapshot();
 
     default int getSlotCount() {
-        return (int) getItemSlots().count();
+        return (int) this.getItemSlots().count();
     }
 }

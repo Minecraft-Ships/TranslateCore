@@ -2,7 +2,7 @@ package org.core.world.direction;
 
 import org.array.utils.ArrayUtils;
 
-public class SixteenFacingDirection extends EightFacingDirection {
+public final class SixteenFacingDirection extends EightFacingDirection {
 
     public static final Direction NORTH_NORTH_EAST = new SixteenFacingDirection("North_North_East", 0, 0, 0,
                                                                                 "South_South_West", "North_North_West",

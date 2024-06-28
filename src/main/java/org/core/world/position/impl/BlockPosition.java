@@ -23,6 +23,7 @@ public interface BlockPosition extends Position<Integer> {
     SyncBlockPosition toSyncPosition();
 
     @Override
+    @Deprecated(forRemoval = true)
     ASyncBlockPosition toAsyncPosition();
 
     @Override
@@ -48,7 +49,7 @@ public interface BlockPosition extends Position<Integer> {
 
     @Deprecated(forRemoval = true)
     default Set<LiveEntity> getAttachedEntities() {
-        return getAttachedLiveEntities().collect(Collectors.toSet());
+        return this.getAttachedLiveEntities().collect(Collectors.toSet());
     }
 
     default Stream<LiveEntity> getAttachedLiveEntities() {

@@ -25,25 +25,27 @@ public interface Extent {
     SyncExactPosition getPosition(double x, double y, double z);
 
     @ThreadSafe(impl = PlatformDetails.BUKKIT_ID)
+    @Deprecated(forRemoval = true)
     ASyncExactPosition getAsyncPosition(double x, double y, double z);
 
     SyncBlockPosition getPosition(int x, int y, int z);
 
     @ThreadSafe(impl = PlatformDetails.BUKKIT_ID)
+    @Deprecated(forRemoval = true)
     ASyncBlockPosition getAsyncPosition(int x, int y, int z);
 
     boolean isLoaded();
 
     @Deprecated(forRemoval = true)
     default Set<LiveEntity> getEntities() {
-        return getLiveEntities().collect(Collectors.toSet());
+        return this.getLiveEntities().collect(Collectors.toSet());
     }
 
     Stream<LiveEntity> getLiveEntities();
 
     @Deprecated(forRemoval = true)
     default Set<LiveTileEntity> getTileEntities() {
-        return getLiveTileEntities().collect(Collectors.toSet());
+        return this.getLiveTileEntities().collect(Collectors.toSet());
     }
 
     Stream<LiveTileEntity> getLiveTileEntities();
@@ -69,6 +71,7 @@ public interface Extent {
     }
 
     @NotNull
+    @Deprecated(forRemoval = true)
     default <N extends Number> ASyncPosition<N> getAsyncPosition(@NotNull Vector3<N> vector) {
         if (vector.getX() instanceof Integer) {
             return (ASyncPosition<N>) this.getAsyncPosition(vector.getX().intValue(), vector.getY().intValue(),

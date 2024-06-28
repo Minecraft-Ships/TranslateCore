@@ -22,6 +22,7 @@ public interface SyncBlockPosition extends SyncPosition<Integer>, BlockPosition 
     }
 
     @Override
+    @Deprecated(forRemoval = true)
     default ASyncBlockPosition toAsyncPosition() {
         return this.getWorld().getAsyncPosition(this.getX(), this.getY(), this.getZ());
     }

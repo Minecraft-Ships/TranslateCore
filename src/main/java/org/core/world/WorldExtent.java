@@ -20,7 +20,7 @@ public interface WorldExtent extends Extent {
 
     @Deprecated(forRemoval = true)
     default Set<ChunkExtent> getChunks() {
-        return getChunkExtents().collect(Collectors.toSet());
+        return this.getChunkExtents().collect(Collectors.toSet());
     }
 
     Stream<ChunkExtent> getChunkExtents();

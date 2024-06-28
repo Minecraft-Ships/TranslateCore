@@ -22,6 +22,7 @@ public interface BlockSnapshot<P extends BlockPosition> extends BlockDetails, Po
         }
     }
 
+    @Deprecated(forRemoval = true)
     interface AsyncBlockSnapshot extends BlockSnapshot<ASyncBlockPosition> {
 
         @Override

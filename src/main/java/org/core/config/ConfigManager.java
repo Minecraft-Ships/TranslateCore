@@ -15,7 +15,7 @@ public interface ConfigManager {
     ConfigurationStream.ConfigurationFile read(@NotNull File file, @Nullable ConfigurationFormat format);
 
     default ConfigurationStream.ConfigurationFile read(@NotNull File file) {
-        return read(file, ConfigurationFormat
+        return this.read(file, ConfigurationFormat
                 .forFile(file.getName())
                 .orElseThrow(() -> new IllegalArgumentException("Unknown file extension for " + file.getName())));
     }

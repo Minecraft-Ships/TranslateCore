@@ -15,7 +15,6 @@ public class Bounds<N extends Number> {
         N zMin = min.getZ();
 
         N xMax = max.getX();
-        ;
         N yMax = max.getY();
         N zMax = max.getZ();
 
@@ -183,5 +182,31 @@ public class Bounds<N extends Number> {
             return false;
         }
         return max.getZ() >= z;
+    }
+
+    public boolean containsWithoutMax(Vector3<Integer> vector) {
+        return containsWithoutMax(vector.getX(), vector.getY(), vector.getZ());
+    }
+
+    public boolean containsWithoutMax(int x, int y, int z) {
+        Vector3<Integer> min = this.getIntMin();
+        Vector3<Integer> max = this.getIntMax();
+
+        if (min.getX() > x) {
+            return false;
+        }
+        if (min.getY() > y) {
+            return false;
+        }
+        if (min.getZ() > z) {
+            return false;
+        }
+        if (max.getX() <= x) {
+            return false;
+        }
+        if (max.getY() <= y) {
+            return false;
+        }
+        return max.getZ() > z;
     }
 }

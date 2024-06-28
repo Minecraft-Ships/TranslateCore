@@ -50,8 +50,7 @@ public class WorldArgument implements CommandArgument<WorldExtent> {
         String worldPeek = commandContext.getCommand()[argument.getFirstArgument()];
         return TranslateCore
                 .getServer()
-                .getWorlds()
-                .stream()
+                .getWorldExtents()
                 .map(WorldExtent::getName)
                 .filter(n -> n.toLowerCase().startsWith(worldPeek))
                 .collect(Collectors.toSet());

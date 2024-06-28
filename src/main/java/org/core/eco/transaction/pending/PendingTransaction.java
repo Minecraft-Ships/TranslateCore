@@ -31,7 +31,4 @@ public interface PendingTransaction {
         }
         return Optional.of(remaining.get(0));
     }
-
-    ;
-
 }

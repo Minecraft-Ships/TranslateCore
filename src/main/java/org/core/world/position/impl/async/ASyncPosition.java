@@ -16,6 +16,7 @@ import org.core.world.position.impl.Position;
 import org.core.world.position.impl.sync.SyncPosition;
 
 @ThreadSafe(impl = PlatformDetails.BUKKIT_ID)
+@Deprecated(forRemoval = true)
 public interface ASyncPosition<N extends Number> extends Position<N> {
 
     FutureResult<SyncPosition<N>> scheduleBlock(Plugin plugin, BlockDetails details, PositionFlag.SetFlag... flags);

@@ -1,10 +1,7 @@
 package org.core.world.position.block.blocktypes;
 
 import org.core.TranslateCore;
-import org.core.platform.plugin.details.CorePluginVersion;
 import org.core.world.position.block.BlockType;
-
-import java.util.function.Function;
 
 /**
  * <p>All Blocks found between legacy blocks and after Minecraft 1.13</p>
@@ -89,10 +86,8 @@ public class CommonBlockTypes {
     public static final BlockType GLOWSTONE = get("minecraft:glowstone");
     public static final BlockType GOLD_BLOCK = get("minecraft:gold_block");
     public static final BlockType GOLD_ORE = get("minecraft:gold_ore");
-    public static final BlockType GRASS = get(version -> version.getMajor() == 1 && version.getMinor() >= 20
-            && version.getPatch() >= 3 ? "minecraft:short_grass" : "minecraft:grass");
-    public static final BlockType GRASS_PATH = get(version -> version.getMajor() == 1
-            && version.getMinor() == 16 ? "minecraft:grass_path" : "minecraft:dirt_path");
+    public static final BlockType GRASS = get("minecraft:short_grass", 20, 3, "minecraft:grass");
+    public static final BlockType GRASS_PATH = get("minecraft:dirt_path", 16, null, "minecraft:grass_path");
     public static final BlockType GRAVEL = get("minecraft:gravel");
     public static final BlockType GRAY_GLAZED_TERRACOTTA = get("minecraft:gray_glazed_terracotta");
     public static final BlockType GRAY_SHULKER_BOX = get("minecraft:gray_shulker_box");
@@ -208,16 +203,17 @@ public class CommonBlockTypes {
     public static final BlockType YELLOW_SHULKER_BOX = get("minecraft:yellow_shulker_box");
 
     private static BlockType get(String idString) {
-        return get(version -> idString);
-    }
-
-    private static BlockType get(Function<CorePluginVersion, String> id) {
-        CorePluginVersion mcVersion = TranslateCore.getPlatform().getMinecraftVersion();
-        String idString = id.apply(mcVersion);
         return TranslateCore
                 .getPlatform()
                 .getBlockType(idString)
                 .orElseThrow(() -> new IllegalStateException("Failed to find blocktype '" + idString + "'"));
+    }
+
+    private static BlockType get(String idString, int major, Integer minor, String elseId) {
+        if (TranslateCore.getPlatform().getMinecraftVersion().isGreater(1, major, minor)) {
+            return get(elseId);
+        }
+        return get(idString);
     }
 
 }

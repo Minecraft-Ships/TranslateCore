@@ -25,7 +25,7 @@ public interface Structure {
 
     @Deprecated(forRemoval = true)
     default Set<BlockSetDetails> getBlocks() {
-        return getBlockDetails().collect(Collectors.toSet());
+        return this.getBlockDetails().collect(Collectors.toSet());
     }
 
     Stream<BlockSetDetails> getBlockDetails();

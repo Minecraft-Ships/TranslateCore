@@ -36,7 +36,7 @@ public interface Explosion extends Positionable<SyncExactPosition> {
 
     @Deprecated(forRemoval = true)
     default Collection<SyncBlockPosition> getAffectedPositions() {
-        return getAffectedBlockPositions().collect(Collectors.toSet());
+        return this.getAffectedBlockPositions().collect(Collectors.toSet());
     }
 
     Stream<SyncBlockPosition> getAffectedBlockPositions();

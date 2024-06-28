@@ -5,9 +5,8 @@ import org.core.inventory.parts.CraftGrid;
 import org.core.inventory.parts.InventoryPart;
 import org.core.inventory.parts.Slot;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public interface CraftingInventory extends Inventory.Parent, BlockAttachedInventory {
 
@@ -16,7 +15,7 @@ public interface CraftingInventory extends Inventory.Parent, BlockAttachedInvent
     Slot getResult();
 
     @Override
-    default Set<InventoryPart> getFirstChildren() {
-        return new HashSet<>(Arrays.asList(this.getCraftingGrid(), this.getResult()));
+    default Stream<InventoryPart> getParts() {
+        return Stream.<Supplier<? extends InventoryPart>>of(this::getCraftingGrid, this::getResult).map(Supplier::get);
     }
 }

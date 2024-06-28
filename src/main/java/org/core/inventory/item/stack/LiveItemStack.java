@@ -4,9 +4,7 @@ import org.core.TranslateCore;
 import org.core.entity.Entity;
 import org.core.entity.InventoryHoldingEntity;
 import org.core.entity.ItemHoldingEntity;
-import org.core.entity.LiveEntity;
 import org.core.world.Extent;
-import org.core.world.WorldExtent;
 import org.core.world.position.block.entity.LiveTileEntity;
 import org.core.world.position.block.entity.container.ContainerTileEntity;
 import org.core.world.position.impl.sync.SyncBlockPosition;
@@ -19,7 +17,7 @@ public interface LiveItemStack extends ItemStack {
     default Optional<SyncExactPosition> getPosition() {
         Optional<SyncExactPosition> opPositionFromTile = TranslateCore
                 .getServer()
-                .getWorldExtent()
+                .getWorldExtents()
                 .flatMap(Extent::getLiveTileEntities)
                 .filter(entity -> entity instanceof ContainerTileEntity)
                 .map(entity -> (ContainerTileEntity) entity)
@@ -33,7 +31,7 @@ public interface LiveItemStack extends ItemStack {
         if (opPositionFromTile.isPresent()) {
             return opPositionFromTile;
         }
-        return TranslateCore.getServer().getWorldExtent().flatMap(Extent::getLiveEntities).filter(entity -> {
+        return TranslateCore.getServer().getWorldExtents().flatMap(Extent::getLiveEntities).filter(entity -> {
             if (entity instanceof ItemHoldingEntity) {
                 ItemHoldingEntity<?> ihEntity = (ItemHoldingEntity<?>) entity;
                 if (ihEntity.getHoldingItem().getItem().map(item -> item.equals(this)).orElse(false)) {

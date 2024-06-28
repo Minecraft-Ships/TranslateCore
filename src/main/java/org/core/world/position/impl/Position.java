@@ -23,38 +23,8 @@ public interface Position<N extends Number> {
 
     SyncPosition<N> toSyncPosition();
 
+    @Deprecated(forRemoval = true)
     ASyncPosition<N> toAsyncPosition();
-
-
-    @Deprecated
-    static BlockPosition toBlock(Position<? extends Number> position) {
-        return position.toBlockPosition();
-    }
-
-    @Deprecated
-    static ExactPosition toExact(Position<? extends Number> position) {
-        return position.toExactPosition();
-    }
-
-    @Deprecated
-    static SyncBlockPosition toSync(BlockPosition position) {
-        return position.toSyncPosition();
-    }
-
-    @Deprecated
-    static ASyncBlockPosition toASync(BlockPosition position) {
-        return position.toAsyncPosition();
-    }
-
-    @Deprecated
-    static SyncExactPosition toSync(ExactPosition position) {
-        return position.toSyncPosition();
-    }
-
-    @Deprecated
-    static ASyncExactPosition toASync(ExactPosition position) {
-        return position.toAsyncPosition();
-    }
 
     Vector3<Integer> getChunkPosition();
 
@@ -89,5 +59,35 @@ public interface Position<N extends Number> {
 
     default N getZ() {
         return this.getPosition().getZ();
+    }
+
+    @Deprecated
+    static BlockPosition toBlock(Position<? extends Number> position) {
+        return position.toBlockPosition();
+    }
+
+    @Deprecated
+    static ExactPosition toExact(Position<? extends Number> position) {
+        return position.toExactPosition();
+    }
+
+    @Deprecated
+    static SyncBlockPosition toSync(BlockPosition position) {
+        return position.toSyncPosition();
+    }
+
+    @Deprecated(forRemoval = true)
+    static ASyncBlockPosition toASync(BlockPosition position) {
+        return position.toAsyncPosition();
+    }
+
+    @Deprecated
+    static SyncExactPosition toSync(ExactPosition position) {
+        return position.toSyncPosition();
+    }
+
+    @Deprecated(forRemoval = true)
+    static ASyncExactPosition toASync(ExactPosition position) {
+        return position.toAsyncPosition();
     }
 }

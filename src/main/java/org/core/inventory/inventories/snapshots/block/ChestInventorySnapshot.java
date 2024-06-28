@@ -3,7 +3,6 @@ package org.core.inventory.inventories.snapshots.block;
 import org.core.inventory.Inventory;
 import org.core.inventory.InventorySnapshot;
 import org.core.inventory.inventories.general.block.ChestInventory;
-import org.core.inventory.parts.Slot;
 import org.core.world.position.block.entity.LiveTileEntity;
 import org.core.world.position.block.entity.container.ContainerTileEntity;
 import org.core.world.position.block.entity.container.chest.LiveChestTileEntity;
@@ -34,7 +33,7 @@ public abstract class ChestInventorySnapshot implements ChestInventory, Inventor
     }
 
     public void apply(Inventory inv) {
-        for (Slot slot : this.getSlots()) {
+        this.getItemSlots().forEach(slot -> {
             slot
                     .getItem()
                     .ifPresent(f -> inv
@@ -43,6 +42,6 @@ public abstract class ChestInventorySnapshot implements ChestInventory, Inventor
                                              .orElseThrow(() -> new IllegalStateException("Unknown slot position")))
                             .orElseThrow(() -> new IllegalStateException("Unknown slot position"))
                             .setItem(f));
-        }
+        });
     }
 }

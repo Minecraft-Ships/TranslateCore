@@ -7,6 +7,7 @@ import org.core.world.position.impl.sync.SyncExactPosition;
 
 import java.math.BigDecimal;
 
+@Deprecated(forRemoval = true)
 public interface ASyncExactPosition extends ASyncPosition<Double>, ExactPosition {
 
     @Override

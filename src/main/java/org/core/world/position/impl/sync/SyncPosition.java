@@ -20,6 +20,12 @@ public interface SyncPosition<A extends Number> extends Position<A> {
     @Override
     BlockSnapshot.SyncBlockSnapshot getBlockDetails();
 
+    @Override
+    SyncPosition<A> getRelative(Vector3<?> vector);
+
+    @Override
+    SyncPosition<A> getRelative(Direction direction);
+
     SyncPosition<A> setBlock(BlockDetails details, PositionFlag.SetFlag... flags);
 
     SyncPosition<A> setBlock(BlockDetails details, LivePlayer... player);
@@ -27,12 +33,6 @@ public interface SyncPosition<A extends Number> extends Position<A> {
     SyncPosition<A> resetBlock(LivePlayer... player);
 
     Optional<LiveTileEntity> getTileEntity();
-
-    @Override
-    SyncPosition<A> getRelative(Vector3<?> vector);
-
-    @Override
-    SyncPosition<A> getRelative(Direction direction);
 
     <E extends LiveEntity, S extends EntitySnapshot<E>> Optional<S> createEntity(EntityType<E, ? extends S> type);
 

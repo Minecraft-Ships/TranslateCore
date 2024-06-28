@@ -21,7 +21,7 @@ public interface SignChangeEvent extends PlatformEvent, BlockEvent, Cancellable 
 
     @Deprecated(forRemoval = true)
     default SignChangeEvent setTo(SignTileEntitySnapshot snapshot) {
-        SignSide side = getChangingSide();
+        SignSide side = this.getChangingSide();
         SignSide snapshotSide = snapshot.getSide(side.isFront());
         side.setLines(snapshotSide.getLines());
         return this;
@@ -29,7 +29,7 @@ public interface SignChangeEvent extends PlatformEvent, BlockEvent, Cancellable 
 
     @Deprecated(forRemoval = true)
     default SignTileEntitySnapshot getFrom() {
-        return getSign();
+        return this.getSign();
     }
 
     SignTileEntitySnapshot getSign();

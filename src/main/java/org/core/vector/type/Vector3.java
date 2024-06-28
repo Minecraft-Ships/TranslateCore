@@ -79,9 +79,9 @@ public class Vector3<N extends Number> extends Vector<N, Vector3<N>> {
 
     public N[] toArray(IntFunction<N[]> collector) {
         N[] array = collector.apply(3);
-        array[0] = getX();
-        array[1] = getY();
-        array[2] = getZ();
+        array[0] = this.getX();
+        array[1] = this.getY();
+        array[2] = this.getZ();
         return array;
     }
 

@@ -6,8 +6,6 @@ import org.core.world.position.block.details.BlockDetails;
 import org.core.world.position.block.grouptype.BlockGroup;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -57,19 +55,11 @@ public interface BlockType extends Identifiable {
      */
     @Deprecated(forRemoval = true)
     default Set<BlockType> getLike() {
-        Set<BlockType> set = new HashSet<>();
-        this.getGroups().forEach(g -> {
-            for (BlockType type : g.getGrouped()) {
-                if (set.stream().noneMatch(bt -> bt.equals(type))) {
-                    set.add(type);
-                }
-            }
-        });
-        return set;
+        return this.getAlike().collect(Collectors.toSet());
     }
 
     default Stream<BlockType> getAlike() {
-        return this.getGroups().stream().flatMap(blockGroup -> Stream.of(blockGroup.getGrouped())).distinct();
+        return this.getGroups().stream().flatMap(BlockGroup::getBlocks).distinct();
     }
 
 }
