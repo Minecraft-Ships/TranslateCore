@@ -49,6 +49,12 @@ public interface TranslateCore {
 
     CurrencyManager getRawCurrencyManager();
 
+    boolean isOnServerThreadRaw();
+
+    static boolean isOnServerThread(){
+        return TranslateCore.CoreImplementation.getImplementation().isOnServerThreadRaw();
+    }
+
     static ScheduleManager getScheduleManager() {
         return TranslateCore.CoreImplementation.getImplementation().getRawScheduleManager();
     }

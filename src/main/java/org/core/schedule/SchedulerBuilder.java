@@ -31,7 +31,13 @@ public interface SchedulerBuilder {
 
     Optional<Scheduler> getToRunAfter();
 
-    SchedulerBuilder setToRunAfter(Scheduler scheduler);
+    default SchedulerBuilder setToRunAfter(Scheduler scheduler) {
+        return this.setToRunAfter(scheduler, true);
+    }
+
+    SchedulerBuilder setToRunAfter(Scheduler scheduler, boolean maintainIfAsync);
+
+    boolean willMaintainScheduleIfAsync();
 
     Optional<String> getDisplayName();
 
