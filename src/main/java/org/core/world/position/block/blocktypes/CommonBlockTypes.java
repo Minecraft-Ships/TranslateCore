@@ -89,8 +89,7 @@ public class CommonBlockTypes {
     public static final BlockType GLOWSTONE = get("minecraft:glowstone");
     public static final BlockType GOLD_BLOCK = get("minecraft:gold_block");
     public static final BlockType GOLD_ORE = get("minecraft:gold_ore");
-    public static final BlockType GRASS = get(version -> version.getMajor() == 1 && version.getMinor() >= 20
-            && version.getPatch() >= 3 ? "minecraft:short_grass" : "minecraft:grass");
+    public static final BlockType GRASS = get("minecraft:short_grass");
     public static final BlockType GRASS_PATH = get(version -> version.getMajor() == 1
             && version.getMinor() == 16 ? "minecraft:grass_path" : "minecraft:dirt_path");
     public static final BlockType GRAVEL = get("minecraft:gravel");
