@@ -20,7 +20,7 @@ public final class BlockGroups {
     public static final Supplier<BlockGroup> BANNERS = createGroup("minecraft:banners");
     public static final Supplier<BlockGroup> BEDS = createGroup("minecraft:beds");
     public static final Supplier<BlockGroup> PRESSURE_PLATES = createGroup("minecraft:pressure_plates");
-    public static final Supplier<BlockGroup> TRAPDOOR = createGroup("minecraft:trapdoor");
+    public static final Supplier<BlockGroup> TRAPDOOR = createGroup("minecraft:trapdoors");
     public static final Supplier<BlockGroup> SAPLINGS = createGroup("minecraft:saplings");
     public static final Supplier<BlockGroup> SLABS = createGroup("minecraft:slabs");
     public static final Supplier<BlockGroup> STAIRS = createGroup("minecraft:stairs");
