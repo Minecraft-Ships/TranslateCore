@@ -2,8 +2,6 @@ package org.core.world.boss;
 
 import net.kyori.adventure.bossbar.BossBar;
 import org.core.TranslateCore;
-import org.core.adventureText.AText;
-import org.core.adventureText.adventure.AdventureText;
 import org.core.entity.living.human.player.LivePlayer;
 import org.core.world.boss.colour.BossColour;
 import org.core.world.boss.colour.BossColours;
@@ -16,15 +14,6 @@ import java.util.stream.StreamSupport;
 public interface ServerBossBar {
 
     BossBar bossBar();
-
-    default AText getTitle() {
-        return new AdventureText(bossBar().name());
-    }
-
-    default ServerBossBar setTitle(AText text) {
-        bossBar().name(text);
-        return this;
-    }
 
     default BossColour getColour() {
         switch (bossBar().color()) {

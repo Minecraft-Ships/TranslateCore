@@ -6,7 +6,7 @@ import net.kyori.adventure.text.Component;
 import org.core.entity.EntityType;
 import org.core.entity.LiveEntity;
 import org.core.permission.Permission;
-import org.core.source.viewer.CommandViewer;
+import org.core.source.command.CommandSource;
 import org.core.world.position.impl.BlockPosition;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnmodifiableView;
@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-public interface LivePlayer extends Player<LiveEntity>, LiveEntity, Audience, CommandViewer {
+public interface LivePlayer extends Player<LiveEntity>, LiveEntity, Audience, CommandSource {
 
     Optional<BlockPosition> getBlockLookingAt(int scanLength);
 

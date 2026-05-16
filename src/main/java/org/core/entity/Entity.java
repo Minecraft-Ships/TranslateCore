@@ -2,8 +2,6 @@ package org.core.entity;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentLike;
-import org.core.adventureText.AText;
-import org.core.adventureText.adventure.AdventureText;
 import org.core.vector.type.Vector3;
 import org.core.world.direction.Direction;
 import org.core.world.direction.EightFacingDirection;
@@ -81,29 +79,6 @@ public interface Entity<T extends Entity<?>> extends Positionable<SyncExactPosit
             return Optional.empty();
         }
         return Optional.of(block);
-    }
-
-    /**
-     * Gets the custom name of the entity, even
-     * if the custom name is not visible
-     *
-     * @return Optional of the custom name, if the custom name has not been set it will return a Optional.empty
-     */
-    @Deprecated(forRemoval = true)
-    default Optional<AText> getCustomName() {
-        return this.getCustomNameComponent().map(AdventureText::new);
-    }
-
-    /**
-     * Sets the custom name of the entity.
-     * For players this is the display name.
-     *
-     * @param text the name to be
-     * @return itself for chaining
-     */
-    @Deprecated(forRemoval = true)
-    default Entity<T> setCustomName(@Nullable AText text) {
-        return setCustomName((ComponentLike) text);
     }
 
     Entity<T> setCustomName(@Nullable Component component);
