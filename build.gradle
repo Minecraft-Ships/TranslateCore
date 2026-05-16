@@ -39,20 +39,11 @@ test {
 }
 
 dependencies {
-    //implementation group: 'net.kyori', name: 'examination-api', version: '1.1.0'
     implementation group: 'net.kyori', name: 'adventure-api', version: '5.1.1'
     implementation group: 'net.kyori', name: 'adventure-text-serializer-plain', version: '5.1.1'
     implementation group: 'net.kyori', name: 'adventure-text-serializer-legacy', version: '5.1.1'
     implementation group: 'net.kyori', name: 'adventure-text-serializer-gson', version: '5.1.1'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.10'
-
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.2.0'
-    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.2.0'
-
-
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.9.2'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.9.2'
-
 }
 
 publishing {
